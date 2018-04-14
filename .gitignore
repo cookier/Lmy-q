@@ -1,0 +1,20 @@
+*.class
+
+target/
+log/
+.settings/
+.externalToolBuilders/
+.project
+.classpath
+.mymetadata
+
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
