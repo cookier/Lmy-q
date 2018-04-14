@@ -1,0 +1,27 @@
+<div ng-controller="UIGoodsEditorController">
+    <form class="form-horizontal" novalidate>
+        <div class="control-group">
+            <label class="control-label">选择商品：</label>
+
+            <div class="controls">
+                <ul class="module-goods-list clearfix" name="goods">
+                    <li ng-repeat="item in data.goods" class="sort">
+                        <a href="{{item.url}}" target="_blank">
+                            <img ng-src="{{item.image_url}}" alt="商品图" width="50" height="50">
+                        </a>
+                        <a class="close-modal js-delete-goods small"
+                           ng-click="delGoods(item,$event)" title="删除">×</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);"
+                           class="js-add-goods add-goods" ng-click="addGoods($event)">
+                            <i class="icon-add"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <div class="js-goods-style-region" style="margin-top: 10px;"
+         ng-include="'tpl/showcase/goods_list/edit_goods_style.html'"></div>
+</div>

@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.UserAddressMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.UserAddress">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="accept_name" jdbcType="VARCHAR" property="acceptName"/>
+        <result column="zip_code" jdbcType="VARCHAR" property="zipCode"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="country_id" jdbcType="INTEGER" property="countryId"/>
+        <result column="country_name" jdbcType="VARCHAR" property="countryName"/>
+        <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+        <result column="province_name" jdbcType="VARCHAR" property="provinceName"/>
+        <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+        <result column="area_id" jdbcType="INTEGER" property="areaId"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="street_id" jdbcType="INTEGER" property="streetId"/>
+        <result column="street_name" jdbcType="VARCHAR" property="streetName"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="default_flag" jdbcType="INTEGER" property="defaultFlag"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, user_id, accept_name, zip_code, mobile, country_id, country_name, province_id, 
+    province_name, city_id, city_name, area_id, area_name, street_id, street_name, address, 
+    default_flag, delete_flag
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.UserAddressExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_user_address
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user_address
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_address
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.UserAddressExample">
+        delete from t_user_address
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.UserAddress">
+    insert into t_user_address (id, user_id, accept_name, 
+      zip_code, mobile, country_id, 
+      country_name, province_id, province_name, 
+      city_id, city_name, area_id, 
+      area_name, street_id, street_name, 
+      address, default_flag, delete_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{acceptName,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{countryId,jdbcType=INTEGER}, 
+      #{countryName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=INTEGER}, #{cityName,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, 
+      #{areaName,jdbcType=VARCHAR}, #{streetId,jdbcType=INTEGER}, #{streetName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{defaultFlag,jdbcType=INTEGER}, #{deleteFlag,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.UserAddress">
+        insert into t_user_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="acceptName != null">
+                accept_name,
+            </if>
+            <if test="zipCode != null">
+                zip_code,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="countryId != null">
+                country_id,
+            </if>
+            <if test="countryName != null">
+                country_name,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="provinceName != null">
+                province_name,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="cityName != null">
+                city_name,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="areaName != null">
+                area_name,
+            </if>
+            <if test="streetId != null">
+                street_id,
+            </if>
+            <if test="streetName != null">
+                street_name,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="defaultFlag != null">
+                default_flag,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="acceptName != null">
+                #{acceptName,jdbcType=VARCHAR},
+            </if>
+            <if test="zipCode != null">
+                #{zipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="countryId != null">
+                #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="countryName != null">
+                #{countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceName != null">
+                #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="cityName != null">
+                #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="areaName != null">
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="streetId != null">
+                #{streetId,jdbcType=INTEGER},
+            </if>
+            <if test="streetName != null">
+                #{streetName,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="defaultFlag != null">
+                #{defaultFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.UserAddressExample" resultType="java.lang.Long">
+        select count(*) from t_user_address
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_user_address
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.acceptName != null">
+                accept_name = #{record.acceptName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zipCode != null">
+                zip_code = #{record.zipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mobile != null">
+                mobile = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.countryId != null">
+                country_id = #{record.countryId,jdbcType=INTEGER},
+            </if>
+            <if test="record.countryName != null">
+                country_name = #{record.countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.provinceId != null">
+                province_id = #{record.provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.provinceName != null">
+                province_name = #{record.provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cityId != null">
+                city_id = #{record.cityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.cityName != null">
+                city_name = #{record.cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.areaId != null">
+                area_id = #{record.areaId,jdbcType=INTEGER},
+            </if>
+            <if test="record.areaName != null">
+                area_name = #{record.areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.streetId != null">
+                street_id = #{record.streetId,jdbcType=INTEGER},
+            </if>
+            <if test="record.streetName != null">
+                street_name = #{record.streetName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.defaultFlag != null">
+                default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_user_address
+        set id = #{record.id,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        accept_name = #{record.acceptName,jdbcType=VARCHAR},
+        zip_code = #{record.zipCode,jdbcType=VARCHAR},
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+        country_id = #{record.countryId,jdbcType=INTEGER},
+        country_name = #{record.countryName,jdbcType=VARCHAR},
+        province_id = #{record.provinceId,jdbcType=INTEGER},
+        province_name = #{record.provinceName,jdbcType=VARCHAR},
+        city_id = #{record.cityId,jdbcType=INTEGER},
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+        area_id = #{record.areaId,jdbcType=INTEGER},
+        area_name = #{record.areaName,jdbcType=VARCHAR},
+        street_id = #{record.streetId,jdbcType=INTEGER},
+        street_name = #{record.streetName,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
+        default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.UserAddress">
+        update t_user_address
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="acceptName != null">
+                accept_name = #{acceptName,jdbcType=VARCHAR},
+            </if>
+            <if test="zipCode != null">
+                zip_code = #{zipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="countryId != null">
+                country_id = #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="countryName != null">
+                country_name = #{countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceName != null">
+                province_name = #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="cityName != null">
+                city_name = #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="areaName != null">
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="streetId != null">
+                street_id = #{streetId,jdbcType=INTEGER},
+            </if>
+            <if test="streetName != null">
+                street_name = #{streetName,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="defaultFlag != null">
+                default_flag = #{defaultFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.UserAddress">
+    update t_user_address
+    set user_id = #{userId,jdbcType=INTEGER},
+      accept_name = #{acceptName,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      country_id = #{countryId,jdbcType=INTEGER},
+      country_name = #{countryName,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      street_id = #{streetId,jdbcType=INTEGER},
+      street_name = #{streetName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      default_flag = #{defaultFlag,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

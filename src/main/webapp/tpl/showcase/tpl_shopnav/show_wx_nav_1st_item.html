@@ -1,0 +1,15 @@
+<a ng-if="navItem.second.length" class="mainmenu js-mainmenu" href="javascript:;">
+    <i class="arrow-weixin"></i>
+    <span class="mainmenu-txt">{{navItem.title}}</span>
+</a>
+<a ng-if="!navItem.second.length" class="mainmenu" href="{{navItem.link_url}}"  target="_blank">
+    <span class="mainmenu-txt">{{navItem.title}}</span>
+</a>
+<div class="submenu js-submenu">
+    <span class="arrow before-arrow"></span>
+    <span class="arrow after-arrow"></span>
+    <div class="js-nav-2nd-region">
+        <li ng-repeat="subNavItem in navItem.second" ng-include="'tpl/showcase/tpl_shopnav/show_wx_nav_2nd_item.html'">
+        </li>
+    </div>
+</div>

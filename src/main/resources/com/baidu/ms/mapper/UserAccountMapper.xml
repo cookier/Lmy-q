@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.UserAccountMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.UserAccount">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="available_money" jdbcType="DOUBLE" property="availableMoney"/>
+        <result column="settlement_money" jdbcType="DOUBLE" property="settlementMoney"/>
+        <result column="deposit_money" jdbcType="DOUBLE" property="depositMoney"/>
+        <result column="bank_name" jdbcType="VARCHAR" property="bankName"/>
+        <result column="bank_card_number" jdbcType="VARCHAR" property="bankCardNumber"/>
+        <result column="bank_deposit_name" jdbcType="VARCHAR" property="bankDepositName"/>
+        <result column="pay_password" jdbcType="VARCHAR" property="payPassword"/>
+        <result column="alipay_account" jdbcType="VARCHAR" property="alipayAccount"/>
+        <result column="alipay_valid_name" jdbcType="VARCHAR" property="alipayValidName"/>
+        <result column="wechat_account" jdbcType="VARCHAR" property="wechatAccount"/>
+        <result column="wechar_valid_name" jdbcType="VARCHAR" property="wecharValidName"/>
+        <result column="deduct_percentage" jdbcType="DOUBLE" property="deductPercentage"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="bonus_num" jdbcType="INTEGER" property="bonusNum"/>
+        <result column="bonus_money" jdbcType="DOUBLE" property="bonusMoney"/>
+        <result column="commission_money" jdbcType="DOUBLE" property="commissionMoney"/>
+        <result column="last_day_settlement_date" jdbcType="DATE" property="lastDaySettlementDate"/>
+        <result column="last_dividend_quota_settlement_date" jdbcType="DATE"
+                property="lastDividendQuotaSettlementDate"/>
+        <result column="order_commission_money" jdbcType="DOUBLE" property="orderCommissionMoney"/>
+        <result column="last_day_settlement_available_money" jdbcType="DOUBLE"
+                property="lastDaySettlementAvailableMoney"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    user_id, available_money, settlement_money, deposit_money, bank_name, bank_card_number, 
+    bank_deposit_name, pay_password, alipay_account, alipay_valid_name, wechat_account, 
+    wechar_valid_name, deduct_percentage, update_time, bonus_num, bonus_money, commission_money, 
+    last_day_settlement_date, last_dividend_quota_settlement_date, order_commission_money, 
+    last_day_settlement_available_money
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.UserAccountExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_user_account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user_account
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_account
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.UserAccountExample">
+        delete from t_user_account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.UserAccount">
+    insert into t_user_account (user_id, available_money, settlement_money, 
+      deposit_money, bank_name, bank_card_number, 
+      bank_deposit_name, pay_password, alipay_account, 
+      alipay_valid_name, wechat_account, wechar_valid_name, 
+      deduct_percentage, update_time, bonus_num, 
+      bonus_money, commission_money, last_day_settlement_date, 
+      last_dividend_quota_settlement_date, order_commission_money, 
+      last_day_settlement_available_money)
+    values (#{userId,jdbcType=INTEGER}, #{availableMoney,jdbcType=DOUBLE}, #{settlementMoney,jdbcType=DOUBLE}, 
+      #{depositMoney,jdbcType=DOUBLE}, #{bankName,jdbcType=VARCHAR}, #{bankCardNumber,jdbcType=VARCHAR}, 
+      #{bankDepositName,jdbcType=VARCHAR}, #{payPassword,jdbcType=VARCHAR}, #{alipayAccount,jdbcType=VARCHAR}, 
+      #{alipayValidName,jdbcType=VARCHAR}, #{wechatAccount,jdbcType=VARCHAR}, #{wecharValidName,jdbcType=VARCHAR}, 
+      #{deductPercentage,jdbcType=DOUBLE}, #{updateTime,jdbcType=TIMESTAMP}, #{bonusNum,jdbcType=INTEGER}, 
+      #{bonusMoney,jdbcType=DOUBLE}, #{commissionMoney,jdbcType=DOUBLE}, #{lastDaySettlementDate,jdbcType=DATE}, 
+      #{lastDividendQuotaSettlementDate,jdbcType=DATE}, #{orderCommissionMoney,jdbcType=DOUBLE}, 
+      #{lastDaySettlementAvailableMoney,jdbcType=DOUBLE})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.UserAccount">
+        insert into t_user_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="availableMoney != null">
+                available_money,
+            </if>
+            <if test="settlementMoney != null">
+                settlement_money,
+            </if>
+            <if test="depositMoney != null">
+                deposit_money,
+            </if>
+            <if test="bankName != null">
+                bank_name,
+            </if>
+            <if test="bankCardNumber != null">
+                bank_card_number,
+            </if>
+            <if test="bankDepositName != null">
+                bank_deposit_name,
+            </if>
+            <if test="payPassword != null">
+                pay_password,
+            </if>
+            <if test="alipayAccount != null">
+                alipay_account,
+            </if>
+            <if test="alipayValidName != null">
+                alipay_valid_name,
+            </if>
+            <if test="wechatAccount != null">
+                wechat_account,
+            </if>
+            <if test="wecharValidName != null">
+                wechar_valid_name,
+            </if>
+            <if test="deductPercentage != null">
+                deduct_percentage,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="bonusNum != null">
+                bonus_num,
+            </if>
+            <if test="bonusMoney != null">
+                bonus_money,
+            </if>
+            <if test="commissionMoney != null">
+                commission_money,
+            </if>
+            <if test="lastDaySettlementDate != null">
+                last_day_settlement_date,
+            </if>
+            <if test="lastDividendQuotaSettlementDate != null">
+                last_dividend_quota_settlement_date,
+            </if>
+            <if test="orderCommissionMoney != null">
+                order_commission_money,
+            </if>
+            <if test="lastDaySettlementAvailableMoney != null">
+                last_day_settlement_available_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="availableMoney != null">
+                #{availableMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="settlementMoney != null">
+                #{settlementMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="depositMoney != null">
+                #{depositMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="bankName != null">
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNumber != null">
+                #{bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="bankDepositName != null">
+                #{bankDepositName,jdbcType=VARCHAR},
+            </if>
+            <if test="payPassword != null">
+                #{payPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="alipayAccount != null">
+                #{alipayAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="alipayValidName != null">
+                #{alipayValidName,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatAccount != null">
+                #{wechatAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="wecharValidName != null">
+                #{wecharValidName,jdbcType=VARCHAR},
+            </if>
+            <if test="deductPercentage != null">
+                #{deductPercentage,jdbcType=DOUBLE},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bonusNum != null">
+                #{bonusNum,jdbcType=INTEGER},
+            </if>
+            <if test="bonusMoney != null">
+                #{bonusMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionMoney != null">
+                #{commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="lastDaySettlementDate != null">
+                #{lastDaySettlementDate,jdbcType=DATE},
+            </if>
+            <if test="lastDividendQuotaSettlementDate != null">
+                #{lastDividendQuotaSettlementDate,jdbcType=DATE},
+            </if>
+            <if test="orderCommissionMoney != null">
+                #{orderCommissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="lastDaySettlementAvailableMoney != null">
+                #{lastDaySettlementAvailableMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.UserAccountExample" resultType="java.lang.Long">
+        select count(*) from t_user_account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_user_account
+        <set>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.availableMoney != null">
+                available_money = #{record.availableMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.settlementMoney != null">
+                settlement_money = #{record.settlementMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.depositMoney != null">
+                deposit_money = #{record.depositMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.bankName != null">
+                bank_name = #{record.bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankCardNumber != null">
+                bank_card_number = #{record.bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankDepositName != null">
+                bank_deposit_name = #{record.bankDepositName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.payPassword != null">
+                pay_password = #{record.payPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="record.alipayAccount != null">
+                alipay_account = #{record.alipayAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.alipayValidName != null">
+                alipay_valid_name = #{record.alipayValidName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wechatAccount != null">
+                wechat_account = #{record.wechatAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wecharValidName != null">
+                wechar_valid_name = #{record.wecharValidName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deductPercentage != null">
+                deduct_percentage = #{record.deductPercentage,jdbcType=DOUBLE},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.bonusNum != null">
+                bonus_num = #{record.bonusNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.bonusMoney != null">
+                bonus_money = #{record.bonusMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.commissionMoney != null">
+                commission_money = #{record.commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.lastDaySettlementDate != null">
+                last_day_settlement_date = #{record.lastDaySettlementDate,jdbcType=DATE},
+            </if>
+            <if test="record.lastDividendQuotaSettlementDate != null">
+                last_dividend_quota_settlement_date = #{record.lastDividendQuotaSettlementDate,jdbcType=DATE},
+            </if>
+            <if test="record.orderCommissionMoney != null">
+                order_commission_money = #{record.orderCommissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.lastDaySettlementAvailableMoney != null">
+                last_day_settlement_available_money = #{record.lastDaySettlementAvailableMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_user_account
+        set user_id = #{record.userId,jdbcType=INTEGER},
+        available_money = #{record.availableMoney,jdbcType=DOUBLE},
+        settlement_money = #{record.settlementMoney,jdbcType=DOUBLE},
+        deposit_money = #{record.depositMoney,jdbcType=DOUBLE},
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+        bank_card_number = #{record.bankCardNumber,jdbcType=VARCHAR},
+        bank_deposit_name = #{record.bankDepositName,jdbcType=VARCHAR},
+        pay_password = #{record.payPassword,jdbcType=VARCHAR},
+        alipay_account = #{record.alipayAccount,jdbcType=VARCHAR},
+        alipay_valid_name = #{record.alipayValidName,jdbcType=VARCHAR},
+        wechat_account = #{record.wechatAccount,jdbcType=VARCHAR},
+        wechar_valid_name = #{record.wecharValidName,jdbcType=VARCHAR},
+        deduct_percentage = #{record.deductPercentage,jdbcType=DOUBLE},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        bonus_num = #{record.bonusNum,jdbcType=INTEGER},
+        bonus_money = #{record.bonusMoney,jdbcType=DOUBLE},
+        commission_money = #{record.commissionMoney,jdbcType=DOUBLE},
+        last_day_settlement_date = #{record.lastDaySettlementDate,jdbcType=DATE},
+        last_dividend_quota_settlement_date = #{record.lastDividendQuotaSettlementDate,jdbcType=DATE},
+        order_commission_money = #{record.orderCommissionMoney,jdbcType=DOUBLE},
+        last_day_settlement_available_money = #{record.lastDaySettlementAvailableMoney,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.UserAccount">
+        update t_user_account
+        <set>
+            <if test="availableMoney != null">
+                available_money = #{availableMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="settlementMoney != null">
+                settlement_money = #{settlementMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="depositMoney != null">
+                deposit_money = #{depositMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="bankName != null">
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNumber != null">
+                bank_card_number = #{bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="bankDepositName != null">
+                bank_deposit_name = #{bankDepositName,jdbcType=VARCHAR},
+            </if>
+            <if test="payPassword != null">
+                pay_password = #{payPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="alipayAccount != null">
+                alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="alipayValidName != null">
+                alipay_valid_name = #{alipayValidName,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatAccount != null">
+                wechat_account = #{wechatAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="wecharValidName != null">
+                wechar_valid_name = #{wecharValidName,jdbcType=VARCHAR},
+            </if>
+            <if test="deductPercentage != null">
+                deduct_percentage = #{deductPercentage,jdbcType=DOUBLE},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bonusNum != null">
+                bonus_num = #{bonusNum,jdbcType=INTEGER},
+            </if>
+            <if test="bonusMoney != null">
+                bonus_money = #{bonusMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionMoney != null">
+                commission_money = #{commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="lastDaySettlementDate != null">
+                last_day_settlement_date = #{lastDaySettlementDate,jdbcType=DATE},
+            </if>
+            <if test="lastDividendQuotaSettlementDate != null">
+                last_dividend_quota_settlement_date = #{lastDividendQuotaSettlementDate,jdbcType=DATE},
+            </if>
+            <if test="orderCommissionMoney != null">
+                order_commission_money = #{orderCommissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="lastDaySettlementAvailableMoney != null">
+                last_day_settlement_available_money = #{lastDaySettlementAvailableMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.UserAccount">
+    update t_user_account
+    set available_money = #{availableMoney,jdbcType=DOUBLE},
+      settlement_money = #{settlementMoney,jdbcType=DOUBLE},
+      deposit_money = #{depositMoney,jdbcType=DOUBLE},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_card_number = #{bankCardNumber,jdbcType=VARCHAR},
+      bank_deposit_name = #{bankDepositName,jdbcType=VARCHAR},
+      pay_password = #{payPassword,jdbcType=VARCHAR},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      alipay_valid_name = #{alipayValidName,jdbcType=VARCHAR},
+      wechat_account = #{wechatAccount,jdbcType=VARCHAR},
+      wechar_valid_name = #{wecharValidName,jdbcType=VARCHAR},
+      deduct_percentage = #{deductPercentage,jdbcType=DOUBLE},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      bonus_num = #{bonusNum,jdbcType=INTEGER},
+      bonus_money = #{bonusMoney,jdbcType=DOUBLE},
+      commission_money = #{commissionMoney,jdbcType=DOUBLE},
+      last_day_settlement_date = #{lastDaySettlementDate,jdbcType=DATE},
+      last_dividend_quota_settlement_date = #{lastDividendQuotaSettlementDate,jdbcType=DATE},
+      order_commission_money = #{orderCommissionMoney,jdbcType=DOUBLE},
+      last_day_settlement_available_money = #{lastDaySettlementAvailableMoney,jdbcType=DOUBLE}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,309 @@
+<base href="${contextPath}/"/>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/order_detail_new_7745077d62.css" type="text/css">
+
+<div class="app-init-container" ng-controller="OrderDetailController">
+    <div id="js-react-container" class="app__content">
+        <div class="page-trade-order-detail">
+            <div class="step-region">
+                <ul class="ui-step ui-step-4">
+                    <li class="ui-step-done">
+                        <div class="ui-step-title">
+                            买家下单
+                        </div>
+                        <div class="ui-step-number">
+                            1
+                        </div>
+                        <div class="ui-step-meta">
+                            {{order.create_time}}
+                        </div>
+                    </li>
+                    <li class="ui-step-done">
+                        <div class="ui-step-title">
+                            付款至云中邦
+                        </div>
+                        <div class="ui-step-number">
+                            2
+                        </div>
+                        <div class="ui-step-meta">
+                            {{order.pay_time}}
+                        </div>
+                    </li>
+                    <li class="ui-step-done">
+                        <div class="ui-step-title">
+                            商家发货
+                        </div>
+                        <div class="ui-step-number">
+                            3
+                        </div>
+                        <div class="ui-step-meta">
+                            {{order.send_time}}
+                        </div>
+                    </li>
+                    <li class="ui-step-done">
+                        <div class="ui-step-title">
+                            结算货款
+                        </div>
+                        <div class="ui-step-number">
+                            4
+                        </div>
+                        <div class="ui-step-meta">
+                            {{order.success_time}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-region clearfix">
+                <div class="info-region">
+                    <h3 data-reactid=".0.1.0.0">
+                        <span >订单信息</span>
+                    </h3>
+                    <table class="info-table">
+                        <tbody>
+                        <tr >
+                            <th>
+                                订单编号：
+                            </th>
+                            <td>
+                                <span>{{order.order_no}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                付款方式：
+                            </th>
+                            <td>
+                                {{order.pay_type_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                买家：
+                            </th>
+                            <td>
+                                <span>{{order.member.nickname}}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="dashed-line"></div>
+                    <table class="info-table">
+                        <tbody data-reactid=".0.1.0.3.0">
+                        <tr data-reactid=".0.1.0.3.0.0:$0">
+                            <th data-reactid=".0.1.0.3.0.0:$0.0">
+                                配送方式：
+                            </th>
+                            <td data-reactid=".0.1.0.3.0.0:$0.1">
+                                {{order.send_type_name}}
+                            </td>
+                        </tr>
+                        <tr data-reactid=".0.1.0.3.0.0:$1">
+                            <th data-reactid=".0.1.0.3.0.0:$1.0">
+                                收货信息：
+                            </th>
+                            <td data-reactid=".0.1.0.3.0.0:$1.1">
+                                <p data-reactid=".0.1.0.3.0.0:$1.1.0">
+                                    {{order.province}}&nbsp;{{order.city}} &nbsp;{{order.area}}&nbsp;{{order.street}}&nbsp;{{order.detail_address}},{{order.receiver}},{{order.receiver_mobile}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr data-reactid=".0.1.0.3.0.1">
+                            <th data-reactid=".0.1.0.3.0.1.0">
+                                买家留言：
+                            </th>
+                            <td data-reactid=".0.1.0.3.0.1.1">
+                                {{order.message}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--<div class="promotion-app" data-reactid=".0.1.0.4">
+                        <div class="promotion-app-qrcode" data-reactid=".0.1.0.4.0"></div>
+                        <div class="promotion-app-content" data-reactid=".0.1.0.4.1">
+                            <p data-reactid=".0.1.0.4.1.0">
+                                随时随地经营店铺
+                            </p>
+                            <p data-reactid=".0.1.0.4.1.1">
+                                订单发货、库存管理通通搞定
+                            </p>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="state-region" data-reactid=".0.1.1">
+                    <div style="padding: 0px 0 30px 40px;" data-reactid=".0.1.1.0">
+                        <h3 class="state-title" data-reactid=".0.1.1.0.0">
+                            <span class="icon success" data-reactid=".0.1.1.0.0.0">√</span><span
+                                data-reactid=".0.1.1.0.0.1">订单状态：</span><span
+                                data-reactid=".0.1.1.0.0.2">{{order.order_status_name}}</span>
+                        </h3>
+                        <!-- <div class="state-desc" data-reactid=".0.1.1.0.1">
+                            <span >{{order.order_status_desc}}</span>
+                        </div> -->
+                        <div class="state-action" data-reactid=".0.1.1.0.2">
+                            <a href="javascript:;" class="ui-btn ui-btn-link" ng-show="order.order_status==1 || order.order_status==2 ||order.order_status==3"
+                               ng-click="addRemark(order)">备注订单</a>
+
+                            <!--<div class="ui-star" data-reactid=".0.1.1.0.2.2">
+                                <span title="去星" class="active"></span>
+                                <span title="一星" ></span>
+                                <span title="二星" ></span>
+                                <span title="三星" ></span>
+                                <span title="四星" ></span>
+                                <span title="五星" ></span>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div ng-show="order.remark">
+                        <div class="dashed-line"></div>
+                        <div class="state-remark">
+                            <table class="info-table">
+                                <tbody>
+                                <tr>
+                                    <th>卖家备注：</th>
+                                    <td>
+                                        <div>{{order.remark}}</div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="state-remind-region" data-reactid=".0.1.1.2">
+                        <div class="dashed-line" data-reactid=".0.1.1.2.0"></div>
+                        <div class="state-remind" data-reactid=".0.1.1.2.1">
+                            <h4>
+                                交易提醒：
+                            </h4>
+                            <ul>
+                                <li>如果无法发货，请及时与买家联系并说明情况后进行退款；</li>
+                                <li>买家申请退款后，须征得买家同意后再发货，否则买家有权拒收货物；</li>
+                                <li>买家付款后超过7天仍未发货，将有权申请平台客服介入发起退款维权；</li>
+                                <li>交易已成功，如果买家提出售后要求，请积极与买家协商，做好售后服务。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <noscript data-reactid=".0.2"></noscript>
+            <noscript data-reactid=".0.3"></noscript>
+            <table class="ui-table ui-table-simple goods-table"
+                   data-reactid=".0.4">
+                <thead data-reactid=".0.4.0">
+                <tr data-reactid=".0.4.0.0">
+                    <th data-reactid=".0.4.0.0.0"></th>
+                    <th class="cell-30" data-reactid=".0.4.0.0.1">
+                        商品名称
+                    </th>
+                    <th data-reactid=".0.4.0.0.2">
+                        单价(元)
+                    </th>
+                    <th data-reactid=".0.4.0.0.3">
+                        数量
+                    </th>
+                    <th data-reactid=".0.4.0.0.4">
+                        优惠(元)
+                    </th>
+                    <th class="cell-13" data-reactid=".0.4.0.0.5">
+                        小计(元)
+                    </th>
+                    <th data-reactid=".0.4.0.0.6">
+                        状态
+                    </th>
+                    <th class="text-center" data-reactid=".0.4.0.0.7">
+                        运费
+                    </th>
+                </tr>
+                </thead>
+                <tbody data-reactid=".0.4.1">
+                <tr class="tr-express" ng-repeat="express in order.logistics">
+                    <td data-reactid=".0.4.1.0:0.0">
+                        <strong data-reactid=".0.4.1.0:0.0.0">
+                            <span>包裹 - {{$index+1}}</span>
+                        </strong>
+                    </td>
+                    <td data-reactid=".0.4.1.0:0.1">
+                        <span class="express-meta">{{express.express_name}}</span>
+                        <span class="express-meta">
+                            <span>运单号：</span>
+                            <span>{{express.express_no}}</span>
+                        </span>
+                    </td>
+                    <td colspan="5" data-reactid=".0.4.1.0:0.2">
+                        <span class="express-meta express-latest-news">
+                            {{express.content[0].datetime}} {{express.content[0].remark}}
+                        </span>
+                        <div ng-show="express.isOpen"  style="border-top: solid 1px #BEBEBE;padding-top: 5px;">
+                          <span class="express-meta express-latest-news" ng-repeat="einfo in express.content track by $index" ng-if="$index!=0" style="display: block;">
+                            {{einfo.datetime}} {{einfo.remark}} {{einfo.zone}}
+                          </span>
+                        </div>
+                        <a  href="javascript:;" ng-click="express.isOpen=!express.isOpen">{{express.isOpen?'收起':'展开'}}</a>
+                    </td>
+                    <td class="td-postage" ng-show="$index==0" rowspan="{{order.logistics.length+order.items.length}}">
+                        {{order.postage| currency:'￥'}}
+                    </td>
+                </tr>
+                <tr class="test-item" data-reactid=".0.4.1.0:1:0:$0" ng-repeat="item in order.items">
+                    <td class="td-goods-image" rowspan="1"
+                        data-reactid=".0.4.1.0:1:0:$0.0">
+                        <div class="ui-centered-image" style="width: 48px; height: 48px;"
+                             width="48" height="48" data-reactid=".0.4.1.0:1:0:$0.0.0">
+                            <img
+                                    src="{{item.image_url}}"
+                                    style="max-width: 48px; max-height: 48px;"
+                                    data-reactid=".0.4.1.0:1:0:$0.0.0.0">
+                        </div>
+                    </td>
+                    <td data-reactid=".0.4.1.0:1:0:$0.1">
+                        <a href="#" target="_blank" data-reactid=".0.4.1.0:1:0:$0.1.0">{{item.goods_title}}</a>
+
+                        <p class="c-gray" data-reactid=".0.4.1.0:1:0:$0.1.1"></p>
+                    </td>
+                    <td data-reactid=".0.4.1.0:1:0:$0.2">
+                        <span data-reactid=".0.4.1.0:1:0:$0.2.0">{{item.price| currency:'￥'}}</span>
+                    </td>
+                    <td data-reactid=".0.4.1.0:1:0:$0.3">
+                        {{item.num}}
+                    </td>
+                    <td data-reactid=".0.4.1.0:1:0:$0.4">
+                        -
+                    </td>
+                    <td data-reactid=".0.4.1.0:1:0:$0.5">
+                        <p data-reactid=".0.4.1.0:1:0:$0.5.0">
+                            {{item.num * item.price | currency:'￥'}}
+                        </p>
+
+                        <div data-reactid=".0.4.1.0:1:0:$0.5.1"></div>
+                    </td>
+                    <td data-reactid=".0.4.1.0:1:0:$0.6">
+                        {{item.item_status_name}}
+                    </td>
+                    <td ng-show="order.logistics.length==0">{{item.postage| currency:'￥'}}</td>
+                </tr>
+                </tbody>
+                <tfoot data-reactid=".0.4.2">
+                <tr data-reactid=".0.4.2.0">
+                    <td colspan="8" class="text-right" data-reactid=".0.4.2.0.0">
+                     <span class="c-gray"> 订单金额：</span>
+                        <span class="real-pay ui-money-income">
+                            <span>{{order.total_money | currency:'￥'}}</span>
+                        </span>
+                        <span class="c-gray"> 订单优惠：</span>
+                        <span class="real-pay ui-money-income">
+                            <span>{{order.discount_money | currency:'￥'}}</span>
+                        </span>
+                        <span class="c-gray"> 邮费：</span>
+                        <span class="real-pay ui-money-income">
+                            <span>{{order.postage | currency:'￥'}}</span>
+                        </span>
+                        <span class="c-gray" data-reactid=".0.4.2.0.0.0">应收总价：</span>
+                        <span class="real-pay ui-money-income">
+                            <span>{{order.need_pay_money | currency:'￥'}}</span>
+                        </span>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

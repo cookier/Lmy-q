@@ -1,0 +1,115 @@
+<div class="widget-list">
+    <div class="js-list-filter-region clearfix">
+        <div class="widget-list-filter">
+            <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;">
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="ui-btn-group " style="text-align: right">
+                            <button ng-click="addRuleByActivity()" class="ui-btn ui-btn-success ">新增规则</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="ui-box">
+        <table class="ui-table-order" style="padding: 0px;">
+            <thead class="js-list-header-region tableFloatingHeaderOriginal">
+            <tr class="widget-list-header">
+                <th>活动规则名称</th>
+                <th>活动规则类型</th>
+                <th>奖励对象</th>
+                <th>奖品类型</th>
+                <th>领取方式</th>
+                <th>已领取人数</th>
+                <th>奖品</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="js-list-body-region">
+            <tr class="widget-list-item" ng-repeat="data in list track by $index">
+                <td>{{data.name}}</td>
+                <td>{{data.rule_type==1?'排名':data.rule_type==2?'奖励':''}}</td>
+                <td>
+                    <span ng-if="data.rewards_object==0">所有会员</span>
+                    <span ng-if="data.rewards_object==1">平台</span>
+                    <span ng-if="data.rewards_object==2">所有店铺</span>
+                    <span ng-if="data.rewards_object==3">所有分销商店铺</span>
+                    <span ng-if="data.rewards_object==4">指定分销商店铺</span>
+                    <span ng-if="data.rewards_object==5">所有供应商店铺</span>
+                    <span ng-if="data.rewards_object==6">指定供应商店铺</span>
+                    <span ng-if="data.rewards_object==7">指定会员</span>
+                    <span ng-if="data.rewards_object==8">活动参与者</span>
+                    <span ng-if="data.rewards_object==9">活动推广者</span>
+                    <span ng-if="data.rewards_object==10">指定分销商</span>
+                    <span ng-if="data.rewards_object==11">指定供应商</span>
+                    <span ng-if="data.rewards_object==12">指定代理商</span>
+                </td>
+                <td>
+                    <span ng-if="data.prize_type==1">优惠券</span>
+                    <span ng-if="data.prize_type==2">购物券</span>
+                    <span ng-if="data.prize_type==3">优惠码</span>
+                    <span ng-if="data.prize_type==4">商品</span>
+                    <span ng-if="data.prize_type==5">实物</span>
+                    <span ng-if="data.prize_type==6">积分</span>
+                    <span ng-if="data.prize_type==7">平台返现</span>
+                    <span ng-if="data.prize_type==8">分红</span>
+                </td>
+                <td>
+                    <span ng-if="data.receive_type==0">系统自动发放</span>
+                    <span ng-if="data.receive_type==1">平台客服发放</span>
+                    <span ng-if="data.receive_type==2">自领</span>
+                    <span ng-if="data.receive_type==3">任意</span>
+                </td>
+                <td>
+                    {{data.receive_num}}
+                </td>
+                <td>{{data.context}}</td>
+                <td>
+                    <span ng-if="data.invalid_status==0">有效</span>
+                    <span ng-if="data.invalid_status==1">无效</span>
+                </td>
+                <td>
+                    <!--                     <a href="javascript:;" class="js-add-sku-atom add-sku" -->
+                    <!--                        stackable-toggle="'active'" -->
+                    <!--                        stackable-trigger="pop_auth">删除</a> -->
+                    <!--                     <stackable-popover -->
+                    <!--                             stackable="pop_auth" stackable-placement="left" -->
+                    <!--                             stackable-alignment="center" -->
+                    <!--                             stackable-enable-escape="true"> -->
+                    <!--                         <div class="popover-inner popover-change"> -->
+                    <!--                             <div class="popover-content text-center form-inline"> -->
+                    <!--                                 <div> -->
+                    <!--                                     确定删除此规则 -->
+                    <!--                                 </div> -->
+                    <!--                                 <div> -->
+                    <!--                                     <br> -->
+                    <!--                                     <button type="button" -->
+                    <!--                                             class="btn btn-primary js-btn-confirm" -->
+                    <!--                                             data-loading-text="确定" -->
+                    <!--                                             ng-click="delRule(data.id)">确定</button> -->
+                    <!--                                     <button type="reset" class="btn js-btn-cancel" -->
+                    <!--                                             ng-click="pop_auth.show=false">取消</button> -->
+                    <!--                                 </div> -->
+                    <!--                             </div> -->
+                    <!--                         </div> -->
+                    <!--                     </stackable-popover> -->
+
+                    <a ng-click="editRuleByActivity(data.id)" style="font-style: normal;">编辑</a>
+                    <a id="console{{$index}}" class="js-add-sku-atom add-sku" ng-click="delRule(data.id,pop)"
+                       style="font-style: normal;">删除</a>
+                    <a ng-click="invalidRule(data.id)" style="font-style: normal;"
+                       ng-show="data.invalid_status==0">使失效</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="js-list-empty-region"></div>
+    </div>
+    <div class="js-list-footer-region ui-box">
+        <div ng-show="(list==null)||(list.length==0)"
+             style="text-align: center;">没有找到相关记录!
+        </div>
+    </div>
+</div>

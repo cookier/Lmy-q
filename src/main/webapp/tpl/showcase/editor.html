@@ -1,0 +1,75 @@
+<div class="app__content js-app-main">
+    <div class="app-design clearfix">
+        <div class="app-preview">
+            <div class="app-header"></div>
+            <div class="app-entry">
+                <div id="app-config" class="app-config js-config-region">
+                        <div ng-repeat="item in items | filter : {type : 'config'}" ng-click="onSelected(item,$event)" class="app-field clearfix" ng-class="{'editing':$index == curIndex}">
+                            <div ng-if="item.type=='config' && type=='feature'"  ng-include="'tpl/showcase/tpl_feature/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='category'"  ng-include="'tpl/showcase/tpl_category/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='usercenter'"  ng-include="'tpl/showcase/tpl_usercenter/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='goodstag'"  ng-include="'tpl/showcase/tpl_goodstag/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='goodstemplate'"  ng-include="'tpl/showcase/tpl_goodstemplate/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='ad'"  ng-include="'tpl/showcase/tpl_ad/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='shopnav'"  ng-include="'tpl/showcase/tpl_shopnav/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='goods'"  ng-include="'tpl/showcase/tpl_goods/show.html'"></div>
+                            <div ng-if="item.type=='config' && type=='doc'"  ng-include="'tpl/showcase/tpl_doc/show.html'"></div>
+                        </div>
+                </div>                
+                <div class="app-fields js-fields-region">
+                    <div id='app-fields' class="app-fields ui-sortable">
+                        <div ng-repeat="item in items" ng-click="onSelected(item,$event)" class="app-field clearfix" ng-class="{'editing':$index == curIndex}">
+                            <div ng-if="item.type=='rich_text'"  ng-include="'tpl/showcase/rich_text/show.html'"></div>
+                            <div ng-if="item.type=='goods'" ng-include="'tpl/showcase/goods/show.html'"></div>
+                            <div ng-if="item.type=='goods_list'" ng-include="'tpl/showcase/goods_list/show.html'"></div>
+                            <div ng-if="item.type=='goods_template_split'" ng-include="'tpl/showcase/goods_template_split/show.html'"></div>
+                            <div ng-if="item.type=='image_ad'" ng-include="'tpl/showcase/image_ad/show.html'"></div>
+                            <div ng-if="item.type=='nav'" ng-include="'tpl/showcase/nav/show.html'"></div>
+                            <div ng-if="item.type=='showcase'" ng-include="'tpl/showcase/showcase/show.html'"></div>
+                            <div ng-if="item.type=='level'" ng-include="'tpl/showcase/level/show.html'"></div>
+                            <div ng-if="item.type=='link'" ng-include="'tpl/showcase/link/show.html'"></div>
+                            <div ng-if="item.type=='text_nav'" ng-include="'tpl/showcase/text_nav/show.html'"></div>
+                            <div ng-if="item.type=='tag_list'" ng-include="'tpl/showcase/tag_list/show.html'"></div>
+                            <div ng-if="item.type=='title'" ng-include="'tpl/showcase/title/show.html'"></div>
+                            <div ng-if="item.type=='component'" ng-include="'tpl/showcase/component/show.html'"></div>
+                            <div ng-if="item.type=='search'" ng-include="'tpl/showcase/search/show.html'"></div>
+                            <div ng-if="item.type=='line'" ng-include="'tpl/showcase/line/show.html'"></div>
+                            <div ng-if="item.type=='cube2'" ng-include="'tpl/showcase/cube2/show.html'"></div>
+                            <div ng-if="item.type=='tpl_shop'" ng-include="'tpl/showcase/tpl_shop/show.html'"></div>
+                            <div ng-if="item.type=='tpl_weixin'" ng-include="'tpl/showcase/tpl_weixin/show.html'"></div>
+                            <div ng-if="item.type=='tpl_fbb'" ng-include="'tpl/showcase/tpl_fbb/show.html'"></div>
+                            <div ng-if="item.type=='tpl_course'" ng-include="'tpl/showcase/tpl_course/show.html'"></div>
+                            <div ng-if="item.type=='tpl_wxd'" ng-include="'tpl/showcase/tpl_wxd/show.html'"></div>
+                            <div ng-if="item.type=='tpl_11_11'" ng-include="'tpl/showcase/tpl_11_11/show.html'"></div>
+                            <div ng-if="item.type=='category'" ng-include="'tpl/showcase/category/show.html'"></div>
+                            <div ng-if="item.type=='white'" ng-include="'tpl/showcase/white/show.html'"></div>
+                            <div ng-if="item.type=='store'" ng-include="'tpl/showcase/store/show.html'"></div>
+                            <div ng-if="item.type=='recommend_goods'" ng-include="'tpl/showcase/recommend_goods/show.html'"></div>
+                            <div ng-if="item.type=='scroll'" ng-include="'tpl/showcase/scroll/show.html'"></div>
+                            <div ng-if="item.type=='scroll_nav'" ng-include="'tpl/showcase/scroll_nav/show.html'"></div>
+                            <div ng-if="item.type=='image_text'" ng-include="'tpl/showcase/image_text/show.html'"></div>
+                            <div ng-if="item.type=='advanced_news'" ng-include="'tpl/showcase/advanced_news/show.html'"></div>
+                            <div ng-if="item.type=='audio'" ng-include="'tpl/showcase/audio/show.html'"></div>
+                            <div ng-if="item.type=='shop_banner'" ng-include="'tpl/showcase/shop_banner/show.html'"></div>
+                            <div ng-if="item.type=='tags'" ng-include="'tpl/showcase/tags/show.html'"></div>
+                            <div ng-if="item.type=='notice'" ng-include="'tpl/showcase/notice/show.html'"></div>
+                            <div ng-if="item.type=='coupon'" ng-include="'tpl/showcase/coupon/show.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="type!='shopnav'" class="js-add-region">
+                <div ng-include="'tpl/showcase/base/add_content.html'">
+                </div>
+            </div>
+        </div>
+        <div class="app-sidebar">
+            <div class="arrow"></div>
+            <div class="app-sidebar-inner js-sidebar-region">
+                <div id="edit_body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

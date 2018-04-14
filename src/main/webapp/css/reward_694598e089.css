@@ -1,0 +1,318 @@
+.orange {
+    color: #f60
+}
+
+.dark-gray {
+    color: #666
+}
+
+.gray {
+    color: #999
+}
+
+.green {
+    color: #44bb00
+}
+
+.red {
+    color: #f30
+}
+
+.ump-select-box {
+    width: 800px;
+    border: 1px solid #ddd;
+    margin-left: 50px;
+    overflow: hidden
+}
+
+.ump-select-tab {
+    width: 800px;
+    margin-left: 50px;
+    margin-bottom: -1px;
+    background: #f2f2f2;
+    border: 1px solid #ddd
+}
+
+.ump-select-tab .ui-nav-tab {
+    margin-bottom: 0;
+    border-bottom: none
+}
+
+.ump-select-tab .ui-nav-tab li:first-child a {
+    border-left: 0
+}
+
+.ump-select-tab .ui-nav-tab li a {
+    width: 120px;
+    border-top: 0;
+    height: 25px;
+    line-height: 25px;
+    padding: 8px 20px
+}
+
+.ump-select-tab .ui-nav-tab li.active a, .ump-select-tab .ui-nav-tab li.active a:hover {
+    height: 24px;
+    line-height: 24px;
+    border-bottom: 2px solid #f60
+}
+
+.ump-select-search {
+    padding: 10px 20px 10px;
+    border-bottom: 1px solid #ddd
+}
+
+.ump-select-search select {
+    width: 200px;
+    margin-right: 10px
+}
+
+.ump-select-search input {
+    width: 200px;
+    margin-right: 10px
+}
+
+.ump-select-search button {
+    vertical-align: top;
+    margin: 0
+}
+
+.ump-select-goods {
+    margin-bottom: 10px;
+    min-height: 200px
+}
+
+.ump-select-goods .ui-table {
+    background: #fff
+}
+
+.ump-select-goods .ui-table tr th {
+    background: #fff;
+    border-bottom: 1px dashed transparent
+}
+
+.ump-select-goods .ui-table tr td {
+    border-bottom: 1px dashed #ddd;
+    vertical-align: middle
+}
+
+.ump-select-goods .ui-table tbody tr:last-child td {
+    border-width: 1px
+}
+
+.ump-select-goods .goods-image-td, .ump-select-goods .goods-image-td .goods-image,
+.ump-select-goods .goods-image-td img {
+    width: 70px;
+    height: 70px
+}
+
+.ump-select-goods .goods-meta a {
+    color: #6289ff
+}
+
+.ump-select-goods .goods-title {
+    padding: 5px 0 0;
+    height: 36px;
+    line-height: 18px;
+    overflow: hidden
+}
+
+.ump-select-goods .goods-price {
+    color: #f60;
+    font-weight: bold
+}
+
+.ump-select-goods .bold {
+    font-weight: bold
+}
+
+.ump-select-goods .scroll-table-box {
+    height: 600px;
+    overflow: auto
+}
+
+.ump-select-goods .no-result {
+    background: #fff
+}
+
+.ump-select-footer {
+    padding: 0 20px 0 10px
+}
+
+.ump-select-footer .pagenavi .active {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.ump-select-footer .pull-left {
+    padding-bottom: 20px
+}
+
+.ump-select-footer .pull-left label {
+    vertical-align: top;
+    padding-right: 5px;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none
+}
+
+.page-reward {
+    font-size: 14px;
+    background: #fff
+}
+
+.page-reward .form-horizontal, .page-reward .mb0 {
+    margin-bottom: 0
+}
+
+.page-reward input[type="radio"] {
+    margin-top: 5px
+}
+
+.page-reward .reward-title {
+    font-size: 14px;
+    background: #f2f2f2;
+    line-height: 40px;
+    padding: 0 20px
+}
+
+.page-reward .app-reward .reward-sub-title {
+    padding: 10px 30px;
+    font-size: 14px;
+    margin: 20px auto 0;
+    font-weight: bold
+}
+
+.page-reward .app-reward .pl20 {
+    padding-left: 20px
+}
+
+.page-reward .app-reward .label-text {
+    line-height: 24px
+}
+
+.page-reward .reward-table-wrap {
+    padding-left: 50px
+}
+
+.page-reward .no-result {
+    border: none;
+    padding: 100px 0
+}
+
+.page-reward .reward-table {
+    width: 100%
+}
+
+.page-reward .reward-table tr {
+    border: 1px solid #ddd
+}
+
+.page-reward .reward-table tr th {
+    line-height: 36px;
+    background: #f2f2f2
+}
+
+.page-reward .reward-table tr .pl100 {
+    padding-left: 100px;
+    text-align: left
+}
+
+.page-reward .reward-table tr td {
+    vertical-align: middle
+}
+
+.page-reward .reward-table tr td .w30 {
+    width: 30px;
+    margin: 0 5px;
+    vertical-align: middle
+}
+
+.page-reward .reward-table tr td .w120 {
+    width: 120px
+}
+
+.page-reward .reward-table tr td .reward-controls {
+    padding-left: 20px;
+    line-height: 40px
+}
+
+.page-reward .reward-table tr td .reward-setting .error-message {
+    display: inline-block;
+    padding-left: 10px
+}
+
+.page-reward .reward-table tr td .reward-setting .show {
+    display: block
+}
+
+.page-reward .reward-table tr td .reward-setting .hide {
+    display: none
+}
+
+.page-reward .reward-table tr td .first-reward {
+    margin-top: 5px
+}
+
+.page-reward .reward-table tr td .last-reward {
+    margin-bottom: 5px
+}
+
+.page-reward .reward-table .controls {
+    height: 32px;
+    margin-left: 100px
+}
+
+.page-reward .reward-table .controls span {
+    display: inline-block;
+    line-height: 32px
+}
+
+.page-reward .reward-table .controls .reward-label {
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 0
+}
+
+.page-reward .reward-table .controls .checked-status {
+    margin-top: 10px
+}
+
+.page-reward .reward-table .controls .replace-status {
+    margin-left: 0;
+    padding-left: 0;
+    display: none
+}
+
+.page-reward .reward-table .readonly-control-group .control-group {
+    margin-top: 10px
+}
+
+.page-reward .reward-table .readonly-control-group .control-group .controls {
+    height: auto
+}
+
+.page-reward .reward-table label {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none
+}
+
+.page-reward .reward-table .add-reward-toolbar {
+    display: none
+}
+
+.page-reward .reward-table .error-node {
+    display: none
+}
+
+.page-reward .reward-table .reward-need-one {
+    display: none
+}
+
+.page-reward .reward-table .reward-need-one.error {
+    display: block
+}
+
+.page-reward .app-actions .form-actions {
+    background: #ffffcc;
+    padding: 10px;
+    border-top: none
+}

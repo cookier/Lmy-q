@@ -1,0 +1,41 @@
+<form class="form-horizontal" novalidate ng-controller="UIShowcaseController">
+    <div class="control-group">
+        <label class="control-label">橱窗标题名：</label>
+        <div class="controls">
+            <input type="text" name="title" ng-model="data.title" maxLength="15">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">显示方式：</label>
+        <div class="controls">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="mode" value="0" ng-model="data.mode" ng-checked="data.mode == '0'"><i></i>默认
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="mode" value="1" ng-model="data.mode" ng-checked="data.mode == '1'" ><i></i>3 列
+            </label>
+            <p class="help-desc">PC版一直显示 3 列</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">内容区标题：</label>
+        <div class="controls">
+            <input type="text" name="body_title" ng-model="data.body_title" maxLength="15">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">内容区说明：</label>
+        <div class="controls">
+            <textarea name="body_desc" ng-model="data.body_desc" cols="15" rows="3" maxLength="50"></textarea>
+        </div>
+    </div>
+
+    <div class="control-group js-collection-region">
+        <ul class="choices">
+            <li ng-repeat="item in data.sub_entry" class="choice" ng-include="'tpl/showcase/showcase/edit_item.html'">
+            </li>
+        </ul>
+    </div>
+
+</form>

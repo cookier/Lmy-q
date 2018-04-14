@@ -1,0 +1,15 @@
+<div class="edit-tags">
+    <div class="tag-source">
+        <div class="control-group">
+            <label class="control-label pull-left">商品来源：</label>
+            <div class="controls pull-left">
+                <a ng-show="item.title" href="{{item.url}}" target="_blank" class="tag-title new-window">{{item.title}}</a>
+                <a ng-show="item.title" href="javascript:;" class="tag-modify js-select-tag" ng-click="editGoodsTag(item)">修改</a>
+                <a ng-show="!item.title" href="javascript:;" class="js-select-tag pull-left" ng-click="editGoodsTag(item)">选择商品分组</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <span class="action delete close-modal" title="删除" ng-click="delGoodsTag(item)">×</span>
+</div>

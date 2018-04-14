@@ -1,0 +1,28 @@
+<div class="control-group">
+    <div ng-show="item.sub_entry.length>0" class="custom-showcase-wrap custom-showcase-wrap-{{item.mode}}">
+        <div ng-show="item.title" class="custom-showcase-wrap-title">
+            {{item.title}}
+        </div>
+        <div class="custom-showcase-body">
+            <ul class="custom-showcase clearfix">
+                <li ng-repeat="subItem in item.sub_entry" ng-class="{'custom-showcase-big':$index ==0,'custom-showcase-small':$index >0}">
+                    <img ng-src="{{subItem.image_url}}">
+                    <span ng-show="subItem.title !== ''" class="title">{{subItem.title}}</span>
+                </li>
+            </ul>
+            <div ng-show="item.body_title" class="custom-showcase-body-title text-center">
+                {{item.body_title}}
+            </div>
+            <p ng-show="item.body_desc" class="custom-showcase-body-desc text-center">
+                {{item.body_desc}}
+            </p>
+        </div>
+    </div>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

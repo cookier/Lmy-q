@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityRecommendLogMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityRecommendLog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="activity_id" jdbcType="INTEGER" property="activityId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="recommend_user_id" jdbcType="INTEGER" property="recommendUserId"/>
+        <result column="recommend_time" jdbcType="TIMESTAMP" property="recommendTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, activity_id, user_id, recommend_user_id, recommend_time, status, update_time
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityRecommendLogExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_recommend_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_activity_recommend_log
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_recommend_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityRecommendLogExample">
+        delete from t_activity_recommend_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityRecommendLog">
+    insert into t_activity_recommend_log (id, activity_id, user_id, 
+      recommend_user_id, recommend_time, status, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{recommendUserId,jdbcType=INTEGER}, #{recommendTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityRecommendLog">
+        insert into t_activity_recommend_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="recommendUserId != null">
+                recommend_user_id,
+            </if>
+            <if test="recommendTime != null">
+                recommend_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="recommendUserId != null">
+                #{recommendUserId,jdbcType=INTEGER},
+            </if>
+            <if test="recommendTime != null">
+                #{recommendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityRecommendLogExample"
+            resultType="java.lang.Long">
+        select count(*) from t_activity_recommend_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_recommend_log
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.activityId != null">
+                activity_id = #{record.activityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.recommendUserId != null">
+                recommend_user_id = #{record.recommendUserId,jdbcType=INTEGER},
+            </if>
+            <if test="record.recommendTime != null">
+                recommend_time = #{record.recommendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_recommend_log
+        set id = #{record.id,jdbcType=INTEGER},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        recommend_user_id = #{record.recommendUserId,jdbcType=INTEGER},
+        recommend_time = #{record.recommendTime,jdbcType=TIMESTAMP},
+        status = #{record.status,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityRecommendLog">
+        update t_activity_recommend_log
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="recommendUserId != null">
+                recommend_user_id = #{recommendUserId,jdbcType=INTEGER},
+            </if>
+            <if test="recommendTime != null">
+                recommend_time = #{recommendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityRecommendLog">
+    update t_activity_recommend_log
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      recommend_user_id = #{recommendUserId,jdbcType=INTEGER},
+      recommend_time = #{recommendTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ShopPageCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ShopPageCategory">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="page_count" jdbcType="INTEGER" property="pageCount"/>
+        <result column="list_type" jdbcType="INTEGER" property="listType"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="default_flag" jdbcType="INTEGER" property="defaultFlag"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ShopPageCategory">
+        <result column="page_data" jdbcType="LONGVARCHAR" property="pageData"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, title, page_count, list_type, url, create_time, update_time, default_flag
+  </sql>
+    <sql id="Blob_Column_List">
+    page_data
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ShopPageCategoryExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_shop_page_category
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ShopPageCategoryExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_shop_page_category
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_shop_page_category
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_shop_page_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ShopPageCategoryExample">
+        delete from t_shop_page_category
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ShopPageCategory">
+    insert into t_shop_page_category (id, shop_id, title, 
+      page_count, list_type, url, 
+      create_time, update_time, default_flag, 
+      page_data)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{pageCount,jdbcType=INTEGER}, #{listType,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{defaultFlag,jdbcType=INTEGER}, 
+      #{pageData,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ShopPageCategory">
+        insert into t_shop_page_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="pageCount != null">
+                page_count,
+            </if>
+            <if test="listType != null">
+                list_type,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="defaultFlag != null">
+                default_flag,
+            </if>
+            <if test="pageData != null">
+                page_data,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="pageCount != null">
+                #{pageCount,jdbcType=INTEGER},
+            </if>
+            <if test="listType != null">
+                #{listType,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="defaultFlag != null">
+                #{defaultFlag,jdbcType=INTEGER},
+            </if>
+            <if test="pageData != null">
+                #{pageData,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ShopPageCategoryExample" resultType="java.lang.Long">
+        select count(*) from t_shop_page_category
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_shop_page_category
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pageCount != null">
+                page_count = #{record.pageCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.listType != null">
+                list_type = #{record.listType,jdbcType=INTEGER},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.defaultFlag != null">
+                default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.pageData != null">
+                page_data = #{record.pageData,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_shop_page_category
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        page_count = #{record.pageCount,jdbcType=INTEGER},
+        list_type = #{record.listType,jdbcType=INTEGER},
+        url = #{record.url,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+        page_data = #{record.pageData,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_shop_page_category
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        page_count = #{record.pageCount,jdbcType=INTEGER},
+        list_type = #{record.listType,jdbcType=INTEGER},
+        url = #{record.url,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        default_flag = #{record.defaultFlag,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ShopPageCategory">
+        update t_shop_page_category
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="pageCount != null">
+                page_count = #{pageCount,jdbcType=INTEGER},
+            </if>
+            <if test="listType != null">
+                list_type = #{listType,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="defaultFlag != null">
+                default_flag = #{defaultFlag,jdbcType=INTEGER},
+            </if>
+            <if test="pageData != null">
+                page_data = #{pageData,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ShopPageCategory">
+    update t_shop_page_category
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      page_count = #{pageCount,jdbcType=INTEGER},
+      list_type = #{listType,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      default_flag = #{defaultFlag,jdbcType=INTEGER},
+      page_data = #{pageData,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ShopPageCategory">
+    update t_shop_page_category
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      page_count = #{pageCount,jdbcType=INTEGER},
+      list_type = #{listType,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      default_flag = #{defaultFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

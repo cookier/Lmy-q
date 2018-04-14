@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="./css/newsettlement.css" type="text/css">
+<div class="app-init-container" ng-controller="setNotificationNumberController">
+
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="js-nav-settlement-income" class="">
+                <a ui-sref="console.account">我的收入</a>
+            </li>
+            <li id="js-nav-settlement-trade" class="">
+                <a ui-sref="console.trading_list">交易记录</a>
+            </li>
+            <li id="js-nav-settlement-inoutdetail" class="">
+                <a ui-sref="console.income_detail">收支明细</a>
+            </li>
+            <li id="js-nav-settlement-withdraw" class="">
+                <a ui-sref="console.withdrawals_record">提现记录</a>
+            </li>
+            <li id="js-nav-settlement-applywithdrawal" class="active">
+                <a ui-sref="#">设置通知号码</a>
+            </li>
+
+        </ul>
+        <div class="common-helps-entry pull-right">
+            <a href="" target="_blank">
+                <span class="help-icon"></span>
+                收入／提现常见问题总结
+            </a>
+        </div>
+    </nav>
+    <div class="app__content js-app-main">
+        <div class="page-settlement">
+            <div class="ui-box applyWithdrawal-region">
+                <form name="applyForm" class="form-validation form-horizontal">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label">原始号码：</label>
+
+                            <div class="controls">
+                                <span class="money">{{mobile}}</span>
+                            </div>
+                        </div>
+                        <div class="control-group bank-group">
+                            <label class="control-label"><em class="required">*</em>设置新的手机号码：</label>
+
+                            <div class="controls js-bank-list-region">
+                                <input type="text" ng-model="mobile"/>
+                            </div>
+                            <!-- 最多只能添加5张银行卡 -->
+                        </div>
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary js-submit" ng-click="setNotificationNumber()">确认
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

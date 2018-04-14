@@ -1,0 +1,16 @@
+<div class="first-nav">
+     <h3>一级导航</h3>
+    <div class="js-first-nav-item-meta-region" ng-include="'tpl/showcase/tpl_shopnav/edit_wx_nav_item.html'">
+    </div>
+</div>
+<div class="second-nav" data-first-nav-index="{{$index}}">
+    <h4>二级导航</h4>
+    <div class="actions"><span class="action delete close-modal" title="删除" ng-click="delFirstNav(item)">×</span></div>
+    <div class="js-second-nav-region">
+        <ul class="choices ui-sortable">
+            <li ng-repeat="item in item.second" class="choice" ng-include="'tpl/showcase/tpl_shopnav/edit_wx_nav_item.html'">
+            </li>
+        </ul>
+    </div>
+    <p class="add-shopnav add-second-shopnav js-add-second-nav" ng-click="addSecondNav(item)" ng-show="item.second.length<5">+ 添加二级导航</p>
+</div>

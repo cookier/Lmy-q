@@ -1,0 +1,31 @@
+<div class="app-nav">
+    <div class="actions"><span class="action delete close-modal" title="删除" ng-click="delAppNav(item)">×</span></div>
+    <div class="app-nav-image-group clearfix">
+        <div class="app-nav-image-normal pull-left"><p>普通：</p>
+            <div class="app-nav-image-box" ng-style="{'background-color':'{{data.background_color}}'}">
+                <div class="app-nav-image"
+                     ng-style="{'background-image':'url({{item.image_url}})','background-size':'{{item.image_width / 2}}px {{item.image_height / 2}}px'}"></div>
+                <a href="javascript:;" class="js-trigger-image" ng-click="setImage(item)">{{item.image_url ? '修改' : '选择'}}</a>
+            </div>
+        </div>
+        <div ng-show="data.nav_style ==2 || data.nav_style ==3" class="app-nav-image-active-box pull-left">
+            <p>高亮（可选）：</p>
+            <div class="app-nav-image-box" ng-style="{'background-color': '{{data.background_color}}'}" >
+                <div class="app-nav-image"
+                     ng-style="{'background-image':'url({{item.actived_image_url}})','background-size':'{{item.actived_image_width / 2}}px {{item.actived_image_height / 2}}px'}"></div>
+                <a href="javascript:;" class="js-trigger-actived-image" ng-click="setActivedImage(item)">{{item.actived_image_url ? '修改' : '选择'}}</a>
+                <div ng-show="item.actived_image_url" class="actions"><span class="action js-delete-actived-image close-modal" title="删除" ng-click="delActiviedImage(item)">×</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls" style="margin-left: 0;"><input type="hidden" name="image_url"></div>
+    </div>
+    <p class="c-gray">图片尺寸要求：不大于128*100像素，支持PNG格式</p>
+    <div class="split-line"></div>
+    <div class="control-group control-group-link"><label class="control-label">链接：</label>
+        <div class="controls">
+            <ui-setup-link link_id="item.link_id" link_url="item.link_url" link_title="item.link_title" link_type="item.link_type"></ui-setup-link>
+        </div>
+    </div>
+</div>

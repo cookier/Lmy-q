@@ -1,0 +1,18 @@
+[
+  {
+    "type": "config",
+    "title": "标题",
+    "digest": "",
+    "keywords": "",
+    "category": ""
+  },
+  {
+    "type": "line"
+  },
+  {
+    "type": "rich_text",
+    "content": "",
+    "color": "#ffffff",
+    "fullscreen": 0
+  }
+]

@@ -1,0 +1,2902 @@
+[
+  {
+    "id": 11,
+    "name": "北京市",
+    "code": "1001",
+    "level": 1,
+    "area_code": "010",
+    "map_code": "11",
+    "child_list": [
+      {
+        "id": 1101,
+        "name": "市辖区",
+        "level": 2
+      },
+      {
+        "id": 1102,
+        "name": "县",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "天津市",
+    "code": "1004",
+    "level": 1,
+    "area_code": "022",
+    "map_code": "12",
+    "child_list": [
+      {
+        "id": 1201,
+        "name": "市辖区",
+        "level": 2
+      },
+      {
+        "id": 1202,
+        "name": "市辖县",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "河北省",
+    "code": "24",
+    "level": 1,
+    "map_code": "13",
+    "child_list": [
+      {
+        "id": 1301,
+        "name": "石家庄市",
+        "code": "2401",
+        "level": 2,
+        "area_code": "0311"
+      },
+      {
+        "id": 1302,
+        "name": "唐山市",
+        "code": "2402",
+        "level": 2,
+        "area_code": "0315",
+        "map_code": ""
+      },
+      {
+        "id": 1303,
+        "name": "秦皇岛市",
+        "code": "2403",
+        "level": 2,
+        "area_code": "0335"
+      },
+      {
+        "id": 1304,
+        "name": "邯郸市",
+        "code": "2404",
+        "level": 2,
+        "area_code": "0310",
+        "map_code": ""
+      },
+      {
+        "id": 1305,
+        "name": "邢台市",
+        "code": "2405",
+        "level": 2,
+        "area_code": "0319",
+        "map_code": ""
+      },
+      {
+        "id": 1306,
+        "name": "保定市",
+        "code": "2406",
+        "level": 2,
+        "area_code": "0312",
+        "map_code": ""
+      },
+      {
+        "id": 1307,
+        "name": "张家口市",
+        "code": "2407",
+        "level": 2,
+        "area_code": "0313"
+      },
+      {
+        "id": 1308,
+        "name": "承德市",
+        "code": "2408",
+        "level": 2,
+        "area_code": "0314",
+        "map_code": ""
+      },
+      {
+        "id": 1309,
+        "name": "沧州市",
+        "code": "2409",
+        "level": 2,
+        "area_code": "0317",
+        "map_code": ""
+      },
+      {
+        "id": 1310,
+        "name": "廊坊市",
+        "code": "2410",
+        "level": 2,
+        "area_code": "0316",
+        "map_code": ""
+      },
+      {
+        "id": 1311,
+        "name": "衡水市",
+        "code": "2411",
+        "level": 2,
+        "area_code": "0318",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "山西省",
+    "code": "11",
+    "level": 1,
+    "area_code": "0351",
+    "child_list": [
+      {
+        "id": 1401,
+        "name": "太原市",
+        "code": "1101",
+        "level": 2,
+        "area_code": "0351",
+        "map_code": "14"
+      },
+      {
+        "id": 1402,
+        "name": "大同市",
+        "code": "1102",
+        "level": 2,
+        "area_code": "0352",
+        "map_code": ""
+      },
+      {
+        "id": 1403,
+        "name": "阳泉市",
+        "code": "1103",
+        "level": 2,
+        "area_code": "0353",
+        "map_code": ""
+      },
+      {
+        "id": 1404,
+        "name": "长治市",
+        "code": "1104",
+        "level": 2,
+        "area_code": "0355",
+        "map_code": ""
+      },
+      {
+        "id": 1405,
+        "name": "晋城市",
+        "code": "1105",
+        "level": 2,
+        "area_code": "0356",
+        "map_code": ""
+      },
+      {
+        "id": 1406,
+        "name": "朔州市",
+        "code": "1106",
+        "level": 2,
+        "area_code": "0349"
+      },
+      {
+        "id": 1407,
+        "name": "晋中市",
+        "code": "1107",
+        "level": 2,
+        "area_code": "0354"
+      },
+      {
+        "id": 1408,
+        "name": "运城市",
+        "code": "1108",
+        "level": 2,
+        "area_code": "0359",
+        "map_code": ""
+      },
+      {
+        "id": 1409,
+        "name": "忻州市",
+        "code": "1109",
+        "level": 2,
+        "area_code": "0350",
+        "map_code": ""
+      },
+      {
+        "id": 1410,
+        "name": "临汾市",
+        "code": "1110",
+        "level": 2,
+        "area_code": "0357",
+        "map_code": ""
+      },
+      {
+        "id": 1411,
+        "name": "吕梁市",
+        "code": "1111",
+        "level": 2,
+        "area_code": "0358"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "内蒙古自治区",
+    "code": "12",
+    "level": 1,
+    "area_code": "0471",
+    "child_list": [
+      {
+        "id": 1501,
+        "name": "呼和浩特市",
+        "code": "1201",
+        "level": 2,
+        "area_code": "0471"
+      },
+      {
+        "id": 1502,
+        "name": "包头市",
+        "code": "1202",
+        "level": 2,
+        "area_code": "0472",
+        "map_code": ""
+      },
+      {
+        "id": 1503,
+        "name": "乌海市",
+        "code": "1203",
+        "level": 2,
+        "area_code": "0473",
+        "map_code": ""
+      },
+      {
+        "id": 1504,
+        "name": "赤峰市",
+        "code": "1204",
+        "level": 2,
+        "area_code": "0476",
+        "map_code": ""
+      },
+      {
+        "id": 1505,
+        "name": "通辽市",
+        "code": "1205",
+        "level": 2,
+        "area_code": "0475",
+        "map_code": ""
+      },
+      {
+        "id": 1506,
+        "name": "鄂尔多斯市",
+        "code": "1206",
+        "level": 2,
+        "area_code": "0477"
+      },
+      {
+        "id": 1507,
+        "name": "呼伦贝尔市",
+        "code": "1207",
+        "level": 2,
+        "area_code": "0470"
+      },
+      {
+        "id": 1508,
+        "name": "巴彦淖尔市",
+        "code": "1208",
+        "level": 2,
+        "area_code": "0478"
+      },
+      {
+        "id": 1509,
+        "name": "乌兰察布市",
+        "code": "1209",
+        "level": 2,
+        "area_code": "0474"
+      },
+      {
+        "id": 1522,
+        "name": "兴安盟",
+        "code": "1210",
+        "level": 2,
+        "area_code": "0482"
+      },
+      {
+        "id": 1525,
+        "name": "锡林郭勒盟",
+        "code": "1211",
+        "level": 2,
+        "area_code": "0479"
+      },
+      {
+        "id": 1529,
+        "name": "阿拉善盟",
+        "code": "1212",
+        "level": 2,
+        "area_code": "0483"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "辽宁省",
+    "code": "25",
+    "level": 1,
+    "map_code": "21",
+    "child_list": [
+      {
+        "id": 2101,
+        "name": "沈阳市",
+        "code": "2501",
+        "level": 2,
+        "area_code": "024",
+        "map_code": "21"
+      },
+      {
+        "id": 2102,
+        "name": "大连市",
+        "code": "2502",
+        "level": 2,
+        "area_code": "0411",
+        "map_code": ""
+      },
+      {
+        "id": 2103,
+        "name": "鞍山市",
+        "code": "2503",
+        "level": 2,
+        "area_code": "0412",
+        "map_code": ""
+      },
+      {
+        "id": 2104,
+        "name": "抚顺市",
+        "code": "2504",
+        "level": 2,
+        "area_code": "024",
+        "map_code": ""
+      },
+      {
+        "id": 2105,
+        "name": "本溪市",
+        "code": "2505",
+        "level": 2,
+        "area_code": "0414",
+        "map_code": ""
+      },
+      {
+        "id": 2106,
+        "name": "丹东市",
+        "code": "2506",
+        "level": 2,
+        "area_code": "0415",
+        "map_code": ""
+      },
+      {
+        "id": 2107,
+        "name": "锦州市",
+        "code": "2507",
+        "level": 2,
+        "area_code": "0416",
+        "map_code": ""
+      },
+      {
+        "id": 2108,
+        "name": "营口市",
+        "code": "2508",
+        "level": 2,
+        "area_code": "0417",
+        "map_code": ""
+      },
+      {
+        "id": 2109,
+        "name": "阜新市",
+        "code": "2509",
+        "level": 2,
+        "area_code": "0418",
+        "map_code": ""
+      },
+      {
+        "id": 2110,
+        "name": "辽阳市",
+        "code": "2510",
+        "level": 2,
+        "area_code": "0419",
+        "map_code": ""
+      },
+      {
+        "id": 2111,
+        "name": "盘锦市",
+        "code": "2511",
+        "level": 2,
+        "area_code": "0427",
+        "map_code": ""
+      },
+      {
+        "id": 2112,
+        "name": "铁岭市",
+        "code": "2512",
+        "level": 2,
+        "area_code": "0410",
+        "map_code": ""
+      },
+      {
+        "id": 2113,
+        "name": "朝阳市",
+        "code": "2513",
+        "level": 2,
+        "area_code": "0421",
+        "map_code": ""
+      },
+      {
+        "id": 2114,
+        "name": "葫芦岛市",
+        "code": "2514",
+        "level": 2,
+        "area_code": "0429"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "吉林省",
+    "code": "13",
+    "level": 1,
+    "area_code": "0431",
+    "map_code": "22",
+    "child_list": [
+      {
+        "id": 2201,
+        "name": "长春市",
+        "code": "1301",
+        "level": 2,
+        "area_code": "0431",
+        "map_code": "22"
+      },
+      {
+        "id": 2202,
+        "name": "吉林市",
+        "code": "1302",
+        "level": 2,
+        "area_code": "0432",
+        "map_code": ""
+      },
+      {
+        "id": 2203,
+        "name": "四平市",
+        "code": "1303",
+        "level": 2,
+        "area_code": "0434",
+        "map_code": ""
+      },
+      {
+        "id": 2204,
+        "name": "辽源市",
+        "code": "1304",
+        "level": 2,
+        "area_code": "0437",
+        "map_code": ""
+      },
+      {
+        "id": 2205,
+        "name": "通化市",
+        "code": "1305",
+        "level": 2,
+        "area_code": "0435",
+        "map_code": ""
+      },
+      {
+        "id": 2206,
+        "name": "白山市",
+        "code": "1306",
+        "level": 2,
+        "area_code": "0439"
+      },
+      {
+        "id": 2207,
+        "name": "松原市",
+        "code": "1307",
+        "level": 2,
+        "area_code": "0438",
+        "map_code": ""
+      },
+      {
+        "id": 2208,
+        "name": "白城市",
+        "code": "1308",
+        "level": 2,
+        "area_code": "0436",
+        "map_code": ""
+      },
+      {
+        "id": 2224,
+        "name": "延边朝鲜族自治州",
+        "code": "1309",
+        "level": 2,
+        "area_code": "0433"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "黑龙江省",
+    "code": "26",
+    "level": 1,
+    "area_code": "0451",
+    "child_list": [
+      {
+        "id": 2301,
+        "name": "哈尔滨市",
+        "code": "2601",
+        "level": 2,
+        "area_code": "0451"
+      },
+      {
+        "id": 2302,
+        "name": "齐齐哈尔市",
+        "code": "2602",
+        "level": 2,
+        "area_code": "0452"
+      },
+      {
+        "id": 2303,
+        "name": "鸡西市",
+        "code": "2603",
+        "level": 2,
+        "area_code": "0467"
+      },
+      {
+        "id": 2304,
+        "name": "鹤岗市",
+        "code": "2604",
+        "level": 2,
+        "area_code": "0468"
+      },
+      {
+        "id": 2305,
+        "name": "双鸭山市",
+        "code": "2605",
+        "level": 2,
+        "area_code": "0469"
+      },
+      {
+        "id": 2306,
+        "name": "大庆市",
+        "code": "2606",
+        "level": 2,
+        "area_code": "0459",
+        "map_code": ""
+      },
+      {
+        "id": 2307,
+        "name": "伊春市",
+        "code": "2607",
+        "level": 2,
+        "area_code": "0458",
+        "map_code": ""
+      },
+      {
+        "id": 2308,
+        "name": "佳木斯市",
+        "code": "2608",
+        "level": 2,
+        "area_code": "0454"
+      },
+      {
+        "id": 2309,
+        "name": "七台河市",
+        "code": "2609",
+        "level": 2,
+        "area_code": "0464"
+      },
+      {
+        "id": 2310,
+        "name": "牡丹江市",
+        "code": "2610",
+        "level": 2,
+        "area_code": "0453"
+      },
+      {
+        "id": 2311,
+        "name": "黑河市",
+        "code": "2611",
+        "level": 2,
+        "area_code": "0456",
+        "map_code": ""
+      },
+      {
+        "id": 2312,
+        "name": "绥化市",
+        "code": "2612",
+        "level": 2,
+        "area_code": "0455",
+        "map_code": ""
+      },
+      {
+        "id": 2327,
+        "name": "大兴安岭地区",
+        "code": "2613",
+        "level": 2,
+        "area_code": "0457"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "上海市",
+    "code": "1002",
+    "level": 1,
+    "area_code": "021",
+    "map_code": "31",
+    "child_list": [
+      {
+        "id": 3101,
+        "name": "市辖区",
+        "level": 2
+      },
+      {
+        "id": 3102,
+        "name": "县",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "江苏省",
+    "code": "14",
+    "level": 1,
+    "area_code": "025",
+    "map_code": "32",
+    "child_list": [
+      {
+        "id": 3201,
+        "name": "南京市",
+        "code": "1401",
+        "level": 2,
+        "area_code": "025",
+        "map_code": "32"
+      },
+      {
+        "id": 3202,
+        "name": "无锡市",
+        "code": "1402",
+        "level": 2,
+        "area_code": "0510",
+        "map_code": ""
+      },
+      {
+        "id": 3203,
+        "name": "徐州市",
+        "code": "1403",
+        "level": 2,
+        "area_code": "0516",
+        "map_code": ""
+      },
+      {
+        "id": 3204,
+        "name": "常州市",
+        "code": "1404",
+        "level": 2,
+        "area_code": "0519",
+        "map_code": ""
+      },
+      {
+        "id": 3205,
+        "name": "苏州市",
+        "code": "1405",
+        "level": 2,
+        "area_code": "0512",
+        "map_code": "32"
+      },
+      {
+        "id": 3206,
+        "name": "南通市",
+        "code": "1406",
+        "level": 2,
+        "area_code": "0513",
+        "map_code": ""
+      },
+      {
+        "id": 3207,
+        "name": "连云港市",
+        "code": "1407",
+        "level": 2,
+        "area_code": "0518"
+      },
+      {
+        "id": 3208,
+        "name": "淮安市",
+        "code": "1408",
+        "level": 2,
+        "area_code": "0517",
+        "map_code": ""
+      },
+      {
+        "id": 3209,
+        "name": "盐城市",
+        "code": "1409",
+        "level": 2,
+        "area_code": "0515",
+        "map_code": ""
+      },
+      {
+        "id": 3210,
+        "name": "扬州市",
+        "code": "1410",
+        "level": 2,
+        "area_code": "0514",
+        "map_code": ""
+      },
+      {
+        "id": 3211,
+        "name": "镇江市",
+        "code": "1411",
+        "level": 2,
+        "area_code": "0511",
+        "map_code": ""
+      },
+      {
+        "id": 3212,
+        "name": "泰州市",
+        "code": "1412",
+        "level": 2,
+        "area_code": "0523",
+        "map_code": ""
+      },
+      {
+        "id": 3213,
+        "name": "宿迁市",
+        "code": "1413",
+        "level": 2,
+        "area_code": "0527"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "浙江省",
+    "code": "27",
+    "level": 1,
+    "area_code": "0571",
+    "map_code": "33",
+    "child_list": [
+      {
+        "id": 3301,
+        "name": "杭州市",
+        "code": "2701",
+        "level": 2,
+        "area_code": "0571",
+        "map_code": "33"
+      },
+      {
+        "id": 3302,
+        "name": "宁波市",
+        "code": "2702",
+        "level": 2,
+        "area_code": "0574",
+        "map_code": ""
+      },
+      {
+        "id": 3303,
+        "name": "温州市",
+        "code": "2703",
+        "level": 2,
+        "area_code": "0577",
+        "map_code": ""
+      },
+      {
+        "id": 3304,
+        "name": "嘉兴市",
+        "code": "2704",
+        "level": 2,
+        "area_code": "0573",
+        "map_code": ""
+      },
+      {
+        "id": 3305,
+        "name": "湖州市",
+        "code": "2705",
+        "level": 2,
+        "area_code": "0572",
+        "map_code": ""
+      },
+      {
+        "id": 3306,
+        "name": "绍兴市",
+        "code": "2706",
+        "level": 2,
+        "area_code": "0575",
+        "map_code": ""
+      },
+      {
+        "id": 3307,
+        "name": "金华市",
+        "code": "2707",
+        "level": 2,
+        "area_code": "0579",
+        "map_code": ""
+      },
+      {
+        "id": 3308,
+        "name": "衢州市",
+        "code": "2708",
+        "level": 2,
+        "area_code": "0570",
+        "map_code": ""
+      },
+      {
+        "id": 3309,
+        "name": "舟山市",
+        "code": "2709",
+        "level": 2,
+        "area_code": "0580",
+        "map_code": ""
+      },
+      {
+        "id": 3310,
+        "name": "台州市",
+        "code": "2710",
+        "level": 2,
+        "area_code": "0576",
+        "map_code": ""
+      },
+      {
+        "id": 3311,
+        "name": "丽水市",
+        "code": "2711",
+        "level": 2,
+        "area_code": "0578",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "安徽省",
+    "code": "15",
+    "level": 1,
+    "area_code": "0551",
+    "map_code": "34",
+    "child_list": [
+      {
+        "id": 3401,
+        "name": "合肥市",
+        "code": "1501",
+        "level": 2,
+        "area_code": "0551",
+        "map_code": "34"
+      },
+      {
+        "id": 3402,
+        "name": "芜湖市",
+        "code": "1502",
+        "level": 2,
+        "area_code": "0553",
+        "map_code": ""
+      },
+      {
+        "id": 3403,
+        "name": "蚌埠市",
+        "code": "1503",
+        "level": 2,
+        "area_code": "0552",
+        "map_code": ""
+      },
+      {
+        "id": 3404,
+        "name": "淮南市",
+        "code": "1504",
+        "level": 2,
+        "area_code": "0554",
+        "map_code": ""
+      },
+      {
+        "id": 3405,
+        "name": "马鞍山市",
+        "code": "1505",
+        "level": 2,
+        "area_code": "0555"
+      },
+      {
+        "id": 3406,
+        "name": "淮北市",
+        "code": "1506",
+        "level": 2,
+        "area_code": "0561",
+        "map_code": ""
+      },
+      {
+        "id": 3407,
+        "name": "铜陵市",
+        "code": "1507",
+        "level": 2,
+        "area_code": "0562",
+        "map_code": ""
+      },
+      {
+        "id": 3408,
+        "name": "安庆市",
+        "code": "1508",
+        "level": 2,
+        "area_code": "0556",
+        "map_code": ""
+      },
+      {
+        "id": 3410,
+        "name": "黄山市",
+        "code": "1509",
+        "level": 2,
+        "area_code": "0559",
+        "map_code": ""
+      },
+      {
+        "id": 3411,
+        "name": "滁州市",
+        "code": "1510",
+        "level": 2,
+        "area_code": "0550",
+        "map_code": ""
+      },
+      {
+        "id": 3412,
+        "name": "阜阳市",
+        "code": "1511",
+        "level": 2,
+        "area_code": "0558",
+        "map_code": ""
+      },
+      {
+        "id": 3413,
+        "name": "宿州市",
+        "code": "1512",
+        "level": 2,
+        "area_code": "0557",
+        "map_code": ""
+      },
+      {
+        "id": 3414,
+        "name": "巢湖市",
+        "code": "1513",
+        "level": 2,
+        "area_code": "0565",
+        "map_code": ""
+      },
+      {
+        "id": 3415,
+        "name": "六安市",
+        "code": "1514",
+        "level": 2,
+        "area_code": "0564",
+        "map_code": ""
+      },
+      {
+        "id": 3416,
+        "name": "亳州市",
+        "code": "1515",
+        "level": 2,
+        "area_code": "0558"
+      },
+      {
+        "id": 3417,
+        "name": "池州市",
+        "code": "1516",
+        "level": 2,
+        "area_code": "0566"
+      },
+      {
+        "id": 3418,
+        "name": "宣城市",
+        "code": "1517",
+        "level": 2,
+        "area_code": "0563",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "福建省",
+    "code": "28",
+    "level": 1,
+    "area_code": "0591",
+    "map_code": "0",
+    "child_list": [
+      {
+        "id": 3501,
+        "name": "福州市",
+        "code": "2801",
+        "level": 2,
+        "area_code": "0591",
+        "map_code": "0"
+      },
+      {
+        "id": 3502,
+        "name": "厦门市",
+        "code": "2802",
+        "level": 2,
+        "area_code": "0592",
+        "map_code": ""
+      },
+      {
+        "id": 3503,
+        "name": "莆田市",
+        "code": "2803",
+        "level": 2,
+        "area_code": "0594",
+        "map_code": ""
+      },
+      {
+        "id": 3504,
+        "name": "三明市",
+        "code": "2804",
+        "level": 2,
+        "area_code": "0598",
+        "map_code": ""
+      },
+      {
+        "id": 3505,
+        "name": "泉州市",
+        "code": "2805",
+        "level": 2,
+        "area_code": "0595",
+        "map_code": ""
+      },
+      {
+        "id": 3506,
+        "name": "漳州市",
+        "code": "2806",
+        "level": 2,
+        "area_code": "0596",
+        "map_code": ""
+      },
+      {
+        "id": 3507,
+        "name": "南平市",
+        "code": "2807",
+        "level": 2,
+        "area_code": "0599",
+        "map_code": ""
+      },
+      {
+        "id": 3508,
+        "name": "龙岩市",
+        "code": "2808",
+        "level": 2,
+        "area_code": "0597",
+        "map_code": ""
+      },
+      {
+        "id": 3509,
+        "name": "宁德市　",
+        "level": 2,
+        "area_code": "0593"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "江西省",
+    "code": "16",
+    "level": 1,
+    "area_code": "0791",
+    "map_code": "36",
+    "child_list": [
+      {
+        "id": 3601,
+        "name": "南昌市",
+        "code": "1601",
+        "level": 2,
+        "area_code": "0791",
+        "map_code": "36"
+      },
+      {
+        "id": 3602,
+        "name": "景德镇市",
+        "code": "1602",
+        "level": 2,
+        "area_code": "0798"
+      },
+      {
+        "id": 3603,
+        "name": "萍乡市",
+        "code": "1603",
+        "level": 2,
+        "area_code": "0799",
+        "map_code": ""
+      },
+      {
+        "id": 3604,
+        "name": "九江市",
+        "code": "1604",
+        "level": 2,
+        "area_code": "0792",
+        "map_code": ""
+      },
+      {
+        "id": 3605,
+        "name": "新余市",
+        "code": "1605",
+        "level": 2,
+        "area_code": "0790",
+        "map_code": ""
+      },
+      {
+        "id": 3606,
+        "name": "鹰潭市",
+        "code": "1607",
+        "level": 2,
+        "area_code": "0701",
+        "map_code": ""
+      },
+      {
+        "id": 3607,
+        "name": "赣州市",
+        "code": "1608",
+        "level": 2,
+        "area_code": "0797",
+        "map_code": ""
+      },
+      {
+        "id": 3608,
+        "name": "吉安市",
+        "code": "1609",
+        "level": 2,
+        "area_code": "0796",
+        "map_code": ""
+      },
+      {
+        "id": 3609,
+        "name": "宜春市",
+        "code": "1610",
+        "level": 2,
+        "area_code": "0795",
+        "map_code": ""
+      },
+      {
+        "id": 3610,
+        "name": "抚州市",
+        "code": "1611",
+        "level": 2,
+        "area_code": "0794"
+      },
+      {
+        "id": 3611,
+        "name": "上饶市",
+        "code": "1612",
+        "level": 2,
+        "area_code": "0793",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "山东省",
+    "code": "29",
+    "level": 1,
+    "area_code": "0531",
+    "map_code": "37",
+    "child_list": [
+      {
+        "id": 3701,
+        "name": "济南市",
+        "code": "2901",
+        "level": 2,
+        "area_code": "0531",
+        "map_code": "37"
+      },
+      {
+        "id": 3702,
+        "name": "青岛市",
+        "code": "2902",
+        "level": 2,
+        "area_code": "0532",
+        "map_code": ""
+      },
+      {
+        "id": 3703,
+        "name": "淄博市",
+        "code": "2903",
+        "level": 2,
+        "area_code": "0533",
+        "map_code": ""
+      },
+      {
+        "id": 3704,
+        "name": "枣庄市",
+        "code": "2904",
+        "level": 2,
+        "area_code": "0632"
+      },
+      {
+        "id": 3705,
+        "name": "东营市",
+        "code": "2905",
+        "level": 2,
+        "area_code": "0546"
+      },
+      {
+        "id": 3706,
+        "name": "烟台市",
+        "code": "2906",
+        "level": 2,
+        "area_code": "0535",
+        "map_code": ""
+      },
+      {
+        "id": 3707,
+        "name": "潍坊市",
+        "code": "2907",
+        "level": 2,
+        "area_code": "0536"
+      },
+      {
+        "id": 3708,
+        "name": "济宁市",
+        "code": "2908",
+        "level": 2,
+        "area_code": "0537",
+        "map_code": ""
+      },
+      {
+        "id": 3709,
+        "name": "泰安市",
+        "code": "2909",
+        "level": 2,
+        "area_code": "0538",
+        "map_code": ""
+      },
+      {
+        "id": 3710,
+        "name": "威海市",
+        "code": "2910",
+        "level": 2,
+        "area_code": "0631"
+      },
+      {
+        "id": 3711,
+        "name": "日照市",
+        "code": "2911",
+        "level": 2,
+        "area_code": "0633"
+      },
+      {
+        "id": 3712,
+        "name": "莱芜市",
+        "code": "2912",
+        "level": 2,
+        "area_code": "0634"
+      },
+      {
+        "id": 3713,
+        "name": "临沂市",
+        "code": "2913",
+        "level": 2,
+        "area_code": "0539",
+        "map_code": ""
+      },
+      {
+        "id": 3714,
+        "name": "德州市",
+        "code": "2914",
+        "level": 2,
+        "area_code": "0534",
+        "map_code": ""
+      },
+      {
+        "id": 3715,
+        "name": "聊城市",
+        "code": "2915",
+        "level": 2,
+        "area_code": "0635"
+      },
+      {
+        "id": 3716,
+        "name": "滨州市",
+        "code": "2916",
+        "level": 2,
+        "area_code": "0543"
+      },
+      {
+        "id": 3717,
+        "name": "菏泽市",
+        "code": "2917",
+        "level": 2,
+        "area_code": "0530",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "河南省",
+    "code": "17",
+    "level": 1,
+    "area_code": "0371",
+    "map_code": "41",
+    "child_list": [
+      {
+        "id": 4101,
+        "name": "郑州市",
+        "code": "1701",
+        "level": 2,
+        "area_code": "0371",
+        "map_code": "41"
+      },
+      {
+        "id": 4102,
+        "name": "开封市",
+        "code": "1702",
+        "level": 2,
+        "area_code": "0378",
+        "map_code": ""
+      },
+      {
+        "id": 4103,
+        "name": "洛阳市",
+        "code": "1703",
+        "level": 2,
+        "area_code": "0379",
+        "map_code": ""
+      },
+      {
+        "id": 4104,
+        "name": "平顶山市",
+        "code": "1704",
+        "level": 2,
+        "area_code": "0375"
+      },
+      {
+        "id": 4105,
+        "name": "安阳市",
+        "code": "1705",
+        "level": 2,
+        "area_code": "0372",
+        "map_code": ""
+      },
+      {
+        "id": 4106,
+        "name": "鹤壁市",
+        "code": "1706",
+        "level": 2,
+        "area_code": "0392",
+        "map_code": ""
+      },
+      {
+        "id": 4107,
+        "name": "新乡市",
+        "code": "1707",
+        "level": 2,
+        "area_code": "0373",
+        "map_code": ""
+      },
+      {
+        "id": 4108,
+        "name": "焦作市",
+        "code": "1708",
+        "level": 2,
+        "area_code": "0391",
+        "map_code": ""
+      },
+      {
+        "id": 4109,
+        "name": "濮阳市",
+        "code": "1709",
+        "level": 2,
+        "area_code": "0393",
+        "map_code": ""
+      },
+      {
+        "id": 4110,
+        "name": "许昌市",
+        "code": "1710",
+        "level": 2,
+        "area_code": "0374",
+        "map_code": ""
+      },
+      {
+        "id": 4111,
+        "name": "漯河市",
+        "code": "1711",
+        "level": 2,
+        "area_code": "0395",
+        "map_code": ""
+      },
+      {
+        "id": 4112,
+        "name": "三门峡市",
+        "code": "1712",
+        "level": 2,
+        "area_code": "0398"
+      },
+      {
+        "id": 4113,
+        "name": "南阳市",
+        "code": "1713",
+        "level": 2,
+        "area_code": "0377",
+        "map_code": ""
+      },
+      {
+        "id": 4114,
+        "name": "商丘市",
+        "code": "1714",
+        "level": 2,
+        "area_code": "0370",
+        "map_code": ""
+      },
+      {
+        "id": 4115,
+        "name": "信阳市",
+        "code": "1715",
+        "level": 2,
+        "area_code": "0376",
+        "map_code": ""
+      },
+      {
+        "id": 4116,
+        "name": "周口市",
+        "code": "1716",
+        "level": 2,
+        "area_code": "0394",
+        "map_code": ""
+      },
+      {
+        "id": 4117,
+        "name": "驻马店市",
+        "code": "1717",
+        "level": 2,
+        "area_code": "0396"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "湖北省",
+    "code": "30",
+    "level": 1,
+    "area_code": "027",
+    "map_code": "42",
+    "child_list": [
+      {
+        "id": 4201,
+        "name": "武汉市",
+        "code": "3001",
+        "level": 2,
+        "area_code": "027",
+        "map_code": "42"
+      },
+      {
+        "id": 4202,
+        "name": "黄石市",
+        "code": "3002",
+        "level": 2,
+        "area_code": "0714",
+        "map_code": ""
+      },
+      {
+        "id": 4203,
+        "name": "十堰市",
+        "code": "3003",
+        "level": 2,
+        "area_code": "0719",
+        "map_code": ""
+      },
+      {
+        "id": 4205,
+        "name": "宜昌市",
+        "code": "3004",
+        "level": 2,
+        "area_code": "0717",
+        "map_code": ""
+      },
+      {
+        "id": 4206,
+        "name": "襄樊市",
+        "code": "3005",
+        "level": 2,
+        "area_code": "0710"
+      },
+      {
+        "id": 4207,
+        "name": "鄂州市",
+        "code": "3006",
+        "level": 2,
+        "area_code": "0711",
+        "map_code": ""
+      },
+      {
+        "id": 4208,
+        "name": "荆门市",
+        "code": "3007",
+        "level": 2,
+        "area_code": "0724",
+        "map_code": ""
+      },
+      {
+        "id": 4209,
+        "name": "孝感市",
+        "code": "3008",
+        "level": 2,
+        "area_code": "0712",
+        "map_code": ""
+      },
+      {
+        "id": 4210,
+        "name": "荆州市",
+        "code": "3009",
+        "level": 2,
+        "area_code": "0716"
+      },
+      {
+        "id": 4211,
+        "name": "黄冈市",
+        "code": "3010",
+        "level": 2,
+        "area_code": "0713"
+      },
+      {
+        "id": 4212,
+        "name": "咸宁市",
+        "code": "3011",
+        "level": 2,
+        "area_code": "0715",
+        "map_code": ""
+      },
+      {
+        "id": 4213,
+        "name": "随州市",
+        "code": "3012",
+        "level": 2,
+        "area_code": "0722"
+      },
+      {
+        "id": 4228,
+        "name": "恩施州",
+        "level": 2,
+        "area_code": "0718"
+      },
+      {
+        "id": 4290,
+        "name": "省直辖行政单位",
+        "code": "3014",
+        "level": 2,
+        "area_code": "0728"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "湖南省",
+    "code": "18",
+    "level": 1,
+    "area_code": "0731",
+    "map_code": "43",
+    "child_list": [
+      {
+        "id": 4301,
+        "name": "长沙市",
+        "code": "1801",
+        "level": 2,
+        "area_code": "0731",
+        "map_code": "43"
+      },
+      {
+        "id": 4302,
+        "name": "株洲市",
+        "code": "1802",
+        "level": 2,
+        "area_code": "0731"
+      },
+      {
+        "id": 4303,
+        "name": "湘潭市",
+        "code": "1803",
+        "level": 2,
+        "area_code": "0731",
+        "map_code": ""
+      },
+      {
+        "id": 4304,
+        "name": "衡阳市",
+        "code": "1804",
+        "level": 2,
+        "area_code": "0734",
+        "map_code": ""
+      },
+      {
+        "id": 4305,
+        "name": "邵阳市",
+        "code": "1805",
+        "level": 2,
+        "area_code": "0739",
+        "map_code": ""
+      },
+      {
+        "id": 4306,
+        "name": "岳阳市",
+        "code": "1806",
+        "level": 2,
+        "area_code": "0730",
+        "map_code": ""
+      },
+      {
+        "id": 4307,
+        "name": "常德市",
+        "code": "1807",
+        "level": 2,
+        "area_code": "0736",
+        "map_code": ""
+      },
+      {
+        "id": 4308,
+        "name": "张家界市",
+        "code": "1808",
+        "level": 2,
+        "area_code": "0744"
+      },
+      {
+        "id": 4309,
+        "name": "益阳市",
+        "code": "1809",
+        "level": 2,
+        "area_code": "0737",
+        "map_code": ""
+      },
+      {
+        "id": 4310,
+        "name": "郴州市",
+        "code": "1810",
+        "level": 2,
+        "area_code": "0735",
+        "map_code": ""
+      },
+      {
+        "id": 4311,
+        "name": "永州市",
+        "code": "1811",
+        "level": 2,
+        "area_code": "0746"
+      },
+      {
+        "id": 4312,
+        "name": "怀化市",
+        "code": "1812",
+        "level": 2,
+        "area_code": "0745",
+        "map_code": ""
+      },
+      {
+        "id": 4313,
+        "name": "娄底市",
+        "code": "1813",
+        "level": 2,
+        "area_code": "0738",
+        "map_code": ""
+      },
+      {
+        "id": 4331,
+        "name": "湘西土家族苗族自治州",
+        "code": "1814",
+        "level": 2,
+        "area_code": "0743"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "广东省",
+    "code": "31",
+    "level": 1,
+    "area_code": "020",
+    "map_code": "44",
+    "child_list": [
+      {
+        "id": 4401,
+        "name": "广州市",
+        "code": "3101",
+        "level": 2,
+        "area_code": "020",
+        "map_code": "44"
+      },
+      {
+        "id": 4402,
+        "name": "韶关市",
+        "code": "3102",
+        "level": 2,
+        "area_code": "0751",
+        "map_code": ""
+      },
+      {
+        "id": 4403,
+        "name": "深圳市",
+        "code": "3103",
+        "level": 2,
+        "area_code": "0755",
+        "map_code": ""
+      },
+      {
+        "id": 4404,
+        "name": "珠海市",
+        "code": "3104",
+        "level": 2,
+        "area_code": "0756",
+        "map_code": ""
+      },
+      {
+        "id": 4405,
+        "name": "汕头市",
+        "code": "3105",
+        "level": 2,
+        "area_code": "0754",
+        "map_code": ""
+      },
+      {
+        "id": 4406,
+        "name": "佛山市",
+        "code": "3106",
+        "level": 2,
+        "area_code": "0757",
+        "map_code": ""
+      },
+      {
+        "id": 4407,
+        "name": "江门市",
+        "code": "3107",
+        "level": 2,
+        "area_code": "0750"
+      },
+      {
+        "id": 4408,
+        "name": "湛江市",
+        "code": "3108",
+        "level": 2,
+        "area_code": "0759",
+        "map_code": ""
+      },
+      {
+        "id": 4409,
+        "name": "茂名市",
+        "code": "3109",
+        "level": 2,
+        "area_code": "0668"
+      },
+      {
+        "id": 4412,
+        "name": "肇庆市",
+        "code": "3110",
+        "level": 2,
+        "area_code": "0758",
+        "map_code": ""
+      },
+      {
+        "id": 4413,
+        "name": "惠州市",
+        "code": "3111",
+        "level": 2,
+        "area_code": "0752",
+        "map_code": ""
+      },
+      {
+        "id": 4414,
+        "name": "梅州市",
+        "code": "3112",
+        "level": 2,
+        "area_code": "0753",
+        "map_code": ""
+      },
+      {
+        "id": 4415,
+        "name": "汕尾市",
+        "code": "3113",
+        "level": 2,
+        "area_code": "0660",
+        "map_code": ""
+      },
+      {
+        "id": 4416,
+        "name": "河源市",
+        "code": "3114",
+        "level": 2,
+        "area_code": "0762",
+        "map_code": ""
+      },
+      {
+        "id": 4417,
+        "name": "阳江市",
+        "code": "3115",
+        "level": 2,
+        "area_code": "0662",
+        "map_code": ""
+      },
+      {
+        "id": 4418,
+        "name": "清远市",
+        "code": "3116",
+        "level": 2,
+        "area_code": "0763",
+        "map_code": ""
+      },
+      {
+        "id": 4419,
+        "name": "东莞市",
+        "code": "3117",
+        "level": 2,
+        "area_code": "0769",
+        "map_code": ""
+      },
+      {
+        "id": 4420,
+        "name": "中山市",
+        "code": "3118",
+        "level": 2,
+        "area_code": "0760",
+        "map_code": ""
+      },
+      {
+        "id": 4451,
+        "name": "潮州市",
+        "code": "3119",
+        "level": 2,
+        "area_code": "0768",
+        "map_code": ""
+      },
+      {
+        "id": 4452,
+        "name": "揭阳市",
+        "code": "3120",
+        "level": 2,
+        "area_code": "0663"
+      },
+      {
+        "id": 4453,
+        "name": "云浮市",
+        "code": "3121",
+        "level": 2,
+        "area_code": "0766",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "广西壮族自治区",
+    "code": "19",
+    "level": 1,
+    "area_code": "0771",
+    "child_list": [
+      {
+        "id": 4501,
+        "name": "南宁市",
+        "code": "1901",
+        "level": 2,
+        "area_code": "0771",
+        "map_code": "45"
+      },
+      {
+        "id": 4502,
+        "name": "柳州市",
+        "code": "1902",
+        "level": 2,
+        "area_code": "0772",
+        "map_code": ""
+      },
+      {
+        "id": 4503,
+        "name": "桂林市",
+        "code": "1903",
+        "level": 2,
+        "area_code": "0773",
+        "map_code": ""
+      },
+      {
+        "id": 4504,
+        "name": "梧州市",
+        "code": "1904",
+        "level": 2,
+        "area_code": "0774",
+        "map_code": ""
+      },
+      {
+        "id": 4505,
+        "name": "北海市",
+        "code": "1905",
+        "level": 2,
+        "area_code": "0779",
+        "map_code": ""
+      },
+      {
+        "id": 4506,
+        "name": "防城港市",
+        "code": "1906",
+        "level": 2,
+        "area_code": "0770"
+      },
+      {
+        "id": 4507,
+        "name": "钦州市",
+        "code": "1907",
+        "level": 2,
+        "area_code": "0777",
+        "map_code": ""
+      },
+      {
+        "id": 4508,
+        "name": "贵港市",
+        "code": "1908",
+        "level": 2,
+        "area_code": "0775"
+      },
+      {
+        "id": 4509,
+        "name": "玉林市",
+        "code": "1909",
+        "level": 2,
+        "area_code": "0775",
+        "map_code": ""
+      },
+      {
+        "id": 4510,
+        "name": "百色市",
+        "code": "1910",
+        "level": 2,
+        "area_code": "0776",
+        "map_code": ""
+      },
+      {
+        "id": 4511,
+        "name": "贺州市",
+        "code": "1911",
+        "level": 2,
+        "area_code": "0774"
+      },
+      {
+        "id": 4512,
+        "name": "河池市",
+        "code": "1912",
+        "level": 2,
+        "area_code": "0778",
+        "map_code": ""
+      },
+      {
+        "id": 4513,
+        "name": "来宾市",
+        "code": "1913",
+        "level": 2,
+        "area_code": "0772"
+      },
+      {
+        "id": 4514,
+        "name": "崇左市",
+        "code": "1914",
+        "level": 2,
+        "area_code": "0771"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "海南省",
+    "code": "20",
+    "level": 1,
+    "area_code": "0898",
+    "map_code": "46",
+    "child_list": [
+      {
+        "id": 4601,
+        "name": "海口市",
+        "code": "2001",
+        "level": 2,
+        "area_code": "0898",
+        "map_code": "46"
+      },
+      {
+        "id": 4602,
+        "name": "三亚市",
+        "code": "2002",
+        "level": 2,
+        "area_code": "0898",
+        "map_code": ""
+      },
+      {
+        "id": 4690,
+        "name": "省属虚拟市",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "重庆市",
+    "code": "1003",
+    "level": 1,
+    "area_code": "023",
+    "map_code": "",
+    "child_list": [
+      {
+        "id": 5001,
+        "name": "市辖区",
+        "level": 2
+      },
+      {
+        "id": 5002,
+        "name": "县",
+        "level": 2
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "四川省",
+    "code": "32",
+    "level": 1,
+    "area_code": "028",
+    "map_code": "51",
+    "child_list": [
+      {
+        "id": 5101,
+        "name": "成都市",
+        "code": "3201",
+        "level": 2,
+        "area_code": "028",
+        "map_code": "51"
+      },
+      {
+        "id": 5103,
+        "name": "自贡市",
+        "code": "3202",
+        "level": 2,
+        "area_code": "0813",
+        "map_code": ""
+      },
+      {
+        "id": 5104,
+        "name": "攀枝花市",
+        "code": "3203",
+        "level": 2,
+        "area_code": "0812"
+      },
+      {
+        "id": 5105,
+        "name": "泸州市",
+        "code": "3204",
+        "level": 2,
+        "area_code": "0830",
+        "map_code": ""
+      },
+      {
+        "id": 5106,
+        "name": "德阳市",
+        "code": "3205",
+        "level": 2,
+        "area_code": "0838",
+        "map_code": ""
+      },
+      {
+        "id": 5107,
+        "name": "绵阳市",
+        "code": "3206",
+        "level": 2,
+        "area_code": "0816",
+        "map_code": ""
+      },
+      {
+        "id": 5108,
+        "name": "广元市",
+        "code": "3207",
+        "level": 2,
+        "area_code": "0839",
+        "map_code": ""
+      },
+      {
+        "id": 5109,
+        "name": "遂宁市",
+        "code": "3208",
+        "level": 2,
+        "area_code": "0825",
+        "map_code": ""
+      },
+      {
+        "id": 5110,
+        "name": "内江市",
+        "code": "3209",
+        "level": 2,
+        "area_code": "0832",
+        "map_code": ""
+      },
+      {
+        "id": 5111,
+        "name": "乐山市",
+        "code": "3210",
+        "level": 2,
+        "area_code": "0833",
+        "map_code": ""
+      },
+      {
+        "id": 5113,
+        "name": "南充市",
+        "code": "3211",
+        "level": 2,
+        "area_code": "0817",
+        "map_code": ""
+      },
+      {
+        "id": 5114,
+        "name": "眉山市",
+        "code": "3212",
+        "level": 2,
+        "area_code": "028"
+      },
+      {
+        "id": 5115,
+        "name": "宜宾市",
+        "code": "3213",
+        "level": 2,
+        "area_code": "0831",
+        "map_code": ""
+      },
+      {
+        "id": 5116,
+        "name": "广安市",
+        "code": "3214",
+        "level": 2,
+        "area_code": "0826",
+        "map_code": ""
+      },
+      {
+        "id": 5117,
+        "name": "达州市",
+        "code": "3215",
+        "level": 2,
+        "area_code": "0818"
+      },
+      {
+        "id": 5118,
+        "name": "雅安市",
+        "code": "3216",
+        "level": 2,
+        "area_code": "0835",
+        "map_code": ""
+      },
+      {
+        "id": 5119,
+        "name": "巴中市",
+        "code": "3217",
+        "level": 2,
+        "area_code": "0827",
+        "map_code": ""
+      },
+      {
+        "id": 5120,
+        "name": "资阳市",
+        "code": "3218",
+        "level": 2,
+        "area_code": "028"
+      },
+      {
+        "id": 5132,
+        "name": "阿坝州",
+        "level": 2,
+        "area_code": "0837"
+      },
+      {
+        "id": 5133,
+        "name": "甘孜藏族自治州",
+        "code": "3220",
+        "level": 2,
+        "area_code": "0836"
+      },
+      {
+        "id": 5134,
+        "name": "凉山州",
+        "level": 2,
+        "area_code": "0834"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "贵州省",
+    "code": "21",
+    "level": 1,
+    "area_code": "0851",
+    "map_code": "52",
+    "child_list": [
+      {
+        "id": 5201,
+        "name": "贵阳市",
+        "code": "2101",
+        "level": 2,
+        "area_code": "0851",
+        "map_code": "52"
+      },
+      {
+        "id": 5202,
+        "name": "六盘水市",
+        "code": "2102",
+        "level": 2,
+        "area_code": "0858"
+      },
+      {
+        "id": 5203,
+        "name": "遵义市",
+        "code": "2103",
+        "level": 2,
+        "area_code": "0852",
+        "map_code": ""
+      },
+      {
+        "id": 5204,
+        "name": "安顺市",
+        "code": "2104",
+        "level": 2,
+        "area_code": "0853",
+        "map_code": ""
+      },
+      {
+        "id": 5222,
+        "name": "铜仁地区",
+        "code": "2105",
+        "level": 2,
+        "area_code": "0856"
+      },
+      {
+        "id": 5223,
+        "name": "黔西南州",
+        "level": 2,
+        "area_code": "0859"
+      },
+      {
+        "id": 5224,
+        "name": "毕节地区",
+        "code": "2107",
+        "level": 2,
+        "area_code": "0857"
+      },
+      {
+        "id": 5226,
+        "name": "黔东南苗族侗族自治州",
+        "code": "2108",
+        "level": 2,
+        "area_code": "0855"
+      },
+      {
+        "id": 5227,
+        "name": "黔南布依族苗族自治州",
+        "code": "2109",
+        "level": 2,
+        "area_code": "0854"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "云南省",
+    "code": "22",
+    "level": 1,
+    "area_code": "0871",
+    "map_code": "53",
+    "child_list": [
+      {
+        "id": 5301,
+        "name": "昆明市",
+        "code": "2201",
+        "level": 2,
+        "area_code": "0871",
+        "map_code": "53"
+      },
+      {
+        "id": 5303,
+        "name": "曲靖市",
+        "code": "2202",
+        "level": 2,
+        "area_code": "0874",
+        "map_code": ""
+      },
+      {
+        "id": 5304,
+        "name": "玉溪市",
+        "code": "2203",
+        "level": 2,
+        "area_code": "0877",
+        "map_code": ""
+      },
+      {
+        "id": 5305,
+        "name": "保山市",
+        "code": "2204",
+        "level": 2,
+        "area_code": "0875",
+        "map_code": ""
+      },
+      {
+        "id": 5306,
+        "name": "昭通市",
+        "code": "2205",
+        "level": 2,
+        "area_code": "0870",
+        "map_code": ""
+      },
+      {
+        "id": 5307,
+        "name": "丽江市",
+        "code": "2206",
+        "level": 2,
+        "area_code": "0888",
+        "map_code": ""
+      },
+      {
+        "id": 5308,
+        "name": "思茅市",
+        "level": 2,
+        "area_code": "00879",
+        "map_code": ""
+      },
+      {
+        "id": 5309,
+        "name": "临沧市",
+        "code": "2208",
+        "level": 2,
+        "area_code": "0883",
+        "map_code": ""
+      },
+      {
+        "id": 5323,
+        "name": "楚雄州",
+        "level": 2,
+        "area_code": "0878"
+      },
+      {
+        "id": 5325,
+        "name": "红河州",
+        "level": 2,
+        "area_code": "0873"
+      },
+      {
+        "id": 5326,
+        "name": "文山州",
+        "level": 2,
+        "area_code": "0876"
+      },
+      {
+        "id": 5328,
+        "name": "西双版纳州",
+        "level": 2,
+        "area_code": "0691"
+      },
+      {
+        "id": 5329,
+        "name": "大理州",
+        "level": 2,
+        "area_code": "0872"
+      },
+      {
+        "id": 5331,
+        "name": "德宏州",
+        "level": 2,
+        "area_code": "0692"
+      },
+      {
+        "id": 5333,
+        "name": "怒江州",
+        "level": 2,
+        "area_code": "0886"
+      },
+      {
+        "id": 5334,
+        "name": "迪庆州",
+        "level": 2,
+        "area_code": "0887"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "西藏自治区",
+    "code": "33",
+    "level": 1,
+    "area_code": "0891",
+    "child_list": [
+      {
+        "id": 5401,
+        "name": "拉萨市",
+        "code": "3301",
+        "level": 2,
+        "area_code": "0891",
+        "map_code": "54"
+      },
+      {
+        "id": 5421,
+        "name": "昌都地区",
+        "code": "3302",
+        "level": 2,
+        "area_code": "0895"
+      },
+      {
+        "id": 5422,
+        "name": "山南地区",
+        "code": "3303",
+        "level": 2,
+        "area_code": "0893"
+      },
+      {
+        "id": 5423,
+        "name": "日喀则地区",
+        "code": "3304",
+        "level": 2,
+        "area_code": "0892"
+      },
+      {
+        "id": 5424,
+        "name": "那曲地区",
+        "code": "3305",
+        "level": 2,
+        "area_code": "0896"
+      },
+      {
+        "id": 5425,
+        "name": "阿里地区",
+        "code": "3306",
+        "level": 2,
+        "area_code": "0897"
+      },
+      {
+        "id": 5426,
+        "name": "林芝地区",
+        "code": "3307",
+        "level": 2,
+        "area_code": "0894"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "陕西省",
+    "code": "34",
+    "level": 1,
+    "area_code": "029",
+    "map_code": "61",
+    "child_list": [
+      {
+        "id": 6101,
+        "name": "西安市",
+        "code": "3401",
+        "level": 2,
+        "area_code": "029",
+        "map_code": "61"
+      },
+      {
+        "id": 6102,
+        "name": "铜川市",
+        "code": "3402",
+        "level": 2,
+        "area_code": "0919",
+        "map_code": ""
+      },
+      {
+        "id": 6103,
+        "name": "宝鸡市",
+        "code": "3403",
+        "level": 2,
+        "area_code": "0917",
+        "map_code": ""
+      },
+      {
+        "id": 6104,
+        "name": "咸阳市",
+        "code": "3404",
+        "level": 2,
+        "area_code": "029",
+        "map_code": ""
+      },
+      {
+        "id": 6105,
+        "name": "渭南市",
+        "code": "3405",
+        "level": 2,
+        "area_code": "0913",
+        "map_code": ""
+      },
+      {
+        "id": 6106,
+        "name": "延安市",
+        "code": "3406",
+        "level": 2,
+        "area_code": "0911",
+        "map_code": ""
+      },
+      {
+        "id": 6107,
+        "name": "汉中市",
+        "code": "3407",
+        "level": 2,
+        "area_code": "0916",
+        "map_code": ""
+      },
+      {
+        "id": 6108,
+        "name": "榆林市",
+        "code": "3408",
+        "level": 2,
+        "area_code": "0912",
+        "map_code": ""
+      },
+      {
+        "id": 6109,
+        "name": "安康市",
+        "code": "3409",
+        "level": 2,
+        "area_code": "0915",
+        "map_code": ""
+      },
+      {
+        "id": 6110,
+        "name": "商洛市",
+        "code": "3410",
+        "level": 2,
+        "area_code": "0914",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "甘肃省",
+    "code": "23",
+    "level": 1,
+    "area_code": "0931",
+    "map_code": "62",
+    "child_list": [
+      {
+        "id": 6201,
+        "name": "兰州市",
+        "code": "2301",
+        "level": 2,
+        "area_code": "0931",
+        "map_code": "62"
+      },
+      {
+        "id": 6202,
+        "name": "嘉峪关市",
+        "code": "2302",
+        "level": 2,
+        "area_code": "0937"
+      },
+      {
+        "id": 6203,
+        "name": "金昌市",
+        "code": "2303",
+        "level": 2,
+        "area_code": "0935"
+      },
+      {
+        "id": 6204,
+        "name": "白银市",
+        "code": "2304",
+        "level": 2,
+        "area_code": "0943",
+        "map_code": ""
+      },
+      {
+        "id": 6205,
+        "name": "天水市",
+        "code": "2305",
+        "level": 2,
+        "area_code": "0938",
+        "map_code": ""
+      },
+      {
+        "id": 6206,
+        "name": "武威市",
+        "code": "2306",
+        "level": 2,
+        "area_code": "0935",
+        "map_code": ""
+      },
+      {
+        "id": 6207,
+        "name": "张掖市",
+        "code": "2307",
+        "level": 2,
+        "area_code": "0936",
+        "map_code": ""
+      },
+      {
+        "id": 6208,
+        "name": "平凉市",
+        "code": "2308",
+        "level": 2,
+        "area_code": "0933",
+        "map_code": ""
+      },
+      {
+        "id": 6209,
+        "name": "酒泉市",
+        "code": "2309",
+        "level": 2,
+        "area_code": "0937",
+        "map_code": ""
+      },
+      {
+        "id": 6210,
+        "name": "庆阳市",
+        "code": "2310",
+        "level": 2,
+        "area_code": "0934"
+      },
+      {
+        "id": 6211,
+        "name": "定西市",
+        "code": "2311",
+        "level": 2,
+        "area_code": "0932",
+        "map_code": ""
+      },
+      {
+        "id": 6212,
+        "name": "陇南市",
+        "code": "2312",
+        "level": 2,
+        "area_code": "0939"
+      },
+      {
+        "id": 6229,
+        "name": "临夏州",
+        "level": 2,
+        "area_code": "0930"
+      },
+      {
+        "id": 6230,
+        "name": "甘南州",
+        "level": 2,
+        "area_code": "00941",
+        "map_code": ""
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "青海省",
+    "code": "35",
+    "level": 1,
+    "area_code": "0971",
+    "map_code": "63",
+    "child_list": [
+      {
+        "id": 6301,
+        "name": "西宁市",
+        "code": "3501",
+        "level": 2,
+        "area_code": "0971",
+        "map_code": "63"
+      },
+      {
+        "id": 6321,
+        "name": "海东地区",
+        "code": "3502",
+        "level": 2,
+        "area_code": "0972"
+      },
+      {
+        "id": 6322,
+        "name": "海北州",
+        "level": 2,
+        "area_code": "0970"
+      },
+      {
+        "id": 6323,
+        "name": "黄南州",
+        "level": 2,
+        "area_code": "0973"
+      },
+      {
+        "id": 6325,
+        "name": "海南州",
+        "level": 2,
+        "area_code": "0974"
+      },
+      {
+        "id": 6326,
+        "name": "果洛州",
+        "level": 2,
+        "area_code": "0975"
+      },
+      {
+        "id": 6327,
+        "name": "玉树州",
+        "level": 2,
+        "area_code": "0976"
+      },
+      {
+        "id": 6328,
+        "name": "海西州",
+        "level": 2,
+        "area_code": "0979"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "宁夏回族自治区",
+    "code": "24",
+    "level": 1,
+    "area_code": "0951",
+    "child_list": [
+      {
+        "id": 6401,
+        "name": "银川市",
+        "code": "2401",
+        "level": 2,
+        "area_code": "0951",
+        "map_code": "64"
+      },
+      {
+        "id": 6402,
+        "name": "石嘴山市",
+        "code": "2402",
+        "level": 2,
+        "area_code": "0952"
+      },
+      {
+        "id": 6403,
+        "name": "吴忠市",
+        "code": "2403",
+        "level": 2,
+        "area_code": "0953",
+        "map_code": ""
+      },
+      {
+        "id": 6404,
+        "name": "固原市",
+        "code": "2404",
+        "level": 2,
+        "area_code": "0954",
+        "map_code": ""
+      },
+      {
+        "id": 6405,
+        "name": "中卫市",
+        "code": "2405",
+        "level": 2,
+        "area_code": "0955"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "新疆维吾尔自治区",
+    "code": "36",
+    "level": 1,
+    "area_code": "0991",
+    "child_list": [
+      {
+        "id": 6501,
+        "name": "乌鲁木齐市",
+        "code": "3601",
+        "level": 2,
+        "area_code": "0991"
+      },
+      {
+        "id": 6502,
+        "name": "克拉玛依市",
+        "code": "3602",
+        "level": 2,
+        "area_code": "0990"
+      },
+      {
+        "id": 6521,
+        "name": "吐鲁番地区",
+        "code": "3603",
+        "level": 2,
+        "area_code": "0995"
+      },
+      {
+        "id": 6522,
+        "name": "哈密地区",
+        "code": "3604",
+        "level": 2,
+        "area_code": "0902"
+      },
+      {
+        "id": 6523,
+        "name": "昌吉州",
+        "level": 2,
+        "area_code": "0994"
+      },
+      {
+        "id": 6527,
+        "name": "博尔塔拉蒙古自治州",
+        "code": "3606",
+        "level": 2,
+        "area_code": "0909"
+      },
+      {
+        "id": 6528,
+        "name": "巴音郭楞蒙古自治州",
+        "code": "3607",
+        "level": 2,
+        "area_code": "0996"
+      },
+      {
+        "id": 6529,
+        "name": "阿克苏地区",
+        "code": "3608",
+        "level": 2,
+        "area_code": "0997"
+      },
+      {
+        "id": 6530,
+        "name": "克州",
+        "level": 2,
+        "area_code": "0908"
+      },
+      {
+        "id": 6531,
+        "name": "喀什地区",
+        "code": "3610",
+        "level": 2,
+        "area_code": "0998"
+      },
+      {
+        "id": 6532,
+        "name": "和田地区",
+        "code": "3611",
+        "level": 2,
+        "area_code": "0903"
+      },
+      {
+        "id": 6540,
+        "name": "伊犁州",
+        "level": 2,
+        "area_code": "0994"
+      },
+      {
+        "id": 6542,
+        "name": "塔城地区",
+        "code": "3613",
+        "level": 2,
+        "area_code": "0901"
+      },
+      {
+        "id": 6543,
+        "name": "阿勒泰地区",
+        "code": "3614",
+        "level": 2,
+        "area_code": "0906"
+      },
+      {
+        "id": 6590,
+        "name": "省直辖行政单位",
+        "code": "3014",
+        "level": 2,
+        "area_code": "0728"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "台湾省",
+    "level": 1,
+    "area_code": "00886"
+  },
+  {
+    "id": 81,
+    "name": "香港特别行政区",
+    "level": 1,
+    "area_code": "00852"
+  },
+  {
+    "id": 82,
+    "name": "澳门特别行政区",
+    "level": 1,
+    "area_code": "00853"
+  }
+]

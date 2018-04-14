@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean name="job1" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.baidu.ms.job.TaskMonitoringJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="timeout" value="0"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="job1"/>
+        <property name="cronExpression" value="*/5 * * * * ?"/>
+    </bean>
+
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="schedulerContextAsMap">
+            <map>
+                <!-- spring 管理的service需要放到这里，才能够注入成功 -->
+                <entry key="taskJobServiceImpl" value-ref="taskJobServiceImpl"/>
+                <entry key="systemConfigServiceImpl" value-ref="systemConfigServiceImpl"/>
+                <entry key="shopServiceImpl" value-ref="shopServiceImpl"/>
+            </map>
+        </property>
+        <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

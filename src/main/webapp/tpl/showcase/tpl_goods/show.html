@@ -1,0 +1,14 @@
+<h1 class="page-title"><span>商品详细</span></h1>
+<div class="goods-details-block">
+    <h4>基本信息区</h4>
+    <p>固定样式，显示商品主图、价格等信息</p>
+</div>
+<div class="control-group">
+    <div class="custom-richtext" ng-bind-html="item.content"></div>
+    <div class="goods-details-block" style="background: #fff;" ng-show="item.content == ''">
+        <h4>商品详情区</h4> <p>点击进行编辑</p>
+    </div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"> <span class="action edit">编辑</span></div>
+</div>

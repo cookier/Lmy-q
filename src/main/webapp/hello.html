@@ -1,0 +1,15 @@
+<base href="${request.contextPath}/" />
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>${title}</title>
+  </head>
+  <body>
+  <form id="myform" action="saveUserDetails" method="POST" commandName="user">
+    <input type="text" name="firstName" path="mobile" />
+    <input type="text" name="lastName" path="password" />
+    <input type="text" name="email" path="nickname" />
+    <input type="submit" value="submit">
+  </form>
+  </body>
+</html>

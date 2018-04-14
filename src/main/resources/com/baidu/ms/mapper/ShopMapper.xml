@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ShopMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.Shop">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_no" jdbcType="VARCHAR" property="shopNo"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName"/>
+        <result column="intro" jdbcType="VARCHAR" property="intro"/>
+        <result column="qr_path" jdbcType="VARCHAR" property="qrPath"/>
+        <result column="qr_url" jdbcType="VARCHAR" property="qrUrl"/>
+        <result column="certification_type" jdbcType="INTEGER" property="certificationType"/>
+        <result column="certification_status" jdbcType="INTEGER" property="certificationStatus"/>
+        <result column="certification_info" jdbcType="VARCHAR" property="certificationInfo"/>
+        <result column="open_time" jdbcType="TIMESTAMP" property="openTime"/>
+        <result column="close_time" jdbcType="TIMESTAMP" property="closeTime"/>
+        <result column="contact_name" jdbcType="VARCHAR" property="contactName"/>
+        <result column="contact_qq" jdbcType="VARCHAR" property="contactQq"/>
+        <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+        <result column="contact_weixin" jdbcType="VARCHAR" property="contactWeixin"/>
+        <result column="service_phone" jdbcType="VARCHAR" property="servicePhone"/>
+        <result column="country_id" jdbcType="INTEGER" property="countryId"/>
+        <result column="country_name" jdbcType="VARCHAR" property="countryName"/>
+        <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+        <result column="province_name" jdbcType="VARCHAR" property="provinceName"/>
+        <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+        <result column="area_id" jdbcType="INTEGER" property="areaId"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="street_id" jdbcType="INTEGER" property="streetId"/>
+        <result column="street_name" jdbcType="VARCHAR" property="streetName"/>
+        <result column="shop_address" jdbcType="VARCHAR" property="shopAddress"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="goods_category" jdbcType="VARCHAR" property="goodsCategory"/>
+        <result column="common_setting" jdbcType="VARCHAR" property="commonSetting"/>
+        <result column="trade_setting" jdbcType="VARCHAR" property="tradeSetting"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+        <result column="logo_url" jdbcType="VARCHAR" property="logoUrl"/>
+        <result column="weixin_setting" jdbcType="VARCHAR" property="weixinSetting"/>
+        <result column="payment_setting" jdbcType="VARCHAR" property="paymentSetting"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="commission_rate" jdbcType="REAL" property="commissionRate"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+        <result column="refund_setting" jdbcType="VARCHAR" property="refundSetting"/>
+        <result column="logo_update_flag" jdbcType="SMALLINT" property="logoUpdateFlag"/>
+        <result column="header_setting" jdbcType="VARCHAR" property="headerSetting"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, shop_no, user_id, shop_name, intro, qr_path, qr_url, certification_type, certification_status,
+        certification_info, open_time, close_time, contact_name, contact_qq, contact_mobile,
+        contact_weixin, service_phone, country_id, country_name, province_id, province_name,
+        city_id, city_name, area_id, area_name, street_id, street_name, shop_address, create_time,
+        goods_category, common_setting, trade_setting, logo, logo_url, weixin_setting, payment_setting,
+        url, commission_rate, delete_flag, refund_setting, logo_update_flag, header_setting
+    </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ShopExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_shop
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_shop
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_shop
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ShopExample">
+        delete from t_shop
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.Shop">
+    insert into t_shop (id, shop_no, user_id,
+      shop_name, intro, qr_path,
+      qr_url, certification_type, certification_status,
+      certification_info, open_time, close_time,
+      contact_name, contact_qq, contact_mobile,
+      contact_weixin, service_phone, country_id,
+      country_name, province_id, province_name,
+      city_id, city_name, area_id,
+      area_name, street_id, street_name,
+      shop_address, create_time, goods_category,
+      common_setting, trade_setting, logo,
+      logo_url, weixin_setting, payment_setting,
+      url, commission_rate, delete_flag,
+      refund_setting, logo_update_flag, header_setting
+      )
+    values (#{id,jdbcType=INTEGER}, #{shopNo,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+      #{shopName,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{qrPath,jdbcType=VARCHAR},
+      #{qrUrl,jdbcType=VARCHAR}, #{certificationType,jdbcType=INTEGER}, #{certificationStatus,jdbcType=INTEGER},
+      #{certificationInfo,jdbcType=VARCHAR}, #{openTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP},
+      #{contactName,jdbcType=VARCHAR}, #{contactQq,jdbcType=VARCHAR}, #{contactMobile,jdbcType=VARCHAR},
+      #{contactWeixin,jdbcType=VARCHAR}, #{servicePhone,jdbcType=VARCHAR}, #{countryId,jdbcType=INTEGER},
+      #{countryName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR},
+      #{cityId,jdbcType=INTEGER}, #{cityName,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER},
+      #{areaName,jdbcType=VARCHAR}, #{streetId,jdbcType=INTEGER}, #{streetName,jdbcType=VARCHAR},
+      #{shopAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{goodsCategory,jdbcType=VARCHAR},
+      #{commonSetting,jdbcType=VARCHAR}, #{tradeSetting,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR},
+      #{logoUrl,jdbcType=VARCHAR}, #{weixinSetting,jdbcType=VARCHAR}, #{paymentSetting,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR}, #{commissionRate,jdbcType=REAL}, #{deleteFlag,jdbcType=INTEGER},
+      #{refundSetting,jdbcType=VARCHAR}, #{logoUpdateFlag,jdbcType=SMALLINT}, #{headerSetting,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.Shop">
+        insert into t_shop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopNo != null">
+                shop_no,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="shopName != null">
+                shop_name,
+            </if>
+            <if test="intro != null">
+                intro,
+            </if>
+            <if test="qrPath != null">
+                qr_path,
+            </if>
+            <if test="qrUrl != null">
+                qr_url,
+            </if>
+            <if test="certificationType != null">
+                certification_type,
+            </if>
+            <if test="certificationStatus != null">
+                certification_status,
+            </if>
+            <if test="certificationInfo != null">
+                certification_info,
+            </if>
+            <if test="openTime != null">
+                open_time,
+            </if>
+            <if test="closeTime != null">
+                close_time,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="contactQq != null">
+                contact_qq,
+            </if>
+            <if test="contactMobile != null">
+                contact_mobile,
+            </if>
+            <if test="contactWeixin != null">
+                contact_weixin,
+            </if>
+            <if test="servicePhone != null">
+                service_phone,
+            </if>
+            <if test="countryId != null">
+                country_id,
+            </if>
+            <if test="countryName != null">
+                country_name,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="provinceName != null">
+                province_name,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="cityName != null">
+                city_name,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="areaName != null">
+                area_name,
+            </if>
+            <if test="streetId != null">
+                street_id,
+            </if>
+            <if test="streetName != null">
+                street_name,
+            </if>
+            <if test="shopAddress != null">
+                shop_address,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="goodsCategory != null">
+                goods_category,
+            </if>
+            <if test="commonSetting != null">
+                common_setting,
+            </if>
+            <if test="tradeSetting != null">
+                trade_setting,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="logoUrl != null">
+                logo_url,
+            </if>
+            <if test="weixinSetting != null">
+                weixin_setting,
+            </if>
+            <if test="paymentSetting != null">
+                payment_setting,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="commissionRate != null">
+                commission_rate,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="refundSetting != null">
+                refund_setting,
+            </if>
+            <if test="logoUpdateFlag != null">
+                logo_update_flag,
+            </if>
+            <if test="headerSetting != null">
+                header_setting,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopNo != null">
+                #{shopNo,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="shopName != null">
+                #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="intro != null">
+                #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="qrPath != null">
+                #{qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="qrUrl != null">
+                #{qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="certificationType != null">
+                #{certificationType,jdbcType=INTEGER},
+            </if>
+            <if test="certificationStatus != null">
+                #{certificationStatus,jdbcType=INTEGER},
+            </if>
+            <if test="certificationInfo != null">
+                #{certificationInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="openTime != null">
+                #{openTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closeTime != null">
+                #{closeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contactName != null">
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactQq != null">
+                #{contactQq,jdbcType=VARCHAR},
+            </if>
+            <if test="contactMobile != null">
+                #{contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="contactWeixin != null">
+                #{contactWeixin,jdbcType=VARCHAR},
+            </if>
+            <if test="servicePhone != null">
+                #{servicePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="countryId != null">
+                #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="countryName != null">
+                #{countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceName != null">
+                #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="cityName != null">
+                #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="areaName != null">
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="streetId != null">
+                #{streetId,jdbcType=INTEGER},
+            </if>
+            <if test="streetName != null">
+                #{streetName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopAddress != null">
+                #{shopAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsCategory != null">
+                #{goodsCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="commonSetting != null">
+                #{commonSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeSetting != null">
+                #{tradeSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="logoUrl != null">
+                #{logoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="weixinSetting != null">
+                #{weixinSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentSetting != null">
+                #{paymentSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="commissionRate != null">
+                #{commissionRate,jdbcType=REAL},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="refundSetting != null">
+                #{refundSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="logoUpdateFlag != null">
+                #{logoUpdateFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="headerSetting != null">
+                #{headerSetting,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ShopExample" resultType="java.lang.Long">
+        select count(*) from t_shop
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="getLatestShopByUser" parameterType="Integer" resultType="com.baidu.ms.pojo.Shop">
+        SELECT * FROM t_shop WHERE 1=1
+        <if test="_parameter!=null">
+            AND user_id = #{id}
+        </if>
+        LIMIT 0,1
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_shop
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopNo != null">
+                shop_no = #{record.shopNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopName != null">
+                shop_name = #{record.shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.intro != null">
+                intro = #{record.intro,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qrPath != null">
+                qr_path = #{record.qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qrUrl != null">
+                qr_url = #{record.qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.certificationType != null">
+                certification_type = #{record.certificationType,jdbcType=INTEGER},
+            </if>
+            <if test="record.certificationStatus != null">
+                certification_status = #{record.certificationStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.certificationInfo != null">
+                certification_info = #{record.certificationInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.openTime != null">
+                open_time = #{record.openTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.closeTime != null">
+                close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.contactName != null">
+                contact_name = #{record.contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactQq != null">
+                contact_qq = #{record.contactQq,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactMobile != null">
+                contact_mobile = #{record.contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactWeixin != null">
+                contact_weixin = #{record.contactWeixin,jdbcType=VARCHAR},
+            </if>
+            <if test="record.servicePhone != null">
+                service_phone = #{record.servicePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.countryId != null">
+                country_id = #{record.countryId,jdbcType=INTEGER},
+            </if>
+            <if test="record.countryName != null">
+                country_name = #{record.countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.provinceId != null">
+                province_id = #{record.provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.provinceName != null">
+                province_name = #{record.provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cityId != null">
+                city_id = #{record.cityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.cityName != null">
+                city_name = #{record.cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.areaId != null">
+                area_id = #{record.areaId,jdbcType=INTEGER},
+            </if>
+            <if test="record.areaName != null">
+                area_name = #{record.areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.streetId != null">
+                street_id = #{record.streetId,jdbcType=INTEGER},
+            </if>
+            <if test="record.streetName != null">
+                street_name = #{record.streetName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shopAddress != null">
+                shop_address = #{record.shopAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.goodsCategory != null">
+                goods_category = #{record.goodsCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="record.commonSetting != null">
+                common_setting = #{record.commonSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tradeSetting != null">
+                trade_setting = #{record.tradeSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logo != null">
+                logo = #{record.logo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logoUrl != null">
+                logo_url = #{record.logoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.weixinSetting != null">
+                weixin_setting = #{record.weixinSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="record.paymentSetting != null">
+                payment_setting = #{record.paymentSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.commissionRate != null">
+                commission_rate = #{record.commissionRate,jdbcType=REAL},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.refundSetting != null">
+                refund_setting = #{record.refundSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logoUpdateFlag != null">
+                logo_update_flag = #{record.logoUpdateFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.headerSetting != null">
+                header_setting = #{record.headerSetting,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_shop
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_no = #{record.shopNo,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+        intro = #{record.intro,jdbcType=VARCHAR},
+        qr_path = #{record.qrPath,jdbcType=VARCHAR},
+        qr_url = #{record.qrUrl,jdbcType=VARCHAR},
+        certification_type = #{record.certificationType,jdbcType=INTEGER},
+        certification_status = #{record.certificationStatus,jdbcType=INTEGER},
+        certification_info = #{record.certificationInfo,jdbcType=VARCHAR},
+        open_time = #{record.openTime,jdbcType=TIMESTAMP},
+        close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+        contact_name = #{record.contactName,jdbcType=VARCHAR},
+        contact_qq = #{record.contactQq,jdbcType=VARCHAR},
+        contact_mobile = #{record.contactMobile,jdbcType=VARCHAR},
+        contact_weixin = #{record.contactWeixin,jdbcType=VARCHAR},
+        service_phone = #{record.servicePhone,jdbcType=VARCHAR},
+        country_id = #{record.countryId,jdbcType=INTEGER},
+        country_name = #{record.countryName,jdbcType=VARCHAR},
+        province_id = #{record.provinceId,jdbcType=INTEGER},
+        province_name = #{record.provinceName,jdbcType=VARCHAR},
+        city_id = #{record.cityId,jdbcType=INTEGER},
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+        area_id = #{record.areaId,jdbcType=INTEGER},
+        area_name = #{record.areaName,jdbcType=VARCHAR},
+        street_id = #{record.streetId,jdbcType=INTEGER},
+        street_name = #{record.streetName,jdbcType=VARCHAR},
+        shop_address = #{record.shopAddress,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        goods_category = #{record.goodsCategory,jdbcType=VARCHAR},
+        common_setting = #{record.commonSetting,jdbcType=VARCHAR},
+        trade_setting = #{record.tradeSetting,jdbcType=VARCHAR},
+        logo = #{record.logo,jdbcType=VARCHAR},
+        logo_url = #{record.logoUrl,jdbcType=VARCHAR},
+        weixin_setting = #{record.weixinSetting,jdbcType=VARCHAR},
+        payment_setting = #{record.paymentSetting,jdbcType=VARCHAR},
+        url = #{record.url,jdbcType=VARCHAR},
+        commission_rate = #{record.commissionRate,jdbcType=REAL},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        refund_setting = #{record.refundSetting,jdbcType=VARCHAR},
+        logo_update_flag = #{record.logoUpdateFlag,jdbcType=SMALLINT},
+        header_setting = #{record.headerSetting,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.Shop">
+        update t_shop
+        <set>
+            <if test="shopNo != null">
+                shop_no = #{shopNo,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="shopName != null">
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="intro != null">
+                intro = #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="qrPath != null">
+                qr_path = #{qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="qrUrl != null">
+                qr_url = #{qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="certificationType != null">
+                certification_type = #{certificationType,jdbcType=INTEGER},
+            </if>
+            <if test="certificationStatus != null">
+                certification_status = #{certificationStatus,jdbcType=INTEGER},
+            </if>
+            <if test="certificationInfo != null">
+                certification_info = #{certificationInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="openTime != null">
+                open_time = #{openTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closeTime != null">
+                close_time = #{closeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contactName != null">
+                contact_name = #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactQq != null">
+                contact_qq = #{contactQq,jdbcType=VARCHAR},
+            </if>
+            <if test="contactMobile != null">
+                contact_mobile = #{contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="contactWeixin != null">
+                contact_weixin = #{contactWeixin,jdbcType=VARCHAR},
+            </if>
+            <if test="servicePhone != null">
+                service_phone = #{servicePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="countryId != null">
+                country_id = #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="countryName != null">
+                country_name = #{countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceName != null">
+                province_name = #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="cityName != null">
+                city_name = #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="areaName != null">
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="streetId != null">
+                street_id = #{streetId,jdbcType=INTEGER},
+            </if>
+            <if test="streetName != null">
+                street_name = #{streetName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopAddress != null">
+                shop_address = #{shopAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsCategory != null">
+                goods_category = #{goodsCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="commonSetting != null">
+                common_setting = #{commonSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeSetting != null">
+                trade_setting = #{tradeSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="logoUrl != null">
+                logo_url = #{logoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="weixinSetting != null">
+                weixin_setting = #{weixinSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentSetting != null">
+                payment_setting = #{paymentSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="commissionRate != null">
+                commission_rate = #{commissionRate,jdbcType=REAL},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="refundSetting != null">
+                refund_setting = #{refundSetting,jdbcType=VARCHAR},
+            </if>
+            <if test="logoUpdateFlag != null">
+                logo_update_flag = #{logoUpdateFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="headerSetting != null">
+                header_setting = #{headerSetting,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.Shop">
+        update t_shop
+        set shop_no = #{shopNo,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=INTEGER},
+        shop_name = #{shopName,jdbcType=VARCHAR},
+        intro = #{intro,jdbcType=VARCHAR},
+        qr_path = #{qrPath,jdbcType=VARCHAR},
+        qr_url = #{qrUrl,jdbcType=VARCHAR},
+        certification_type = #{certificationType,jdbcType=INTEGER},
+        certification_status = #{certificationStatus,jdbcType=INTEGER},
+        certification_info = #{certificationInfo,jdbcType=VARCHAR},
+        open_time = #{openTime,jdbcType=TIMESTAMP},
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+        contact_name = #{contactName,jdbcType=VARCHAR},
+        contact_qq = #{contactQq,jdbcType=VARCHAR},
+        contact_mobile = #{contactMobile,jdbcType=VARCHAR},
+        contact_weixin = #{contactWeixin,jdbcType=VARCHAR},
+        service_phone = #{servicePhone,jdbcType=VARCHAR},
+        country_id = #{countryId,jdbcType=INTEGER},
+        country_name = #{countryName,jdbcType=VARCHAR},
+        province_id = #{provinceId,jdbcType=INTEGER},
+        province_name = #{provinceName,jdbcType=VARCHAR},
+        city_id = #{cityId,jdbcType=INTEGER},
+        city_name = #{cityName,jdbcType=VARCHAR},
+        area_id = #{areaId,jdbcType=INTEGER},
+        area_name = #{areaName,jdbcType=VARCHAR},
+        street_id = #{streetId,jdbcType=INTEGER},
+        street_name = #{streetName,jdbcType=VARCHAR},
+        shop_address = #{shopAddress,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        goods_category = #{goodsCategory,jdbcType=VARCHAR},
+        common_setting = #{commonSetting,jdbcType=VARCHAR},
+        trade_setting = #{tradeSetting,jdbcType=VARCHAR},
+        logo = #{logo,jdbcType=VARCHAR},
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+        weixin_setting = #{weixinSetting,jdbcType=VARCHAR},
+        payment_setting = #{paymentSetting,jdbcType=VARCHAR},
+        url = #{url,jdbcType=VARCHAR},
+        commission_rate = #{commissionRate,jdbcType=REAL},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+        refund_setting = #{refundSetting,jdbcType=VARCHAR},
+        logo_update_flag = #{logoUpdateFlag,jdbcType=SMALLINT},
+        header_setting = #{headerSetting,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

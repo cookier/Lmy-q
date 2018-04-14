@@ -1,0 +1,18 @@
+<form class="form-horizontal" novalidate ng-controller="UITextNavController">
+    <div ng-show="data.show_method == '1'" class="control-group">
+        <label class="control-label">显示方式：</label>
+        <div class="controls">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="show_method" value="0"><i></i>通栏
+            </label>
+        </div>
+    </div>
+    <div class="control-group js-collection-region">
+        <ul class="choices ui-sortable">
+            <li class="choice" ng-repeat="item in data.sub_entry" ng-include="'tpl/showcase/text_nav/edit_item.html'"></li>
+        </ul>
+    </div>
+    <div class="control-group options">
+        <a class="add-option js-add-option" ng-click="addItem()"><i class="icon-add"></i> 添加一个文本导航</a>
+    </div>
+</form>

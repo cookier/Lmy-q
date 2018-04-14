@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityDirectsellerMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityDirectseller">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="exp_time_type" jdbcType="SMALLINT" property="expTimeType"/>
+        <result column="allow_seller_buy" jdbcType="SMALLINT" property="allowSellerBuy"/>
+        <result column="allow_recruit" jdbcType="SMALLINT" property="allowRecruit"/>
+        <result column="auto_settle" jdbcType="SMALLINT" property="autoSettle"/>
+        <result column="cps_rate" jdbcType="REAL" property="cpsRate"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="flag" jdbcType="SMALLINT" property="flag"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ActivityDirectseller">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, title, exp_time_type, allow_seller_buy, allow_recruit, auto_settle, 
+    cps_rate, update_time, create_time, flag, url
+  </sql>
+    <sql id="Blob_Column_List">
+    content
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityDirectsellerExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_directseller
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_directseller
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_directseller
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_directseller
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerExample">
+        delete from t_activity_directseller
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityDirectseller">
+    insert into t_activity_directseller (id, shop_id, title, 
+      exp_time_type, allow_seller_buy, allow_recruit, 
+      auto_settle, cps_rate, update_time, 
+      create_time, flag, url, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{expTimeType,jdbcType=SMALLINT}, #{allowSellerBuy,jdbcType=SMALLINT}, #{allowRecruit,jdbcType=SMALLINT}, 
+      #{autoSettle,jdbcType=SMALLINT}, #{cpsRate,jdbcType=REAL}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=SMALLINT}, #{url,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityDirectseller">
+        insert into t_activity_directseller
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="expTimeType != null">
+                exp_time_type,
+            </if>
+            <if test="allowSellerBuy != null">
+                allow_seller_buy,
+            </if>
+            <if test="allowRecruit != null">
+                allow_recruit,
+            </if>
+            <if test="autoSettle != null">
+                auto_settle,
+            </if>
+            <if test="cpsRate != null">
+                cps_rate,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="expTimeType != null">
+                #{expTimeType,jdbcType=SMALLINT},
+            </if>
+            <if test="allowSellerBuy != null">
+                #{allowSellerBuy,jdbcType=SMALLINT},
+            </if>
+            <if test="allowRecruit != null">
+                #{allowRecruit,jdbcType=SMALLINT},
+            </if>
+            <if test="autoSettle != null">
+                #{autoSettle,jdbcType=SMALLINT},
+            </if>
+            <if test="cpsRate != null">
+                #{cpsRate,jdbcType=REAL},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=SMALLINT},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerExample"
+            resultType="java.lang.Long">
+        select count(*) from t_activity_directseller
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_directseller
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.expTimeType != null">
+                exp_time_type = #{record.expTimeType,jdbcType=SMALLINT},
+            </if>
+            <if test="record.allowSellerBuy != null">
+                allow_seller_buy = #{record.allowSellerBuy,jdbcType=SMALLINT},
+            </if>
+            <if test="record.allowRecruit != null">
+                allow_recruit = #{record.allowRecruit,jdbcType=SMALLINT},
+            </if>
+            <if test="record.autoSettle != null">
+                auto_settle = #{record.autoSettle,jdbcType=SMALLINT},
+            </if>
+            <if test="record.cpsRate != null">
+                cps_rate = #{record.cpsRate,jdbcType=REAL},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.flag != null">
+                flag = #{record.flag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_activity_directseller
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        exp_time_type = #{record.expTimeType,jdbcType=SMALLINT},
+        allow_seller_buy = #{record.allowSellerBuy,jdbcType=SMALLINT},
+        allow_recruit = #{record.allowRecruit,jdbcType=SMALLINT},
+        auto_settle = #{record.autoSettle,jdbcType=SMALLINT},
+        cps_rate = #{record.cpsRate,jdbcType=REAL},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        flag = #{record.flag,jdbcType=SMALLINT},
+        url = #{record.url,jdbcType=VARCHAR},
+        content = #{record.content,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_directseller
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        exp_time_type = #{record.expTimeType,jdbcType=SMALLINT},
+        allow_seller_buy = #{record.allowSellerBuy,jdbcType=SMALLINT},
+        allow_recruit = #{record.allowRecruit,jdbcType=SMALLINT},
+        auto_settle = #{record.autoSettle,jdbcType=SMALLINT},
+        cps_rate = #{record.cpsRate,jdbcType=REAL},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        flag = #{record.flag,jdbcType=SMALLINT},
+        url = #{record.url,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityDirectseller">
+        update t_activity_directseller
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="expTimeType != null">
+                exp_time_type = #{expTimeType,jdbcType=SMALLINT},
+            </if>
+            <if test="allowSellerBuy != null">
+                allow_seller_buy = #{allowSellerBuy,jdbcType=SMALLINT},
+            </if>
+            <if test="allowRecruit != null">
+                allow_recruit = #{allowRecruit,jdbcType=SMALLINT},
+            </if>
+            <if test="autoSettle != null">
+                auto_settle = #{autoSettle,jdbcType=SMALLINT},
+            </if>
+            <if test="cpsRate != null">
+                cps_rate = #{cpsRate,jdbcType=REAL},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=SMALLINT},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityDirectseller">
+    update t_activity_directseller
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      exp_time_type = #{expTimeType,jdbcType=SMALLINT},
+      allow_seller_buy = #{allowSellerBuy,jdbcType=SMALLINT},
+      allow_recruit = #{allowRecruit,jdbcType=SMALLINT},
+      auto_settle = #{autoSettle,jdbcType=SMALLINT},
+      cps_rate = #{cpsRate,jdbcType=REAL},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=SMALLINT},
+      url = #{url,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityDirectseller">
+    update t_activity_directseller
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      exp_time_type = #{expTimeType,jdbcType=SMALLINT},
+      allow_seller_buy = #{allowSellerBuy,jdbcType=SMALLINT},
+      allow_recruit = #{allowRecruit,jdbcType=SMALLINT},
+      auto_settle = #{autoSettle,jdbcType=SMALLINT},
+      cps_rate = #{cpsRate,jdbcType=REAL},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=SMALLINT},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

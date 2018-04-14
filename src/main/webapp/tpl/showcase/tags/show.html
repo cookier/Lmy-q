@@ -1,0 +1,19 @@
+<div class="control-group">
+    <div class="custom-tags">
+        <div class="js-collection-region">
+            <ul class="tabber tabber-bottom red clearfix tabber-n3 ">
+                <a ng-repeat="subItem in item.sub_entry" ng-class="{'active':$index==0}">测试实物商品</a>
+            </ul>
+        </div>
+        <div class="js-goods-style-region">
+            <div ng-include="'tpl/showcase/goods_list/show_goods_style.html'"></div>
+        </div>
+    </div>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

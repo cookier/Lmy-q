@@ -1,0 +1,28 @@
+<form class="form-horizontal" novalidate>
+    <div class="control-group">
+        <label class="control-label">背景图片：</label>
+        <div class="controls">
+            <% if (backgroundImage === '') { %>
+                <a class="control-action js-trigger-image" href="javascript: void(0);">选择图片</a>
+            <% } else { %>
+                <div class="tpl-wxd">
+                    <div class="tpl-wxd-bg">
+                        <img src="<%- backgroundImage %>" alt="">
+                    </div>
+                </div>
+                <a class="control-action js-trigger-image" href="javascript: void(0);">修改</a>
+            <% } %>
+            <p class="help-desc">建议尺寸：640 x 200 像素。</p>
+            <p class="help-desc">尺寸不匹配时，图片将被压缩或拉伸以铺满画面。</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">店铺Logo：</label>
+        <div class="controls">
+            <img src="<%- window._global.mp_data.logo %>" width="80" height="80" class="thumb-image" style="width: 80px; height: 80px;">
+            <a class="control-action js-trigger-avatar" href="javascript: void(0);">修改店铺Logo</a>
+            <p class="help-desc">建议尺寸：160 x 160 像素</p>
+        </div>
+    </div>
+</form>

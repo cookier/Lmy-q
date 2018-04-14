@@ -1,0 +1,101 @@
+<div class="app-init-container" ng-controller="AccountListController">
+    <div class="app__content js-app-main">
+        <div class="goods-list">
+            <div class="js-list-filter-region clearfix ui-box"
+                 style="position: relative;text-align: right;">
+                <div class="widget-list-filter">
+                    <div class="filter-box">
+                        <div class="js-list-search seach-box" ng-enter='pageChanged()'>
+                            用户类型：
+                            <select ng-model="accountType" style="height: 30px;width: 100px;">
+                                <option value="">全部</option>
+                                <option value=1>分销商</option>
+                                <option value=2>供应商</option>
+                            </select>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            用户昵称：<input ng-model="nickname" type="text" class="input-sm"/>
+                            手机号码：<input ng-model="mobile" type="text" class="input-sm"/>
+                            <button class="btn btn-sm btn-default" type="button"
+                                    ng-click="pageChanged()">Go!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-box">
+            <div class="panel panel-default">
+                <table class="ui-table ui-table-list" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <!--  <th width="30px;"><label class="i-checks i-checks-sm">
+                                <input type="checkbox" ng-checked="isCheckedAll()"
+                                ng-click="checkAll()"><i></i>
+                        </label></th>-->
+                        <th>用户</th>
+                        <th>可用金额</th>
+                        <th>待结算金额</th>
+                        <th>保证金额</th>
+                        <th>支付宝账号</th>
+                        <th>银行账号</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in pageData.list">
+                        <!-- <td><label class="i-checks i-checks-sm"> <input
+                                id={{data.id}} type="checkbox" ng-checked="data.chk"
+                                ng-click="data.chk = !data.chk"><i></i></label></td> -->
+                        <td class="goods-meta">
+                            <p class="goods-title">
+                                <a> {{data.nickname}} </a>
+
+                            </p>
+                        </td>
+                        <td>
+                            <p>￥{{data.available_money}}</p>
+                        </td>
+                        <td>
+                            <p>￥{{data.settlement_money}}</p>
+                        </td>
+                        <td>
+                            <p>￥{{data.deposit_money}}</p>
+                        </td>
+                        <td>
+                            <p>{{data.alipay_valid_name}}</p>
+                            <p>{{data.alipay_account}}</p>
+                        </td>
+                        <td>
+                            <p>{{data.bank_deposit_name}}</p>
+                            <p>{{data.bank_deposit_number}}</p>
+                        </td>
+                        <td>
+                            <p><a ng-click="toAccountBill(data.user_id)">查看账户明细</a></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="js-list-empty-region"></div>
+                <footer class="panel-footer" style="text-align: right;">
+                    <div class="row">
+                        <div ng-show="pageData.totalRow>0">
+                            <custom-pagination boundary-links="true"
+                                               ng-change="pageChanged()" total-items="pageData.totalRow"
+                                               ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                               class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                               next-text="&rsaquo;" first-text="&laquo;"
+                                               last-text="&raquo;"></custom-pagination>
+                        </div>
+                        <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                             style="text-align: center;">没有找到相关记录!
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="modal-header">
+	<a class="close js-news-modal-dismiss" data-dismiss="modal"
+		ng-click="cancel()">×</a>
+
+	<ul class="module-nav modal-tab">
+		<li class="active"><a href="#js-module-goods" data-type="goods"
+			class="js-modal-tab">可使用的优惠券</a></li>
+		<li><input placeholder="请输入优惠券名称" type="text" ng-model="title"
+			style="width: 200px;height: 30px;">
+			<button class="btn btn-default" type="button"
+				ng-click="pageChanged()">Go!</button></li>
+	</ul>
+</div>
+
+<div class="modal-body">
+	<div class="tab-content">
+		<div id="js-module-goods" class="tab-pane module-goods active">
+			<table class="table">
+				<!-- <colgroup>
+					<col class="modal-col-title">
+					<col class="modal-col-time" span="2">
+					<col class="modal-col-action">
+				</colgroup> -->
+				<!-- 表格头部 -->
+				<thead>
+					<tr>
+						<th class="title">
+							<div class="td-cont">
+								<span></span> <a class="js-update" ng-click="pageChanged()">优惠券名称</a>
+							</div>
+						</th>
+						<th class="title">
+							<div class="td-cont">
+								<span>店铺名称</span>
+							</div>
+						</th>
+						<th class="title">
+							<div class="td-cont">
+								<span>创建时间</span>
+							</div>
+						</th>
+						<th class="title">
+							<div class="td-cont">
+								<span>选择</span>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<!-- 表格数据区 -->
+				<tbody>
+					<tr ng-repeat="data in pageData.list">
+						<td class="title">
+							<div class="td-cont">
+								<a>{{data.name}}</a>
+							</div>
+						</td>
+						<td class="title">
+							<div class="td-cont">
+								<span>{{data.shop_name}} </span>
+							</div>
+						</td>
+						<td class="title">
+							<div class="td-cont">
+								<span>{{data.create_time}} </span>
+							</div>
+						</td>
+						<td class="time">
+							<button ng-click="selectGoods(data)">确定</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
+
+<footer class="panel-footer">
+	<div class="row">
+		<div ng-show="pageData.totalRow>0">
+			<custom-pagination boundary-links="true" ng-change="pageChanged()"
+				total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+				page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+				previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+				last-text="&raquo;"></custom-pagination>
+		</div>
+		<div ng-show="(pageData.totalRow==0)||(pageData=='')"
+			style="text-align: center;">没有找到相关记录!</div>
+	</div>
+</footer>

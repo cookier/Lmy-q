@@ -1,0 +1,158 @@
+<div class="app-init-container" ng-controller="ActivityParticipationController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;">
+
+                        <div class="clearfix">
+                            <div class="filter-groups" style='float:left;'>
+                                <div class="control-group">
+                                    <label class="control-label">用户昵称：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="nickname" style="height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-groups" style='float:left;'>
+                                <div class="control-group">
+                                    <label class="control-label">用户手机号：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="mobile" style="height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-groups" style='float:left;'>
+                                <div class="control-group">
+                                    <label class="control-label">用户类型：</label>
+                                    <div class="controls">
+                                        <select ng-model="role" style="height: 30px;">
+                                            <option value="">全部</option>
+                                            <option value=0>活动参与者</option>
+                                            <option value=1>活动推广者</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="ui-btn-group">
+                                    <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                       data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                                    <!--  <a href="javascript:;" class="ui-btn js-export">批量导出</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>昵称</th>
+                        <th width='110px'>手机号</th>
+                        <th width='145px'>参与时间</th>
+                        <th width='90px'>销售额</th>
+                        <th width='90px'>分红名额</th>
+                        <th width='100px'>累计分红金额</th>
+                        <th width='120px'>排名</th>
+                        <th width='280px'>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">{{data}}
+                        <td>{{data.nickname}}</td>
+                        <td>{{data.mobile}}</td>
+                        <td>{{data.create_time}}</td>
+                        <td><a ui-sref="console.income({uid:data.user_id,nickname:data.nickname})">{{data.sales}}</a>
+                        </td>
+                        <td>{{data.remainder_bonus_number}}</td>
+                        <td>{{data.bonus_total_money}}</td>
+                        <td>{{data.role==0?data.ranking:'不参与排名'}}</td>
+                        <td>
+                            <button ng-show="data.role==1" ng-click="setRole(data.id,0)">设为参与者</button>
+                            <button ng-show="data.role==0" ng-click="setRole(data.id,1)">设为推广者</button>
+                            <!-- <button ng-show="data.role==0" ng-click="setBlankUser(data.id)">加入黑名单</button> -->
+                            <button id="console{{$index}}" ng-if="data.blanklist_flag==1"
+                                    ng-click="showBlanklistDialog(data,'remove')">移出黑名单
+                            </button>
+                            <button id="console{{$index}}" ng-if="data.blanklist_flag==0"
+                                    ng-click="showBlanklistDialog(data,'join')">加入黑名单&nbsp;&nbsp;
+                            </button>
+                            <dialog ng-if="data.blanklist_show==true" for="console{{$index}}" align="left"
+                                    close="data.blanklist_show=false" close-action="outerchick">
+                                <div dialog-content>
+                                    <div class="popover-content text-center form-inline">
+                                        <form name="form" class="form-validation">
+                                            <div style="margin-top: 5px;text-align: left;">
+                                                <span style="width: 250px; display:block;">是否保留活动数据：</span>
+                                                <input type="checkbox" ng-true-value=1 ng-false-value=0
+                                                       ng-model="userBlanklist.activity_data_retain_flag"/>
+                                            </div>
+                                            <div style="margin-top: 5px;text-align: left;">
+                                                <span style="width: 250px; display:block;">黑名单失效时间：<label
+                                                        style="color: red;">*</label></span>
+                                                <input type="text" ng-model="userBlanklist.invalid_time"
+                                                       required="required"
+                                                       date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}' class="Wdate"
+                                                       style="width: 150px; height: 30px;">
+                                            </div>
+                                            <div style="margin-top: 5px;text-align: left;">
+                                                <span style="width: 250px; display:block;">取消参与活动对应的规则和奖励：</span>
+                                                <select ng-model="userBlanklist.exclude_rule_ids" multiple="multiple"
+                                                        style="width: 200px;"
+                                                        ng-options="r.id as r.name for r in rules">
+                                                </select>
+                                            </div>
+                                            <div style="margin-top: 5px;text-align: left;">
+                                                <span style="width: 250px; display:block;">备注（原因等）：</span>
+                                                <textarea rows="3" cols="30" ng-model="userBlanklist.remark"></textarea>
+                                            </div>
+                                            <div>
+                                                <br>
+                                                <button type="submit" ng-disabled="form.$invalid" ng-if="option=='join'"
+                                                        class="btn btn-primary js-btn-confirm"
+                                                        data-loading-text="确定"
+                                                        ng-click="joinBlanklist(userBlanklist,data)">确定
+                                                </button>
+                                                <button type="submit" ng-disabled="form.$invalid"
+                                                        ng-if="option=='remove'"
+                                                        class="btn btn-primary js-btn-confirm"
+                                                        data-loading-text="确定"
+                                                        ng-click="removeBlanklist(data)">确定
+                                                </button>
+                                                <button type="reset" class="btn js-btn-cancel"
+                                                        ng-click="data.blanklist_show=false">取消
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </dialog>
+                            <a ui-sref="console.ap_recommend_list({aid:data.activity_id,uid:data.user_id})">推荐人数：{{data.recommend_num}}</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

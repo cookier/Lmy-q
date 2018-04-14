@@ -1,0 +1,374 @@
+<link rel="stylesheet" href="./css/reward_694598e089.css"
+      type="text/css">
+
+<div class="app-init-container"
+     ng-controller="ActivityFullSubGiveEditController">
+    <!-- <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="js-list-nav-all" class="active"><a href="#">所有促销</a></li>
+            <li id="js-list-nav-future"><a href="#">未开始</a></li>
+            <li id="js-list-nav-on"><a href="#">进行中</a></li>
+            <li id="js-list-nav-end"><a href="#">已结束</a></li>
+        </ul>
+        <div class="pull-right common-helps-entry">
+            <a href="#" target="_blank"> <span class="help-icon"></span>
+                查看【满减／送】使用教程
+            </a>
+        </div>
+    </nav> -->
+    <div class="app__content js-app-main">
+        <div class="app-design-wrap">
+            <div class="page-reward clearfix">
+                <h2 class="reward-title">设置满就送</h2>
+                <div class="app-reward">
+                    <form class="form-horizontal form-validation" name="form">
+                        <div class="reward-info">
+                            <div class="js-basic-info-region">
+                                <div>
+                                    <h3 class="reward-sub-title">活动信息</h3>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">* </em>活动名称：</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="activityFullSubGive.name" maxlength="50"
+                                               style="width: 200px; vertical-align: baseline;"
+                                               placeholder="请填写活动名称！" required="required">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">* </em>生效时间：</label>
+                                        <div class="controls" style='margin-left:120px;'>
+                                            <input type="text" ng-model="activityFullSubGive.begin_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}' required="required"
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                            <input type="text" ng-model="activityFullSubGive.end_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}' required="required"
+                                                   class="Wdate" style="width: 150px; height: 30px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="js-setting-region">
+                                <div>
+                                    <h3 class="reward-sub-title">优惠设置</h3>
+
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">* </em>优惠方式：</label>
+                                        <div class="controls">
+                                            <label class="i-checks i-checks-sm"> <input
+                                                    ng-click="removeMoreYouhui()"
+                                                    ng-model="activityFullSubGive.discount_type" type="radio"
+                                                    value="0"><i></i>
+                                            </label> <span class="label-text">普通优惠</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="i-checks i-checks-sm"> <input
+                                                    ng-click="addMoreYouhui()"
+                                                    ng-model="activityFullSubGive.discount_type" type="radio"
+                                                    value="1"><i></i>
+                                            </label> <span class="label-text">多级优惠（每级优惠不累积叠加）</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="control-group">
+                                        <label class="control-label">优惠条件：</label>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="reward-table-wrap">
+                                            <table class="reward-table">
+                                                <thead>
+                                                <tr>
+                                                    <th width="10%" style='text-align:center'>层级</th>
+                                                    <th width="25%" style='text-align:center'>优惠门槛</th>
+                                                    <th width="55%" class="pl100">优惠方式(可多选)</th>
+                                                    <th width="10%">操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="reward-condition">
+                                                <tr ng-repeat="item in discount_settings track by $index">
+                                                    <td align="center">{{$index+1}}</td>
+                                                    <td align="center">
+                                                        <div class="control-group">
+                                                            <div class="controls" style="margin: 0;">
+                                                                <span>满</span> <input type="number" min="0" value="0"
+                                                                                      step="0.01" max="999999999"
+                                                                                      ng-model="item.orderMinLimit"
+                                                                                      style="width: 150px; height: 30px;">
+                                                                <span>元</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="control-group reward-setting first-reward">
+                                                            <div class="controls">
+                                                                <label class="i-checks i-checks-sm"> <input
+                                                                        type="checkbox" class="checked-status"
+                                                                        ng-model="item.isSubtractCash"
+                                                                        ng-true-value="1" ng-false-value="0">
+                                                                    <i></i></label>
+                                                                <span class="origin-status "
+                                                                      ng-show="item.isSubtractCash!=1">减现金</span> <span
+                                                                    ng-show="item.isSubtractCash==1"> 减 <input
+                                                                    type="number" min="0.0"
+                                                                    ng-model="item.subtractCash" step="0.01"
+                                                                    max="999999999" style="width: 150px; height: 30px;">元
+																	</span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group reward-setting">
+                                                            <div class="controls">
+                                                                <label class="i-checks i-checks-sm"> <input
+                                                                        type="checkbox" class="checked-status"
+                                                                        ng-true-value="1" ng-false-value="0"
+                                                                        ng-model="item.isFreePostage"><i></i></label>
+                                                                <span
+                                                                        class="origin-status">免邮</span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group reward-setting">
+                                                            <div class="controls">
+                                                                <label class="i-checks i-checks-sm"> <input
+                                                                        type="checkbox" class="i-checks i-checks-sm"
+                                                                        ng-true-value="1" ng-false-value="0"
+                                                                        ng-model="item.isGiveScore"><i></i></label>
+                                                                <span
+                                                                        ng-show="item.isGiveScore!=1"
+                                                                        class="origin-status ">送积分</span> <span
+                                                                    ng-show="item.isGiveScore==1"> 送 <input
+                                                                    type="number" min="0"
+                                                                    ng-model="item.giveScore" step="1"
+                                                                    max="999999999" style="width: 150px; height: 30px;">
+																		积分
+																	</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group reward-setting">
+                                                            <div class="controls">
+                                                                <label class="i-checks i-checks-sm"> <input
+                                                                        type="checkbox" class="i-checks i-checks-sm"
+                                                                        ng-true-value="1" ng-false-value="0"
+                                                                        ng-model="item.isGiveCoupon"><i></i></label>
+                                                                <span
+                                                                        class="origin-status ">送优惠</span> <span
+                                                                    ng-show="item.isGiveCoupon==1"> <select
+                                                                    class="input-sm form-control w-sm inline v-middle"
+                                                                    ng-disabled="item.isGiveCoupon==0"
+                                                                    ng-required="item.isGiveCoupon==1"
+                                                                    ng-model="item.coupon" style="width: 180px;"
+                                                                    ng-options="c.id as c.name for c in coupons"><option
+                                                                    value="">请选择优惠券!</option></select> <a
+                                                                    href="javascript:;"
+                                                                    class="js-refresh-coupon">刷新</a> <span
+                                                                    class="c-gray">|</span>
+																		<a ui-sref="console.ump_coupon_edit('0')">新建</a>
+																	</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group reward-setting last-reward">
+                                                            <div class="controls">
+                                                                <label class="i-checks i-checks-sm"> <input
+                                                                        ng-true-value="1" ng-false-value="0"
+                                                                        type="checkbox"
+                                                                        class="i-checks i-checks-sm"
+                                                                        ng-model="item.isGiveGift"><i></i></label><span
+                                                                    ng-show="item.isGiveGift!=1"
+                                                                    class="origin-status ">送赠品</span> <span
+                                                                    ng-show="item.isGiveGift==1">
+																		送 <select
+                                                                    class="input-sm form-control w-sm inline v-middle"
+                                                                    ng-model="item.giveGift"
+                                                                    ng-required="item.isGiveGift==1"
+                                                                    ng-options="g.id as g.title for g in gifts"
+                                                                    style="width: 180px;"><option
+                                                                    value="">请选择赠品!</option></select>
+																		<a class="js-refresh-present">刷新</a>
+																		<span class="c-gray">|</span> <a
+                                                                    class="new-window">新建</a>
+																	</span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group reward-need-one">
+                                                            <div class="controls">
+                                                                <input type="hidden" name="needOne">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><a ng-show="$index>0" ng-click="removeYouhui(item)">删除</a></td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot id="tfoot" class="add-reward-toolbar"
+                                                       style="display: none;">
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <div class="reward-controls">
+                                                            <a ng-click="addYouhui()" class="js-add-reward">+新增一级优惠</a>
+                                                            <span class="gray pl20">最多可设置五个层级</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <h3 class="reward-sub-title">选择活动商品</h3>
+
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">* </em>活动商品：</label>
+                                        <div class="controls">
+                                            <label class="i-checks i-checks-sm"> <input
+                                                    class="js-select-all" type="radio"
+                                                    ng-click="unselectGoods()"
+                                                    ng-model="activityFullSubGive.goods_range" value="0"><i></i></label>
+                                            <span class="label-text">全部商品参与</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="i-checks i-checks-sm"> <input
+                                                    class="js-select-part" type="radio"
+                                                    ng-model="activityFullSubGive.goods_range" value="1"
+                                                    ng-click="selectGoods()"><i></i></label> <span
+                                                class="label-text">部分商品参与</span> <span class="gray">已选商品(
+												<b class="js-amount">{{goodses.length||0}}</b> )个
+											</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls show-present js-show-present">
+                                <!-- 仅编辑状态下才展示 -->
+                                <!-- <div class="current-present clearfix"> -->
+                                <table class="ui-table ui-table-list" style="padding: 0px;">
+                                    <thead>
+                                    <tr class="widget-list-header">
+                                        <th>商品信息</th>
+                                        <th>库存</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="js-list-body-region">
+                                    <tr class="widget-list-item" ng-repeat="goods in goodses">
+                                        <td><img src="{{goods.default_pic_url}}-50-50">
+                                            <p class="goods-title">
+                                                <a class="new-window" title="{{goods.title}}">{{goods.title}}</a>
+                                            </p></td>
+                                        <td>{{goods.stock}}</td>
+                                        <td><input type="button" ng-click="quit()" value="取消参与"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- </div> -->
+                                <!-- 商品被删除时给出提示 -->
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div id="div_goods" ng-show="activityFullSubGive.goods_range==1"
+                                 class="controls show-present js-show-present">
+                                <div class="goods-list-wrap">
+                                    <div class="js-goods-list-region js-goods-list-tab">
+                                        <div class="widget-list">
+                                            <div class="ump-select-box js-select-goods-list">
+                                                <div class="ump-goods-wrap">
+                                                    <div class="ump-waitting-select ump-goods-list">
+                                                        <div class="js-list-filter-region clearfix">
+                                                            <div class="widget-list-filter">
+                                                                <div class="ump-select-search">
+                                                                    <select
+                                                                            class="input-sm form-control w-sm inline v-middle"
+                                                                            ng-model="goodsTag"
+                                                                            ng-options="tag.id  as tag.group_name for tag in goodsTags">
+                                                                        <option value="">所有分组</option>
+                                                                    </select> <input class="input-sm" type="text"
+                                                                                     ng-model="title"
+                                                                                     placeholder="请输入商品名称" value=""> <a
+                                                                        ng-click="pageChanged()"
+                                                                        class="btn btn-primary js-search">搜索</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <table class="ui-table ui-table-list" style="padding: 0px;">
+                                                            <thead>
+                                                            <tr class="widget-list-header">
+                                                                <th style="width: 15px;"></th>
+                                                                <th>商品信息</th>
+                                                                <th>库存</th>
+                                                                <th>操作</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody class="js-list-body-region">
+                                                            <tr class="widget-list-item"
+                                                                ng-repeat="data in pageData.list">
+                                                                <td class="goods-image-td text-center">
+                                                                </td>
+                                                                <td class="goods-meta">
+                                                                    <p><img src="{{data.default_pic_url}}-50-50"></p>
+                                                                    <p class="goods-title">
+                                                                        <a class="new-window" title="{{data.title}}">{{data.title}}</a>
+                                                                    </p>
+                                                                    <p class="goods-price">￥{{data.sale_price}}</p>
+                                                                </td>
+                                                                <td class="text-center">{{data.stock}}</td>
+                                                                <td class="text-center"><input type="button"
+                                                                                               ng-click="join(data)"
+                                                                                               value="参与满减"></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="js-list-empty-region"></div>
+                                                        <div class="js-list-footer-region ui-box">
+                                                            <div class="widget-list-footer">
+                                                                <div class="ump-select-footer">
+                                                                    <footer class="panel-footer">
+                                                                        <div class="row">
+                                                                            <div ng-show="pageData.totalRow>0">
+                                                                                <custom-pagination boundary-links="true"
+                                                                                                   ng-change="pageChanged()"
+                                                                                                   total-items="pageData.totalRow"
+                                                                                                   ng-model="pageData.pageNumber"
+                                                                                                   page-size="pageData.pageSize"
+                                                                                                   class="pagination-sm m-t-none m-b"
+                                                                                                   previous-text="&lsaquo;"
+                                                                                                   next-text="&rsaquo;"
+                                                                                                   first-text="&laquo;"
+                                                                                                   last-text="&raquo;"></custom-pagination>
+                                                                            </div>
+                                                                            <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                                                                                 style="text-align: center;">没有找到相关记录!
+                                                                            </div>
+                                                                        </div>
+                                                                    </footer>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="app-actions">
+                    <div class="form-actions text-center">
+                        <input class="btn js-btn-quit" type="button" value="返回" ng-click="cancel()">
+                        <input ng-show="activityFullSubGive.status==0" ng-disabled="form.$invalid"
+                               class="btn btn-primary js-btn-save" type="button" value="保 存" ng-click="save()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="app-header"></div>
+<div class="app-entry">
+	<div class="app-config js-config-region">
+		<div class="app-field clearfix editing">
+			<h1>
+				<span>优惠码</span>
+			</h1>
+			<div class="app-field-wrap editing">
+				<div class="weixin-card-show" ng-show="couponcode.sync_wechat_flag==1">
+					<div class="card"
+						style="background-color: {{couponcode.background_value||'#cf3e36'}}">
+						<img
+							src="./img/logo.png"
+							class="card-shop-logo">
+						<p class="card-shop-name">云中邦商城</p>
+						<div class="card-info">
+							<h2>{{couponcode.wechat_card_title||'微信卡券标题'}}</h2>
+							<p>{{couponcode.wechat_card_sub_title||'购买订单满xx元可以使用'}}</p>
+							<p style="color: #e8e8e8;">有效期：{{couponcode.valid_time}}至{{couponcode.expire_time}}</p>
+						</div>
+						<div class="card-divide"></div>
+					</div>
+					<div class="card-code">
+						<h2>H7MR XXXX ZKSM</h2>
+						<p class="used-mall">请在云中帮微商城购物使用</p>
+					</div>
+					<p class="about-card-desc" style="margin-top: 20px;">(微信卡券包)</p>
+					<div class="divide-line"></div>
+					<p class="about-card-desc">(云中邦微商城优惠券)</p>
+				</div>
+				<div class="ump-coupon-detail-wrap">
+					<div class="promote-card promote-code">
+						<div class="clearfix">
+							<h2 class="pull-left font-size-16 promote-card-name">{{couponcode.name||'优惠码标题'}}</h2>
+							<p
+								class="pull-right font-size-14 center promote-share transparent-color js-share">分享</p>
+						</div>
+						<p class="center promote-value">
+							<span class="promote-value-sign"> <span>￥</span> <i>
+									{{couponcode.amount||0}} </i>
+							</span>
+						</p>
+						<p class="center font-size-14 promote-limit">订单满
+							{{couponcode.order_money_limit||'xx'}}元 (含运费)</p>
+						<p class="font-size-14 transparent-color">有效日期：{{couponcode.valid_time}}至{{couponcode.expire_time}}</p>
+						<div class="dot"></div>
+					</div>
+
+					<div class="promote-desc">
+						<h2 class="font-size-14 c-gray-dark promote-desc-title">使用说明</h2>
+						<div class="block">
+							<div class="block-item clearfix">
+								<span class="js-desc-detail">{{couponcode.use_instructions||'暂无使用说明……'}}
+								</span> <a class="c-blue more-desc pull-right js-more-desc"
+									href="javascript:void(0)">更多</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="app-fields js-fields-region">
+		<div class="app-fields ui-sortable"></div>
+	</div>
+</div>
+<div class="js-add-region">
+	<div></div>
+</div>

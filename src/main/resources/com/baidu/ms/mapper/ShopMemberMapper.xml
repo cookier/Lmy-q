@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ShopMemberMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ShopMember">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="headface_url" jdbcType="VARCHAR" property="headfaceUrl"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="country_id" jdbcType="INTEGER" property="countryId"/>
+        <result column="country_name" jdbcType="VARCHAR" property="countryName"/>
+        <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+        <result column="province_name" jdbcType="VARCHAR" property="provinceName"/>
+        <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="wealth" jdbcType="INTEGER" property="wealth"/>
+        <result column="point" jdbcType="INTEGER" property="point"/>
+        <result column="subscribe_time" jdbcType="TIMESTAMP" property="subscribeTime"/>
+        <result column="unsubscribe_time" jdbcType="TIMESTAMP" property="unsubscribeTime"/>
+        <result column="subscribe_status" jdbcType="INTEGER" property="subscribeStatus"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="shop_member_card_id" jdbcType="INTEGER" property="shopMemberCardId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="average_price" jdbcType="DOUBLE" property="averagePrice"/>
+        <result column="order_count" jdbcType="INTEGER" property="orderCount"/>
+        <result column="last_order_time" jdbcType="TIMESTAMP" property="lastOrderTime"/>
+        <result column="last_talk_time" jdbcType="TIMESTAMP" property="lastTalkTime"/>
+        <result column="recommend_id" jdbcType="INTEGER" property="recommendId"/>
+        <result column="channel" jdbcType="VARCHAR" property="channel"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, user_id, open_id, password, nickname, headface_url, sex, country_id, 
+    country_name, province_id, province_name, city_id, city_name, mobile, wealth, point, 
+    subscribe_time, unsubscribe_time, subscribe_status, update_time, create_time, shop_member_card_id, 
+    status, tag, remark, average_price, order_count, last_order_time, last_talk_time, 
+    recommend_id, channel
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ShopMemberExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_shop_member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_shop_member
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_shop_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ShopMemberExample">
+        delete from t_shop_member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ShopMember">
+    insert into t_shop_member (id, shop_id, user_id, 
+      open_id, password, nickname, 
+      headface_url, sex, country_id, 
+      country_name, province_id, province_name, 
+      city_id, city_name, mobile, 
+      wealth, point, subscribe_time, 
+      unsubscribe_time, subscribe_status, update_time, 
+      create_time, shop_member_card_id, status, 
+      tag, remark, average_price, 
+      order_count, last_order_time, last_talk_time, 
+      recommend_id, channel)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{openId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{headfaceUrl,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{countryId,jdbcType=INTEGER}, 
+      #{countryName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=INTEGER}, #{cityName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{wealth,jdbcType=INTEGER}, #{point,jdbcType=INTEGER}, #{subscribeTime,jdbcType=TIMESTAMP}, 
+      #{unsubscribeTime,jdbcType=TIMESTAMP}, #{subscribeStatus,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{shopMemberCardId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{tag,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{averagePrice,jdbcType=DOUBLE}, 
+      #{orderCount,jdbcType=INTEGER}, #{lastOrderTime,jdbcType=TIMESTAMP}, #{lastTalkTime,jdbcType=TIMESTAMP}, 
+      #{recommendId,jdbcType=INTEGER}, #{channel,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ShopMember">
+        insert into t_shop_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="headfaceUrl != null">
+                headface_url,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="countryId != null">
+                country_id,
+            </if>
+            <if test="countryName != null">
+                country_name,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="provinceName != null">
+                province_name,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="cityName != null">
+                city_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="wealth != null">
+                wealth,
+            </if>
+            <if test="point != null">
+                point,
+            </if>
+            <if test="subscribeTime != null">
+                subscribe_time,
+            </if>
+            <if test="unsubscribeTime != null">
+                unsubscribe_time,
+            </if>
+            <if test="subscribeStatus != null">
+                subscribe_status,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="shopMemberCardId != null">
+                shop_member_card_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="averagePrice != null">
+                average_price,
+            </if>
+            <if test="orderCount != null">
+                order_count,
+            </if>
+            <if test="lastOrderTime != null">
+                last_order_time,
+            </if>
+            <if test="lastTalkTime != null">
+                last_talk_time,
+            </if>
+            <if test="recommendId != null">
+                recommend_id,
+            </if>
+            <if test="channel != null">
+                channel,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="headfaceUrl != null">
+                #{headfaceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="countryId != null">
+                #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="countryName != null">
+                #{countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceName != null">
+                #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="cityName != null">
+                #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="wealth != null">
+                #{wealth,jdbcType=INTEGER},
+            </if>
+            <if test="point != null">
+                #{point,jdbcType=INTEGER},
+            </if>
+            <if test="subscribeTime != null">
+                #{subscribeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unsubscribeTime != null">
+                #{unsubscribeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="subscribeStatus != null">
+                #{subscribeStatus,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shopMemberCardId != null">
+                #{shopMemberCardId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="averagePrice != null">
+                #{averagePrice,jdbcType=DOUBLE},
+            </if>
+            <if test="orderCount != null">
+                #{orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="lastOrderTime != null">
+                #{lastOrderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTalkTime != null">
+                #{lastTalkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="recommendId != null">
+                #{recommendId,jdbcType=INTEGER},
+            </if>
+            <if test="channel != null">
+                #{channel,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ShopMemberExample" resultType="java.lang.Long">
+        select count(*) from t_shop_member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_shop_member
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.openId != null">
+                open_id = #{record.openId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nickname != null">
+                nickname = #{record.nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.headfaceUrl != null">
+                headface_url = #{record.headfaceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=INTEGER},
+            </if>
+            <if test="record.countryId != null">
+                country_id = #{record.countryId,jdbcType=INTEGER},
+            </if>
+            <if test="record.countryName != null">
+                country_name = #{record.countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.provinceId != null">
+                province_id = #{record.provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.provinceName != null">
+                province_name = #{record.provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cityId != null">
+                city_id = #{record.cityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.cityName != null">
+                city_name = #{record.cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mobile != null">
+                mobile = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wealth != null">
+                wealth = #{record.wealth,jdbcType=INTEGER},
+            </if>
+            <if test="record.point != null">
+                point = #{record.point,jdbcType=INTEGER},
+            </if>
+            <if test="record.subscribeTime != null">
+                subscribe_time = #{record.subscribeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.unsubscribeTime != null">
+                unsubscribe_time = #{record.unsubscribeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.subscribeStatus != null">
+                subscribe_status = #{record.subscribeStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.shopMemberCardId != null">
+                shop_member_card_id = #{record.shopMemberCardId,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.tag != null">
+                tag = #{record.tag,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.averagePrice != null">
+                average_price = #{record.averagePrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.orderCount != null">
+                order_count = #{record.orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastOrderTime != null">
+                last_order_time = #{record.lastOrderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastTalkTime != null">
+                last_talk_time = #{record.lastTalkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.recommendId != null">
+                recommend_id = #{record.recommendId,jdbcType=INTEGER},
+            </if>
+            <if test="record.channel != null">
+                channel = #{record.channel,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_shop_member
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        open_id = #{record.openId,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+        headface_url = #{record.headfaceUrl,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=INTEGER},
+        country_id = #{record.countryId,jdbcType=INTEGER},
+        country_name = #{record.countryName,jdbcType=VARCHAR},
+        province_id = #{record.provinceId,jdbcType=INTEGER},
+        province_name = #{record.provinceName,jdbcType=VARCHAR},
+        city_id = #{record.cityId,jdbcType=INTEGER},
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+        wealth = #{record.wealth,jdbcType=INTEGER},
+        point = #{record.point,jdbcType=INTEGER},
+        subscribe_time = #{record.subscribeTime,jdbcType=TIMESTAMP},
+        unsubscribe_time = #{record.unsubscribeTime,jdbcType=TIMESTAMP},
+        subscribe_status = #{record.subscribeStatus,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        shop_member_card_id = #{record.shopMemberCardId,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        tag = #{record.tag,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        average_price = #{record.averagePrice,jdbcType=DOUBLE},
+        order_count = #{record.orderCount,jdbcType=INTEGER},
+        last_order_time = #{record.lastOrderTime,jdbcType=TIMESTAMP},
+        last_talk_time = #{record.lastTalkTime,jdbcType=TIMESTAMP},
+        recommend_id = #{record.recommendId,jdbcType=INTEGER},
+        channel = #{record.channel,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ShopMember">
+        update t_shop_member
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="headfaceUrl != null">
+                headface_url = #{headfaceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="countryId != null">
+                country_id = #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="countryName != null">
+                country_name = #{countryName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceName != null">
+                province_name = #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="cityName != null">
+                city_name = #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="wealth != null">
+                wealth = #{wealth,jdbcType=INTEGER},
+            </if>
+            <if test="point != null">
+                point = #{point,jdbcType=INTEGER},
+            </if>
+            <if test="subscribeTime != null">
+                subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unsubscribeTime != null">
+                unsubscribe_time = #{unsubscribeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="subscribeStatus != null">
+                subscribe_status = #{subscribeStatus,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shopMemberCardId != null">
+                shop_member_card_id = #{shopMemberCardId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="averagePrice != null">
+                average_price = #{averagePrice,jdbcType=DOUBLE},
+            </if>
+            <if test="orderCount != null">
+                order_count = #{orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="lastOrderTime != null">
+                last_order_time = #{lastOrderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTalkTime != null">
+                last_talk_time = #{lastTalkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="recommendId != null">
+                recommend_id = #{recommendId,jdbcType=INTEGER},
+            </if>
+            <if test="channel != null">
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ShopMember">
+    update t_shop_member
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      open_id = #{openId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      headface_url = #{headfaceUrl,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      country_id = #{countryId,jdbcType=INTEGER},
+      country_name = #{countryName,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      wealth = #{wealth,jdbcType=INTEGER},
+      point = #{point,jdbcType=INTEGER},
+      subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+      unsubscribe_time = #{unsubscribeTime,jdbcType=TIMESTAMP},
+      subscribe_status = #{subscribeStatus,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      shop_member_card_id = #{shopMemberCardId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      average_price = #{averagePrice,jdbcType=DOUBLE},
+      order_count = #{orderCount,jdbcType=INTEGER},
+      last_order_time = #{lastOrderTime,jdbcType=TIMESTAMP},
+      last_talk_time = #{lastTalkTime,jdbcType=TIMESTAMP},
+      recommend_id = #{recommendId,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

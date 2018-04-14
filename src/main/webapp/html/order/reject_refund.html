@@ -1,0 +1,35 @@
+<div class="modal-header">
+	<a class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+	<h3 class="title">维权处理</h3>
+</div>
+<div class="modal-body">
+	<div class="alert">
+		建议您与买家协商后，再确定是否拒绝退款。如您拒绝退款后，买家可修改退款申请协议重新发起退款。 也可直接发起维权申请，将会由云中邦客满介入处理。</div>
+	<div class="form-horizontal" style="margin: 0;">
+		<div class="control-group">
+			<div class="control-label">处理方式：</div>
+			<div class="controls">
+				<div class="control-action">{{orderSafe.safe_type_str}}</div>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="control-label">退款金额：</div>
+			<div class="controls">
+				<div class="control-action" style="color: #f60;">¥ {{orderSafe.refund_fee}}</div>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="control-label">拒绝理由：</div>
+			<div class="controls">
+				<textarea ng-model="reject_reason" class="span4" rows="3"
+					placeholder="请填写您的拒绝理由"></textarea>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="text-left" style="padding-left: 130px;">
+		<button class="ui-btn ui-btn-primary js-reject" style="width: 80px;" ng-click="rejectRefund()">拒绝</button>
+	</div>
+</div>
+

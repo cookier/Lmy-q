@@ -1,0 +1,64 @@
+<form class="form-horizontal" novalidate>
+    <div class="control-group">
+        <label class="control-label">背景图：</label>
+        <div class="controls">
+            <% if (image.url === '') { %>
+                <a class="js-choose-bg control-action" href="javascript: void(0);">选择背景图</a>
+            <% } else { %>
+                <img src="<%= fullfillImage(image.url) %>" width="100" height="100">
+                <a class="js-choose-bg control-action" href="javascript: void(0);">修改背景图</a>
+            <% } %>
+            <p class="help-desc">背景图推荐宽度 640 像素、高度 320 像素</p>
+        </div>
+    </div>
+    <div class="separate-line-wrap">
+        <hr>
+        <div class="separate-line">
+            <p class="text-center">显示等级的设置</p>
+            <p class="text-center">v</p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">等级：</label>
+        <div class="controls">
+            <label  class="i-checks i-checks-sm">
+                <% if (show_level == '0') { %>
+                    <input type="checkbox" name="show_level" value="0"><i></i>显示等级
+                <% } else { %>
+                    <input type="checkbox" name="show_level" value="1" checked><i></i>显示等级
+                <% } %>
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">等级提示：</label>
+        <div class="controls">
+            <input type="text" name="level_msg" value="<%- level_msg %>">
+        </div>
+    </div>
+    <div class="separate-line-wrap">
+        <hr>
+        <div class="separate-line">
+            <p class="text-center">显示积分的设置</p>
+            <p class="text-center">v</p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">积分：</label>
+        <div class="controls">
+            <label  class="i-checks i-checks-sm">
+                <% if (show_point == '0') { %>
+                    <input type="checkbox" name="show_point" value="0"><i></i>显示积分
+                <% } else { %>
+                    <input type="checkbox" name="show_point" value="1" checked><i></i>显示积分
+                <% } %>
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">积分提示：</label>
+        <div class="controls">
+            <input type="text" name="point_msg" value="<%- point_msg %>">
+        </div>
+    </div>
+</form>

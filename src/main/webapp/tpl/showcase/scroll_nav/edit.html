@@ -1,0 +1,87 @@
+<form class="form-horizontal custom-scroll edit-scroll-nav" novalidate style="padding: 0 10px; width: auto;">
+    <div class="control-group clearfix">
+        <label class="control-label" style="text-align: left; width: auto;">主页图标：</label>
+        <div class="controls pull-left" style="margin-left: 0;">
+            <label class="i-checks i-checks-sm">
+                <input type="checkbox" name="homepage_icon" <%= homepage_icon=='1' ? 'checked' : '' %>>
+               <i></i>显示店铺主页图标，用户点击后进入店铺主页
+            </label>
+        </div>
+    </div>
+
+    <div class="split-line"></div>
+    <div class="control-group control-group-block">
+        <label class="control-label">背景图片</label>
+        <div class="controls">
+            <p class="help-desc" style="margin-bottom: 20px;">尺寸要求：640*1010 像素；可以添加多张，每次打开页面时，系统随机选择一张</p>
+
+            <div class="background-images">
+                <% _.each(background_images, function(image, index) { %>
+                    <div class="image-box" data-index="<%= index %>">
+                        <img src="<%= fullfillImage(image.url, '!140x140+2x.jpg') %>" alt="">
+                        <span class="close-modal js-delete-backgorund-image" title="删除">×</span>
+                    </div>
+                <% }); %>
+            </div>
+
+            <a href="javascript:;" class="add-image js-add-background-image"><i class="icon-add"></i> 添加图片</a>
+            <input type="hidden" name="background_images">
+        </div>
+    </div>
+
+    <div class="split-line"></div>
+    <div class="control-group control-group-block">
+        <label class="control-label">前景导航</label>
+
+        <div class="controls">
+            <p class="help-desc" style="margin-bottom: 20px;">建议图片尺寸：800*230像素</p>
+
+            <div class="js-collection-region custom-scroll-page ">
+
+            </div>
+
+            <div class="js-options options" style="margin: 0;">
+                <a href="javascript:;" class="add-option js-add-module"><i class="icon-add"></i> 添加一个模块</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="split-line"></div>
+    <div class="control-group control-group-block">
+        <label class="control-label">前景导航样式</label>
+
+        <div class="controls nav-styles">
+            <label class="i-checks i-checks-sm">
+                <input name="nav_style" value="left" type="radio" <%= nav_style == 'left'? 'checked' : '' %>><i></i>向左倾斜
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input name="nav_style" value="normal" type="radio" <%= nav_style == 'normal'? 'checked' : '' %>><i></i>正常
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input name="nav_style" value="right" type="radio" <%= nav_style == 'right'? 'checked' : '' %>><i></i>向右倾斜
+            </label>
+        </div>
+    </div>
+
+    <div class="split-line"></div>
+    <div class="control-group control-group-block">
+        <label class="control-label">前景显现动画</label>
+
+        <div class="controls">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="animate" value="zoom" <%= animate == 'zoom' ? 'checked' : '' %>><i></i>正常
+            </label>
+            <select class="span2" name="zoom_type" style="margin-right: 40px;">
+                <option value="zoom_out" <%= zoom_type == 'zoom_out' ? 'selected' : '' %>>缩小渐现</option>
+                <option value="zoom_in" <%= zoom_type == 'zoom_in' ? 'selected' : '' %>>放大渐现</option>
+            </select>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="animate" value="slide" <% if(animate == 'slide') { %>checked<% }%>><i></i>滑入
+            </label>
+            <select class="span2" name="slide_type">
+                <option value="slide_left" <%= slide_type == 'slide_left' ? 'selected' : '' %>>从左侧滑入</option>
+                <option value="slide_right" <%= slide_type == 'slide_right' ? 'selected' : '' %>>从右侧滑入</option>
+            </select>
+        </div>
+    </div>
+</form>

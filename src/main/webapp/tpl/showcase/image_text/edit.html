@@ -1,0 +1,38 @@
+<form class="form-horizontal" novalidate>
+    <div class="control-group">
+        <label>标题</label>
+        <input type="text" name="title" ng-model="curItem.title" data-error-style="block">
+    </div>
+    <div class="control-group">
+        <label>作者<span class="label-desc">（选填）</span></label>
+        <input type="text" name="author" ng-model="curItem.author" data-error-style="block">
+    </div>
+    <div class="control-group image-region js-image-region">
+        <label>封面<span class="label-desc">（图片建议尺寸：900 x 500像素）</span></label>
+        <p>
+        <img ng-show="curItem.image" ng-src="{{curItem.image}}" width="100" height="100"/>
+        </p>
+        <p>
+        <a ng-show="curItem.image" class="js-add-image control-action" href="javascript:;" ng-click="setImage()">重新选择</a>
+        <a ng-show="!curItem.image" class="js-add-image control-action" href="javascript:;" ng-click="setImage()">添加图片...</a>
+        </p>
+        <input type="hidden" name="image" data-error-style="block">
+    </div>
+    <div class="control-group">
+        <label class="checkbox">
+            <input type="checkbox" name="show_image" ng-model="curItem.show_image"  ng-true-value="1" ng-false-value="0"  ng-checked="curItem.show_image==1">封面图片显示在正文中
+        </label>
+    </div>
+    <div class="control-group digest">
+        <label>摘要</label>
+        <textarea name="digest" cols="30" rows="3" data-error-style="block" ng-model="curItem.digest"></textarea>
+    </div>
+    <div class="control-group">
+        <label>正文</label>
+        <div class="js-editor" text-angular ng-model="curItem.content"></div>
+    </div>
+    <div class="control-group js-link-region">
+        <label>阅读原文</label>
+        <ui-setup-link link_id="curItem.link_id"  link_url="curItem.link_url" link_title="curItem.link_title" link_type="curItem.link_type"></ui-setup-link>
+    </div>
+</form>

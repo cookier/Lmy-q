@@ -1,0 +1,343 @@
+<link rel="stylesheet" href="css/order.css" type="text/css">
+
+<div class="app-init-container" ng-controller="OrderListController">
+  <div class="app__content js-app-main">
+    <div class="widget-list">
+      <div class="js-list-filter-region clearfix">
+        <div class="widget-list-filter">
+          <form class="form-horizontal ui-box list-filter-form"
+                onsubmit="return false;">
+            <div class="clearfix" ng-enter='pageChanged()'>
+              <div class="filter-groups">
+                <div class="control-group">
+                  <label class="control-label">订单号：</label>
+                  <div class="controls">
+                    <input type="text" name="order_no" value="" placeholder="请输入订单号!" style="height: 30px;"
+                           ng-model="order.order_no">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">订单状态：</label>
+                  <div class="controls">
+                    <select name="state" class="js-state-select" style="height: 30px;"
+                            ng-model="order.order_status"
+                            ng-options="f.value as f.name for f in orderStatus">
+                      <option value="">全部</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">维权状态：</label>
+                  <div class="controls">
+                    <select name="feedback" ng-model="order.refund_status" style="height: 30px;width: 200px;"
+                            ng-options="f.value as f.name for f in refundStatus">
+                      <option value="">全部</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">商品：</label>
+                  <div class="controls">
+                    <input type="text" name="goods" value="" placeholder="请输入商品名称或者商品编码!" style="width: 200px;height: 30px;"
+                           ng-model="order.goods">
+                  </div>
+                </div>
+              </div>
+              <div class="pull-left">
+                <div class="time-filter-groups clearfix">
+                  <div class="control-group">
+                    <label class="control-label">时间范围：</label>
+                    <div class="controls">
+                      <select ng-model="order.time_type" style="height: 30px; width:100px;">
+                        <option value="create_time">下单时间</option>
+                        <option value="receive_time">收货时间</option>
+                        <option value="success_time">完成时间</option>
+                      </select>
+                      <input type="text" id="beginCreateTime" ng-model="order.beginCreateTime"
+                             date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                             class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                      <input type="text" id="endCreateTime" ng-model="order.endCreateTime"
+                             date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                             class="Wdate" style="width: 150px; height: 30px;"> <span
+                            class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                      <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div style='float:left;'>
+                      <label class="control-label">物流方式：</label>
+                      <div class="controls">
+                        <select name="sendType" ng-model="order.send_type" style="height: 30px;width: 200px;">
+                          <option value="">全部</option>
+                          <option value="1">快递</option>
+                          <option value="2">自提</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style='float:left;'>
+                      <label class="control-label">支付方式：</label>
+                      <div class="controls">
+                        <select name="payType" ng-model="order.pay_type" style="height: 30px;width: 200px;">
+                          <option value="">全部</option>
+                          <option value="1">微信</option>
+                          <option value="2">支付宝</option>
+                          <option value="4">余额</option>
+                          <option value="5">余额微信混合</option>
+                          <option value="6">余额支付宝混合</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div style='float:left;'>
+                      <label class="control-label">供应商：</label>
+                      <div class="controls">
+                        <input type="text" name="supplier" value="" placeholder="请输入商家店铺名称!" style="width: 200px;height: 30px;"
+                               ng-model="order.supplier">
+                      </div>
+                    </div>
+
+                    <div style='float:left;'>
+                      <label class="control-label">分销商：</label>
+                      <div class="controls">
+                        <input type="text" name="distributor" value="" placeholder="请输入分销商昵称或者手机号!" style="width: 200px;height: 30px;"
+                               ng-model="order.distributor">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div style='float:left;'>
+                      <label class="control-label">买家：</label>
+                      <div class="controls">
+                        <input type="text" name="buyer" value="" placeholder="请输入买家手机号或者昵称!" style="width: 200px;height: 30px;" ng-model="order.buyer">
+                      </div>
+                    </div>
+                    <div style='float:left;'>
+                      <div class="control-group">
+                        <label class="control-label">收货人：</label>
+                        <div class="controls">
+                          <input type="text" name="receiver" value="" placeholder="请输入收货人姓名或者手机号!" style="width: 200px;height: 30px;"
+                                 ng-model="order.receiver">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <div class="ui-btn-group">
+                  <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                     data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                  <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                     data-loading-text="正在筛选..." ng-click="exportOrderData()">导出查询结果</a>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="ui-nav clearfix">
+            <div class="common-helps-entry pull-right hide">
+              <a href="#" target="_blank"> <span class="help-icon"></span>
+                订单类型简介及管理方法
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="ui-box">
+        <table class="ui-table-order" style="padding: 0px;">
+          <thead class="js-list-header-region tableFloatingHeaderOriginal">
+          <tr class="widget-list-header">
+            <th class="" colspan="2">商品</th>
+            <th width='100px' class='text-right'>单价(元)/数量</th>
+            <th width='80px'>售后</th>
+            <th width='140px' class='text-center'>买家</th>
+            <th width='90px' class='text-center'>分销商</th>
+            <th width='90px' class='text-center'>供应商</th>
+            <th width='170px' class='text-center'>下单/收货/完成时间</th>
+            <!-- <th width='90px'>收货时间</th>
+            <th width='90px'>完成时间</th> -->
+            <th width='80px'>订单状态</th>
+            <th width='120px'>订单金额(元)</th>
+          </tr>
+          </thead>
+          <tbody class="widget-list-item" ng-repeat="data in pageData.list">
+          <tr class="separation-row">
+            <td colspan="10"></td>
+          </tr>
+          <tr class="header-row">
+            <td colspan="6">
+              <div>订单号: {{data.order_no}}</div>
+              <div class="clearfix"></div>
+            </td>
+            <td colspan="7" class="text-right">
+              <div class="order-opts-container">
+                <div class="js-memo-star-container memo-star-container">
+                  <div class="opts">
+                    <div class="td-cont message-opts">
+                      <div class="m-opts">
+                        <a ui-sref="console.order_detail({orderId:{{data.id}}})"
+                           class="js-order-detail new-window">查看详情</a>
+                        <a ng-show="(data.order_status==1||data.order_status==2)&&data.order_type==1&&data.pay_type!=5&&data.pay_type!=6" ng-click="pop={cMP_show:true}" id="console{{$index}}"
+                           class="js-order-detail new-window">关闭订单</a>
+                        <dialog for="console{{$index}}" ng-if="pop.cMP_show==true" align="left" close="pop.cMP_show=false" close-action="outerchick">
+                          <div dialog-content>
+                            <div style="width: auto; padding: 5px">
+                              <div class="inner__content">
+                                <a class="ui-btn ui-btn-primary js-save"
+                                   ng-click="closeOrder(data.id)">直接关闭</a>
+                                <a ng-if="data.order_status==2" class="ui-btn js-cancel" ng-click="directRefund(data.id)">关闭并退款</a>
+                              </div>
+                            </div>
+                          </div>
+                        </dialog>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="content-row" ng-repeat="item in data.items">
+            <td width='80px'>
+              <img src="{{item.image_url}}-60" onerror="this.src='./img/404.jpg'" width='60px' height='60px'>
+            </td>
+            <td>
+              <p class="goods-title">
+                <a href="{{item.goods_url}}" target="_blank"
+                   title="{{item.goods_title}}"> {{item.goods_title}} </a>
+              </p>
+              <p ng-repeat="sku in item.sku |split:',' track by $index">
+                <span ng-if="$index==0&&sku.length>0">{{sku}}:{{item.s1}}</span>
+                <span ng-if="$index==1&&sku.length>0">{{sku}}:{{item.s2}}</span>
+                <span ng-if="$index==2&&sku.length>0">{{sku}}:{{item.s3}}</span>
+              </p>
+              <p>商家编码：<span ng-if="item.sku_code!='' && item.sku_code.indexOf('null')<0">{{item.sku_code}}</span></p>
+
+            </td>
+            <td class='text-right' class='td-border-left'>
+              <!-- <p>{{item.price}}</p> -->
+              <p style="color:red;">进货价：{{item.fx_price}}</p>
+              <p style="color:red;">单价：{{item.pay_price}}</p>
+              <p>({{item.num}}件)</p>
+            </td>
+            <td><a
+                    ui-sref="console.order_refund({itemId:item.id,orderId:data.id})"
+                    class="new-window" ng-show="item.item_status==6"> 买家发起维权
+            </a> <a ui-sref="console.order_refund({itemId:item.id,orderId:data.id})"
+                    class="new-window" ng-show="item.item_status==8"> 卖家拒绝维权
+            </a> <a ui-sref="console.order_refund({itemId:item.id,orderId:data.id})"
+                    class="new-window" ng-show="item.item_status==7">维权结束 </a>
+            </td>
+            <td class='td-border-left' ng-if="$index==0" rowspan="{{data.items.length}}">
+              <p class="user-name" ng-if="data.buyer&&data.buyer.nickname!=''">买家:{{data.buyer.nickname}}</p>
+              <p class="user-name" ng-if="data.buyer.mobile!=''">买家手机: {{data.buyer.mobile}}</p>
+              <p class="user-name">收货人: {{data.receiver}}</p>
+              <p class="user-name">收货人手机: {{data.receiver_mobile}}</p>
+            </td>
+            <td class='td-border-left' ng-if="$index==0" rowspan="{{data.items.length}}">
+              <p class="user-name"><a target="_blank" href="{{data.proxyShop.url}}">{{data.proxyShop.shop_name}}</a></p>
+              <p class="user-name">{{data.proxyShop.contact_mobile}}</p>
+            </td>
+            <td class='td-border-left' ng-if="$index==0&&type==1" rowspan="{{data.items.length}}">
+              <div ng-repeat="ss in data.supplierShop">
+                <p class="user-name">{{ss.shop_name}}</p>
+                <p class="user-name">{{ss.contact_mobile}}</p>
+              </div>
+            </td>
+            <td class='td-border-left' ng-if="$index==0&&type==2" rowspan="{{data.items.length}}">
+              <p class="user-name">{{data.supplierShop.shop_name}}</p>
+              <p class="user-name">{{data.supplierShop.contact_mobile}}</p>
+            </td>
+
+            <td class='td-border-left' ng-if="$index==0" rowspan="{{data.items.length}}">
+              <p>下单: {{data.create_time}}</p>
+              <p ng-show="data.receive_time!=undefined">收货: {{data.receive_time}}</p>
+              <p ng-show="data.success_time!=undefined">完成: {{data.success_time}}</p>
+            </td>
+            <!-- 	<td ng-if="$index==0" rowspan="{{data.items.length}}">
+                <div class="td-cont">{{data.receive_time}}</div>
+              </td>
+              <td ng-if="$index==0" rowspan="{{data.items.length}}">
+                <div class="td-cont">{{data.success_time}}</div>
+              </td> -->
+            <td class='td-border-left' ng-if="$index==0" rowspan="{{data.items.length}}">
+              <div class="td-cont">
+                <p class="js-order-state">{{data.order_status_name}}</p>
+                <p>
+                  <input type="button" value="介入维权"
+                         ng-show="data.order_status==6&&item.orderSafeStatus==7"
+                         ng-click="serviceIntervene('{{item.id}}','{{data.id}}')">
+                </p>
+              </div>
+            </td>
+            <td class='td-border-left' ng-if="$index==0" rowspan="{{data.items.length}}">
+              <div class="td-cont text-left">
+                <div>
+                  <p ng-show="data.total_money>0">总 &nbsp;金 &nbsp;额：{{data.total_money}}</p>
+                  <p id="follow-elem{{data.id}}" ng-show="data.discount_money>0" ng-mouseenter="data.open=true" ng-mouseleave="data.open=false" title="bottom rigth" style="color:#0000FF">优惠金额：-{{data.discount_money}}</p>
+                  <dialog ng-show="data.open" for="follow-elem{{data.id}}" align="bottom">
+                    <i dialog-content>
+                      <i ng-show="data.discount_info.length>0">
+                        <i ng-repeat="coupons in data.discount_info">
+                          <i ng-show="coupons.scope=='supplier'">
+                            供应商：<br>
+                            <i ng-repeat="coupon in coupons.items">
+                              {{coupon.coupon_name}}<br>
+                            </i>
+                          </i>
+                          <i ng-show="coupons.scope=='shop'">
+                            店铺：<br>
+                            <i ng-repeat="coupon in coupons.items">
+                              {{coupon.coupon_name}}<br>
+                            </i>
+                          </i>
+                          <i ng-show="coupons.scope=='platform'">
+                            平台：<br>
+                            <i ng-repeat="coupon in coupons.items">
+                              {{coupon.coupon_name}}<br>
+                            </i>
+                          </i>
+                        </i>
+                      </i>
+                    </i>
+                  </dialog>
+                  <p ng-show="data.postage>0">运 &nbsp; &nbsp;&nbsp; &nbsp; 费：{{data.postage}}</p>
+                  <p>应付金额：{{data.need_pay_money}}</p>
+                  <p ng-show="data.real_pay_money>0">实付金额：{{data.real_pay_money}}</p>
+                  <p ng-if="data.pay_type!=undefined&&data.pay_type!=''">付款方式：
+                    <span ng-if="data.pay_type==1">微信</span>
+                    <span ng-if="data.pay_type==2">支付宝</span>
+                  </p>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="remark-row">
+            <td colspan="13">买家备注： {{data.message}}</td>
+          </tr>
+          <tr class="remark-row">
+            <td colspan="13">卖家备注： {{data.remark}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="js-list-empty-region"></div>
+      </div>
+      <div class="js-list-footer-region ui-box">
+        <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+          <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                             total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                             page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                             previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                             last-text="&raquo;"></custom-pagination>
+        </div>
+        <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+             style="text-align: center;">没有找到相关记录!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

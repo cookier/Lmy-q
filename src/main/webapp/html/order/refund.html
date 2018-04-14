@@ -1,0 +1,190 @@
+<!-- 买家退款处理页面 -->
+<link rel="stylesheet" href="css/order_detail.css" type="text/css">
+
+<div class="app-init-container" ng-controller="OrderRefundController">
+	<div id="js-react-container" class="app__content">
+		<div class="page-trade-order-detail">
+			<div class="step-region">
+				<ul class="ui-step ui-step-4">
+					<li class="ui-step-done"><div class="ui-step-title">买家申请维权</div>
+						<div class="ui-step-number">1</div>
+						<div class="ui-step-meta">{{orderSafe.create_time}}</div></li>
+					<li class="{{orderSafe.status>=1?'ui-step-done':''}}"><div class="ui-step-title">商家处理退款申请</div>
+						<div class="ui-step-number">2</div>
+						<div class="ui-step-meta">{{orderSafe.update_time}}</div></li>
+					<li class="{{orderSafe.status>=3?'ui-step-done':''}}" ng-show="orderLogisticses.length>0"><div class="ui-step-title">买家退货给商家</div>
+						<div class="ui-step-number">3</div>
+						<div class="ui-step-meta"></div></li>
+					<li class="{{orderSafe.status==5?'ui-step-done':''}}"><div class="ui-step-title">退款完成</div>
+						<div class="ui-step-number"><span ng-show="orderLogisticses.length>0">4</span><span ng-show="order.order_status==2">3</span></div>
+						<div class="ui-step-meta">{{orderSafe.update_time}}</div></li>
+				</ul>
+			</div>
+			<div class="content-region clearfix">
+				<div class="info-region" style="padding: 15px;">
+					<h3>售后维权</h3>
+					<div>
+						<div class="info-goods">
+							<div class="ui-centered-image"
+								src="https://dn-kdt-img.qbox.me/upload_files/2015/10/12/f02a2ca175b644b8de6d8487ea36f984.jpg?imageView2/2/w/120/h/120/q/75/format/webp">
+								<img src="{{orderItem.image_url}}">
+							</div>
+							<div class="info-goods-content">
+								<div>{{orderItem.title}}</div>
+								<div></div>
+							</div>
+						</div>
+						<div class="dashed-line"></div>
+					</div>
+					<table class="info-table">
+						<tbody>
+							<tr>
+								<td>期望结果：</td>
+								<td><span class="color-orange">{{orderSafe.safe_type_str}}</span></td>
+							</tr>
+							<tr>
+								<td>退款金额：</td>
+								<td>
+									<span class="color-orange" >
+									{{type=='proxy'?orderSafe.refund_fee:orderSafe.supplier_refund_fee}}
+									</span>
+									<span>元 </span>
+									<!--<span><span>(含运费</span><span>{{orderSafe.postage}}</span><span>元)</span></span>
+								--></td>
+							</tr>
+							<tr>
+								<td>维权原因：</td>
+								<td>{{orderSafe.safe_reason_str}}</td>
+							</tr>
+							<tr>
+								<td>维权编号：</td>
+								<td>{{orderSafe.safe_no}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="dashed-line"></div>
+					<table class="info-table">
+						<tbody>
+							<tr>
+								<td>订单编号：</td>
+								<td><a href="#detail">{{order.order_no}}</a></td>
+							</tr>
+							<tr>
+								<td>付款时间：</td>
+								<td>{{order.pay_time}}</td>
+							</tr>
+							<tr>
+								<td>买 家：</td>
+								<td><span>{{order.receiver}}</span></td>
+							</tr>
+							<!--<tr>
+								<td>物流信息：</td>
+								<td><div>
+										<span>{{orderItem.express_name}}</span><span> </span><span>{{orderItem.express_no}}</span>
+										<a href="javascript:;"> 查看</a>
+									</div></td>
+							</tr>
+							--><tr>
+								<td>运 费：</td>
+								<td><span>{{order.postage}}</span><span> 元</span></td>
+							</tr>
+							<tr>
+								<td>合计优惠：</td>
+								<td><span>{{order.discount_money}}</span><span>
+										元</span></td>
+							</tr>
+							<tr>
+								<td>实收总计：</td>
+								<td><span class="color-orange">{{order.real_pay_money}}</span><span>
+										元</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="state-region">
+					<div style="padding: 0px 0 30px 40px;">
+						<h3 class="state-title">
+							<span class="icon info">!</span><span>{{orderSafe.status_str}}</span>
+						</h3>
+						<!-- <div class="state-action" ng-show="orderSafe.status==1">
+							<button class="ui-btn ui-btn-primary" ng-click="directRefund()" ng-show="order.order_status==2">同意退款</button>
+							<button class="ui-btn ui-btn-primary" ng-click="agreeRefund()" ng-show="order.order_status!=2">同意退货，发送退货地址</button>
+							<button class="ui-btn" ng-click="rejectRefund()" ng-show="order.order_status!=2">拒绝退款申请</button>
+						</div> -->
+						
+						<div class="state-action" ng-show="orderSafe.status==7">
+							<button class="ui-btn ui-btn-primary" ng-click="directRefund()">同意退款</button>
+							<button class="ui-btn" ng-click="rejectRefund()">拒绝退款</button>
+							<button class="ui-btn" ng-click="confimReceiver()">确认收货</button>
+						</div>
+						
+						<div>
+							<div class="dashed-line"></div>
+							<div class="state-remind" style="text-align: left;">
+								<h4>提醒：</h4>
+								<ul>
+									<li>如果同意申请，请发送正确退货地址给买家。</li>
+									<li>如果拒绝申请，买家有权要求云中邦客服介入处理。</li>
+									<li>如果您逾期未处理，视作同意买家申请，系统自动将您的默认退货地址发给买家。</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="safeguard-log">
+				<h3>协商记录</h3>
+				<span class="send-comments pull-right" ng-show="orderSafe.status!=4"><a ng-click="addMessage()">点击发表留言</a></span>
+				<div id="div-message" class="form-horizontal" style="display: none;">
+					<div class="control-group">
+						<div class="controls message-editor">
+							<div class="reply-dialog">
+								<textarea class="transparent-txta" cols="30" rows="1" ng-model="message"
+									placeholder="您可以在这里给买家留言，为了保证您的权益，请尽可能详细的上传留言资料。"></textarea>
+								<!-- <div class="inputer-actions">
+									<span><span>大约还可输入</span><i>300</i><span>字</span></span>
+								</div> -->
+								<div class="actions">
+									<button class="ui-btn ui-btn-primary postComment" style="outline: 0;" ng-click="saveMessage()">发表留言</button>
+								</div>
+								<div class="images">
+									<div style="display: inline-block;">
+										<ul class="js-picture-list app-image-list clearfix">
+											<li ng-repeat="pic in pics">
+											    <img src="{{pic.thumb_url}}">
+											    <a class="js-delete-picture close-modal small" ng-click="delPic(pic)">×</a>
+											</li>
+									   </ul>
+									</div>
+									<div style="display: inline-block;" class="image">
+										<span class="add-image" ng-click="addPic()">+</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<table>
+					<tbody ng-repeat="item in orderSafeLogs">
+						<tr class="tr-title">
+							<td>{{item.explain_detail.who}}</td>
+							<td class="td-time">{{item.create_time}}</td>
+						</tr>
+						<tr>
+							<td colspan="2">{{item.explain_detail.handStatus}}</td>
+						</tr>
+						<tr ng-repeat="e in item.explain_detail.detail">
+							<td class="td-meta"><span>{{e.title}}</span><span>：</span></td>
+							<td ng-if="e.title!='图片'">{{e.value}}</td>
+							<td ng-if="e.title=='图片'">
+								<div class="ui-centered-image" ng-repeat="p in e.value">
+									<img src="{{p.thumb_url}}"/>
+								</div> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

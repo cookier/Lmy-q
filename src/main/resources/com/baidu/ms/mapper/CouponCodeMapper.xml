@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.CouponCodeMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.CouponCode">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="order_limit_flag" jdbcType="INTEGER" property="orderLimitFlag"/>
+        <result column="order_money_limit" jdbcType="DOUBLE" property="orderMoneyLimit"/>
+        <result column="background_name" jdbcType="VARCHAR" property="backgroundName"/>
+        <result column="background_value" jdbcType="VARCHAR" property="backgroundValue"/>
+        <result column="can_attorn" jdbcType="INTEGER" property="canAttorn"/>
+        <result column="code_no" jdbcType="VARCHAR" property="codeNo"/>
+        <result column="code_type" jdbcType="INTEGER" property="codeType"/>
+        <result column="card_no" jdbcType="VARCHAR" property="cardNo"/>
+        <result column="use_condition" jdbcType="VARCHAR" property="useCondition"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="use_instructions" jdbcType="VARCHAR" property="useInstructions"/>
+        <result column="valid_time" jdbcType="TIMESTAMP" property="validTime"/>
+        <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime"/>
+        <result column="expire_flag" jdbcType="INTEGER" property="expireFlag"/>
+        <result column="extend_setting" jdbcType="INTEGER" property="extendSetting"/>
+        <result column="sync_wechat_flag" jdbcType="INTEGER" property="syncWechatFlag"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="each_one_limit_count" jdbcType="INTEGER" property="eachOneLimitCount"/>
+        <result column="use_range" jdbcType="INTEGER" property="useRange"/>
+        <result column="used_by_fullrates" jdbcType="INTEGER" property="usedByFullrates"/>
+        <result column="service_phone" jdbcType="VARCHAR" property="servicePhone"/>
+        <result column="issue_quantity" jdbcType="INTEGER" property="issueQuantity"/>
+        <result column="can_receive_quantity" jdbcType="INTEGER" property="canReceiveQuantity"/>
+        <result column="received_people_count" jdbcType="INTEGER" property="receivedPeopleCount"/>
+        <result column="used_count" jdbcType="INTEGER" property="usedCount"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="coupon_url" jdbcType="VARCHAR" property="couponUrl"/>
+        <result column="vip_level_limit" jdbcType="INTEGER" property="vipLevelLimit"/>
+        <result column="vip_level_name" jdbcType="VARCHAR" property="vipLevelName"/>
+        <result column="amount" jdbcType="DOUBLE" property="amount"/>
+        <result column="wechat_card_notice_content" jdbcType="VARCHAR" property="wechatCardNoticeContent"/>
+        <result column="wechat_card_title" jdbcType="VARCHAR" property="wechatCardTitle"/>
+        <result column="wechat_card_sub_title" jdbcType="VARCHAR" property="wechatCardSubTitle"/>
+        <result column="invalid_status" jdbcType="INTEGER" property="invalidStatus"/>
+        <result column="source" jdbcType="SMALLINT" property="source"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.CouponCodeWithBLOBs">
+        <result column="vip_label" jdbcType="LONGVARCHAR" property="vipLabel"/>
+        <result column="range_goods" jdbcType="LONGVARCHAR" property="rangeGoods"/>
+        <result column="extr_content" jdbcType="LONGVARCHAR" property="extrContent"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, order_limit_flag, order_money_limit, background_name, background_value, 
+    can_attorn, code_no, code_type, card_no, use_condition, type, create_time, use_instructions, 
+    valid_time, expire_time, expire_flag, extend_setting, sync_wechat_flag, name, each_one_limit_count, 
+    use_range, used_by_fullrates, service_phone, issue_quantity, can_receive_quantity, 
+    received_people_count, used_count, update_time, coupon_url, vip_level_limit, vip_level_name, 
+    amount, wechat_card_notice_content, wechat_card_title, wechat_card_sub_title, invalid_status, 
+    source
+  </sql>
+    <sql id="Blob_Column_List">
+    vip_label, range_goods, extr_content
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.CouponCodeExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_coupon_code
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.CouponCodeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_coupon_code
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_coupon_code
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_coupon_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.CouponCodeExample">
+        delete from t_coupon_code
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.CouponCodeWithBLOBs">
+    insert into t_coupon_code (id, shop_id, order_limit_flag, 
+      order_money_limit, background_name, background_value, 
+      can_attorn, code_no, code_type, 
+      card_no, use_condition, type, 
+      create_time, use_instructions, valid_time, 
+      expire_time, expire_flag, extend_setting, 
+      sync_wechat_flag, name, each_one_limit_count, 
+      use_range, used_by_fullrates, service_phone, 
+      issue_quantity, can_receive_quantity, received_people_count, 
+      used_count, update_time, coupon_url, 
+      vip_level_limit, vip_level_name, amount, 
+      wechat_card_notice_content, wechat_card_title, 
+      wechat_card_sub_title, invalid_status, source, 
+      vip_label, range_goods, extr_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{orderLimitFlag,jdbcType=INTEGER}, 
+      #{orderMoneyLimit,jdbcType=DOUBLE}, #{backgroundName,jdbcType=VARCHAR}, #{backgroundValue,jdbcType=VARCHAR}, 
+      #{canAttorn,jdbcType=INTEGER}, #{codeNo,jdbcType=VARCHAR}, #{codeType,jdbcType=INTEGER}, 
+      #{cardNo,jdbcType=VARCHAR}, #{useCondition,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{useInstructions,jdbcType=VARCHAR}, #{validTime,jdbcType=TIMESTAMP}, 
+      #{expireTime,jdbcType=TIMESTAMP}, #{expireFlag,jdbcType=INTEGER}, #{extendSetting,jdbcType=INTEGER}, 
+      #{syncWechatFlag,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{eachOneLimitCount,jdbcType=INTEGER}, 
+      #{useRange,jdbcType=INTEGER}, #{usedByFullrates,jdbcType=INTEGER}, #{servicePhone,jdbcType=VARCHAR}, 
+      #{issueQuantity,jdbcType=INTEGER}, #{canReceiveQuantity,jdbcType=INTEGER}, #{receivedPeopleCount,jdbcType=INTEGER}, 
+      #{usedCount,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{couponUrl,jdbcType=VARCHAR}, 
+      #{vipLevelLimit,jdbcType=INTEGER}, #{vipLevelName,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, 
+      #{wechatCardNoticeContent,jdbcType=VARCHAR}, #{wechatCardTitle,jdbcType=VARCHAR}, 
+      #{wechatCardSubTitle,jdbcType=VARCHAR}, #{invalidStatus,jdbcType=INTEGER}, #{source,jdbcType=SMALLINT}, 
+      #{vipLabel,jdbcType=LONGVARCHAR}, #{rangeGoods,jdbcType=LONGVARCHAR}, #{extrContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.CouponCodeWithBLOBs">
+        insert into t_coupon_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="orderLimitFlag != null">
+                order_limit_flag,
+            </if>
+            <if test="orderMoneyLimit != null">
+                order_money_limit,
+            </if>
+            <if test="backgroundName != null">
+                background_name,
+            </if>
+            <if test="backgroundValue != null">
+                background_value,
+            </if>
+            <if test="canAttorn != null">
+                can_attorn,
+            </if>
+            <if test="codeNo != null">
+                code_no,
+            </if>
+            <if test="codeType != null">
+                code_type,
+            </if>
+            <if test="cardNo != null">
+                card_no,
+            </if>
+            <if test="useCondition != null">
+                use_condition,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="useInstructions != null">
+                use_instructions,
+            </if>
+            <if test="validTime != null">
+                valid_time,
+            </if>
+            <if test="expireTime != null">
+                expire_time,
+            </if>
+            <if test="expireFlag != null">
+                expire_flag,
+            </if>
+            <if test="extendSetting != null">
+                extend_setting,
+            </if>
+            <if test="syncWechatFlag != null">
+                sync_wechat_flag,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="eachOneLimitCount != null">
+                each_one_limit_count,
+            </if>
+            <if test="useRange != null">
+                use_range,
+            </if>
+            <if test="usedByFullrates != null">
+                used_by_fullrates,
+            </if>
+            <if test="servicePhone != null">
+                service_phone,
+            </if>
+            <if test="issueQuantity != null">
+                issue_quantity,
+            </if>
+            <if test="canReceiveQuantity != null">
+                can_receive_quantity,
+            </if>
+            <if test="receivedPeopleCount != null">
+                received_people_count,
+            </if>
+            <if test="usedCount != null">
+                used_count,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="couponUrl != null">
+                coupon_url,
+            </if>
+            <if test="vipLevelLimit != null">
+                vip_level_limit,
+            </if>
+            <if test="vipLevelName != null">
+                vip_level_name,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="wechatCardNoticeContent != null">
+                wechat_card_notice_content,
+            </if>
+            <if test="wechatCardTitle != null">
+                wechat_card_title,
+            </if>
+            <if test="wechatCardSubTitle != null">
+                wechat_card_sub_title,
+            </if>
+            <if test="invalidStatus != null">
+                invalid_status,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="vipLabel != null">
+                vip_label,
+            </if>
+            <if test="rangeGoods != null">
+                range_goods,
+            </if>
+            <if test="extrContent != null">
+                extr_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="orderLimitFlag != null">
+                #{orderLimitFlag,jdbcType=INTEGER},
+            </if>
+            <if test="orderMoneyLimit != null">
+                #{orderMoneyLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="backgroundName != null">
+                #{backgroundName,jdbcType=VARCHAR},
+            </if>
+            <if test="backgroundValue != null">
+                #{backgroundValue,jdbcType=VARCHAR},
+            </if>
+            <if test="canAttorn != null">
+                #{canAttorn,jdbcType=INTEGER},
+            </if>
+            <if test="codeNo != null">
+                #{codeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="codeType != null">
+                #{codeType,jdbcType=INTEGER},
+            </if>
+            <if test="cardNo != null">
+                #{cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="useCondition != null">
+                #{useCondition,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="useInstructions != null">
+                #{useInstructions,jdbcType=VARCHAR},
+            </if>
+            <if test="validTime != null">
+                #{validTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireFlag != null">
+                #{expireFlag,jdbcType=INTEGER},
+            </if>
+            <if test="extendSetting != null">
+                #{extendSetting,jdbcType=INTEGER},
+            </if>
+            <if test="syncWechatFlag != null">
+                #{syncWechatFlag,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="eachOneLimitCount != null">
+                #{eachOneLimitCount,jdbcType=INTEGER},
+            </if>
+            <if test="useRange != null">
+                #{useRange,jdbcType=INTEGER},
+            </if>
+            <if test="usedByFullrates != null">
+                #{usedByFullrates,jdbcType=INTEGER},
+            </if>
+            <if test="servicePhone != null">
+                #{servicePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="issueQuantity != null">
+                #{issueQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="canReceiveQuantity != null">
+                #{canReceiveQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="receivedPeopleCount != null">
+                #{receivedPeopleCount,jdbcType=INTEGER},
+            </if>
+            <if test="usedCount != null">
+                #{usedCount,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="couponUrl != null">
+                #{couponUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="vipLevelLimit != null">
+                #{vipLevelLimit,jdbcType=INTEGER},
+            </if>
+            <if test="vipLevelName != null">
+                #{vipLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="wechatCardNoticeContent != null">
+                #{wechatCardNoticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatCardTitle != null">
+                #{wechatCardTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatCardSubTitle != null">
+                #{wechatCardSubTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="invalidStatus != null">
+                #{invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=SMALLINT},
+            </if>
+            <if test="vipLabel != null">
+                #{vipLabel,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="rangeGoods != null">
+                #{rangeGoods,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="extrContent != null">
+                #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.CouponCodeExample" resultType="java.lang.Long">
+        select count(*) from t_coupon_code
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_coupon_code
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderLimitFlag != null">
+                order_limit_flag = #{record.orderLimitFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderMoneyLimit != null">
+                order_money_limit = #{record.orderMoneyLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="record.backgroundName != null">
+                background_name = #{record.backgroundName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.backgroundValue != null">
+                background_value = #{record.backgroundValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.canAttorn != null">
+                can_attorn = #{record.canAttorn,jdbcType=INTEGER},
+            </if>
+            <if test="record.codeNo != null">
+                code_no = #{record.codeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.codeType != null">
+                code_type = #{record.codeType,jdbcType=INTEGER},
+            </if>
+            <if test="record.cardNo != null">
+                card_no = #{record.cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.useCondition != null">
+                use_condition = #{record.useCondition,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.useInstructions != null">
+                use_instructions = #{record.useInstructions,jdbcType=VARCHAR},
+            </if>
+            <if test="record.validTime != null">
+                valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.expireTime != null">
+                expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.expireFlag != null">
+                expire_flag = #{record.expireFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.extendSetting != null">
+                extend_setting = #{record.extendSetting,jdbcType=INTEGER},
+            </if>
+            <if test="record.syncWechatFlag != null">
+                sync_wechat_flag = #{record.syncWechatFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eachOneLimitCount != null">
+                each_one_limit_count = #{record.eachOneLimitCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.useRange != null">
+                use_range = #{record.useRange,jdbcType=INTEGER},
+            </if>
+            <if test="record.usedByFullrates != null">
+                used_by_fullrates = #{record.usedByFullrates,jdbcType=INTEGER},
+            </if>
+            <if test="record.servicePhone != null">
+                service_phone = #{record.servicePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.issueQuantity != null">
+                issue_quantity = #{record.issueQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="record.canReceiveQuantity != null">
+                can_receive_quantity = #{record.canReceiveQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="record.receivedPeopleCount != null">
+                received_people_count = #{record.receivedPeopleCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.usedCount != null">
+                used_count = #{record.usedCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.couponUrl != null">
+                coupon_url = #{record.couponUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vipLevelLimit != null">
+                vip_level_limit = #{record.vipLevelLimit,jdbcType=INTEGER},
+            </if>
+            <if test="record.vipLevelName != null">
+                vip_level_name = #{record.vipLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.amount != null">
+                amount = #{record.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.wechatCardNoticeContent != null">
+                wechat_card_notice_content = #{record.wechatCardNoticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wechatCardTitle != null">
+                wechat_card_title = #{record.wechatCardTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wechatCardSubTitle != null">
+                wechat_card_sub_title = #{record.wechatCardSubTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.invalidStatus != null">
+                invalid_status = #{record.invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.source != null">
+                source = #{record.source,jdbcType=SMALLINT},
+            </if>
+            <if test="record.vipLabel != null">
+                vip_label = #{record.vipLabel,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.rangeGoods != null">
+                range_goods = #{record.rangeGoods,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.extrContent != null">
+                extr_content = #{record.extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_coupon_code
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        order_limit_flag = #{record.orderLimitFlag,jdbcType=INTEGER},
+        order_money_limit = #{record.orderMoneyLimit,jdbcType=DOUBLE},
+        background_name = #{record.backgroundName,jdbcType=VARCHAR},
+        background_value = #{record.backgroundValue,jdbcType=VARCHAR},
+        can_attorn = #{record.canAttorn,jdbcType=INTEGER},
+        code_no = #{record.codeNo,jdbcType=VARCHAR},
+        code_type = #{record.codeType,jdbcType=INTEGER},
+        card_no = #{record.cardNo,jdbcType=VARCHAR},
+        use_condition = #{record.useCondition,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        use_instructions = #{record.useInstructions,jdbcType=VARCHAR},
+        valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+        expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+        expire_flag = #{record.expireFlag,jdbcType=INTEGER},
+        extend_setting = #{record.extendSetting,jdbcType=INTEGER},
+        sync_wechat_flag = #{record.syncWechatFlag,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
+        each_one_limit_count = #{record.eachOneLimitCount,jdbcType=INTEGER},
+        use_range = #{record.useRange,jdbcType=INTEGER},
+        used_by_fullrates = #{record.usedByFullrates,jdbcType=INTEGER},
+        service_phone = #{record.servicePhone,jdbcType=VARCHAR},
+        issue_quantity = #{record.issueQuantity,jdbcType=INTEGER},
+        can_receive_quantity = #{record.canReceiveQuantity,jdbcType=INTEGER},
+        received_people_count = #{record.receivedPeopleCount,jdbcType=INTEGER},
+        used_count = #{record.usedCount,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        coupon_url = #{record.couponUrl,jdbcType=VARCHAR},
+        vip_level_limit = #{record.vipLevelLimit,jdbcType=INTEGER},
+        vip_level_name = #{record.vipLevelName,jdbcType=VARCHAR},
+        amount = #{record.amount,jdbcType=DOUBLE},
+        wechat_card_notice_content = #{record.wechatCardNoticeContent,jdbcType=VARCHAR},
+        wechat_card_title = #{record.wechatCardTitle,jdbcType=VARCHAR},
+        wechat_card_sub_title = #{record.wechatCardSubTitle,jdbcType=VARCHAR},
+        invalid_status = #{record.invalidStatus,jdbcType=INTEGER},
+        source = #{record.source,jdbcType=SMALLINT},
+        vip_label = #{record.vipLabel,jdbcType=LONGVARCHAR},
+        range_goods = #{record.rangeGoods,jdbcType=LONGVARCHAR},
+        extr_content = #{record.extrContent,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_coupon_code
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        order_limit_flag = #{record.orderLimitFlag,jdbcType=INTEGER},
+        order_money_limit = #{record.orderMoneyLimit,jdbcType=DOUBLE},
+        background_name = #{record.backgroundName,jdbcType=VARCHAR},
+        background_value = #{record.backgroundValue,jdbcType=VARCHAR},
+        can_attorn = #{record.canAttorn,jdbcType=INTEGER},
+        code_no = #{record.codeNo,jdbcType=VARCHAR},
+        code_type = #{record.codeType,jdbcType=INTEGER},
+        card_no = #{record.cardNo,jdbcType=VARCHAR},
+        use_condition = #{record.useCondition,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        use_instructions = #{record.useInstructions,jdbcType=VARCHAR},
+        valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+        expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+        expire_flag = #{record.expireFlag,jdbcType=INTEGER},
+        extend_setting = #{record.extendSetting,jdbcType=INTEGER},
+        sync_wechat_flag = #{record.syncWechatFlag,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
+        each_one_limit_count = #{record.eachOneLimitCount,jdbcType=INTEGER},
+        use_range = #{record.useRange,jdbcType=INTEGER},
+        used_by_fullrates = #{record.usedByFullrates,jdbcType=INTEGER},
+        service_phone = #{record.servicePhone,jdbcType=VARCHAR},
+        issue_quantity = #{record.issueQuantity,jdbcType=INTEGER},
+        can_receive_quantity = #{record.canReceiveQuantity,jdbcType=INTEGER},
+        received_people_count = #{record.receivedPeopleCount,jdbcType=INTEGER},
+        used_count = #{record.usedCount,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        coupon_url = #{record.couponUrl,jdbcType=VARCHAR},
+        vip_level_limit = #{record.vipLevelLimit,jdbcType=INTEGER},
+        vip_level_name = #{record.vipLevelName,jdbcType=VARCHAR},
+        amount = #{record.amount,jdbcType=DOUBLE},
+        wechat_card_notice_content = #{record.wechatCardNoticeContent,jdbcType=VARCHAR},
+        wechat_card_title = #{record.wechatCardTitle,jdbcType=VARCHAR},
+        wechat_card_sub_title = #{record.wechatCardSubTitle,jdbcType=VARCHAR},
+        invalid_status = #{record.invalidStatus,jdbcType=INTEGER},
+        source = #{record.source,jdbcType=SMALLINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.CouponCodeWithBLOBs">
+        update t_coupon_code
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="orderLimitFlag != null">
+                order_limit_flag = #{orderLimitFlag,jdbcType=INTEGER},
+            </if>
+            <if test="orderMoneyLimit != null">
+                order_money_limit = #{orderMoneyLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="backgroundName != null">
+                background_name = #{backgroundName,jdbcType=VARCHAR},
+            </if>
+            <if test="backgroundValue != null">
+                background_value = #{backgroundValue,jdbcType=VARCHAR},
+            </if>
+            <if test="canAttorn != null">
+                can_attorn = #{canAttorn,jdbcType=INTEGER},
+            </if>
+            <if test="codeNo != null">
+                code_no = #{codeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="codeType != null">
+                code_type = #{codeType,jdbcType=INTEGER},
+            </if>
+            <if test="cardNo != null">
+                card_no = #{cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="useCondition != null">
+                use_condition = #{useCondition,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="useInstructions != null">
+                use_instructions = #{useInstructions,jdbcType=VARCHAR},
+            </if>
+            <if test="validTime != null">
+                valid_time = #{validTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                expire_time = #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireFlag != null">
+                expire_flag = #{expireFlag,jdbcType=INTEGER},
+            </if>
+            <if test="extendSetting != null">
+                extend_setting = #{extendSetting,jdbcType=INTEGER},
+            </if>
+            <if test="syncWechatFlag != null">
+                sync_wechat_flag = #{syncWechatFlag,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="eachOneLimitCount != null">
+                each_one_limit_count = #{eachOneLimitCount,jdbcType=INTEGER},
+            </if>
+            <if test="useRange != null">
+                use_range = #{useRange,jdbcType=INTEGER},
+            </if>
+            <if test="usedByFullrates != null">
+                used_by_fullrates = #{usedByFullrates,jdbcType=INTEGER},
+            </if>
+            <if test="servicePhone != null">
+                service_phone = #{servicePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="issueQuantity != null">
+                issue_quantity = #{issueQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="canReceiveQuantity != null">
+                can_receive_quantity = #{canReceiveQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="receivedPeopleCount != null">
+                received_people_count = #{receivedPeopleCount,jdbcType=INTEGER},
+            </if>
+            <if test="usedCount != null">
+                used_count = #{usedCount,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="couponUrl != null">
+                coupon_url = #{couponUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="vipLevelLimit != null">
+                vip_level_limit = #{vipLevelLimit,jdbcType=INTEGER},
+            </if>
+            <if test="vipLevelName != null">
+                vip_level_name = #{vipLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="wechatCardNoticeContent != null">
+                wechat_card_notice_content = #{wechatCardNoticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatCardTitle != null">
+                wechat_card_title = #{wechatCardTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatCardSubTitle != null">
+                wechat_card_sub_title = #{wechatCardSubTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="invalidStatus != null">
+                invalid_status = #{invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=SMALLINT},
+            </if>
+            <if test="vipLabel != null">
+                vip_label = #{vipLabel,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="rangeGoods != null">
+                range_goods = #{rangeGoods,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="extrContent != null">
+                extr_content = #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.CouponCodeWithBLOBs">
+    update t_coupon_code
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      order_limit_flag = #{orderLimitFlag,jdbcType=INTEGER},
+      order_money_limit = #{orderMoneyLimit,jdbcType=DOUBLE},
+      background_name = #{backgroundName,jdbcType=VARCHAR},
+      background_value = #{backgroundValue,jdbcType=VARCHAR},
+      can_attorn = #{canAttorn,jdbcType=INTEGER},
+      code_no = #{codeNo,jdbcType=VARCHAR},
+      code_type = #{codeType,jdbcType=INTEGER},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      use_condition = #{useCondition,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      use_instructions = #{useInstructions,jdbcType=VARCHAR},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      expire_flag = #{expireFlag,jdbcType=INTEGER},
+      extend_setting = #{extendSetting,jdbcType=INTEGER},
+      sync_wechat_flag = #{syncWechatFlag,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      each_one_limit_count = #{eachOneLimitCount,jdbcType=INTEGER},
+      use_range = #{useRange,jdbcType=INTEGER},
+      used_by_fullrates = #{usedByFullrates,jdbcType=INTEGER},
+      service_phone = #{servicePhone,jdbcType=VARCHAR},
+      issue_quantity = #{issueQuantity,jdbcType=INTEGER},
+      can_receive_quantity = #{canReceiveQuantity,jdbcType=INTEGER},
+      received_people_count = #{receivedPeopleCount,jdbcType=INTEGER},
+      used_count = #{usedCount,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      coupon_url = #{couponUrl,jdbcType=VARCHAR},
+      vip_level_limit = #{vipLevelLimit,jdbcType=INTEGER},
+      vip_level_name = #{vipLevelName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DOUBLE},
+      wechat_card_notice_content = #{wechatCardNoticeContent,jdbcType=VARCHAR},
+      wechat_card_title = #{wechatCardTitle,jdbcType=VARCHAR},
+      wechat_card_sub_title = #{wechatCardSubTitle,jdbcType=VARCHAR},
+      invalid_status = #{invalidStatus,jdbcType=INTEGER},
+      source = #{source,jdbcType=SMALLINT},
+      vip_label = #{vipLabel,jdbcType=LONGVARCHAR},
+      range_goods = #{rangeGoods,jdbcType=LONGVARCHAR},
+      extr_content = #{extrContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.CouponCode">
+    update t_coupon_code
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      order_limit_flag = #{orderLimitFlag,jdbcType=INTEGER},
+      order_money_limit = #{orderMoneyLimit,jdbcType=DOUBLE},
+      background_name = #{backgroundName,jdbcType=VARCHAR},
+      background_value = #{backgroundValue,jdbcType=VARCHAR},
+      can_attorn = #{canAttorn,jdbcType=INTEGER},
+      code_no = #{codeNo,jdbcType=VARCHAR},
+      code_type = #{codeType,jdbcType=INTEGER},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      use_condition = #{useCondition,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      use_instructions = #{useInstructions,jdbcType=VARCHAR},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      expire_flag = #{expireFlag,jdbcType=INTEGER},
+      extend_setting = #{extendSetting,jdbcType=INTEGER},
+      sync_wechat_flag = #{syncWechatFlag,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      each_one_limit_count = #{eachOneLimitCount,jdbcType=INTEGER},
+      use_range = #{useRange,jdbcType=INTEGER},
+      used_by_fullrates = #{usedByFullrates,jdbcType=INTEGER},
+      service_phone = #{servicePhone,jdbcType=VARCHAR},
+      issue_quantity = #{issueQuantity,jdbcType=INTEGER},
+      can_receive_quantity = #{canReceiveQuantity,jdbcType=INTEGER},
+      received_people_count = #{receivedPeopleCount,jdbcType=INTEGER},
+      used_count = #{usedCount,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      coupon_url = #{couponUrl,jdbcType=VARCHAR},
+      vip_level_limit = #{vipLevelLimit,jdbcType=INTEGER},
+      vip_level_name = #{vipLevelName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DOUBLE},
+      wechat_card_notice_content = #{wechatCardNoticeContent,jdbcType=VARCHAR},
+      wechat_card_title = #{wechatCardTitle,jdbcType=VARCHAR},
+      wechat_card_sub_title = #{wechatCardSubTitle,jdbcType=VARCHAR},
+      invalid_status = #{invalidStatus,jdbcType=INTEGER},
+      source = #{source,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

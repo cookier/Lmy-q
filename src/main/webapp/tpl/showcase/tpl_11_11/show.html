@@ -1,0 +1,58 @@
+<div class="control-group">
+    <div class="tpl-11-11">
+        <div class="tpl-11-11-banner" style="<% if(banner) { %>background-image: url(<%= fullfillImage(banner) %>)<% } %>"></div>
+        <div class="tpl-11-11-title clearfix">
+            <span class="tpl-11-11-team-name"><%= _global.mp_data.team_name %></span>
+            <div class="pull-right">
+                <a href="javascript:;" class="tpl-11-11-follow">关注</a>
+            </div>
+        </div>
+        <ul class="custom-coupon">
+            <% if(tradeincard.length) { %>
+                <% _.each(tradeincard, function(item) { %>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="custom-coupon-price"><span>￥</span><%= item.value %></div>
+                            <div class="custom-coupon-desc">
+                                <% if(item.at_least) { %>
+                                    满<%= item.at_least %>元可用
+                                <% } else { %>
+                                    无限制
+                                <% } %>
+
+                            </div>
+                        </a>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <% for(var i = 0; i < 3; i++) { %>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="custom-coupon-price"><span>￥</span>100</div>
+                            <div class="custom-coupon-desc">
+                                满500元可用
+                            </div>
+                        </a>
+                    </li>
+                <% } %>
+            <% } %>
+        </ul>
+        <div class="custom-notice">
+            <div class="custom-notice-inner">
+                <div class="custom-notice-scroll">
+                    <span>
+                        公告：<%= notice ? _.escape(notice).replace(/\s/g, '&nbsp;') : '请填写内容，如果过长，将会在手机上滚动显示' %>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <div class="actions-wrap">
+        <span class="action edit">编辑</span><span class="action add">加内容</span>
+    </div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

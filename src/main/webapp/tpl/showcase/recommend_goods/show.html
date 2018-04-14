@@ -1,0 +1,23 @@
+<div class="control-group">
+    <div class="custom-recommend-goods clearfix">
+        <div class="custom-recommend-goods-title">
+            <a href="javascript:;">推荐商品</a>
+        </div>
+        <ul class="custom-recommend-goods-list clearfix">
+            <% for(var i = 0; i < goodsSample.length; i++){ %>
+                <li>
+                    <a href="javascript:;">
+                        <img src="<%- goodsSample[i].image_url %>" alt="">
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

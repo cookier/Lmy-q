@@ -1,0 +1,41 @@
+<div class="shopnav-item">
+    <div class="actions">
+        <span class="action delete close-modal" title="删除" ng-click="delSecondNav($parent,item)" ng-show="!item.second || item.second.length == 0">×</span>
+    </div>
+    <div class="shopnav-item-title"><span>{{item.title}}</span></div>
+    <div class="shopnav-item-link">
+        <a class="pull-left shopnav-item-action js-edit-title" id="ms{{$index}}" ng-click="pop={eT_show:true}">编辑标题</a>
+<!--         <stackable-popover stackable="item.edit_title" stackable-placement="bottom" -->
+<!--                            stackable-alignment="center" stackable-enable-escape="true"> -->
+<!--             <div class="popover-inner popover-thin"> -->
+<!--                 <div class="popover-content"> -->
+<!--                     <div class="controls"> -->
+<!--                         <input class="js-txt" type="text" ng-model="item.title" maxlength="15" placeholder="菜单标题" -->
+<!--                                value="标题"> -->
+<!--                     </div> -->
+<!--                     <button class="js-btn-confirm btn btn-primary" ng-click="editTitle(item)">确定</button> -->
+<!--                     <button class="js-btn-cancel btn" >取消</button> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </stackable-popover> -->
+        <dialog ng-if="pop.eT_show==true" for="ms{{$index}}" align="left" close="pop.eT_show=false" close-action="outerchick">
+		    <div dialog-content>
+	            <div class="popover-thin">
+	                <div class="popover-content">
+	                    <div class="controls">
+	                        <input class="js-txt" type="text" ng-model="item.title" maxlength="15" placeholder="菜单标题"
+	                               value="标题">
+	                    </div>
+	                    <button class="js-btn-confirm btn btn-primary" ng-click="editTitle(item,pop)">确定</button>
+	                    <button class="js-btn-cancel btn" ng-click="pop.eT_show=false">取消</button>
+	                </div>
+	            </div>
+			</div>
+		</dialog>
+        <span class="pull-left shopnav-item-split">|</span>
+        <span ng-show="item.second && item.second.length > 0" class="pull-left c-gray">使用二级导航后主链接已失效。</span>
+        <div  ng-show="!item.second || item.second.length ==0"class="pull-left">
+            <ui-setup-link link_id="item.link_id"  link_url="item.link_url" link_title="item.link_title" link_type="item.link_type"></ui-setup-link>
+        </div>
+    </div>
+</div>

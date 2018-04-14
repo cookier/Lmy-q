@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.WechatAutoReplyRuleMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.WechatAutoReplyRule">
+        <id column="rule_id" jdbcType="INTEGER" property="ruleId"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="rule_name" jdbcType="VARCHAR" property="ruleName"/>
+        <result column="rule_type" jdbcType="SMALLINT" property="ruleType"/>
+        <result column="activity_id" jdbcType="INTEGER" property="activityId"/>
+        <result column="reply_type" jdbcType="SMALLINT" property="replyType"/>
+        <result column="delete_flag" jdbcType="SMALLINT" property="deleteFlag"/>
+        <result column="enable_flag" jdbcType="SMALLINT" property="enableFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.WechatAutoReplyRule">
+        <result column="settings" jdbcType="LONGVARCHAR" property="settings"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    rule_id, shop_id, rule_name, rule_type, activity_id, reply_type, delete_flag, enable_flag, 
+    create_time, update_time
+  </sql>
+    <sql id="Blob_Column_List">
+    settings
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.WechatAutoReplyRuleExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_wechat_auto_reply_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.WechatAutoReplyRuleExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_wechat_auto_reply_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_wechat_auto_reply_rule
+        where rule_id = #{ruleId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_wechat_auto_reply_rule
+    where rule_id = #{ruleId,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.WechatAutoReplyRuleExample">
+        delete from t_wechat_auto_reply_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.WechatAutoReplyRule">
+    insert into t_wechat_auto_reply_rule (rule_id, shop_id, rule_name, 
+      rule_type, activity_id, reply_type, 
+      delete_flag, enable_flag, create_time, 
+      update_time, settings)
+    values (#{ruleId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{ruleName,jdbcType=VARCHAR}, 
+      #{ruleType,jdbcType=SMALLINT}, #{activityId,jdbcType=INTEGER}, #{replyType,jdbcType=SMALLINT}, 
+      #{deleteFlag,jdbcType=SMALLINT}, #{enableFlag,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{settings,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.WechatAutoReplyRule">
+        insert into t_wechat_auto_reply_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ruleId != null">
+                rule_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="ruleName != null">
+                rule_name,
+            </if>
+            <if test="ruleType != null">
+                rule_type,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="replyType != null">
+                reply_type,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="enableFlag != null">
+                enable_flag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="settings != null">
+                settings,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ruleId != null">
+                #{ruleId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="ruleName != null">
+                #{ruleName,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleType != null">
+                #{ruleType,jdbcType=SMALLINT},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="replyType != null">
+                #{replyType,jdbcType=SMALLINT},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="enableFlag != null">
+                #{enableFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="settings != null">
+                #{settings,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.WechatAutoReplyRuleExample"
+            resultType="java.lang.Long">
+        select count(*) from t_wechat_auto_reply_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_wechat_auto_reply_rule
+        <set>
+            <if test="record.ruleId != null">
+                rule_id = #{record.ruleId,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.ruleName != null">
+                rule_name = #{record.ruleName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ruleType != null">
+                rule_type = #{record.ruleType,jdbcType=SMALLINT},
+            </if>
+            <if test="record.activityId != null">
+                activity_id = #{record.activityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.replyType != null">
+                reply_type = #{record.replyType,jdbcType=SMALLINT},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.enableFlag != null">
+                enable_flag = #{record.enableFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.settings != null">
+                settings = #{record.settings,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_wechat_auto_reply_rule
+        set rule_id = #{record.ruleId,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        rule_name = #{record.ruleName,jdbcType=VARCHAR},
+        rule_type = #{record.ruleType,jdbcType=SMALLINT},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        reply_type = #{record.replyType,jdbcType=SMALLINT},
+        delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+        enable_flag = #{record.enableFlag,jdbcType=SMALLINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        settings = #{record.settings,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_wechat_auto_reply_rule
+        set rule_id = #{record.ruleId,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        rule_name = #{record.ruleName,jdbcType=VARCHAR},
+        rule_type = #{record.ruleType,jdbcType=SMALLINT},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        reply_type = #{record.replyType,jdbcType=SMALLINT},
+        delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+        enable_flag = #{record.enableFlag,jdbcType=SMALLINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.WechatAutoReplyRule">
+        update t_wechat_auto_reply_rule
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="ruleName != null">
+                rule_name = #{ruleName,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleType != null">
+                rule_type = #{ruleType,jdbcType=SMALLINT},
+            </if>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="replyType != null">
+                reply_type = #{replyType,jdbcType=SMALLINT},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="enableFlag != null">
+                enable_flag = #{enableFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="settings != null">
+                settings = #{settings,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where rule_id = #{ruleId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.WechatAutoReplyRule">
+    update t_wechat_auto_reply_rule
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      rule_name = #{ruleName,jdbcType=VARCHAR},
+      rule_type = #{ruleType,jdbcType=SMALLINT},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      reply_type = #{replyType,jdbcType=SMALLINT},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+      enable_flag = #{enableFlag,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      settings = #{settings,jdbcType=LONGVARCHAR}
+    where rule_id = #{ruleId,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.WechatAutoReplyRule">
+    update t_wechat_auto_reply_rule
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      rule_name = #{ruleName,jdbcType=VARCHAR},
+      rule_type = #{ruleType,jdbcType=SMALLINT},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      reply_type = #{replyType,jdbcType=SMALLINT},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+      enable_flag = #{enableFlag,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where rule_id = #{ruleId,jdbcType=INTEGER}
+  </update>
+</mapper>

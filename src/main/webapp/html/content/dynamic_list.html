@@ -1,0 +1,164 @@
+<link rel="stylesheet" href="css/order.css" type="text/css">
+
+<div class="app-init-container" ng-controller="DynamicListController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form"
+                          onsubmit="return false;">
+                        <div class="clearfix" ng-enter='pageChanged()'>
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">用户名：</label>
+                                    <div class="controls">
+                                        <input type="text" name="nickname" ng-model="dynamic.nickname" value=""
+                                               placeholder="请输入用户昵称!" style="height: 30px;">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">动态来源：</label>
+                                    <div class="controls">
+                                        <select name="source" class="js-state-select" style="height: 30px;"
+                                                ng-model="dynamic.source"
+                                                ng-options="f.value as f.name for f in source">
+                                            <option value="">全部</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">动态类型：</label>
+                                    <div class="controls">
+                                        <select name="type" ng-model="dynamic.type" style="height: 30px;width: 200px;"
+                                                ng-options="f.code as f.name for f in type">
+                                            <option value="">全部</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="time-filter-groups clearfix">
+                                    <div class="control-group">
+                                        <label class="control-label">发表时间：</label>
+                                        <div class="controls">
+                                            <input type="text" id="beginCreateTime" ng-model="dynamic.beginCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                            <input type="text" id="endCreateTime" ng-model="dynamic.endCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span
+                                                class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                                            <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div style='float:left;'>
+                                            <label class="control-label">公开范围：</label>
+                                            <div class="controls">
+                                                <select name="permissions" ng-model="dynamic.permissions"
+                                                        style="height: 30px;width: 200px;"
+                                                        ng-options="f.value as f.name for f in permissions">
+                                                    <option value="">全部</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style='float:left;'>
+                                            <label class="control-label">审核状态：</label>
+                                            <div class="controls">
+                                                <select name="state" ng-model="dynamic.state"
+                                                        style="height: 30px;width: 200px;"
+                                                        ng-options="f.value as f.name for f in state">
+                                                    <option value="">全部</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div style='float:left;    margin-top: 6px;'>
+                                                <label class="control-label"><a href="javascript:;"
+                                                                                class="ui-btn ui-btn-primary js-filter"
+                                                                                data-loading-text="正在筛选..."
+                                                                                ng-click="pageChanged()">筛选</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="ui-nav clearfix">
+                        <div class="common-helps-entry pull-right hide">
+                            <a href="#" target="_blank"> <span class="help-icon"></span>
+                                订单类型简介及管理方法
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th class="" colspan='2'>动态</th>
+                        <th width='150px'>发表时间</th>
+                        <th width='80px'>动态来源</th>
+                        <th width='80px'>动态类型</th>
+                        <th width='80px'>公开范围</th>
+                        <th width='125px' style='text-align:center;'>审核状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="widget-list-item" ng-repeat="data in pageData.list track by data.id">
+                    <tr ng-init='data.stateUpdate=true;'>
+                        <td width='76px'><img src='{{data.avatar}}' width='53px' onerror="this.src='./images/a0.jpg'">
+                        </td>
+                        <td style='line-height:16px;'>
+                            <div style='min-height:20px'><span style='color:#157c8c;'>{{data.nickname}} : &nbsp;</span>{{data.title}}
+                            </div>
+                            <div><img ng-repeat="img in data.images track by $index" src='{{img}}'
+                                      style='margin:10px 5px 5px 5px;height:80px;border:1px solid #AAA;'></div>
+                            <div style='color:#AAA;margin-top:5px;'>
+                                <img src='./image/content/fx.png' width='15px'> 转发({{data.share_count}})
+                                &nbsp; &nbsp; &nbsp; &nbsp;<img src='./image/content/pl.png' width='15px'>
+                                评论({{data.comment_count}})
+                                &nbsp; &nbsp; &nbsp; &nbsp;<img src='./image/content/dz.png' width='15px'>
+                                赞({{data.like_count}})
+                            </div>
+                        </td>
+                        <td>{{data.create_time}}</td>
+                        <td>{{data.source==0?"平台动态":data.source==1?"用户动态":data.source==2?"圈子动态":""}}</td>
+                        <td>{{data.type_name}}</td>
+                        <td>
+                            {{data.permissions==0?"不公开":data.permissions==1?"好友":data.permissions==2?"圈子":data.permissions==3?"好友和圈子":data.permissions==4?"所有人":""}}
+                        </td>
+                        <td align='right'>
+                            <span ng-if='data.stateUpdate'>{{data.state=="-1"?"审核不通过":data.state=="0"?"待审核":data.state=="1"?"审核通过":""}}<img
+                                    src='./image/content/edit.png' width='15px' style='margin-left:10px;'
+                                    ng-click='data.stateUpdate=false'></span>
+                            <span ng-if='!data.stateUpdate'>
+          				<select name="state" ng-model="data.state" style="height: 25px;width: 75px;"
+                                ng-options="f.value as f.name for f in state">
+                    	</select><img src='./image/content/editSave.png' width='18px' style='margin-left:10px;'
+                                      ng-click='updateState(data.id,data.state,$index)'></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='') || !pageData.list"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

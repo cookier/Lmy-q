@@ -1,0 +1,33 @@
+
+<div class="control-group">
+    <label class="control-label"><em class="required">*</em>选择图片：</label>
+    <div class="controls" name="image_url">
+            <a ng-show="curCell.image_url === ''" class="control-action js-trigger-image" ng-click="setImage(curCell)">选择图片</a>
+            <img ng-show="curCell.image_url != ''" src="{{curCell.image_url}}" data-full-size="{{curCell.image_url}}" width="100" height="100" class="thumb-image">
+            <a ng-show="curCell.image_url != ''" class="control-action js-trigger-image" ng-click="setImage(curCell)">修改</a>
+        <p class="help-desc">建议尺寸：{{curCell.width*160+'x'+curCell.height*160}} 像素</p>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">链接到：</label>
+    <div class="controls">
+        <ui-setup-link link_id="curCell.link_id"  link_url="curCell.link_url" link_title="curCell.link_title" link_type="curCell.link_type"></ui-setup-link>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">图片占：</label>
+    <div class="controls">
+        <div class="btn-group dropdown hover">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                {{curCell.height}} 行 {{curCell.width}} 列
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                    <li ng-repeat="l in curCell.layout"><a class="js-image-layout" ng-click="changeCellLayout(l.rows,l.cols)" data-width="{{l.cols}}" data-height="{{l.rows}}">{{l.rows}}行 {{l.cols}}列</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <span class="action delete close-modal" title="删除" ng-click="del(curCell)">×</span>
+</div>

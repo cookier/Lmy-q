@@ -1,0 +1,16 @@
+<a href="javascript:;"<% if (bg_image_url) { %> class="slide-bg" style="background-image: url(<%= bg_image_url %>)"<% } %>>
+    <% if (bg_image_url) { %>
+        <div class="swiper-item-bg"></div>
+    <% } %>
+    <div class="tpl-fbb-item-wrap">
+        <div class="tpl-fbb-item-name">
+            <%= title %>
+        </div>
+        <div class="tpl-fbb-item-line"></div>
+        <div class="tpl-fbb-item-icon">
+            <% if (icon_image_url) { %>
+                <img src="<%= icon_image_url %>" width="30" height="30">
+            <% } %>
+        </div>
+    </div>
+</a>

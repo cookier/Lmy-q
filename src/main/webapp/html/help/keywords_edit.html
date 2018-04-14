@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="./css/reward_694598e089.css"
+      type="text/css">
+
+<div class="app-init-container" ng-controller="KeywordsEditController">
+    <div class="app__content js-app-main">
+        <div class="app-design-wrap">
+            <div class="page-reward clearfix">
+                <h2 class="reward-title">关键字描述</h2>
+                <div class="app-reward">
+                    <form class="form-horizontal form-validation" name="form">
+                        <div class="reward-info">
+                            <div class="js-basic-info-region">
+                                <div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>类目：</label>
+                                        <div class="controls">
+                                            <ui-select multiple ng-model="multipleCategorys.selectedTags"
+                                                       theme="bootstrap" ng-disabled="disabled">
+                                                <ui-select-match placeholder="选择标签分组!">{{$item.name}}
+                                                    <!-- <span ng-bind="$item.name"></span> -->
+                                                </ui-select-match>
+                                                <ui-select-choices group-by="id"
+                                                                   repeat="cate in categorys | propsFilter: {name: $select.search}">
+                                                    <div ng-bind-html="cate.name | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                            <!-- <select ui-jq="chosen" multiple class="w-md"
+                                            style="width: 500px;"
+                                            ng-model="multipleCategorys.selectedTags"
+                                            ng-options="item.id as item.name for item in categorys">
+                                            </select> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>关键字：</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="keywords.name" maxlength="200"
+                                               style="width: 300px; vertical-align: baseline;"
+                                               placeholder="请填写关键字！" required="required">
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">描述：</label>
+                                        <textarea rows="3" cols="30" ng-model="keywords.description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="app-actions">
+                    <div class="form-actions text-center">
+                        <input class="btn js-btn-quit" type="button" value="返回"
+                               ng-click="cancel()"> <input
+                            class="btn btn-primary js-btn-save" type="button" value="保 存"
+                            ng-click="save()">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

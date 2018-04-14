@@ -1,0 +1,65 @@
+﻿<div class="app-init-container" ng-controller="userController">
+  <div class="row">
+    <h4 class="page-header text-info">
+      用户管理
+    </h4>
+  </div>
+  <div class="row">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th class="col-sm-1">用户名</th>
+          <th class="col-sm-3">角色</th>
+          <th class="col-sm-1">手机号码</th>
+          <th class="col-sm-2">邮箱</th>
+          <th class="col-sm-2">创建时间</th>
+          <th class="col-sm-1">用户状态</th>
+          <th class="col-sm-2">
+            <a ng-click="openAddPlatformUser()" class="btn btn-primary btn-xs">添加用户</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in pageData.list">
+          <td>{{item.nickname}}</td>
+          <td>
+            <a href="javascript:;">
+              {{item.roles|merge:'name':2:'...'|none:'未关联角色'}}
+              <span class="text-success">({{item.roles.length}})</span>
+            </a>
+          </td>
+          <td>{{item.mobile}}</td>
+          <td>{{item.qq}}</td>
+
+          <td>{{item.create_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td>
+            {{1|state}}
+          </td>
+          <td>
+            <button type="button" ng-click="remove(item.id)" class="btn btn-danger btn-xs">删除</button>
+            <a ng-click="addRole(item.id)" class="btn btn-info btn-xs">添加角色</a>
+          </td>
+        </tr>
+      </tbody>
+      <tbody ng-if="loadingState">
+        <tr>
+          <td colspan="8" class="text-center">
+            <img width="20px" src="img/doing.gif" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="js-list-footer-region ui-box">
+      <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+        <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                           total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                           page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                           previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                           last-text="&raquo;"></custom-pagination>
+      </div>
+      <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+           style="text-align: center;">没有找到相关记录!
+      </div>
+    </div>
+  </div>
+</div>

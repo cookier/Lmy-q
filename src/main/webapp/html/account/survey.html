@@ -1,0 +1,157 @@
+<link rel="stylesheet" href="./css/newsettlement.css" type="text/css">
+
+<div class="app-init-container" ng-controller="AccountIncomeController">
+    <!-- <alert class="alert">
+      最新规范：<span class="red">套现商家处理规则</span> <a>查看详情</a>
+  </alert> -->
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="js-nav-settlement-income" class="active">
+                <a ui-sref="console.account">我的收入</a>
+            </li>
+            <li id="js-nav-settlement-trade">
+                <a ui-sref="console.trading_list">交易记录</a>
+            </li>
+            <li id="js-nav-settlement-inoutdetail">
+                <a ui-sref="console.income_detail">收支明细</a>
+            </li>
+            <li id="js-nav-settlement-withdraw">
+                <a ui-sref="console.withdrawals_record">提现记录</a>
+            </li>
+        </ul>
+        <div class="common-helps-entry pull-right hide">
+            <a href="#" target="_blank">
+                <span class="help-icon"></span>
+                收入／提现常见问题总结
+            </a>
+        </div>
+    </nav>
+    <div class="app__content js-app-main">
+
+        <div class="page-settlement">
+            <div class="ui-box settlement-info">
+                <div class="account-info">
+                    <img ng-src="{{shop.logo}}"
+                         src="images/logo_1.png"
+                         class="logo">
+
+                    <div class="account-info-meta">
+                        <div class="info-item">
+                            <label>店铺名称：</label>
+                            <span>{{shop.shop_name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="balance">
+                    <!--  <div class="balance-info">
+                         <div class="balance-title">7天收入<span>（截至今日0点）</span></div>
+                         <div class="balance-content">
+                             <span class="money">0.00</span>
+                             <span class="unit">元</span>
+                             <a href="#inoutdetail" class="pull-right">收支明细</a>
+                         </div>
+                     </div> -->
+                    <div class="balance-info" style='width:50%'>
+                        <div class="balance-title">待结算<span>（担保交易）</span></div>
+                        <div class="balance-content">
+                            <span class="money">{{account.settlement_money | number:2}}</span>
+                            <span class="unit">元</span>
+                            <a href="#trade&amp;state=doing" class="pull-right">待结算记录</a>
+                        </div>
+                    </div>
+                    <div class="balance-info">
+                        <div class="balance-title">账户余额
+
+                            <span>（不可用余额 <a href="#freeze">{{account.deposit_money | number:2}}</a> 元）</span>
+
+                        </div>
+                        <div class="balance-content">
+                            <span class="money money-font">{{account.available_money | number:2}}</span>
+                            <span class="unit">元</span>
+                            <!-- 充值按钮 -->
+                            <!-- 店铺被锁定 -->
+                            <!-- 未提交认证，弹出认证提醒弹出框 -->
+                            <!-- 设置提现console账号 or 申请提现 -->
+                            <a ui-sref="console.rechargeMoney"
+                               class="ui-btn ui-btn-primary pull-right js-recharge-money">充值</a>
+                            <a ui-sref="console.applyWithdrawal"
+                               class="ui-btn ui-btn-primary pull-right btn-margin-right">提现</a>
+                            <!--<a ui-sref="console.setNotificationNumber" style="background-color:#3a3f51;border-color:#3a3f51;" class="ui-btn ui-btn-primary pull-right btn-margin-right">设置通知号码</a>-->
+                            <!--<a ui-sref="console.transfers" style="background-color:#3a3f51;border-color:#3a3f51;" class="ui-btn ui-btn-primary pull-right btn-margin-right">转账</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-box ui-title title-info">
+                <h3>近期交易记录</h3>
+                <!--  <a class="new-window pull-right">订单交易手续费全额补贴计划</a>
+                 <span class="pull-right c-gray">  |  </span>
+                 <a class="new-window pull-right">支付方式设置</a>-->
+            </div>
+
+            <div class="ui-box js-trade-list-region">
+                <div class="widget-list trade-list">
+                    <table class="ui-table ui-table-trade" style="padding: 0px;">
+                        <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                        <tr class="widget-list-header">
+                            <th width='150px'>时间</th>
+                            <th>名称</th>
+                            <th>对方</th>
+                            <th width='150px'>
+                                <div class="row-money">金额｜明细</div>
+                            </th>
+                            <th class="cell-5"></th>
+                            <th width='150px'>状态</th>
+                            <th width='120px' class='text-right'>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="widget-list-item" ng-repeat="item in pageData.list">
+                        <tr>
+                            <td rowspan="2">{{item.order_time}}</td>
+                            <td>{{item.trade_name}}</td>
+                            <td>{{item.trade_object}}</td>
+                            <td class="text-right">
+                                <p class="ui-money-outlay" ng-show="item.bill_type==0">- {{item.money}}</p>
+                                <p class="ui-money-income" ng-show="item.bill_type==1">+ {{item.money}}</p>
+                                <div class="row-money js-show-detail">
+                                    <p ng-if="item.detail.total_money">订单总金额:{{item.detail.total_money}}</p>
+                                    <p ng-if="item.detail.discount_money">优惠金额:{{item.detail.discount_money}}</p>
+                                    <p ng-if="item.detail.postage">邮费:{{item.detail.postage}}</p>
+                                    <p ng-if="item.detail.purchase_pay_money">采购支出:
+                                        -{{item.detail.purchase_pay_money}}</p>
+                                    <p ng-if="item.detail.purchase_order_id">采购订单号:
+                                        {{item.detail.purchase_order_id}}</p>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <!--0：进行中，1：退款，2：成功，3：失败-->
+                                <span ng-show="item.bill_status ==0">交易中<span
+                                        ng-show="item.pay_status==1">,待结算</span></span>
+                                <span ng-show="item.bill_status ==1">退款</span>
+                                <span ng-show="item.bill_status ==2">交易完成，已结算</span>
+                                <span ng-show="item.bill_status ==3">交易失败</span>
+                            </td>
+                            <td class="text-right"><a ng-if="item.detail.order_id"
+                                                      ui-sref="console.order_detail({orderId:item.detail.order_id})">查看订单详细</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="js-list-empty-region"></div>
+                    <div class="js-list-footer-region">
+                        <div class="widget-list-footer">
+                            <div class="income-trade-list-footer">
+                                <div class="text-right">
+                                    <a ui-sref="console.trading_list">查看所有交易记录</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

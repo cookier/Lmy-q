@@ -1,0 +1,21 @@
+<div class="control-group">
+    <div class="custom-store block-item">
+        <a class="custom-store-link clearfix" href="javascript:;">
+            <div class="custom-store-img"></div>
+            <div class="custom-store-name">
+                {{item.name || '店铺名称'}}
+            </div>
+            <div class="custom-store-enter">
+                进入店铺
+            </div>
+        </a>
+    </div>
+
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

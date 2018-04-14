@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myShiro" class="com.baidu.ms.shiro.MyShrio"/>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!-- 我们自定义的realm -->
+        <property name="realm" ref="myShiro"/>
+        <!-- 缓存管理器 -->
+        <property name="cacheManager" ref="cacheManager"/>
+    </bean>
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 权限管理器 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 登录地址 -->
+        <property name="loginUrl" value="/"/>
+        <!-- 登录后跳转到业务页面 -->
+        <property name="successUrl" value="/main.jsp"/>
+        <!-- 错误页面 -->
+        <property name="unauthorizedUrl" value="/error.jsp"/>
+        <!-- 权限配置 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- anon无权限访问请求，此处是登录页面和登录请求,静态资源 !!!!这些可以访问的东西，必需写在前面 -->
+                /login.do = anon
+                /css/** = anon
+                /html/** = anon
+                /js/** = anon
+                /tpl/** = anon
+                /image/** = anon
+                /img/** = anon
+                /images/** = anon
+                <!-- 需要权限为add的用户才能访问此请求-->
+                /user=perms[user:add]
+                <!-- 需要管理员角色才能访问此页面 -->
+                /user/add=roles[admin]
+                <!--拦截非静态资源的所有请求-->
+                /** = authc
+            </value>
+        </property>
+    </bean>
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>

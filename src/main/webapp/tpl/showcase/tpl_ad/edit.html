@@ -1,0 +1,35 @@
+<form class="form-horizontal" novalidate ng-controller="UIShopAdvConfigController">
+	<div class="control-group">
+		<label class="control-label"><em class="required">*</em>展示位置：</label>
+		<div class="controls">
+			<label class="i-checks i-checks-sm"> 
+			<input type="radio" ng-model="data.position" value="0" ng-checked="data.position==0" ><i></i>页面头部
+			</label> <label class="i-checks i-checks-sm">
+			 <input type="radio" ng-model="data.position" value="1" ng-checked="data.position==1"><i></i>页面底部
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">出现的页面：</label>
+		<div class="controls">
+			<label  class="i-checks i-checks-sm"> 
+			<input type="checkbox" class="js-not-autoupdate" ng-model="weiPage" value="1" ng-click="setOnPages(weiPage,1)" ng-checked="data.page.indexOf(1)>-1"><i></i>微页面
+			</label> 
+			<label  class="i-checks i-checks-sm"> 
+			<input type="checkbox" class="js-not-autoupdate" ng-model="weiPageCategory" value="2" ng-click="setOnPages(weiPageCategory,2)" ng-checked="data.page.indexOf(2)>-1"><i></i>微页面分类
+			</label> <label  class="i-checks i-checks-sm"> 
+			<input type="checkbox" class="js-not-autoupdate" ng-model="goods" value="3" ng-click="setOnPages(goods,3)" ng-checked="data.page.indexOf(3)>-1"><i></i>商品
+			</label> <label  class="i-checks i-checks-sm"> 
+			<input type="checkbox" class="js-not-autoupdate" ng-model="goodsTag" value="4" ng-click="setOnPages(goodsTag,4)" ng-checked="data.page.indexOf(4)>-1" ><i></i>商品标签
+			</label>
+		</div>
+		<div class="controls">
+			<label  class="i-checks i-checks-sm"> 
+			<input type="checkbox" class="js-not-autoupdate" ng-model="shopHome" value="5" ng-click="setOnPages(shopHome,5)" ng-checked="data.page.indexOf(5)>-1"><i></i>店铺主页
+			</label> 
+			<label class="i-checks i-checks-sm"> 
+			<input type="checkbox" class="js-not-autoupdate" ng-model="memberHome" value="6" ng-click="setOnPages(memberHome,6)" ng-checked="data.page.indexOf(6)>-1"><i></i>会员主页
+			</label>
+		</div>
+	</div>
+</form>

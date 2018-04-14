@@ -1,0 +1,26 @@
+<div>
+  <a style='padding:10px 20px;' class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+  <div style='padding:20px 0 0 20px;font-size:16px;'>新增可操作平台的用户</div>
+  <div style='border:1px solid #CCCCCC;padding:10px;border-radius: 5px;margin:10px 10px 20px 10px;'>
+    <div class="filter-groups">
+      <div class="form-group">
+        <label class=" control-label text-left" style='float:left;line-height: 30px;'>分销商手机号码 ： </label>
+        <input class='mobile' maxlength="11" ng-model='mobile' ng-change='mobileChange()' style='width:190px;padding:5px;' type="text" value='0.02' style="height: 30px;">
+        <span ng-if='mobile_type==0' style='color:#AAAAAA;'> 输入手机号码自动查询分销商信息</span>
+        <span ng-if='mobile_type==1'> <img src="./img/doing.gif" width='22px' align="AbsMiddle" style='padding:0 3px;'>正在查询,请稍等...</span>
+        <span ng-if='mobile_type==2' style='color:red'> 手机号码格式不正确</span>
+        <span ng-if='mobile_type==3'> 分销商昵称：{{user.nickname}}</span>
+        <span ng-if='mobile_type==4' style='color:red;'> 没有该手机号码对应的分销商</span>
+        <span ng-if='mobile_type==5' style='color:red;'> {{user.nickname}}已经是可操作平台的用户,不能再次设置</span>
+      </div>
+      <center>
+        <a class="ui-btn ui-btn-primary js-filter"
+           data-loading-text="正在筛选..." ng-click="addUser()">保存
+        </a>
+        <a class="ui-btn js-export"
+           data-loading-text="正在筛选..." ng-click="cancel()">取消
+        </a>
+      </center>
+    </div>
+  </div>
+</div>

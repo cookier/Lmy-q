@@ -1,0 +1,59 @@
+<div class="app-init-container" ng-controller="ConfigListController">
+	<div class="app__content js-app-main">
+		<div class="goods-list">
+			<div class="js-list-filter-region clearfix ui-box"
+				style="position: relative; text-align: right;">
+				<div class="widget-list-filter">
+					<div class="filter-box"  ng-enter='pageChanged()'>
+						<div class="js-list-search seach-box">
+							参数名称：<input ng-model="title" type="text" class="input-sm" />
+							<button class="btn btn-sm btn-default" type="button"
+								ng-click="pageChanged()">Go!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="ui-box">
+				<div class="panel panel-default">
+					<table class="ui-table ui-table-list" style="padding: 0px;table-layout:fixed;">
+						<thead class="js-list-header-region tableFloatingHeaderOriginal">
+							<tr class="widget-list-header">
+								<th width="200px;">参数名称</th>
+								<th>参数值</th>
+								<th width="100px;">操作</th>
+							</tr>
+						</thead>
+						<tbody class="js-list-body-region">
+							<tr ng-repeat="data in pageData.list">
+								<td>{{data.title}}</td>
+								<td>{{data.value}}</td>
+								<td><a ui-sref="console.config_edit({type:data.type,id:data.id})">修改</a></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="js-list-empty-region"></div>
+					<footer class="panel-footer" style="text-align: right;">
+						<div class="row">
+							<div style="text-align: left; margin-left: 10px;"
+								ng-show="pageData.totalRow>0">
+
+								<custom-pagination boundary-links="true"
+									ng-change="pageChanged()" total-items="pageData.totalRow"
+									ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+									class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+								</custom-pagination>
+							</div>
+							<div ng-show="(pageData.totalRow==0)||(pageData=='')"
+								style="text-align: center;">没有找到相关记录!</div>
+
+						</div>
+					</footer>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,27 @@
+<form class="form-horizontal" novalidate>
+    <div class="control-group">
+        <label class="control-label">背景图片：</label>
+        <div class="controls">
+            <div class="custom-shop-banner" style="width: 320px; background-image: url(<%- fullfillImage(background_image) %>);"></div>
+            <a class="control-action js-trigger-image" href="javascript: void(0);">修改</a>
+            <p class="help-desc">最佳尺寸：640 x 480 像素。</p>
+            <p class="help-desc">尺寸不匹配时，图片将被压缩或拉伸以铺满画面。</p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">店铺Logo：</label>
+        <div class="controls">
+            <img src="<%- logo() %>" width="80" height="80" class="thumb-image" style="width: 80px; height: 80px;">
+            <a class="control-action js-trigger-avatar" href="javascript: void(0);">修改店铺Logo</a>
+        </div>
+    </div>
+    <% if (isFenxiao()) { %>
+    <div class="control-group">
+        <label class="control-label">店铺简介：</label>
+        <div class="controls">
+            <textarea name="intro" rows="2" cols="8" maxlength="40" style="resize: none;width:320px;"><%= intro %></textarea>
+            <p class="help-desc">最多40个字</p>
+        </div>
+    </div>
+    <% } %>
+</form>

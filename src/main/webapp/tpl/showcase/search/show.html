@@ -1,0 +1,15 @@
+<div class="control-group">
+    <div class="custom-search">
+        <form action="/" method="GET">
+            <input type="text" class="custom-search-input" placeholder="商品搜索：请输入商品关键字" disabled>
+            <button type="submit" class="custom-search-button">搜索</button>
+        </form>
+    </div>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

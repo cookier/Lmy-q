@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="echarts.min.new.js"></script>
+    <script src="require.min.js"></script>
+</head>
+
+<body>
+    <div id="radar" style="width:600px;height: 600px;padding-top: 10px; margin: 0 auto;"></div>
+    <script>
+        require(['echarts.min.new.js'],
+            function(echarts) {
+                var myChart = echarts.init(document.getElementById("radar"));
+
+                var colors = ['#5793f3', '#d14a61', '#675bba'];
+
+                option = {
+                    color: colors,
+
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        }
+                    },
+                    grid: {
+                        right: '20%'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            restore: {
+                                show: true
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    legend: {
+                        data: ['蒸发量']
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                    }],
+                    yAxis: [{
+                        type: 'value',
+                        name: '蒸发量',
+                        min: 0,
+                        max: 250,
+                        position: 'right',
+                        axisLine: {
+                            lineStyle: {
+                                color: colors[0]
+                            }
+                        },
+                        axisLabel: {
+                            formatter: '{value} ml'
+                        }
+                    }],
+                    series: [{
+                        name: '蒸发量',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {　　　　　　　　　　　　　　 //好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
+                                color: function(params) {
+                                    // build a color map as your need.
+                                    var colorList = [
+                                        '#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B',
+                                        '#FE8463', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD',
+                                        '#D7504B', '#C6E579', '#F4E001', '#F0805A', '#26C0C0'
+                                    ];
+                                    return colorList[params.dataIndex]
+                                },
+                                　　　　　　　　　　　　　　 //以下为是否显示，显示位置和显示格式的设置了
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    //                             formatter: '{c}'
+                                    formatter: '{b}\n{c}'
+                                }
+                            }
+                        },
+                        data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                    }]
+                };
+                myChart.setOption(option);
+            });
+    </script>
+</body>
+
+</html>

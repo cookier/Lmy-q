@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="css/goods_edit_69a4c9a1bf.css" type="text/css">
+<link rel="stylesheet" href="css/goods_58f81727ac.css" type="text/css">
+<div class="app-init-container" ng-controller="CreateDocumentCategoryController">
+    <div id="app-region" class="app__content">
+        <div class="goods-edit-area">
+            <form id="form_activity" name="myForm" class="form-validation form-horizontal fm-goods-info">
+                <div id="goods-info-region" class="goods-info-group">
+                    <div class="goods-info-group-inner">
+                        <div style="width: 100px;">
+                            <div class="group-inner">栏目信息</div>
+                        </div>
+                        <div class="info-group-cont">
+                            <div class="group-inner">
+                                <div class="control-group">
+                                    <label class="control-label">分类图片：</label>
+                                    <div class="controls">
+                                        <input type="button" value="上传" ng-click="upload()">
+                                        <input id="fileUp" type="file" file-model="myFile" style="display: none;"/>
+                                        <div class="col-md-12" style="padding-left: 0px;padding-top: 10px;">
+                                            <img src="{{imageSrc}}"
+                                                 style="max-width:300px;max-height:300px;margin:0 auto;display:block;"
+                                                 align="left"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required"></em>父级栏目：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-disabled="true"
+                                               class="form-control ng-pristine ng-untouched ng-valid ng-valid-required"
+                                               placeholder="请选择商品类目!" style="width: 200px;"
+                                               ng-model="documentCategory.parentName" disabled="disabled">
+                                        <button ng-click="selectParent()">选择</button>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required"
+                                                                     style="color: red;">*</em>排序号：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="sort_num"
+                                               placeholder="请输入排序号!" style="width: 400px;" ng-pattern="/[0-9]$/"
+                                               ng-model="documentCategory.sort_num" required>
+                                        <span class="glyphicon glyphicon-ok" style="color: #33CC00;"
+                                              ng-show="myForm.sort_num.$valid"></span>
+                                        <span ng-show="myForm.sort_num.$invalid">请填写数字</span>
+                                        &nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="control-group has-feedback">
+                                    <label class="control-label"><em class="required"
+                                                                     style="color: red;">*</em>分类名称：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="qing"
+                                               placeholder="请输入分类名称!" style="width: 400px;" ng-minlength="2"
+                                               ng-model="documentCategory.name" required>
+                                        <span class="glyphicon glyphicon-ok" style="color: #33CC00;"
+                                              ng-show="myForm.qing.$valid"></span>
+                                        <span ng-show="myForm.qing.$invalid">名称长度必须大于2</span>
+                                        &nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">分类描述：</label>
+                                    <div>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <textarea style='margin-left:-5px;' ng-model="documentCategory.description"
+                                                  rows="2" cols="100"
+                                                  placeholder="活动描述～"></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                </div>
+                            </div>
+                            <div class="app-actions" style="bottom: 0px;">
+                                <div class="form-actions text-center" style='background-color:white;'>
+                                    <button class="btn btn-success" type="submit" ng-click="save()"
+                                            ng-disabled="myForm.$invalid">保存
+                                    </button>
+                                    <button class="btn" ui-sref="console.help_category">返回</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

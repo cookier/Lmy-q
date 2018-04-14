@@ -1,0 +1,101 @@
+<div class="app-init-container" ng-controller="ProxyGoodsListController">
+  <div class="app__content js-app-main">
+    <div class="goods-list">
+      <div class="js-list-filter-region clearfix ui-box"
+           style="position: relative;text-align: right;">
+        <div class="widget-list-filter">
+          <div class="filter-box" ng-enter='pageChanged()'>
+            <div class="js-list-search seach-box">
+              审核状态：
+              <select name="auth_status" style="height: 30px;"
+                      ng-model="auth_status">
+                <option value="">全部</option>
+                <option value="0">待审核</option>
+                <option value="1">审核中</option>
+                <option value="2">已审核</option>
+                <option value="3">审核不通过</option>
+              </select>
+              商品名称：<input ng-model="title" type="text" class="input-sm" />
+              <button class="btn btn-sm btn-default" type="button"
+                      ng-click="pageChanged()">Go!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-box">
+      <div class="panel panel-default">
+        <table class="ui-table ui-table-list" style="padding: 0px;">
+          <thead class="js-list-header-region tableFloatingHeaderOriginal">
+            <tr class="widget-list-header">
+              <!--  <th width="30px;"><label class="i-checks i-checks-sm">
+                  <input type="checkbox" ng-checked="isCheckedAll()"
+                  ng-click="checkAll()"><i></i>
+              </label></th>-->
+              <th colspan='2'>商品</th>
+              <th>类型</th>
+              <th>商品状态</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+
+          <tbody class="js-list-body-region">
+            <tr class="widget-list-item" ng-repeat="data in pageData.list">
+              <!-- <td><label class="i-checks i-checks-sm"> <input
+                  id={{data.id}} type="checkbox" ng-checked="data.chk"
+                  ng-click="data.chk = !data.chk"><i></i></label></td> -->
+              <td width='80px'>
+                <img src="{{data.default_pic_url}}-60" onerror="this.src='./img/404.jpg'" width='60px' height='60px'>
+              </td>
+              <td class="goods-meta">
+                <p class="goods-title">
+                  <a href='{{data.url}}' target="blank"> {{data.title}}</a>
+                </p>
+              </td>
+              <!--  <td class="goods-meta">
+                <p class="goods-title">
+                <a href="{{data.url}}" target="blank"> {{data.title}} </a><br>
+                  <ul
+                  class="js-upload-image-list upload-image-list clearfix ui-sortable">
+                  <li class="upload-preview-img sort"><img
+                    src="{{data.default_pic_url}}"></li>
+                </ul>
+                </p>
+              </td>-->
+              <td>{{data.product_type==1?'分销商品':data.product_type==0?'自营商品':'礼品'}}</td>
+              <td>{{data.auditing_status==1?'审核中':(data.auditing_status==2?'已审核':(data.auditing_status==3?'审核不通过':'待审核'))}}</td>
+              <td>{{data.create_time}}</td>
+              <td>
+                <!-- <p><a ui-sref="console.proxy_goods_auth({id:data.id})">商品审核</a></p> -->
+                <p>
+                  <a ng-click="toAuthGoods('{{data.id}}');">商品审核</a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+        <div class="js-list-empty-region"></div>
+        <footer class="panel-footer" style="text-align: right;">
+          <div class="row">
+            <div ng-show="pageData.totalRow>0">
+              <custom-pagination boundary-links="true"
+                                 ng-change="pageChanged()" total-items="pageData.totalRow"
+                                 ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                 class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                 next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></custom-pagination>
+            </div>
+            <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                 style="text-align: center;">没有找到相关记录!
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+
+  </div>
+</div>

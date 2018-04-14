@@ -1,0 +1,43 @@
+<div class="control-group">
+        <div ng-if="item.sub_entry.length < 1 && item.show_method == '0'" class="custom-image-swiper">
+            <div class="swiper-container" style="height: 80px">
+                <div class="swiper-wrapper">
+                    <img style="max-height: 80px; display: block;" src="http://imgqn.koudaitong.com/upload_files/2013/10/09/138129843442351477.jpg">
+                </div>
+            </div>
+        </div>
+        <ul ng-if="item.sub_entry.length < 1 && item.show_method != '0'" class="custom-image clearfix">
+            <li>
+                <img src="http://imgqn.koudaitong.com/upload_files/2013/10/09/138129928109524248.jpg" style="display: block;">
+            </li>
+        </ul>
+            <div ng-if="item.sub_entry.length > 0 && item.show_method == '0'" class="custom-image-swiper">
+                <div class="swiper-container" ng-style="{'height':'{{item.height || 160}}px'}">
+                    <div class="swiper-wrapper">
+                        <div ng-repeat="subItem in item.sub_entry" class="swiper-slide" ng-style="{'height':'{{item.height || 160}}px'}">
+                            <a href="javascript: void(0);" ng-style="{'height':'{{item.height || 160}}px'}">
+                                <h3 ng-show="subItem.title !=''" class="title">{{subItem.title}}</h3>
+                                <img ng-src="{{subItem.image_url}}" ng-style="{'height':'{{item.height || 160}}px'}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="item.sub_entry.length > 1 && item.show_method == '0'" class="swiper-pagination">
+                <span class="swiper-pagination-switch swiper-active-switch"></span>
+                <span ng-repeat="subEntry in  item.sub_entry" ng-if="$index >0" class="swiper-pagination-switch"></span>
+            </div>
+        <ul ng-if="item.sub_entry.length >0 && item.show_method != '0'" class="custom-image clearfix">
+            <li ng-repeat="subItem in item.sub_entry" ng-class="{'custom-image-small':item.size ==1}">
+                <h3 ng-show="subItem.title !=''" class="title">{{subItem.title}}</h3>
+                <img ng-src="{{subItem.image_url}}">
+            </li>
+        </ul>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

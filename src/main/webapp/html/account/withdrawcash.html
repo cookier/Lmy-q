@@ -1,0 +1,226 @@
+<link rel="stylesheet" href="./css/newsettlement.css" type="text/css">
+<div class="app-init-container" ng-controller="withdrawcashListController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+                <div class="widget-list-filter">
+                    <div class="js-list-filter-region clearfix">
+                        <form class="form-horizontal ui-box list-filter-form">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    起止时间：
+                                </label>
+                                <div class="controls">
+                                    <input style="height: 30px;" type="text" ng-model="beginTime" date-picker
+                                           class="js-stime hasDatepicker">
+                                    <span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+                                    <input style="height: 30px;" type="text" ng-model="endTime" date-picker
+                                           class="js-etime hasDatepicker">
+                                    <a ng-click="setQueryTime(6)">最近7天</a>
+                                    <a ng-click="setQueryTime(29)">最近30天</a>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    提现状态：
+                                </label>
+                                <div class="controls">
+                                    <select ng-model="status" style="height: 30px;">
+                                        <option value="" selected="selected">全部</option>
+                                        <option value="0">申请中</option>
+                                        <option value="5">银行处理中</option>
+                                        <option value="2">提现成功</option>
+                                        <option value="3">提现失败</option>
+                                    </select>
+                                    <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                       ng-click="pageChanged()">查询</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table ui-table-list" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>申请时间</th>
+                        <th>提现银行 | 编号</th>
+                        <th class="cell-12 text-right">提现金额(元)</th>
+                        <th>处理完成时间</th>
+                        <th>状态</th>
+                        <th>申请人</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="item in pageData.list">
+                        <td>
+                            {{item.order_time}}
+                        </td>
+                        <td>
+                            <!--{bank_name: "中国农业银行", account_name: "吴百求", account_no: "622845****018715879", account_type: "0",admin_name:"小杂物"}-->
+                            <div class="js-bank-detail"
+                                 ng-show="item.detail.account_type==0 || item.detail.account_type==1">
+                                <p>账户类型：{{item.detail.account_type==0?'个人账户':'企业账户'}}</p>
+                                <p>银行名称：{{item.detail.bank_name}}</p>
+                                <p>开户行：{{item.detail.province_name}} {{item.detail.city_name}} {{item.detail.area_name}}
+                                    {{item.detail.branch_name}}</p>
+                                <p>户名：{{item.detail.account_name}}</p>
+                                <p>账号：{{item.detail.account_no}}</p>
+                                <p>手机号：{{item.detail.admin_mobile}}</p>
+                            </div>
+                            <div class="js-bank-detail" ng-show="item.detail.account_type==2">
+                                <p>微信账号</p>
+                                <p>{{item.detail.account_name}}({{item.detail.bank_name}})</p>
+                                <p>{{item.pay_no}}</p>
+                            </div>
+                            <br>
+                            <!-- <span class="c-gray">{{item.trade_no}}</span> -->
+                        </td>
+                        <td class="text-right ui-money-outlay">
+                            {{item.money}}
+                        </td>
+                        <td>
+                            {{item.finish_time}}
+                        </td>
+                        <td class="">
+                            <p ng-show="item.bill_status ==0">审核中</p>
+                            <p ng-show="item.bill_status ==5">处理中</p>
+                            <p ng-show="item.bill_status ==2">提现成功</p>
+                            <p ng-show="item.bill_status ==3">提现失败</p>
+                            <p ng-show="item.bill_status ==6">审核通过，转账中...</p>
+                            <p ng-show="item.bill_status ==7">拒绝,原因见备注.</p>
+                            <p ng-show="item.detail.msg" class="ui-money-outlay">{{item.detail.msg}}</p>
+                        </td>
+                        <td>
+                            <!--admin_mobile: "15116121098" admin_name: "黄艳娇"-->
+                            {{item.detail.admin_name}}
+                            <br>
+                            <span class="c-gray">{{item.detail.admin_mobile}}</span>
+                        </td>
+                        <td>
+                            <div style="line-height: 14px;overflow: hidden;display: inline-block;">
+                                {{item.bill_remark}}
+                            </div>
+                            <br>
+                            <!--                             <input type="button" value="备注" stackable-trigger="pop.remark" stackable-toggle="'active'"/> -->
+                            <!--                         	<stackable-popover stackable="pop.remark" stackable-placement="left" style="height:100px;" -->
+                            <!-- 													stackable-alignment="center" stackable-enable-escape="true"> -->
+                            <!-- 								<div class="popover-inner popover-change"> -->
+                            <!-- 									<div class="popover-content text-center form-inline">										 -->
+                            <!-- 										<textarea style="width: 200px;" id="remark_c_{{item.bill_id}}">{{item.bill_remark}}</textarea> -->
+                            <!-- 										<p><button type="button" class="btn btn-primary js-btn-confirm" ng-click="remark({{item.bill_id}})" >确定</button> -->
+                            <!-- 										<button type="reset" class="btn js-btn-cancel" >取消</button></p> -->
+                            <!-- 									</div> -->
+                            <!-- 								</div> -->
+                            <!-- 							</stackable-popover>      -->
+                            <input id="console1{{$index}} type=" button" value="备注" ng-click="pop={rek_show:true}"
+                            style="font-style:normal"/>
+                            <dialog ng-if="pop.rek_show==true" for="console1{{$index}}" align="left"
+                                    close="pop.rek_show=false" close-action="outerchick">
+                                <div dialog-content>
+                                    <div class="popover-content text-center form-inline">
+                                        <textarea style="width: 200px;" id="remark_c_{{item.bill_id}}">{{item.bill_remark}}</textarea>
+                                        <p>
+                                            <button type="button" class="btn btn-primary js-btn-confirm"
+                                                    ng-click="remark({{item.bill_id}},pop)">确定
+                                            </button>
+                                            <button type="reset" class="btn js-btn-cancel"
+                                                    ng-click="pop.rek_show=false">取消
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </dialog>
+                        </td>
+                        <td>
+                            <input type="button" value="同意提现" ng-click="agree({{item.bill_id}})"
+                                   ng-show="item.bill_status==0"/>
+                            <!--                         	<input type="button" value="拒绝提现" ng-show="item.bill_status==0" stackable-trigger="pop.reject" stackable-toggle="'active'"/> -->
+                            <!--                         	<stackable-popover stackable="pop.reject" stackable-placement="left" style="height:100px;" -->
+                            <!-- 													stackable-alignment="center" stackable-enable-escape="true"> -->
+                            <!-- 								<div class="popover-inner popover-change"> -->
+                            <!-- 									<div class="popover-content text-center form-inline"> -->
+                            <!-- 										请输入拒绝理由! -->
+                            <!-- 										<textarea style="width: 200px;" id="remark_{{item.bill_id}}"></textarea> -->
+                            <!-- 										<p><button type="button" class="btn btn-primary js-btn-confirm" ng-click="reject({{item.bill_id}})" >确定</button> -->
+                            <!-- 										<button type="reset" class="btn js-btn-cancel" >取消</button></p> -->
+                            <!-- 									</div> -->
+                            <!-- 								</div> -->
+                            <!-- 							</stackable-popover> -->
+                            <input id="console2{{$index}}" type="button" value="拒绝提现" ng-show="item.bill_status==0"
+                                   ng-click="pop={reject_show:true}" style="font-style:normal"/>
+                            <dialog ng-if="pop.reject_show==true" for="console2{{$index}}" align="left"
+                                    close="pop.reject_show=false" close-action="outerchick">
+                                <div dialog-content>
+                                    <div class="popover-content text-center form-inline">
+                                        <p>请输入拒绝理由!</p>
+                                        <textarea style="width: 200px;" id="remark_{{item.bill_id}}"></textarea>
+                                        <p>
+                                            <button type="button" class="btn btn-primary js-btn-confirm"
+                                                    ng-click="reject({{item.bill_id}},pop)">确定
+                                            </button>
+                                            <button type="reset" class="btn js-btn-cancel"
+                                                    ng-click="pop.reject_show=false">取消
+                                            </button>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </dialog>
+                            <input type="button" value="转账成功" ng-click="success(item.bill_id)"
+                                   ng-show="item.bill_status==6"/>
+                            <!-- 							<input type="button" value="转账失败" ng-show="item.bill_status==6" stackable-trigger="pop.fail" stackable-toggle="'active'"/> -->
+                            <!--                         	<stackable-popover stackable="pop.fail" stackable-placement="left" style="height:100px;" -->
+                            <!-- 													stackable-alignment="center" stackable-enable-escape="true"> -->
+                            <!-- 								<div class="popover-inner popover-change"> -->
+                            <!-- 									<div class="popover-content text-center form-inline"> -->
+                            <!-- 										请输入失败原因! -->
+                            <!-- 										<textarea style="width: 200px;" id="fail_{{item.bill_id}}"></textarea> -->
+                            <!-- 										<p><button type="button" class="btn btn-primary js-btn-confirm" ng-click="fail({{item.bill_id}})" >确定</button> -->
+                            <!-- 										<button type="reset" class="btn js-btn-cancel" >取消</button></p> -->
+                            <!-- 									</div> -->
+                            <!-- 								</div> -->
+                            <!-- 							</stackable-popover>		 -->
+                            <input id="console3{{$index}}" type="button" value="转账失败" ng-show="item.bill_status==6"
+                                   ng-click="pop={fail_show:true}" style="font-style:normal"/>
+                            <dialog ng-if="pop.fail_show==true" for="console3{{$index}}" align="left"
+                                    close="pop.fail_show=false" close-action="outerchick">
+                                <div dialog-content>
+                                    <div class="popover-content text-center form-inline">
+                                        请输入失败原因!
+                                        <textarea style="width: 200px;" id="fail_{{item.bill_id}}"></textarea>
+                                        <p>
+                                            <button type="button" class="btn btn-primary js-btn-confirm"
+                                                    ng-click="fail({{item.bill_id}},pop)">确定
+                                            </button>
+                                            <button type="reset" class="btn js-btn-cancel"
+                                                    ng-click="pop.fail_show=false">取消
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </dialog>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer">
+                    <div class="pagenavi">
+                        <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                           total-items="pageData.totalRow"
+                                           ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                           class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                           next-text="&rsaquo;" first-text="&laquo;"
+                                           last-text="&raquo;"></custom-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

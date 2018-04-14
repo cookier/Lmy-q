@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityDirectsellerLogMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityDirectsellerLog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="seller_id" jdbcType="INTEGER" property="sellerId"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="real_pay" jdbcType="DOUBLE" property="realPay"/>
+        <result column="cps_money" jdbcType="DOUBLE" property="cpsMoney"/>
+        <result column="cps_rate" jdbcType="REAL" property="cpsRate"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="settle_type" jdbcType="SMALLINT" property="settleType"/>
+        <result column="settle_state" jdbcType="SMALLINT" property="settleState"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, seller_id, member_id, order_no, real_pay, cps_money, cps_rate, created_time, 
+    settle_type, settle_state
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerLogExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_directseller_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_activity_directseller_log
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_directseller_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerLogExample">
+        delete from t_activity_directseller_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityDirectsellerLog">
+    insert into t_activity_directseller_log (id, shop_id, seller_id, 
+      member_id, order_no, real_pay, 
+      cps_money, cps_rate, created_time, 
+      settle_type, settle_state)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{sellerId,jdbcType=INTEGER}, 
+      #{memberId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{realPay,jdbcType=DOUBLE}, 
+      #{cpsMoney,jdbcType=DOUBLE}, #{cpsRate,jdbcType=REAL}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{settleType,jdbcType=SMALLINT}, #{settleState,jdbcType=SMALLINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityDirectsellerLog">
+        insert into t_activity_directseller_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="sellerId != null">
+                seller_id,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="realPay != null">
+                real_pay,
+            </if>
+            <if test="cpsMoney != null">
+                cps_money,
+            </if>
+            <if test="cpsRate != null">
+                cps_rate,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="settleType != null">
+                settle_type,
+            </if>
+            <if test="settleState != null">
+                settle_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="sellerId != null">
+                #{sellerId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="realPay != null">
+                #{realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="cpsMoney != null">
+                #{cpsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="cpsRate != null">
+                #{cpsRate,jdbcType=REAL},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="settleType != null">
+                #{settleType,jdbcType=SMALLINT},
+            </if>
+            <if test="settleState != null">
+                #{settleState,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerLogExample"
+            resultType="java.lang.Long">
+        select count(*) from t_activity_directseller_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_directseller_log
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.sellerId != null">
+                seller_id = #{record.sellerId,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberId != null">
+                member_id = #{record.memberId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderNo != null">
+                order_no = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realPay != null">
+                real_pay = #{record.realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpsMoney != null">
+                cps_money = #{record.cpsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpsRate != null">
+                cps_rate = #{record.cpsRate,jdbcType=REAL},
+            </if>
+            <if test="record.createdTime != null">
+                created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.settleType != null">
+                settle_type = #{record.settleType,jdbcType=SMALLINT},
+            </if>
+            <if test="record.settleState != null">
+                settle_state = #{record.settleState,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_directseller_log
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        seller_id = #{record.sellerId,jdbcType=INTEGER},
+        member_id = #{record.memberId,jdbcType=INTEGER},
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+        real_pay = #{record.realPay,jdbcType=DOUBLE},
+        cps_money = #{record.cpsMoney,jdbcType=DOUBLE},
+        cps_rate = #{record.cpsRate,jdbcType=REAL},
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+        settle_type = #{record.settleType,jdbcType=SMALLINT},
+        settle_state = #{record.settleState,jdbcType=SMALLINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityDirectsellerLog">
+        update t_activity_directseller_log
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="sellerId != null">
+                seller_id = #{sellerId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="realPay != null">
+                real_pay = #{realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="cpsMoney != null">
+                cps_money = #{cpsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="cpsRate != null">
+                cps_rate = #{cpsRate,jdbcType=REAL},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="settleType != null">
+                settle_type = #{settleType,jdbcType=SMALLINT},
+            </if>
+            <if test="settleState != null">
+                settle_state = #{settleState,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityDirectsellerLog">
+    update t_activity_directseller_log
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      seller_id = #{sellerId,jdbcType=INTEGER},
+      member_id = #{memberId,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      real_pay = #{realPay,jdbcType=DOUBLE},
+      cps_money = #{cpsMoney,jdbcType=DOUBLE},
+      cps_rate = #{cpsRate,jdbcType=REAL},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      settle_type = #{settleType,jdbcType=SMALLINT},
+      settle_state = #{settleState,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

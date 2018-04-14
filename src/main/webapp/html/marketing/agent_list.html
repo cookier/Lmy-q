@@ -1,0 +1,226 @@
+<div class="app-init-container" ng-controller="AgentListController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;"
+                          ng-enter='pageChanged()'>
+                        <div class="clearfix">
+                            <div class="filter-groups">
+                                <div class="control-group" style='float:left;'>
+                                    <label class="control-label">代理商名称：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="name" style="height: 30px;">
+                                    </div>
+                                </div>
+                                <div class="control-group" style='float:left;'>
+                                    <label class="control-label">手机号码：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="mobile" style="height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="time-filter-groups clearfix">
+                                    <div class="control-group">
+                                        <label class="control-label">注册时间：</label>
+                                        <div class="controls">
+                                            <input type="text" id="beginCreateTime" ng-model="beginCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                            <input type="text" id="endCreateTime" ng-model="endCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span
+                                                class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                                            <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                                            <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                               data-loading-text="正在筛选..." ng-click="pageChanged()">筛选
+                                            </a>
+                                            <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                               data-loading-text="正在筛选..." ng-click="addAgent()">新增代理商
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="ui-btn-group">
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div style='color:#AAAAAA;padding:0 0 10px 10px;'> 备注 : 封号后可取消所有代理区域 ; 可解冻保证金 ; ( 操作请慎重,无法还原 )</div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th width='90px;'>代理商名称</th>
+                        <th width='90px;'>手机号码</th>
+                        <!--  <th>区域</th> -->
+                        <th width='130px;'>保证金</th>
+                        <th width='130px;'>提成比例</th>
+                        <th width='95px;'>创建时间</th>
+                        <th width='95px;'>更新时间</th>
+                        <th width='80px;'>状态</th>
+                        <th width='115px;'>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">
+                        <td>{{data.nickname}}</td>
+                        <td>{{data.mobile}}</td>
+                        <!-- <td>
+                           {{data.area}}<a ng-click="updateArea(data.id)"> &nbsp;编辑</a>
+                           <a ng-if='data.delete_flag==1' ng-click='delAgentArea(data.id)' style='color:red'> &nbsp;取消所有代理区域</a>
+                         </td> -->
+                        <td ng-init='data.id_updateMoney=false;pop.minusDepositMoney=false'>
+                            <span ng-if='data.id_updateMoney!=true'>{{data.deposit_money}}</span>
+                            <input ng-if='data.id_updateMoney==true' style='width:80px;'
+                                   id='{{data.user_id}}_updateMoney' value='{{data.deposit_money}}'>
+                            <a ng-if='data.delete_flag==1 && data.id_updateMoney!=true'
+                               ng-click="data.id_updateMoney=true"> &nbsp;编辑</a>
+                            <a ng-if='data.delete_flag==1 && data.id_updateMoney==true'
+                               ng-click="updateDepositMoney(data.user_id,data.id_updateMoney)"> &nbsp;保存</a>
+                            <a ng-if='data.delete_flag==1 && data.id_updateMoney!=true' id='minusDepositMoney{{$index}}'
+                               class="js-add-sku-atom add-sku" ng-click="pop.minusDepositMoney=true"
+                               style="font-style:normal;"> &nbsp;解冻</a>
+                            <dialog ng-if="pop.minusDepositMoney==true" for="minusDepositMoney{{$index}}" align="right">
+                                <div dialog-content>
+                                    <div class="popover-content text-center form-inline">
+                                        <div>
+                                            <span style='color:#AAAAAA;'>保证金 : </span>{{data.deposit_money}} -
+                                            <span style='color:#AAAAAA;'> 解冻保证金: </span><input style='width:100px;'
+                                                                                               ng-model='agentMinusDepositMoney'
+                                                                                               type='number'
+                                                                                               placeholder='请输入需要解冻的保证金额'>
+                                            =
+                                            <span style='color:#AAAAAA;'> 总金额 : </span>{{data.deposit_money-agentMinusDepositMoney}}
+                                        </div>
+                                        <div>
+                                            <br>
+                                            <button type="button"
+                                                    class="btn btn-primary js-btn-confirm"
+                                                    data-loading-text="确定"
+                                                    ng-click="minusDepositMoney(data.user_id,pop,data.deposit_money,agentMinusDepositMoney)">
+                                                确定
+                                            </button>
+                                            <button type="reset" class="btn js-btn-cancel"
+                                                    ng-click="pop.minusDepositMoney=false">取消
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dialog>
+                            <a ng-if='data.delete_flag==0' id='addDepositMoney{{$index}}'
+                               class="js-add-sku-atom add-sku" ng-click="pop.addDepositMoney=true"
+                               style="font-style:normal;"> &nbsp;添加</a>
+                            <dialog ng-if="pop.addDepositMoney==true" for="addDepositMoney{{$index}}" align="right">
+                                <div dialog-content>
+                                    <div class="popover-content text-center form-inline">
+                                        <div>
+                                            <span style='color:#AAAAAA;'>保证金 : </span>{{data.deposit_money}} +
+                                            <span style='color:#AAAAAA;'> 添加保证金: </span><input style='width:100px;'
+                                                                                               ng-model='agentAddDepositMoney'
+                                                                                               type='number'
+                                                                                               placeholder='请输入添加的保证金额'>
+                                            =
+                                            <span style='color:#AAAAAA;'> 总金额 : </span>{{data.deposit_money+agentAddDepositMoney}}
+                                        </div>
+                                        <div>
+                                            <br>
+                                            <button type="button"
+                                                    class="btn btn-primary js-btn-confirm"
+                                                    data-loading-text="确定"
+                                                    ng-click="addDepositMoney(data.user_id,pop,data.deposit_money+agentAddDepositMoney,agentAddDepositMoney)">
+                                                确定
+                                            </button>
+                                            <button type="reset" class="btn js-btn-cancel"
+                                                    ng-click="pop.addDepositMoney=false">取消
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dialog>
+                        </td>
+                        <td ng-init='data.id_del=false'>
+				<span ng-if='data.id_del !=true'>
+					{{data.commission_rate}}
+					<a class="js-add-sku-atom add-sku" ng-click="data.id_del=true"
+                       style="font-style:normal;"> &nbsp;编辑</a>
+				</span>
+                            <span ng-if='data.id_del==true'>
+					<input style='width:80px;' id='{{data.id}}_commission_rate' value='{{data.commission_rate}}'>
+					<a class="js-add-sku-atom add-sku" ng-click="update_commission_rate(data.id)"
+                       style="font-style:normal;"> &nbsp;保存</a>
+				</span>
+                        </td>
+                        <td>{{data.create_time}}</td>
+                        <td>{{data.update_time}}</td>
+                        <td>
+                            <span ng-if="data.status==0">未审核</span>
+                            <span ng-if="data.status==1">审核中</span>
+                            <span ng-if="data.status==2">审核通过</span>
+                            <span ng-if="data.status==3">审核不通过</span>
+                        </td>
+                        <td style='text-align:left;'>
+                            <a class="js-add-sku-atom add-sku" ng-click="openSupplierCommissionRate(data.id)"
+                               style="font-style:normal;">供应商提成比例</a>
+                            </br>
+                            <a ng-if='data.delete_flag==0' class="js-add-sku-atom add-sku" ng-click="del(data.id,1)"
+                               style="font-style:normal;color:red;">封号</a>
+                            <a ng-if='data.delete_flag==1' class="js-add-sku-atom add-sku" ng-click="del(data.id,0)"
+                               style="font-style:normal;">解冻</a>
+                            <a id="console{{$index}}" class="js-add-sku-atom add-sku"
+                               ng-click="loadSelect(pop={save_show:true})" style="font-style:normal"> &nbsp; 审核</a>
+                            <dialog ng-show="pop.save_show==true" for="console{{$index}}" align="left"
+                                    close="pop.save_show=false" close-action="outerchick">
+                                <div dialog-content>
+                                    <div class="popover-content text-center form-inline">
+                                        <div>
+                                            <select id="status_{{data.id}}"
+                                                    ng-init="selectedName = selectValue[2].value"
+                                                    ng-model="selectedName"
+                                                    ng-options="zhuang.value as zhuang.name for zhuang in selectValue">
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <br>
+                                            <button type="button"
+                                                    class="btn btn-primary js-btn-confirm"
+                                                    data-loading-text="确定"
+                                                    ng-click="save(data.id,pop)">确定
+                                            </button>
+                                            <button type="reset" class="btn js-btn-cancel"
+                                                    ng-click="pop.save_show=false">取消
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dialog>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

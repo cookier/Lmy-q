@@ -1,0 +1,133 @@
+<link rel="stylesheet" href="css/order.css" type="text/css">
+<style>
+    .comments {
+        padding-left: 60px;
+        margin-top: 15px;
+    }
+
+    .comments .user_img {
+        top: -5px;
+    }
+
+    .comments .user_img img {
+        width: 40px;
+        border-radius: 100%;
+    }
+
+    .comment .comment_content {
+        margin-left: 60px;
+        padding-right: 70px;
+    }
+
+    .comments .comment_content {
+        margin-left: 50px;
+        padding-right: 60px;
+    }
+
+    .content_del {
+        padding-left: 50px;
+        color: #157c8c;
+    }
+</style>
+<div class="app-init-container" ng-controller="WeatherListController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form">
+                        <div class="clearfix" ng-enter='pageChanged()'>
+                            <div class="filter-groups">
+                                <div class="pull-left">
+                                    <div class="time-filter-groups clearfix">
+                                        <div class="control-group">
+                                            <label class="control-label">查询时间：</label>
+                                            <div class="controls">
+                                                <input type="text" id="beginCreateTime" ng-model="data.beginCreateTime"
+                                                       date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                       class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                                <input type="text" id="endCreateTime" ng-model="data.endCreateTime"
+                                                       date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                       class="Wdate" style="width: 150px; height: 30px;"> <span
+                                                    class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                                                <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">地区：</label>
+                                    <div class="controls">
+                                        <input type="text" name="area" ng-model="data.area" value=""
+                                               placeholder="请输入地区!" style="height: 30px;">
+                                        <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                           data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="ui-nav clearfix">
+                        <div class="common-helps-entry pull-right hide">
+                            <a href="#" target="_blank"> <span class="help-icon"></span>
+                                订单类型简介及管理方法
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>地区</th>
+                        <th width='100px'>日期</th>
+                        <th width='80px'>天气</th>
+                        <th>空气指数</th>
+                        <th>生活指数</th>
+                        <th width='100px'>更新日期</th>
+                        <th width='45px' style='text-align:right;'>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="widget-list-item" ng-repeat="data in pageData.list track by data.id">
+                    <tr ng-init='data_index=$index;data.stateUpdate=true;data.editContent=false;data.content_index=1;'>
+                        <td style='line-height:16px;'>
+                            {{data.area}}
+                        </td>
+                        <td>{{data.weather_date}}</td>
+                        <td>{{data.weather}}</td>
+                        <td>
+                            <div ng-repeat="(key,val) in data.adviseDetail" style='margin-bottom:10px;'>
+                                {{key}} : {{val.title}} ( {{val.desc}} )
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-repeat="(key,val) in data.aqiDetail" style='margin-bottom:10px;'>
+                                {{key}} : {{val.title}} ( {{val.desc}} )
+                            </div>
+                        </td>
+                        <td>{{data.update_time}}</td>
+                        <td style='text-align:right;'><a>同步</a></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='') || !pageData.list"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

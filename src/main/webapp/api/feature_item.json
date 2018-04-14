@@ -1,0 +1,30 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "id": "",
+    "alias": "7syjrvtu",
+    "template_data": [
+      {
+        "type": "config",
+        "title": "微页面标题",
+        "category": [],
+        "background": "",
+        "color": "#f9f9f9",
+        "width": "",
+        "height": "",
+        "description": ""
+      },
+      {
+        "type": "search"
+      },
+      {
+        "type": "rich_text",
+        "content": "<p>这是富文本</p>",
+        "color": "#ffffff",
+        "fullscreen": 0
+      }
+    ],
+    "is_display": "0"
+  }
+}

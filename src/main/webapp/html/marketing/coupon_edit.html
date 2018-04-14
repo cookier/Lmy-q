@@ -1,0 +1,483 @@
+<link rel="stylesheet" href="./css/tradeincard_3041b87d27.css"
+      type="text/css">
+
+<div class="app-init-container" ng-controller="CouponEditController">
+    <form class="form-horizontal form-validation" name="form">
+        <div class="app__content js-app-main">
+            <div id="544313" class="app-design clearfix">
+                <div class="page-tradeincard">
+                    <h2 class="ump-title">设置店铺优惠券</h2>
+
+                    <div class="app-preview">
+                        <div class="app-header"></div>
+                        <div class="app-entry">
+                            <div class="app-config js-config-region">
+                                <div class="app-field clearfix editing">
+                                    <h1>
+                                        <span>优惠券</span>
+                                    </h1>
+                                    <div class="app-field-wrap editing">
+                                        <div class="weixin-card-show"
+                                             ng-show="coupon.sync_wechat_flag==1">
+                                            <div class="card"
+                                                 style="background-color: {{coupon.background_value||'#cf3e36'}}">
+                                                <img
+                                                        src="./img/logo.jpg"
+                                                        class="card-shop-logo">
+                                                <p class="card-shop-name">云中邦商城</p>
+                                                <div class="card-info">
+                                                    <h2>{{coupon.wechat_card_title||'微信卡券标题'}}</h2>
+                                                    <p>{{coupon.wechat_card_sub_title||'购买订单满xx元可以使用'}}</p>
+                                                    <p style="color: #e8e8e8;">
+                                                        有效期：{{coupon.valid_time}}至{{coupon.expire_time}}</p>
+                                                </div>
+                                                <div class="card-divide"></div>
+                                            </div>
+                                            <div class="card-code">
+                                                <h2>H7MR XXXX ZKSM</h2>
+                                                <p class="used-mall">请在云中帮微商城购物使用</p>
+                                            </div>
+                                            <p class="about-card-desc" style="margin-top: 20px;">(微信卡券包)</p>
+                                            <div class="divide-line"></div>
+                                            <p class="about-card-desc">(云中邦微商城优惠券)</p>
+                                        </div>
+
+                                        <div class="ump-coupon-detail-wrap">
+                                            <div class="promote-card">
+                                                <div class="clearfix">
+                                                    <h2 class="pull-left font-size-16 promote-card-name">
+                                                        {{coupon.name||'优惠券标题'}}</h2>
+                                                    <p
+                                                            class="pull-right font-size-14 center promote-share transparent-color js-share">
+                                                        分享</p>
+                                                </div>
+                                                <p class="center promote-value">
+													<span class="promote-value-sign"> <span>￥</span> <i>
+															{{coupon.amount||0}} </i>
+													</span>
+                                                </p>
+                                                <p class="center font-size-14 promote-limit">订单满
+                                                    {{coupon.order_money_limit||'xx'}}元 (含运费)</p>
+                                                <p class="font-size-14 transparent-color">
+                                                    有效日期：{{coupon.valid_time}}至{{coupon.expire_time}}</p>
+                                                <div class="dot"></div>
+                                            </div>
+
+                                            <div class="promote-desc">
+                                                <h2 class="font-size-14 c-gray-dark promote-desc-title">使用说明</h2>
+                                                <div class="block">
+                                                    <div class="block-item clearfix">
+														<span class="js-desc-detail">{{coupon.use_instructions||'暂无使用说明……'}}
+														</span> <a class="c-blue more-desc pull-right js-more-desc"
+                                                                   href="javascript:void(0)">更多</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="app-fields js-fields-region">
+                                <div class="app-fields ui-sortable"></div>
+                            </div>
+                        </div>
+                        <div class="js-add-region">
+                            <div></div>
+                        </div>
+                    </div>
+
+                    <div class="app-sidebar" style="margin-top: 71px;">
+                        <div class="arrow"></div>
+                        <div class="app-sidebar-inner js-sidebar-region">
+                            <div>
+                                <h1 class="config-title">优惠券基础信息</h1>
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>优惠券名称：</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" ng-model="coupon.name"
+                                               maxlength="10" value="" style="width: 250px;"
+                                               placeholder="最多支持10个字" required="required">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required"></em>类型：</label>
+                                    <i ng-show="isNew==false">
+                                        <div class="controls">
+                                            <i ng-if="coupon.type==1">
+                                                <label class="i-checks i-checks-sm"> <i></i>普通优惠券
+                                                </label>
+                                            </i>
+                                            <i ng-if="coupon.type==2">
+                                                <label class="i-checks i-checks-sm"> <i></i>购物券
+                                                </label>
+                                            </i>
+                                        </div>
+                                    </i>
+                                    <i ng-show="isNew==true">
+                                        <div class="controls">
+                                            <label class="i-checks i-checks-sm"> <input
+                                                    name="type" type="radio"
+                                                    value="1" ng-model="coupon.type"> <i></i>普通优惠券
+                                            </label>
+                                            <label class="i-checks i-checks-sm"> <input
+                                                    name="type" type="radio"
+                                                    value="2" ng-model="coupon.type"> <i></i>购物券
+                                            </label>
+                                        </div>
+                                    </i>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>发放总量：</label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <div style="width: 150px;">
+                                                <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                       id="input_Total"
+                                                       data-min='1' data-max="999999999"
+                                                       ng-model="coupon.issue_quantity"
+                                                       data-verticalbuttons="true"
+                                                       data-verticalupclass="fa fa-caret-up"
+                                                       data-verticaldownclass="fa fa-caret-down"
+                                                       required="required">
+                                            </div>
+                                        </div>
+                                        <span class="add-on"> 张 </span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>面值：</label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <div style="width: 150px;">
+                                                <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                       id="input_face"
+                                                       data-min='0.01' data-max="999999999" data-step="0.01"
+                                                       data-decimals="2" ng-model="coupon.amount"
+                                                       data-verticalbuttons="true"
+                                                       data-verticalupclass="fa fa-caret-up"
+                                                       data-verticaldownclass="fa fa-caret-down"
+                                                       required="required">
+                                            </div>
+                                        </div>
+                                        <span class="add-on"> 元 </span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>订单金额：</label>
+                                    <div class="controls">
+                                        <label class="i-checks i-checks-sm"> <input
+                                                name="is_at_least" ng-click="resetLimit()" type="radio"
+                                                value="0" ng-model="coupon.order_limit_flag"> <i></i>不限制
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"></label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <label class="i-checks i-checks-sm"> <input
+                                                    name="is_at_least" type="radio" value="1"
+                                                    ng-model="coupon.order_limit_flag"><i></i> 满
+                                            </label>
+                                        </div>
+                                        <div class="input-append">
+                                            <div style="width: 150px;">
+                                                <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                       data-min='0.01' data-max="999999999" data-max="999999999"
+                                                       data-step="0.01" data-decimals="2"
+                                                       ng-disabled="coupon.order_limit_flag==0"
+                                                       ng-model="coupon.order_money_limit"
+                                                       data-verticalbuttons="true"
+                                                       data-verticalupclass="fa fa-caret-up"
+                                                       data-verticaldownclass="fa fa-caret-down"
+                                                       required="required">
+                                            </div>
+                                        </div>
+                                        <span class="add-on"> 元可使用 </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="control-group">
+                                    <label class="control-label">同步发布至：</label>
+                                    <div class="controls">
+                                        <label class="i-checks i-checks-sm"> <input
+                                                type="checkbox" ng-true-value="1" ng-false-value="0"
+                                                ng-checked="coupon.sync_wechat_flag==1"
+                                                class="js-sync-weixin" ng-model="coupon.sync_wechat_flag"><i></i>微信卡券(包)<a
+                                                class="to-helps" href=""
+                                                target="_blank">帮助</a>
+                                        </label>
+
+                                        <p class="help-desc">如您的微信公众号没有开通卡券权限，将由云中邦代发券。同步至微信卡包后，需等待微信审核通过，才能领取；</p>
+
+                                    </div>
+                                </div>
+
+                                <div class="control-group" ng-show="coupon.sync_wechat_flag==1">
+                                    <label class="control-label"><em class="required">*</em>卡券颜色：</label>
+                                    <div class="controls">
+                                        <div class="dropdown hover card-bgcolor">
+                                            <div class="btn dropdown-toggle" data-toggle="dropdown"
+                                                 type="button" style="border: 1px thin #000;">
+												<span class="card-bgcolor-show"
+                                                      style="background-color: {{coupon.background_value||'#cf3e36'"></span>
+                                                <span class="caret"></span> <input type="hidden"
+                                                                                   ng-model="coupon.background_value"/>
+                                            </div>
+                                            <ul class="dropdown-menu clearfix">
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #63b359" data-value="#63b359"
+                                                    ng-click="setBgColor('#63b359')" data-name="Color010"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #2c9f67" data-value="#2c9f67"
+                                                    ng-click="setBgColor('#2c9f67')" data-name="Color020"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #509fc9" data-value="#509fc9"
+                                                    ng-click="setBgColor('#509fc9')" data-name="Color030"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #5885cf" data-value="#5885cf"
+                                                    ng-click="setBgColor('#5885cf')" data-name="Color040"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #9062c0" data-value="#9062c0"
+                                                    ng-click="setBgColor('#9062c0')" data-name="Color050"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #d09a45" data-value="#d09a45"
+                                                    ng-click="setBgColor('#d09a45')" data-name="Color060"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #e4b138" data-value="#e4b138"
+                                                    ng-click="setBgColor('#e4b138')" data-name="Color070"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #ee903c" data-value="#ee903c"
+                                                    ng-click="setBgColor('#ee903c')" data-name="Color080"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #f08500" data-value="#f08500"
+                                                    ng-click="setBgColor('#f08500')" data-name="Color081"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #a9d92d" data-value="#a9d92d"
+                                                    ng-click="setBgColor('#a9d92d')" data-name="Color082"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #dd6549" data-value="#dd6549"
+                                                    ng-click="setBgColor('#dd6549')" data-name="Color090"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #cc463d" data-value="#cc463d"
+                                                    ng-click="setBgColor('#cc463d')" data-name="Color100"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #cf3e36" data-value="#cf3e36"
+                                                    ng-click="setBgColor('#cf3e36')" data-name="Color101"></li>
+                                                <li class="js-card-bgcolor card-bgcolor-box"
+                                                    style="background-color: #5E6671" data-value="#5E6671"
+                                                    ng-click="setBgColor('#5E6671')" data-name="Color102"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" ng-show="coupon.sync_wechat_flag==1">
+                                    <label class="control-label"><em class="required">*</em>卡券标题：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="coupon.wechat_card_title"
+                                               maxlength="9" style="width: 150px;"
+                                               ng-required="coupon.sync_wechat_flag==1" class="form-control"
+                                               placeholder="最多可输入9个字" required="required">
+                                        <p class="help-desc">
+                                            建议填写代金券“减免金额”及自定义内容，描述卡券提供的<br>具体优惠。例如：贝塔咖啡5元代金券
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" ng-show="coupon.sync_wechat_flag==1">
+                                    <label><em class="required">*</em>卡券副标题：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="coupon.wechat_card_sub_title"
+                                               style="width: 300px;"
+                                               ng-required="coupon.sync_wechat_flag==1" class="form-control"
+                                               maxlength="18" placeholder="最多可输入18个字" required="required">
+                                    </div>
+                                </div>
+
+                                <h1 class="config-title">基本规则</h1>
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>会员等级：</label>
+                                    <div class="controls">
+                                        <select class="input-sm form-control w-sm inline v-middle"
+                                                ng-model="coupon.vip_level_limit"
+                                                ng-options="card.id as card.card_name for card in memberCards">
+                                            <option value="">所有会员等级</option>
+                                        </select> 可领取
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>每人限领：</label>
+                                    <div class="controls">
+                                        <select name="quota"
+                                                class="input-sm form-control w-sm inline v-middle"
+                                                ng-model="coupon.each_one_limit_count">
+                                            <option value="0" selected="">不限张</option>
+                                            <option value="1">1张</option>
+                                            <option value="2">2张</option>
+                                            <option value="3">3张</option>
+                                            <option value="4">4张</option>
+                                            <option value="5">5张</option>
+                                            <option value="10">10张</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>生效时间：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="coupon.valid_time"
+                                               required="required"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}' class="Wdate"
+                                               style="width: 150px; height: 30px;">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>过期时间：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="coupon.expire_time"
+                                               required="required"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}' class="Wdate"
+                                               style="width: 150px; height: 30px;">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">同步打标签：</label>
+                                    <div class="controls">
+                                        <ui-select multiple ng-model="multipleTags.selectedTags"
+                                                   theme="bootstrap" ng-disabled="disabled">
+                                            <ui-select-match
+                                                    placeholder="选择标签!">{{$item.label_name}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                    style="width:100px;" group-by="id"
+                                                    repeat="memberTag in memberTags | memberTagPropsFilter: {label_name:$select.search}">
+                                                <div
+                                                        ng-bind-html="memberTag.label_name | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <p class="help-inline">
+                                            <a href="javascript:;" class="js-refresh-fans-tag"> 刷新</a> |
+                                            <a ui-sref="app.customer_label_edit">新建</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">到期提醒：</label>
+                                    <div class="controls">
+                                        <label class="i-checks i-checks-sm"> <input
+                                                type="checkbox" ng-model="coupon.expire_flag"
+                                                ng-true-value="1" ng-false-value="0"
+                                                ng-checked="coupon.expire_flag==1"><i></i>到期前4天提醒一次
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">推广设置：</label>
+                                    <div class="controls">
+                                        <label class="i-checks i-checks-sm"> <input
+                                                type="checkbox" ng-model="coupon.extend_setting"
+                                                ng-true-value="1" ng-false-value="0"
+                                                ng-checked="coupon.extend_setting==1"><i></i>
+                                            允许分享领取链接
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>可使用商品：</label>
+                                    <div class="controls">
+                                        <label class="i-checks i-checks-sm"> <input
+                                                ng-model="coupon.use_range" value=1 type="radio"
+                                                checked="checked"><i></i>本店通用
+                                        </label> <label class="i-checks i-checks-sm">
+                                        <!-- range_type : single 兼容宝贝券数据 -->
+                                        <input ng-model="coupon.use_range" type="radio" value="2"><i></i>指定商品
+                                    </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <div class="controls" ng-show="coupon.use_range!=0">
+                                        <table class="assign-goods-list ui-table js-goods-list">
+                                            <thead>
+                                            <tr>
+                                                <th class="cell-80">商品名称</th>
+                                                <th class="cell-20">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-model="selectedGoods"
+                                                ng-repeat="goods in selectedGoods">
+                                                <td><a>{{goods.title}}</a></td>
+                                                <td><a ng-click="delGoods(goods)">删除</a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <a ng-click="selectGoods()" class="add-goods js-add-goods">
+                                            + 添加商品</a>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"></label>
+                                    <div class="controls">
+                                        <label class="i-checks i-checks-sm"> <input
+                                                type="checkbox" ng-checked="coupon.used_by_fullrates==1"
+                                                ng-true-value="1" ng-false-value="0"
+                                                ng-model="coupon.used_by_fullrates"><i></i>仅原价购买商品时可用
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"></label>
+                                    <div class="controls">
+                                        <label class="i-checks i-checks-sm"> <input
+                                                type="checkbox" ng-checked="coupon.can_accumulate==1"
+                                                ng-true-value="1" ng-false-value="0"
+                                                ng-model="coupon.can_accumulate"><i></i>是否允许叠加使用
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">使用说明：</label>
+                                    <div class="controls">
+										<textarea ng-model="coupon.use_instructions"
+                                                  style="width: 320px;" cols="50" rows="3"
+                                                  placeholder="填写活动的详细说明，支持换行;"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="app-actions" style="bottom: 0px;">
+                        <div class="form-actions text-center">
+                            <input class="btn js-btn-quit" type="button" value="取 消"
+                                   ng-click="cancel()"> <input
+                                class="btn btn-primary js-btn-save" type="submit"
+                                ng-disabled="form.$invalid" ng-click="save()" value="保 存"
+                                data-loading-text="保 存...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

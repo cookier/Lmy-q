@@ -1,0 +1,142 @@
+<style>
+    .balance {
+        border: 1px solid #ccc;
+        height: 80px;
+    }
+
+    .money {
+        line-height: 40px;
+        font-size: 24px;
+        color: #f60;
+    }
+
+    .balance-info {
+        float: left;
+        width: 25%;
+        border-right: 1px solid #ccc;
+        padding: 9px;
+    }
+
+    .balance-info:last-child {
+        border-right: none;
+    }
+</style>
+<div class="app-init-container" ng-controller="BalanceTreasureController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;"
+                          ng-enter='pageChanged()'>
+                        <div class="balance">
+                            <div class="balance-info">
+                                <div class="balance-title">平台账号可用余额</div>
+                                <div class="balance-content">
+                                    <span class="money">{{sumMoney.available_money}}</span>
+                                    <span class="unit">元</span>
+                                    <!-- <a ui-sref="supplier.income_detail" class="pull-right">收支明细</a> -->
+                                </div>
+                            </div>
+                            <div class="balance-info">
+                                <div class="balance-title">客户累积分红名额</div>
+                                <div class="balance-content">
+                                    <span class="money">{{sumMoney.bonus_num}}</span>
+                                    <span class="unit">元</span>
+                                    <!--  <a ui-sref="supplier.trading_list" class="pull-right">待结算记录</a>-->
+                                </div>
+                            </div>
+                            <div class="balance-info">
+                                <div class="balance-title">客户累积分红金额</div>
+                                <div class="balance-content">
+                                    <span class="money money-font">{{sumMoney.bonus_money}}</span>
+                                    <span class="unit">元</span>
+                                    <!--  <a ui-sref="supplier.rechargeMoney" class="ui-btn ui-btn-primary pull-right js-recharge-money">充值</a>
+                                     <a ui-sref="supplier.applyWithdrawal" class="ui-btn ui-btn-primary pull-right btn-margin-right">提现</a> -->
+                                </div>
+                            </div>
+                            <div class="balance-info">
+                                <div class="balance-title">客户余额宝累积收益金额</div>
+                                <div class="balance-content">
+                                    <span class="money money-font">{{sumMoney.balance_money}}</span>
+                                    <span class="unit">元</span>
+                                    <!--  <a ui-sref="supplier.rechargeMoney" class="ui-btn ui-btn-primary pull-right js-recharge-money">充值</a>
+                                     <a ui-sref="supplier.applyWithdrawal" class="ui-btn ui-btn-primary pull-right btn-margin-right">提现</a> -->
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="filter-groups" style='float:left;'>
+                        <div class="control-group">
+                            <label class="control-label">手机号码：</label>
+                            <input type="text" ng-model="mobile" style="height: 30px;">
+                        </div>
+                    </div>
+                    <div class="pull-left" style='float:left;'>
+                        <div class="time-filter-groups clearfix">
+                            <div class="control-group">
+                                <label class="control-label" style='margin-left:40px;'>时间：</label>
+                                <input type="text" id="beginCreateTime" ng-model="beginCreateTime"
+                                       date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                       class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                <input type="text" id="endCreateTime" ng-model="endCreateTime"
+                                       date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                       class="Wdate" style="width: 150px; height: 30px;"> <span
+                                    class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                                <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                                <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                   data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="ui-box">
+            <table class="ui-table-order" style="padding: 0px;">
+                <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                <tr class="widget-list-header">
+                    <th>手机号码</th>
+                    <th>更新时间</th>
+                    <th width='95px'>累积分红名额</th>
+                    <th width='95px'>累积分红金额</th>
+                    <th width='95px'>余额累积收益</th>
+                    <th width='80px'>查询详情</th>
+                </tr>
+                </thead>
+                <tbody class="js-list-body-region">
+                <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">
+                    <td>{{data.mobile}} &nbsp; {{data.nickname}}</td>
+                    <td>{{data.update_time}}</td>
+                    <td style='text-align:right;'>{{data.bonus_num?data.bonus_num:0}}</td>
+                    <td style='text-align:right;'>{{data.bonus_money?data.bonus_money:0}}</td>
+                    <td style='text-align:right;'>
+                        {{data.balance_money?data.balance_money:0}}
+                    </td>
+                    <td style='text-align:center;'>
+                        <a href="#/console/balance_treasure_detail/{{data.user_id}}">查看</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="js-list-empty-region"></div>
+        </div>
+        <div class="js-list-footer-region ui-box">
+            <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                   total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                   page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                   previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                   last-text="&raquo;"></custom-pagination>
+            </div>
+            <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                 style="text-align: center;">没有找到相关记录!
+            </div>
+        </div>
+    </div>
+</div>
+</div>

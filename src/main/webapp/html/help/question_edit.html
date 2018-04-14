@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="./css/reward_694598e089.css"
+      type="text/css">
+
+<div class="app-init-container"
+     ng-controller="QuestionEditController">
+    <div class="app__content js-app-main">
+        <div class="app-design-wrap">
+            <div class="page-reward clearfix">
+                <h2 class="reward-title">问题描述</h2>
+                <div class="app-reward">
+                    <form class="form-horizontal form-validation" name="form">
+                        <div class="reward-info">
+                            <div class="js-basic-info-region">
+                                <div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>问题标签：</label>
+                                        <!-- <input type="text" class="form-control"
+                                            ng-model="question.keywords" maxlength="50"
+                                            style="width: 200px; vertical-align: baseline;"
+                                            placeholder="请填写问题标签！" required="required"> -->
+                                        <div class="controls">
+                                            <ui-select multiple ng-model="multipleKeywords.selectedTags"
+                                                       theme="bootstrap" ng-disabled="disabled">
+                                                <ui-select-match placeholder="选择标签分组!">{{$item.name}}
+                                                    <!-- <span ng-bind="$item.name"></span> -->
+                                                </ui-select-match>
+                                                <ui-select-choices group-by="id"
+                                                                   repeat="kw in keywords | propsFilter: {name: $select.search}">
+                                                    <div ng-bind-html="kw.name | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>问题描述：</label>
+                                        <textarea ng-model="question.content" rows="3" cols="100"
+                                                  required="required"></textarea>
+                                    </div>
+                                    <div class="control-group" ng-show="question.user_id>0">
+                                        <label class="control-label"><em class="required">*</em>相关图片：</label>
+                                        <div class="picture-list ui-sortable">
+                                            <ul class="js-picture-list app-image-list clearfix">
+                                                <li class="sort" ng-repeat="pic in pics">
+                                                    <img src="/console{{pic.url}}">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>问题答复：</label>
+                                        <div class="controls">
+                                            <div ng-repeat="reply in replies">
+                                                <p style="line-height: 30px;">
+                                                <div style="width: 200px;display:inline-block;">{{reply.nickName}}</div>
+                                                <div style="width: 200px;display:inline-block;"
+                                                     ng-show="reply.to!=null">to:
+                                                </div>
+                                                <div style="width: 200px;display:inline-block;">{{reply.to}}</div>
+                                                <div style="width: 200px;display:inline-block;">{{reply.time}}</div>
+                                                </p>
+
+                                                <p style="line-height: 30px;">
+                                                    <span ng-bind-html="reply.content"></span>
+                                                </p>
+                                                <hr>
+                                            </div>
+
+                                        </div>
+                                        <div class="controls" id="div_ue">
+                                            <div class="ueditor"
+                                                 style="width: 100%;height:300px;"
+                                                 ng-change="saveToCache();"
+                                                 config="_simpleConfig"
+                                                 ng-model="replyContent">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" ng-show="question.user_id>0">
+                                        <label class="control-label">提问时间：</label>
+                                        <div class="controls">
+                                            {{question.create_time}}
+                                        </div>
+                                    </div>
+                                    <div class="control-group" ng-show="question.user_id>0">
+                                        <label class="control-label">回复时间：</label>
+                                        <div class="controls">
+                                            {{question.update_time}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="app-actions">
+                            <div class="form-actions text-center">
+                                <input class="btn js-btn-quit" type="button" value="返回" ng-click="cancel()">
+                                <input class="btn btn-primary js-btn-save" type="button" value="保 存" ng-click="save()">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

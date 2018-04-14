@@ -1,0 +1,33 @@
+<form class="form-horizontal" novalidate>
+    <div class="control-group">
+        <label class="control-label"><em class="required">*</em>背景图片：</label>
+        <div class="controls">
+            <% if (background === '') { %>
+                <a class="control-action js-trigger-image" href="javascript: void(0);">选择图片</a>
+            <% } else { %>
+                <img src="<%= fullfillImage(background) %>" width="100" height="100" class="thumb-image">
+                <a class="control-action js-trigger-image" href="javascript: void(0);">修改</a>
+            <% } %>
+            <p class="help-block">建议尺寸：640 x 1080 像素</p>
+        </div>
+    </div>
+    <div class="control-group js-background-link">
+        <label class="control-label">背景链接：</label>
+        <div class="controls" name="link_url">
+            <%= renderLink(bg_link_url, bg_link_title, bg_link_type, {showDelete: false}) %>
+        </div>
+    </div>
+    <div class="control-group white-space-group">
+        <label class="control-label">导航位置：</label>
+        <div class="controls controls-slider">
+            <div class="js-slider white-space-slider"></div>
+            <div class="slider-height hide"><span class="js-top"><%= top %></span> %</div>
+        </div>
+    </div>
+    <div class="control-group js-collection-region">
+
+    </div>
+    <div class="control-group options js-add-subentry">
+        <a class="add-option js-add-option" href="javascript:void(0);"><i class="icon-add"></i> 添加一个导航链接</a>
+    </div>
+</form>

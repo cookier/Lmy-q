@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityParticipationBlanklistMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityParticipationBlanklist">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="activity_id" jdbcType="INTEGER" property="activityId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="ap_id" jdbcType="INTEGER" property="apId"/>
+        <result column="exclude_rule_ids" jdbcType="VARCHAR" property="excludeRuleIds"/>
+        <result column="activity_data_retain_flag" jdbcType="INTEGER" property="activityDataRetainFlag"/>
+        <result column="invalid_time" jdbcType="TIMESTAMP" property="invalidTime"/>
+        <result column="invalid_status" jdbcType="INTEGER" property="invalidStatus"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ActivityParticipationBlanklist">
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, activity_id, user_id, ap_id, exclude_rule_ids, activity_data_retain_flag, invalid_time, 
+    invalid_status
+  </sql>
+    <sql id="Blob_Column_List">
+    remark
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklistExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_participation_blanklist
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklistExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_participation_blanklist
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_participation_blanklist
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_participation_blanklist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklistExample">
+        delete from t_activity_participation_blanklist
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklist">
+    insert into t_activity_participation_blanklist (id, activity_id, user_id, 
+      ap_id, exclude_rule_ids, activity_data_retain_flag, 
+      invalid_time, invalid_status, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{apId,jdbcType=INTEGER}, #{excludeRuleIds,jdbcType=VARCHAR}, #{activityDataRetainFlag,jdbcType=INTEGER}, 
+      #{invalidTime,jdbcType=TIMESTAMP}, #{invalidStatus,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklist">
+        insert into t_activity_participation_blanklist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="apId != null">
+                ap_id,
+            </if>
+            <if test="excludeRuleIds != null">
+                exclude_rule_ids,
+            </if>
+            <if test="activityDataRetainFlag != null">
+                activity_data_retain_flag,
+            </if>
+            <if test="invalidTime != null">
+                invalid_time,
+            </if>
+            <if test="invalidStatus != null">
+                invalid_status,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="apId != null">
+                #{apId,jdbcType=INTEGER},
+            </if>
+            <if test="excludeRuleIds != null">
+                #{excludeRuleIds,jdbcType=VARCHAR},
+            </if>
+            <if test="activityDataRetainFlag != null">
+                #{activityDataRetainFlag,jdbcType=INTEGER},
+            </if>
+            <if test="invalidTime != null">
+                #{invalidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="invalidStatus != null">
+                #{invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklistExample"
+            resultType="java.lang.Long">
+        select count(*) from t_activity_participation_blanklist
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_participation_blanklist
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.activityId != null">
+                activity_id = #{record.activityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.apId != null">
+                ap_id = #{record.apId,jdbcType=INTEGER},
+            </if>
+            <if test="record.excludeRuleIds != null">
+                exclude_rule_ids = #{record.excludeRuleIds,jdbcType=VARCHAR},
+            </if>
+            <if test="record.activityDataRetainFlag != null">
+                activity_data_retain_flag = #{record.activityDataRetainFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.invalidTime != null">
+                invalid_time = #{record.invalidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.invalidStatus != null">
+                invalid_status = #{record.invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_activity_participation_blanklist
+        set id = #{record.id,jdbcType=INTEGER},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        ap_id = #{record.apId,jdbcType=INTEGER},
+        exclude_rule_ids = #{record.excludeRuleIds,jdbcType=VARCHAR},
+        activity_data_retain_flag = #{record.activityDataRetainFlag,jdbcType=INTEGER},
+        invalid_time = #{record.invalidTime,jdbcType=TIMESTAMP},
+        invalid_status = #{record.invalidStatus,jdbcType=INTEGER},
+        remark = #{record.remark,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_participation_blanklist
+        set id = #{record.id,jdbcType=INTEGER},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        ap_id = #{record.apId,jdbcType=INTEGER},
+        exclude_rule_ids = #{record.excludeRuleIds,jdbcType=VARCHAR},
+        activity_data_retain_flag = #{record.activityDataRetainFlag,jdbcType=INTEGER},
+        invalid_time = #{record.invalidTime,jdbcType=TIMESTAMP},
+        invalid_status = #{record.invalidStatus,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklist">
+        update t_activity_participation_blanklist
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="apId != null">
+                ap_id = #{apId,jdbcType=INTEGER},
+            </if>
+            <if test="excludeRuleIds != null">
+                exclude_rule_ids = #{excludeRuleIds,jdbcType=VARCHAR},
+            </if>
+            <if test="activityDataRetainFlag != null">
+                activity_data_retain_flag = #{activityDataRetainFlag,jdbcType=INTEGER},
+            </if>
+            <if test="invalidTime != null">
+                invalid_time = #{invalidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="invalidStatus != null">
+                invalid_status = #{invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklist">
+    update t_activity_participation_blanklist
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      ap_id = #{apId,jdbcType=INTEGER},
+      exclude_rule_ids = #{excludeRuleIds,jdbcType=VARCHAR},
+      activity_data_retain_flag = #{activityDataRetainFlag,jdbcType=INTEGER},
+      invalid_time = #{invalidTime,jdbcType=TIMESTAMP},
+      invalid_status = #{invalidStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityParticipationBlanklist">
+    update t_activity_participation_blanklist
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      ap_id = #{apId,jdbcType=INTEGER},
+      exclude_rule_ids = #{excludeRuleIds,jdbcType=VARCHAR},
+      activity_data_retain_flag = #{activityDataRetainFlag,jdbcType=INTEGER},
+      invalid_time = #{invalidTime,jdbcType=TIMESTAMP},
+      invalid_status = #{invalidStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

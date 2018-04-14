@@ -1,0 +1,395 @@
+<div class="modal-header">
+    <a class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+    <ul class="module-nav modal-tab js-modal-tab">
+        <li class="js-modal-tab-item js-modal-tab-upload active">
+            <a>活动规则</a></li>
+    </ul>
+</div>
+<div class="goods-edit-area" style="height: 600px;overflow: auto;">
+    <div id="step-content-region">
+        <form id="form_activity" name="form" class="form-validation form-horizontal fm-goods-info">
+            <div id="goods-info-region" class="goods-info-group">
+                <div class="goods-info-group-inner">
+                    <div class="info-group-cont">
+                        <div class="group-inner">
+                            <div class="control-group">
+                                <label class="control-label"><em class="required">*</em>活动规则名称：</label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" required
+                                           placeholder="请输入活动规则名称!" style="border-color:#CCCCCC;width: 300px"
+                                           ng-model="data.name">&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><em class="required">*</em>规则类型：</label>
+                                <div class="controls">
+                                    <select ng-model="data.rule_type" style="height: 30px;width: 100px;"
+                                            ng-disabled="data.id>0" ui-validate="'$value>0'" required>
+                                        <option value=0>请选择...</option>
+                                        <option value=1>排名规则</option>
+                                        <option value=2>奖励规则</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-if="data.rule_type==1">
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>排名依据：</label>
+                                    <div class="controls">
+                                        <select ng-model="data.extr_content.ranking_by"
+                                                style="height: 30px;width: 100px;" ui-validate="'$value>0'" required>
+                                            <option value="" selected>请选择</option>
+                                            <option value=1>销售额</option>
+                                            <option value=2>采购额</option>
+                                            <option value=3>利润</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">订单创建截止时间：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="data.extr_content.order_create_begin_time"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;">~
+                                        <input type="text" ng-model="data.extr_content.order_create_end_time"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">订单完成截止时间：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="data.extr_content.order_finished_begin_time"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;">~
+                                        <input type="text" ng-model="data.extr_content.order_finished_end_time"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;">
+                                    </div>
+                                </div>
+
+                                <!-- <div class="control-group">
+                                  <label class="control-label">首次统计时间：</label>
+                                  <div class="controls">
+                                    <input type="text" ng-model="data.extr_content.ranking_first_time"
+                                           date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                           class="Wdate" style="width: 150px; height: 30px;">
+                                  </div>
+                                </div>
+
+                                 -->
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>分销统计层级：</label>
+                                    <div class="controls">
+                                        <input type="number"
+                                               class="form-control ng-valid-max_price ng-valid-max ng-valid-required ng-dirty ng-valid-number ng-invalid ng-invalid-min_price ng-invalid-min ng-touched"
+                                               ng-model="data.extr_content.ranking_fx_level" min="1" step="1"
+                                               style="width:90px;height:30px;" ui-validate=" '$value >= 1' "
+                                               style="width:90px;height:30px;" placeholder="" required/>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>排名统计周期：</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control"
+                                               style="border-color:#CCCCCC;width: 100px"
+                                               ng-model="data.extr_content.ranking_cron" required>&nbsp;&nbsp;
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>统计任务截止时间：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="data.extr_content.ranking_end_time"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;" required>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">是否备份排名：</label>
+                                    <div class="controls">
+                                        <label class="checkbox inline">
+			          <span class="ui-tooltip">
+			              <input type="checkbox" ng-model="data.extr_content.backup_ranking_flag" ng-true-value="1"
+                                 ng-false-value="0">
+			          </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" ng-if="data.extr_content.backup_ranking_flag">
+                                    <label class="control-label">备份后是否重新排名：</label>
+                                    <div class="controls">
+                                        <label class="checkbox inline">
+			          <span class="ui-tooltip">
+			              <input type="checkbox" ng-model="data.extr_content.backup_clear_ranking_flag"
+                                 ng-true-value="1" ng-false-value="0">
+			          </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" ng-if="data.extr_content.backup_ranking_flag">
+                                    <label class="control-label"></em>排名备份周期：</label>
+                                    <div class="controls">
+                                        <!-- <select ng-model="data.extr_content.ranking_history_period_by" style="height: 30px;width: 100px;">
+                                          <option value="" selected>请选择</option>
+                                          <option value=1>按照统计周期</option>
+                                          <option value=2>按照指定周期</option>
+                                        </select> -->
+
+                                        <input type="text" class="form-control"
+                                               style="border-color:#CCCCCC;width: 100px"
+                                               ng-model="data.extr_content.backup_ranking_cron"
+                                               ng-required="data.extr_content.backup_ranking_flag">&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ------------------------------------------------------------ -->
+                            <div ng-if="data.rule_type==2">
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>领取方式：</label>
+                                    <div class="controls">
+                                        <select ng-model="data.receive_type" style="height: 30px;width: 100px;">
+                                            <option value="">请选择</option>
+                                            <option value=0>系统自动发放</option>
+                                            <option value=1>平台客服发放</option>
+                                            <option value=2>自领</option>
+                                            <option value=3>任意</option>
+                                            <option value=4>快递</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>奖励对象：</label>
+                                    <div class="controls">
+                                        <select ng-model="data.rewards_object" style="height: 30px;width: 100px;">
+                                            <option value="">请选择</option>
+                                            <option value=0>所有会员</option>
+                                            <option value=1>平台</option>
+                                            <option value=2>所有店铺</option>
+                                            <option value=3>所有分销商店铺</option>
+                                            <option value=4>指定分销商店铺</option>
+                                            <option value=5>所有供应商店铺</option>
+                                            <option value=6>指定供应商店铺</option>
+                                            <option value=7>指定会员</option>
+                                            <option value=8>活动参与者</option>
+                                            <option value=9>活动推广者</option>
+                                            <option value=10>指定分销商</option>
+                                            <option value=11>指定供应商</option>
+                                            <option value=12>指定代理商</option>
+                                            <option value=13>所有分销商</option>
+                                            <option value=14>所有供应商</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group" ng-if="false">
+                                    <label class="control-label"><em class="required">*</em>发放时间：</label>
+                                    <div class="controls">
+                                        <input type="text" id="beginCreateTime" ng-model="data.begin_time"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;" required>
+                                        <span>至</span>
+                                        <input type="text" id="endCreateTime" ng-model="activity.end_time"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label"><em class="required">*</em>奖品：</label>
+                                    <div class="controls">
+                                        <select ng-model="data.prize_type" style="height: 30px;width: 100px;"
+                                                ng-change="showHidden()">
+                                            <option value="">请选择</option>
+                                            <option value=1>优惠券</option>
+                                            <option value=2>购物券</option>
+                                            <option value=3>优惠码</option>
+                                            <option value=4>商品</option>
+                                            <option value=5>实物</option>
+                                            <option value=6>积分</option>
+                                            <option value=7>平台返现</option>
+                                            <option value=8>分红</option>
+                                        </select>
+                                        <a ng-click="selectData(data)" class="js-add-sku-atom add-sku"
+                                           ng-show="data.prize_type==1||data.prize_type==2||data.prize_type==3||data.prize_type==4">选择</a>
+                                    </div>
+                                </div>
+                                <div class="control-group" ng-if="selectedData">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="widget-list-header">
+                                            <th>名称</th>
+                                            <th>创建时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tr>
+                                            <td>{{selectedData.name}}</td>
+                                            <td>{{selectedData.create_time}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div ng-if="distribution">
+                                    <div class="control-group">
+                                        <label class="control-label">平台用于分红总额限制：</label>
+                                        <div class="controls">
+                                            <div class="input-prepend" style="width: 200px;">
+                                                <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                       data-min='0' data-max="999999999" data-step="0.01"
+                                                       data-decimals="2" data-prefix="￥"
+                                                       ng-model="data.extr_content.bonus_profit_limit_min">
+                                            </div>
+                                            &nbsp;&nbsp;~&nbsp;&nbsp;
+                                            <div class="input-prepend" style="width: 200px;">
+                                                <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                       data-min='0' data-max="999999999" data-step="0.01"
+                                                       data-decimals="2" data-prefix="￥"
+                                                       ng-model="data.extr_content.bonus_profit_limit_max">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>平台用户分红利润比例：</label>
+                                        <div class="controls">
+                                            <input type="number"
+                                                   class="form-control ng-valid-max_price ng-valid-max ng-valid-required ng-dirty ng-valid-number ng-invalid ng-invalid-min_price ng-invalid-min ng-touched"
+                                                   min="0" max="1" step="0.01" style="width:90px;height:30px;"
+                                                   ui-validate=" '$value > 0 && $value < 1' "
+                                                   ng-model="data.extr_content.bonus_profit_percent" required/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">每个名额分红金额限制：</label>
+                                        <div class="controls">
+                                            <div class="input-prepend" style="width: 200px;">
+                                                <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                       data-min='0' data-max="999999999" data-step="0.01"
+                                                       data-decimals="2" data-prefix="￥"
+                                                       ng-model="data.extr_content.bonus_limit_min">
+                                            </div>
+                                            &nbsp;&nbsp;~&nbsp;&nbsp;
+                                            <div class="input-prepend" style="width: 200px;">
+                                                <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                       data-min='0' data-max="999999999" data-step="0.01"
+                                                       data-decimals="2" data-prefix="￥"
+                                                       ng-model="data.extr_content.bonus_limit_max">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>分红统计基线金额：</label>
+                                        <div class="controls" style="width: 200px;">
+                                            <input ui-jq="TouchSpin" type="text" class="form-control"
+                                                   data-min='0' data-max="999999999" data-step="0.01"
+                                                   data-decimals="2" data-prefix="￥"
+                                                   ng-model="data.extr_content.bonus_limit" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">结算余额是否累加：</label>
+                                        <div class="controls">
+                                            <label class="checkbox inline">
+				          <span class="ui-tooltip">
+				              <input type="checkbox" checked="" ng-model="data.extr_content.bonus_sales_addup_flag"
+                                     ng-true-value="1" ng-false-value="0">
+				          </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">分红名额是否累加：</label>
+                                        <div class="controls">
+                                            <label class="checkbox inline">
+				          <span class="ui-tooltip">
+				              <input type="checkbox" checked="" ng-model="data.extr_content.bonus_number_addup_flag"
+                                     ng-true-value="1" ng-false-value="0">
+				          </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>统计分销层级：</label>
+                                        <div class="controls">
+                                            <input type="number"
+                                                   class="form-control ng-valid-max_price ng-valid-max ng-valid-required ng-dirty ng-valid-number ng-invalid ng-invalid-min_price ng-invalid-min ng-touched"
+                                                   ng-model="data.extr_content.fx_level" min="1" step="1"
+                                                   style="width:90px;height:30px;" ui-validate=" '$value >= 1' "
+                                                   style="width:90px;height:30px;" placeholder="" required/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>分红结算周期：</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" required
+                                                   style="border-color:#CCCCCC;width: 100px"
+                                                   ng-model="data.extr_content.bonus_period">&nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>分红统计截止时间：</label>
+                                        <div class="controls">
+                                            <input type="text" ng-model="data.extr_content.bonus_task_end_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>分红名额统计周期：</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" required
+                                                   style="border-color:#CCCCCC;width: 100px"
+                                                   ng-model="data.extr_content.bonus_number_period">&nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><em class="required">*</em>分红名额统计截止时间：</label>
+                                        <div class="controls">
+                                            <input type="text" ng-model="data.extr_content.bonus_number_task_end_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">参与分红统计订单创建截止时间：</label>
+                                        <div class="controls">
+                                            <input type="text" ng-model="data.extr_content.order_create_begin_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;">~
+                                            <input type="text" ng-model="data.extr_content.order_create_end_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">参与分红统计订单完成截止时间：</label>
+                                        <div class="controls">
+                                            <input type="text" ng-model="data.extr_content.order_finished_begin_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;">~
+                                            <input type="text" ng-model="data.extr_content.order_finished_end_time"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-actions">
+                <div class="form-actions text-center">
+                    <input ng-disabled="form.$invalid" class="btn js-btn-preview" type="submit" value="保存"
+                           ng-click="ok()">
+                    <input class="btn js-btn-preview" type="button" value="取消" ng-click="cancel()">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

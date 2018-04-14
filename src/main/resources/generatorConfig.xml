@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="testTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <!--<jdbcConnection driverClass="${jdbc.driver}"-->
+        <!--connectionURL="${jdbc.url}"-->
+        <!--userId="${jdbc.username}"-->
+        <!--password="${jdbc.password}">-->
+        <!--</jdbcConnection>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.179.129:3306/yzb"
+                        userId="root" password="root"></jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.baidu.ms.pojo"
+                            targetProject="src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="com.baidu.ms.mapper"
+                         targetProject="src\main\resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.baidu.ms.mapper"
+                             targetProject="src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+        <!--<table tableName="t_user" domainObjectName="User" schema="general" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+        <!--enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="t_user" domainObjectName="User"></table>-->
+        <!--<table tableName="t_order" domainObjectName="Order"></table>-->
+        <!--<table tableName="t_goods" domainObjectName="Goods"></table>-->
+        <!--<table tableName="t_shop" domainObjectName="Shop"></table>-->
+        <!--<table tableName="t_order_goods_item" domainObjectName="OrderGoodsItem"></table>-->
+
+        <!--<table tableName="t_activity_bonus_distribution" domainObjectName="ActivityBonusDistribution"></table>-->
+        <!--<table tableName="t_activity_cashback" domainObjectName="ActivityCashback"></table>-->
+        <!--<table tableName="t_activity_cashback_log" domainObjectName="ActivityCashbackLog"></table>-->
+        <!--<table tableName="t_activity_directseller" domainObjectName="ActivityDirectseller"></table>-->
+        <!--<table tableName="t_activity_directseller_log" domainObjectName="ActivityDirectsellerLog"></table>-->
+        <!--<table tableName="t_activity_directseller_member" domainObjectName="ActivityDirectsellerMember"></table>-->
+        <!--<table tableName="t_activity_full_sub_give" domainObjectName="ActivityFullSubGive"></table>-->
+        <!--<table tableName="t_activity_full_sub_give_log" domainObjectName="ActivityFullSubGiveLog"></table>-->
+        <!--<table tableName="t_activity_group_purchase" domainObjectName="ActivityGroupPurchase"></table>-->
+        <!--<table tableName="t_activity_group_purchase_log" domainObjectName="ActivityGroupPurchaseLog"></table>-->
+        <!--<table tableName="t_activity_guagua_card" domainObjectName="ActivityGuaguaCard"></table>-->
+        <!--<table tableName="t_activity_guagua_card_log" domainObjectName="ActivityGuaguaCardLog"></table>-->
+        <!--<table tableName="t_activity_lucky_turntable" domainObjectName="ActivityLuckyTurntable"></table>-->
+        <!--<table tableName="t_activity_lucky_turntable_log" domainObjectName="ActivityLuckyTurntableLog"></table>-->
+        <!--<table tableName="t_activity_participation_blanklist" domainObjectName="ActivityParticipationBlanklist"></table>-->
+        <!--<table tableName="t_activity_participator" domainObjectName="ActivityParticipator"></table>-->
+        <!--<table tableName="t_activity_recommend_log" domainObjectName="ActivityRecommendLog"></table>-->
+        <!--<table tableName="t_activity_rewards" domainObjectName="ActivityRewards"></table>-->
+        <!--<table tableName="t_activity_rewards_log" domainObjectName="ActivityRewardsLog"></table>-->
+        <!--<table tableName="t_activity_rule" domainObjectName="ActivityRule"></table>-->
+        <!--<table tableName="t_activity_topic" domainObjectName="ActivityTopic"></table>-->
+        <!--<table tableName="t_agent" domainObjectName="Agent"></table>-->
+        <!--<table tableName="t_agent_area" domainObjectName="AgentArea"></table>-->
+        <!--<table tableName="t_agent_order" domainObjectName="AgentOrder"></table>-->
+        <!--<table tableName="t_agent_proxy" domainObjectName="AgentProxy"></table>-->
+        <!--<table tableName="t_area" domainObjectName="Area"></table>-->
+        <!--<table tableName="t_area_proxy" domainObjectName="AreaProxy"></table>-->
+        <!--<table tableName="t_bonus_num_record" domainObjectName="BonusNumRecord"></table>-->
+        <!--<table tableName="t_cart" domainObjectName="Cart"></table>-->
+        <!--<table tableName="t_chat_record" domainObjectName="ChatRecord"></table>-->
+        <!--<table tableName="t_checkin" domainObjectName="Checkin"></table>-->
+        <!--<table tableName="t_checkin_log" domainObjectName="CheckinLog"></table>-->
+        <!--<table tableName="t_checkin_record" domainObjectName="CheckinRecord"></table>-->
+        <!--<table tableName="t_checkin_rule" domainObjectName="CheckinRule"></table>-->
+        <!--<table tableName="t_coupon" domainObjectName="Coupon"></table>-->
+        <!--<table tableName="t_coupon_code" domainObjectName="CouponCode"></table>-->
+        <!--<table tableName="t_coupon_code_sn" domainObjectName="CouponCodeSn"></table>-->
+        <!--<table tableName="t_coupon_log" domainObjectName="CouponLog"></table>-->
+        <!--<table tableName="t_data_fans_increase_trend" domainObjectName="DataFansIncreaseTrend"></table>-->
+        <!--<table tableName="t_data_fanstag_order" domainObjectName="DataFanstagOrder"></table>-->
+        <!--<table tableName="t_data_fans_visit_depth" domainObjectName="DataFansVisitDepth"></table>-->
+        <!--<table tableName="t_data_fans_visit_local" domainObjectName="DataFansVisitLocal"></table>-->
+        <!--<table tableName="t_data_goods_calcu" domainObjectName="DataGoodsCalcu"></table>-->
+        <!--<table tableName="t_data_order_calcu" domainObjectName="DataOrderCalcu"></table>-->
+        <!--<table tableName="t_data_page_calcu" domainObjectName="DataPageCalcu"></table>-->
+        <!--<table tableName="t_data_qrcode_calcu" domainObjectName="DataQrcodeCalcu"></table>-->
+        <!--<table tableName="t_data_trend" domainObjectName="DataTrend"></table>-->
+        <!--<table tableName="t_data_visit_flow" domainObjectName="DataVisitFlow"></table>-->
+        <!--<table tableName="t_data_visit_local" domainObjectName="DataVisitLocal"></table>-->
+        <!--<table tableName="t_data_visitor_device" domainObjectName="DataVisitorDevice"></table>-->
+        <!--<table tableName="t_data_visit_pagetype" domainObjectName="DataVisitPagetype"></table>-->
+        <!--<table tableName="t_data_visit_source" domainObjectName="DataVisitSource"></table>-->
+        <!--<table tableName="t_data_wechat_interact" domainObjectName="DataWechatInteract"></table>-->
+        <!--<table tableName="t_delivery_template" domainObjectName="DeliveryTemplate"></table>-->
+        <!--<table tableName="t_dividend_details" domainObjectName="DividendDetails"></table>-->
+        <!--<table tableName="t_dividend_record" domainObjectName="DividendRecord"></table>-->
+        <!--<table tableName="t_document" domainObjectName="Document"></table>-->
+        <!--<table tableName="t_document_category" domainObjectName="DocumentCategory"></table>-->
+        <!--<table tableName="t_express" domainObjectName="Express"></table>-->
+        <!--<table tableName="t_gift" domainObjectName="Gift"></table>-->
+        <!--<table tableName="t_gift_log" domainObjectName="GiftLog"></table>-->
+        <!--<table tableName="t_goods" domainObjectName="Goods"></table>-->
+        <!--<table tableName="t_goods_category" domainObjectName="GoodsCategory"></table>-->
+        <!--<table tableName="t_goods_label" domainObjectName="GoodsLabel"></table>-->
+        <!--<table tableName="t_goods_label_ref" domainObjectName="GoodsLabelRef"></table>-->
+        <!--<table tableName="t_goods_picture" domainObjectName="GoodsPicture"></table>-->
+        <!--<table tableName="t_goods_references" domainObjectName="GoodsReferences"></table>-->
+        <!--<table tableName="t_goods_review" domainObjectName="GoodsReview"></table>-->
+        <!--<table tableName="t_goods_rqcode" domainObjectName="GoodsRqcode"></table>-->
+        <!--<table tableName="t_goods_search_key_word" domainObjectName="GoodsSearchKeyWord"></table>-->
+        <!--<table tableName="t_goods_spec" domainObjectName="GoodsSpec"></table>-->
+        <!--<table tableName="t_goods_tags" domainObjectName="GoodsTags"></table>-->
+        <!--<table tableName="t_goods_tags_ref" domainObjectName="GoodsTagsRef"></table>-->
+        <!--<table tableName="t_keywords" domainObjectName="Keywords"></table>-->
+        <!--<table tableName="t_link_url" domainObjectName="LinkUrl"></table>-->
+        <!--<table tableName="t_notification" domainObjectName="Notification"></table>-->
+        <!--<table tableName="t_order" domainObjectName="Order"></table>-->
+        <!--<table tableName="t_order_comment" domainObjectName="OrderComment"></table>-->
+        <!--<table tableName="t_order_goods_item" domainObjectName="OrderGoodsItem"></table>-->
+        <!--<table tableName="t_order_logistics" domainObjectName="OrderLogistics"></table>-->
+        <!--<table tableName="t_order_safe" domainObjectName="OrderSafe"></table>-->
+        <!--<table tableName="t_order_safe_log" domainObjectName="OrderSafeLog"></table>-->
+        <!--<table tableName="t_pay_config" domainObjectName="PayConfig"></table>-->
+        <!--<table tableName="t_pay_plugin" domainObjectName="PayPlugin"></table>-->
+        <!--<table tableName="t_platform_permission" domainObjectName="PlatformPermission"></table>-->
+        <!--<table tableName="t_platform_role" domainObjectName="PlatformRole"></table>-->
+        <!--<table tableName="t_platform_role_permission" domainObjectName="PlatformRolePermission"></table>-->
+        <!--<table tableName="t_prize_allocate" domainObjectName="PrizeAllocate"></table>-->
+        <!--<table tableName="t_qualification" domainObjectName="Qualification"></table>-->
+        <!--<table tableName="t_question" domainObjectName="Question"></table>-->
+        <!--<table tableName="t_ranking_history_log" domainObjectName="RankingHistoryLog"></table>-->
+        <!--<table tableName="t_resource_file" domainObjectName="ResourceFile"></table>-->
+        <!--<table tableName="t_rqcode_log" domainObjectName="RqcodeLog"></table>-->
+        <!--<table tableName="t_shop" domainObjectName="Shop"></table>-->
+        <!--<table tableName="t_shop_ad" domainObjectName="ShopAd"></table>-->
+        <!--<table tableName="t_shop_custom_template" domainObjectName="ShopCustomTemplate"></table>-->
+        <!--<table tableName="t_shop_custom_template_log" domainObjectName="ShopCustomTemplateLog"></table>-->
+        <!--<table tableName="t_shop_goods_template" domainObjectName="ShopGoodsTemplate"></table>-->
+        <!--<table tableName="t_shop_member" domainObjectName="ShopMember"></table>-->
+        <!--<table tableName="t_shop_member_card" domainObjectName="ShopMemberCard"></table>-->
+        <!--<table tableName="t_shop_member_card_log" domainObjectName="ShopMemberCardLog"></table>-->
+        <!--<table tableName="t_shop_member_point_log" domainObjectName="ShopMemberPointLog"></table>-->
+        <!--<table tableName="t_shop_member_point_rule" domainObjectName="ShopMemberPointRule"></table>-->
+        <!--<table tableName="t_shop_member_tag" domainObjectName="ShopMemberTag"></table>-->
+        <!--<table tableName="t_shop_navigate_menu" domainObjectName="ShopNavigateMenu"></table>-->
+        <!--<table tableName="t_shop_page" domainObjectName="ShopPage"></table>-->
+        <!--<table tableName="t_shop_page_category" domainObjectName="ShopPageCategory"></table>-->
+        <!--<table tableName="t_shop_page_tpl" domainObjectName="ShopPageTpl"></table>-->
+        <!--<table tableName="t_shop_visit_log" domainObjectName="ShopVisitLog"></table>-->
+        <!--<table tableName="t_sms_message" domainObjectName="SmsMessage"></table>-->
+        <!--<table tableName="t_spec" domainObjectName="Spec"></table>-->
+        <!--<table tableName="t_spec_value" domainObjectName="SpecValue"></table>-->
+        <!--<table tableName="t_supplier_agent_percent" domainObjectName="SupplierAgentPercent"></table>-->
+        <!--<table tableName="t_sync_log" domainObjectName="SyncLog"></table>-->
+        <!--<table tableName="t_system_config" domainObjectName="SystemConfig"></table>-->
+        <!--<table tableName="t_table_to_bean" domainObjectName="TableToBean"></table>-->
+        <!--<table tableName="t_task_log" domainObjectName="TaskLog"></table>-->
+        <!--<table tableName="t_user" domainObjectName="User"></table>-->
+        <!--<table tableName="t_user_account" domainObjectName="UserAccount"></table>-->
+        <!--<table tableName="t_user_account_bill" domainObjectName="UserAccountBill"></table>-->
+        <!--<table tableName="t_user_address" domainObjectName="UserAddress"></table>-->
+        <!--<table tableName="t_user_auth" domainObjectName="UserAuth"></table>-->
+        <!--<table tableName="t_user_bank_info" domainObjectName="UserBankInfo"></table>-->
+        <!--<table tableName="t_user_day_bill" domainObjectName="UserDayBill"></table>-->
+        <table tableName="t_user_role" domainObjectName="UserRole"></table>
+        <!--<table tableName="t_wechat" domainObjectName="Wechat"></table>-->
+        <!--<table tableName="t_wechat_auto_reply_rule" domainObjectName="WechatAutoReplyRule"></table>-->
+        <!--<table tableName="t_wechat_groupsend" domainObjectName="WechatGroupsend"></table>-->
+        <!--<table tableName="t_wechat_menu" domainObjectName="WechatMenu"></table>-->
+        <!--<table tableName="t_wechat_message" domainObjectName="WechatMessage"></table>-->
+        <!--<table tableName="t_wechat_news" domainObjectName="WechatNews"></table>-->
+        <!--<table tableName="t_wechat_reply_content" domainObjectName="WechatReplyContent"></table>-->
+        <!--<table tableName="t_wechat_reply_keyword" domainObjectName="WechatReplyKeyword"></table>-->
+        <!--<table tableName="t_wechat_rqcode" domainObjectName="WechatRqcode"></table>-->
+        <!--<table tableName="t_wechat_shortcut_words" domainObjectName="WechatShortcutWords"></table>-->
+
+        <!--<table tableName="t_task_job" domainObjectName="TaskJob">-->
+        <!--<columnOverride column="field" jdbcType="VARCHAR" property="field"/>-->
+        <!--</table>-->
+
+
+    </context>
+</generatorConfiguration>

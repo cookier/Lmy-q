@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <!--<param-value>classpath*:config/spring/application-*.xml</param-value>-->
+    <param-value>classpath*:config/spring/application-mvc.xml</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:config/log4j.properties</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>log4jRefreshInterval</param-name>
+    <param-value>60000</param-value>
+  </context-param>
+
+  <!--log4j-->
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+
+  <!--配置spring listener-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!--shiro-->
+  <!--<filter>-->
+  <!--<filter-name>shiroFilter</filter-name>-->
+  <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+  <!--<init-param>-->
+  <!--<param-name>targetFilterLifecycle</param-name>-->
+  <!--<param-value>true</param-value>-->
+  <!--</init-param>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+  <!--<filter-name>shiroFilter</filter-name>-->
+  <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!--解决post乱码-->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--springMvc前端控制器-->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath*:config/spring/spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!--<filter>-->
+  <!--<filter-name>WebResourceOptimizer</filter-name>-->
+  <!--<filter-class>-->
+  <!--ro.isdc.wro.http.WroFilter-->
+  <!--</filter-class>-->
+  <!--<init-param>-->
+  <!--<param-name>debug</param-name>-->
+  <!--<param-value>true</param-value>-->
+  <!--</init-param>-->
+  <!--<init-param>-->
+  <!--<param-name>disableCache</param-name>-->
+  <!--<param-value>true</param-value>-->
+  <!--</init-param>-->
+  <!--&lt;!&ndash; <init-param> <param-name>gzipResources</param-name> <param-value>false</param-value>-->
+  <!--</init-param> <init-param> <param-name>cacheUpdatePeriod</param-name> <param-value>1</param-value>-->
+  <!--</init-param> <init-param> <param-name>modelUpdatePeriod</param-name> <param-value>1</param-value>-->
+  <!--</init-param> <init-param> <param-name>minimizeEnabled</param-name> <param-value>true</param-value>-->
+  <!--</init-param> &ndash;&gt;-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+  <!--<filter-name>WebResourceOptimizer</filter-name>-->
+  <!--<url-pattern>/wro/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!--<filter>-->
+    <!--<filter-name>WebResourceOptimizer</filter-name>-->
+    <!--<filter-class>-->
+      <!--ro.isdc.wro.http.WroFilter-->
+    <!--</filter-class>-->
+  <!--</filter>-->
+
+  <!--<filter-mapping>-->
+    <!--<filter-name>WebResourceOptimizer</filter-name>-->
+    <!--<url-pattern>/wro/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+</web-app>

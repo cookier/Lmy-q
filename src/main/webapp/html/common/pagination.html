@@ -1,0 +1,33 @@
+<div style="text-align: right;font-size:12px;">
+	<span ng-click='returnTop()'>
+		<button class="btn btn-sm btn-default" ng-disabled="page<=1" ng-click="selectPage(1)">&lt;&lt;</button>
+		<button class="btn btn-sm btn-default" ng-disabled="page<=1" ng-click="selectPage(page-1)">&lt;</button>
+		<span ng-if='(showPage+1)<page'>&nbsp; ... &nbsp;</span>
+		<div ng-repeat='p in sumPageData' style='opacity:1;line-height: 35px;' class="pageBtn"
+             ng-init='classData=(p-page==showPage || (showPage >p-page   && showPage >totalPages-page))'>
+			<span ng-if='page==p' style='border:1px solid #428BCB;background-color: #428BCB;color:white;'
+                  class='pageBtn-sm'>{{page}}</span>
+			<span ng-if="page!=p && (p-page)>=-showPage && (p-page)<= showPage " ng-click="selectPage(p)"
+                  class='pageBtn-sm'
+                  ng-class="{true: 'pageBtn-sm-border-right', false: ''}[p-page==showPage || (p-page==1   && totalPages-page==1)]">{{p}}</span>
+		</div>
+		
+		<span ng-if='(totalPages-page)>showPage'>&nbsp; ... &nbsp;</span>
+		<button class="btn btn-sm btn-default" ng-disabled="noNext()" ng-click="selectPage(page+1)">&gt;</button>
+		<button class="btn btn-sm btn-default" ng-disabled="page==totalPages"
+                ng-click="selectPage(totalPages)">&gt;&gt;</button>
+	</span>
+    共 {{totalPages}} 页 / <strong> {{totalItems}} </strong> 条记录
+    <span ng-show="canChangePageSize=='true'">, 每页显示&nbsp; <select onchange='return window.scrollTo(0,0);'
+                                                                   style="width: 40px;height: 25px;vertical-align:baseline;"
+                                                                   ng-change="changePageSize(itemsPerPage)"
+                                                                   ng-model='itemsPerPage'
+                                                                   ng-options="f for f in pageSizes"></select> &nbsp;条</span>
+    , 跳转到第&nbsp;
+    <input id='input-sm-page' type="text" class="input-sm" style="width: 50px;height: 25px;vertical-align:baseline;"
+           ng-model="page"/>&nbsp;
+    &nbsp; <span ng-click='returnTop()'><div
+        style="padding:3px 10px;border:1px solid #CCCCCC;background: #0077DD;color:white;border-color: #006CC9;display: -webkit-inline-box;"
+        ng-click='changePageNumber()'>确定</div></span>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+</div>

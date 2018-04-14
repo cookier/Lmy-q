@@ -1,0 +1,23 @@
+<form class="form-horizontal edit-custom-coupon" novalidate ng-controller="UICouponController">
+    <div class="control-group">
+        <label class="control-label">优惠券：</label>
+        <div class="controls">
+            <ul class="coupon-list">
+                <li ng-repeat="item in data.coupon">
+                    <div class="coupon-list-content">
+                        <div class="coupon-list-summary">
+                            <span class="label label-success">优惠券</span>
+                            <span>{{item.name }}</span>
+                            <span ng-if="item.at_least>0" class="c-gray">（满{{item.at_least }}元可用）</span>
+                            <span ng-if="item.at_least==0" class="c-gray">(无限制)</span>
+                        </div>
+                    </div>
+                    <div class="coupon-list-opts">
+                        <a href="javascript:;" class="js-remove-coupon" ng-click="delItem(item)">删除</a>
+                    </div>
+                </li>
+            </ul>
+            <a ng-show="data.coupon.length < 3" class="control-action js-add-coupon" ng-click="addItem()">添加优惠券</a>
+        </div>
+    </div>
+</form>

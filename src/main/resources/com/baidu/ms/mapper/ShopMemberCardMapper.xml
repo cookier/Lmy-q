@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ShopMemberCardMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ShopMemberCard">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="card_icon" jdbcType="VARCHAR" property="cardIcon"/>
+        <result column="card_name" jdbcType="VARCHAR" property="cardName"/>
+        <result column="card_level" jdbcType="INTEGER" property="cardLevel"/>
+        <result column="discount" jdbcType="REAL" property="discount"/>
+        <result column="card_type" jdbcType="INTEGER" property="cardType"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="upate_time" jdbcType="TIMESTAMP" property="upateTime"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+        <result column="trade_upgrade_limit" jdbcType="INTEGER" property="tradeUpgradeLimit"/>
+        <result column="money_upgrade_limit" jdbcType="DOUBLE" property="moneyUpgradeLimit"/>
+        <result column="point_upgrade_limit" jdbcType="INTEGER" property="pointUpgradeLimit"/>
+        <result column="usage_notes" jdbcType="VARCHAR" property="usageNotes"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ShopMemberCard">
+        <result column="template_content" jdbcType="LONGVARCHAR" property="templateContent"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, card_icon, card_name, card_level, discount, card_type, create_time, 
+    upate_time, delete_flag, trade_upgrade_limit, money_upgrade_limit, point_upgrade_limit, 
+    usage_notes
+  </sql>
+    <sql id="Blob_Column_List">
+    template_content
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ShopMemberCardExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_shop_member_card
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ShopMemberCardExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_shop_member_card
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_shop_member_card
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_shop_member_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ShopMemberCardExample">
+        delete from t_shop_member_card
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ShopMemberCard">
+    insert into t_shop_member_card (id, shop_id, card_icon, 
+      card_name, card_level, discount, 
+      card_type, create_time, upate_time, 
+      delete_flag, trade_upgrade_limit, money_upgrade_limit, 
+      point_upgrade_limit, usage_notes, template_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{cardIcon,jdbcType=VARCHAR}, 
+      #{cardName,jdbcType=VARCHAR}, #{cardLevel,jdbcType=INTEGER}, #{discount,jdbcType=REAL}, 
+      #{cardType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{upateTime,jdbcType=TIMESTAMP}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{tradeUpgradeLimit,jdbcType=INTEGER}, #{moneyUpgradeLimit,jdbcType=DOUBLE}, 
+      #{pointUpgradeLimit,jdbcType=INTEGER}, #{usageNotes,jdbcType=VARCHAR}, #{templateContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ShopMemberCard">
+        insert into t_shop_member_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="cardIcon != null">
+                card_icon,
+            </if>
+            <if test="cardName != null">
+                card_name,
+            </if>
+            <if test="cardLevel != null">
+                card_level,
+            </if>
+            <if test="discount != null">
+                discount,
+            </if>
+            <if test="cardType != null">
+                card_type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="upateTime != null">
+                upate_time,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="tradeUpgradeLimit != null">
+                trade_upgrade_limit,
+            </if>
+            <if test="moneyUpgradeLimit != null">
+                money_upgrade_limit,
+            </if>
+            <if test="pointUpgradeLimit != null">
+                point_upgrade_limit,
+            </if>
+            <if test="usageNotes != null">
+                usage_notes,
+            </if>
+            <if test="templateContent != null">
+                template_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="cardIcon != null">
+                #{cardIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="cardName != null">
+                #{cardName,jdbcType=VARCHAR},
+            </if>
+            <if test="cardLevel != null">
+                #{cardLevel,jdbcType=INTEGER},
+            </if>
+            <if test="discount != null">
+                #{discount,jdbcType=REAL},
+            </if>
+            <if test="cardType != null">
+                #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="upateTime != null">
+                #{upateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="tradeUpgradeLimit != null">
+                #{tradeUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="moneyUpgradeLimit != null">
+                #{moneyUpgradeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="pointUpgradeLimit != null">
+                #{pointUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="usageNotes != null">
+                #{usageNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="templateContent != null">
+                #{templateContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ShopMemberCardExample" resultType="java.lang.Long">
+        select count(*) from t_shop_member_card
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_shop_member_card
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.cardIcon != null">
+                card_icon = #{record.cardIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cardName != null">
+                card_name = #{record.cardName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cardLevel != null">
+                card_level = #{record.cardLevel,jdbcType=INTEGER},
+            </if>
+            <if test="record.discount != null">
+                discount = #{record.discount,jdbcType=REAL},
+            </if>
+            <if test="record.cardType != null">
+                card_type = #{record.cardType,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.upateTime != null">
+                upate_time = #{record.upateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.tradeUpgradeLimit != null">
+                trade_upgrade_limit = #{record.tradeUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="record.moneyUpgradeLimit != null">
+                money_upgrade_limit = #{record.moneyUpgradeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="record.pointUpgradeLimit != null">
+                point_upgrade_limit = #{record.pointUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="record.usageNotes != null">
+                usage_notes = #{record.usageNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="record.templateContent != null">
+                template_content = #{record.templateContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_shop_member_card
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        card_icon = #{record.cardIcon,jdbcType=VARCHAR},
+        card_name = #{record.cardName,jdbcType=VARCHAR},
+        card_level = #{record.cardLevel,jdbcType=INTEGER},
+        discount = #{record.discount,jdbcType=REAL},
+        card_type = #{record.cardType,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        upate_time = #{record.upateTime,jdbcType=TIMESTAMP},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        trade_upgrade_limit = #{record.tradeUpgradeLimit,jdbcType=INTEGER},
+        money_upgrade_limit = #{record.moneyUpgradeLimit,jdbcType=DOUBLE},
+        point_upgrade_limit = #{record.pointUpgradeLimit,jdbcType=INTEGER},
+        usage_notes = #{record.usageNotes,jdbcType=VARCHAR},
+        template_content = #{record.templateContent,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_shop_member_card
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        card_icon = #{record.cardIcon,jdbcType=VARCHAR},
+        card_name = #{record.cardName,jdbcType=VARCHAR},
+        card_level = #{record.cardLevel,jdbcType=INTEGER},
+        discount = #{record.discount,jdbcType=REAL},
+        card_type = #{record.cardType,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        upate_time = #{record.upateTime,jdbcType=TIMESTAMP},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        trade_upgrade_limit = #{record.tradeUpgradeLimit,jdbcType=INTEGER},
+        money_upgrade_limit = #{record.moneyUpgradeLimit,jdbcType=DOUBLE},
+        point_upgrade_limit = #{record.pointUpgradeLimit,jdbcType=INTEGER},
+        usage_notes = #{record.usageNotes,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ShopMemberCard">
+        update t_shop_member_card
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="cardIcon != null">
+                card_icon = #{cardIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="cardName != null">
+                card_name = #{cardName,jdbcType=VARCHAR},
+            </if>
+            <if test="cardLevel != null">
+                card_level = #{cardLevel,jdbcType=INTEGER},
+            </if>
+            <if test="discount != null">
+                discount = #{discount,jdbcType=REAL},
+            </if>
+            <if test="cardType != null">
+                card_type = #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="upateTime != null">
+                upate_time = #{upateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="tradeUpgradeLimit != null">
+                trade_upgrade_limit = #{tradeUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="moneyUpgradeLimit != null">
+                money_upgrade_limit = #{moneyUpgradeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="pointUpgradeLimit != null">
+                point_upgrade_limit = #{pointUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="usageNotes != null">
+                usage_notes = #{usageNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="templateContent != null">
+                template_content = #{templateContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ShopMemberCard">
+    update t_shop_member_card
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      card_icon = #{cardIcon,jdbcType=VARCHAR},
+      card_name = #{cardName,jdbcType=VARCHAR},
+      card_level = #{cardLevel,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=REAL},
+      card_type = #{cardType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      upate_time = #{upateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      trade_upgrade_limit = #{tradeUpgradeLimit,jdbcType=INTEGER},
+      money_upgrade_limit = #{moneyUpgradeLimit,jdbcType=DOUBLE},
+      point_upgrade_limit = #{pointUpgradeLimit,jdbcType=INTEGER},
+      usage_notes = #{usageNotes,jdbcType=VARCHAR},
+      template_content = #{templateContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ShopMemberCard">
+    update t_shop_member_card
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      card_icon = #{cardIcon,jdbcType=VARCHAR},
+      card_name = #{cardName,jdbcType=VARCHAR},
+      card_level = #{cardLevel,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=REAL},
+      card_type = #{cardType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      upate_time = #{upateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      trade_upgrade_limit = #{tradeUpgradeLimit,jdbcType=INTEGER},
+      money_upgrade_limit = #{moneyUpgradeLimit,jdbcType=DOUBLE},
+      point_upgrade_limit = #{pointUpgradeLimit,jdbcType=INTEGER},
+      usage_notes = #{usageNotes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

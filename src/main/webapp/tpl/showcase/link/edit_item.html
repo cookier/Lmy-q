@@ -1,0 +1,37 @@
+<div class="control-group">
+    <label class="control-label"><em class="required">*</em>内容来源：</label>
+    <div class="controls">
+        <ui-setup-link link_id="item.source_id"  link_url="item.source_url" link_title="item.source_title" link_type="item.source_type" show_types="category,tag,link"></ui-setup-link>
+        <input type="hidden" ng-model="item.source_url" name="source_url">
+    </div>
+</div>
+
+<div ng-if="item.source_type === 'link'" class="control-group">
+    <label class="control-label"><em class="required">*</em>链接名称：</label>
+    <div class="controls">
+        <input type="text" name="source_title" ng-model="item.source_title">
+    </div>
+</div>
+<div ng-if="item.source_type === 'link'" class="control-group">
+    <label class="control-label"><em class="required">*</em>链接地址：</label>
+    <div class="controls">
+        <input type="text" name="source_url" ng-model="item.source_url" class="js-fullfill-url">
+    </div>
+</div>
+<div ng-if="item.source_type !== '' && item.source_type !== 'link' " class="control-group">
+    <label class="control-label">显示条数：</label>
+    <div class="controls">
+        <select name="number" ng-model="item.number">
+            <option value="1" >1条</option>
+            <option value="2" >2条</option>
+            <option value="3" >3条</option>
+            <option value="4" >4条</option>
+            <option value="5" >5条</option>
+        </select>
+    </div>
+</div>
+
+<div class="actions">
+    <span class="action add close-modal" title="添加" ng-click="addItem()">+</span>
+    <span class="action delete close-modal" title="删除" ng-click="delItem(item)">×</span>
+</div>

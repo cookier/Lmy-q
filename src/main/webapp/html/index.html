@@ -1,0 +1,227 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3" id='home_title_pageSize'>欢迎进入云中邦管理平台</h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+    <div style='width:100%' class="col-sm-6 connected" ui-jq="sortable" ui-options="{items:'.panel', handle:'.panel-heading', connectWith:'.connected'}">
+      <div class="panel panel-success" ng-controller="SupplierListController">
+        <div class="panel-heading">
+          <div ng-show="pageData.totalRow>0" style="float: right;">
+            <a ui-sref="console.supplier">查看更多 -></a>
+          </div>
+          <div>供应商</div>
+        </div>
+        <div class="panel-default">
+          <table class="ui-table ui-table-list" style="padding: 0px;">
+            <thead class="js-list-header-region tableFloatingHeaderOriginal">
+              <tr class="widget-list-header">
+                <th>昵称</th>
+                <th width='90px'>手机号</th>
+                <th>企业名称</th>
+                <th>经营类目</th>
+                <th width='80px'>认证状态</th>
+                <th width='80px'>账号状态</th>
+                <th width='190px' style="text-align: center;">操作
+
+                </th>
+              </tr>
+            </thead>
+            <tbody class="js-list-body-region">
+              <tr ng-repeat="data in pageData.list">
+                <td class="goods-image-td">{{data.nickname}}</td>
+                <td>{{data.mobile}}</td>
+                <td class="goods-meta">{{data.shop_name}}</td>
+                <td class="goods-meta">{{data.goods_category_name}}</td>
+                <td>
+                  <span ng-show="data.uastatus==0">待认证</span>
+                  <span ng-show="data.uastatus==1">认证中</span>
+                  <span ng-show="data.uastatus==2">已认证</span>
+                  <span ng-show="data.uastatus==3">认证不通过</span>
+                </td>
+                <td>
+                  <span ng-show="data.uflag==1">已被冻结</span>
+                  <span ng-show="data.uflag==0">正常</span>
+                </td>
+                <td style="text-align: center;">
+                  <a style='color:red' ng-click="freeze(data.uid)" ng-show="data.uflag==0"> 封号 &nbsp;&nbsp;</a>
+                  <a style='color:red' ng-click="unfreeze(data.uid)" ng-show="data.uflag==1"> 解冻&nbsp;&nbsp;</a>
+                  <a ng-click="toSupplierAuth(data.uid)"> 企业认证&nbsp;&nbsp;</a>
+                  <a ng-click="toQualificationAuth(data.uid)"> 资质审核&nbsp;&nbsp;</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <footer class="panel-footer" style="text-align: right;" ng-show="pageData.totalRow==0">
+            <div class="row">
+              <div style="text-align: center;">没有找到相关记录!</div>
+            </div>
+          </footer>
+        </div>
+      </div>
+      <div class="panel panel-info" ng-controller="SupplierGoodsListController">
+        <div class="panel-heading">
+          <div ng-show="pageData.totalRow>0" style="float: right;">
+            <a ui-sref="console.supplier_goods">查询更多 -></a>
+          </div>
+          <div>供应商商品</div>
+        </div>
+        <div class="panel-default">
+          <table class="ui-table ui-table-list" style="padding: 0px;">
+            <thead class="js-list-header-region tableFloatingHeaderOriginal">
+              <tr class="widget-list-header">
+                <th colspan='2'>商品</th>
+                <th width='80px'>供货价</th>
+                <th width='100px'>建议零售价</th>
+                <th width='150px'>微商城售价</th>
+                <th width='100px'>库存</th>
+                <th width='80px'>总销量</th>
+                <th width='80px'>商品状态</th>
+                <th width='90px'>创建时间</th>
+                <th width='90px'>操作</th>
+              </tr>
+            </thead>
+
+            <tbody class="js-list-body-region">
+              <tr class="widget-list-item" ng-repeat="data in pageData.list">
+                <td width='80px'>
+                  <img src="{{data.default_pic_url}}" onerror="this.src='./img/404.jpg'" width='60px' height='60px'>
+                </td>
+                <td class="goods-meta">
+                  <p class="goods-title">
+                    <a href='{{data.url}}' target="blank"> {{data.title}}</a>
+                  </p>
+                </td>
+                <td>
+                  <p class="goods-price">￥{{data.fx_price}}</p>
+                </td>
+                <td>
+                  <p class="goods-price">￥{{data.product_price}}</p>
+                </td>
+                <td>
+                  <p>￥{{data.min_retail_price}} - ￥{{data.max_retail_price}}</p>
+                </td>
+                <td>
+                  <p>{{data.stock}}</p>
+                </td>
+                <td>
+                  <p>{{data.sale_count}}</p>
+                </td>
+                <td>{{data.auditing_status==1?'审核中':(data.auditing_status==2?'已审核':(data.auditing_status==3?'审核不通过':'待审核'))}}</td>
+                <td>{{data.create_time}}</td>
+                <td>
+                  <p>
+                    <a ui-sref="console.supplier_goods_auth({id:data.id})">商品审核</a>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <footer class="panel-footer" style="text-align: right;" ng-show="pageData.totalRow==0">
+            <div class="row">
+              <div style="text-align: center;">没有找到相关记录!</div>
+            </div>
+          </footer>
+        </div>
+      </div>
+      <div class="panel panel-success" ng-controller="ProxyListController">
+        <div class="panel-heading">
+          <div ng-show="pageData.totalRow>0" style="float:right;">
+            <a ui-sref="console.proxy">查看更多 -></a>
+          </div>
+          <div>分销商</div>
+        </div>
+        <div class="panel-default">
+          <table class="ui-table ui-table-list" style="padding: 0px;">
+            <thead class="js-list-header-region tableFloatingHeaderOriginal">
+              <tr class="widget-list-header">
+                <th colspan='2'>分销商</th>
+                <th width='100px'>手机号码</th>
+                <th width='100px'>状态</th>
+                <th>店铺状态</th>
+                <th width='120px'>操作</th>
+              </tr>
+            </thead>
+            <tbody class="js-list-body-region">
+              <tr ng-repeat="data in pageData.list">{{data}}
+                <td class="goods-image-td" width='60px'>
+                  <img src="{{data.shops[0].logo}}" onerror="this.src='./img/main_ico_29.png'" width='40px'>
+                </td>
+                <td class="goods-meta">{{data.nickname}}
+                  <div>
+                    <a href='{{data.shops[0].url}}' target="blank">{{data.shops[0].shop_name}}</a>
+                  </div>
+                </td>
+                <td>{{data.mobile}}</td>
+                <td>{{data.delete_flag==0?'正常':'冻结'}}</td>
+                <td>{{data.str}}</td>
+                <td>
+                  <a style='color:red' ng-click="freeze(data.id)" ng-show="data.delete_flag==0"> 封号 &nbsp;&nbsp;</a>
+                  <a style='color:red' ng-click="unfreeze(data.id)" ng-show="data.delete_flag==1"> 解冻&nbsp;&nbsp;</a>
+                  <a ng-click="toProxyShopList(data.id)"> 店铺审核&nbsp;&nbsp;</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <footer class="panel-footer" style="text-align: right;" ng-show="pageData.totalRow==0">
+            <div class="row">
+              <div style="text-align: center;">没有找到相关记录!</div>
+            </div>
+          </footer>
+        </div>
+      </div>
+      <div class="panel panel-info" ng-controller="AccountIncomeController">
+        <div class="panel-heading">
+          <div style='float:right;'>
+            <a ui-sref="console.trading_list">查看更多 -></a>
+          </div>
+          <div>最近交易</div>
+        </div>
+        <div class=" js-trade-list-region">
+          <div class="widget-list trade-list">
+            <table class="ui-table ui-table-trade" style="padding: 0px;">
+              <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                <tr class="widget-list-header">
+                  <th width='150px'>时间</th>
+                  <th>名称</th>
+                  <th>对方</th>
+                  <th class="text-right">
+                    <div class="row-money">金额｜明细</div>
+                  </th>
+                  <th class="cell-5"></th>
+                  <th width='120px'>状态</th>
+                  <th width='110px'>操作</th>
+                </tr>
+              </thead>
+              <tbody class="widget-list-item" ng-repeat="item in pageData.list">
+                <tr>
+                  <td rowspan="2">{{item.order_time}}</td>
+                  <td>{{item.trade_name}}</td>
+                  <td>{{item.trade_object}}</td>
+                  <td class="text-right">
+                    <div class="row-money js-show-detail" style="cursor: pointer;">
+                      <span class="ui-money-outlay" ng-show="item.bill_type==0">- {{item.money}}</span>
+                      <span class="ui-money-income" ng-show="item.bill_type==1">+ {{item.money}}</span>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td>
+                    <!--0：进行中，1：退款，2：成功，3：失败-->
+                    <span ng-show="item.bill_status ==0">交易中<span ng-show="item.pay_status==1">,待结算</span></span>
+                    <span ng-show="item.bill_status ==1">退款</span>
+                    <span ng-show="item.bill_status ==2">交易完成，已结算</span>
+                    <span ng-show="item.bill_status ==3">交易失败</span>
+                  </td>
+                  <td>
+                    <a ng-if="item.detail.order_id" ui-sref="console.order_detail({orderId:item.detail.order_id})">查看订单详细</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="js-list-empty-region"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

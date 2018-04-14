@@ -1,0 +1,61 @@
+<h1><span>[页面标题]</span></h1>
+<div class="preview-nav-menu">
+    <div ng-if="item.nav_style==1" class="js-navmenu nav-show nav-menu-1 nav-menu has-menu-{{item.nav.length}}">
+        <div class="nav-special-item nav-item"><a href="javascript:;" class="home">主页</a></div>
+        <div class="js-nav-preview-region nav-items-wrap">
+            <div class="nav-items">
+                <div class="nav-item-www" ng-repeat="navItem in item.nav" ng-include="'tpl/showcase/tpl_shopnav/show_wx_nav_1st_item.html'"></div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="item.nav_style==2" class="js-navmenu nav-show nav-menu-2 nav-menu has-menu-{{item.app_nav.length}}"
+         style="background-color:{{item.background_color}}">
+        <div class="js-nav-preview-region">
+            <ul class="nav-pop-sub">
+                <li ng-repeat="navItem in item.app_nav" class="nav-item nav-pop-sub-item nav-pop-sub-item-{{item.app_nav.length}}-{{$index+1}}"
+                        ng-include="'tpl/showcase/tpl_shopnav/show_app_nav_item.html'">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div ng-if="item.nav_style==3" class="js-navmenu js-nav-preview-region nav-show nav-menu-3 nav-menu has-menu-{{item.app_nav.length}}"
+         style="background-color: {{item.background_color}}">
+        <ul class="nav-pop-sub">
+            <div ng-repeat="navItem in item.app_nav">
+                <li  class="nav-item nav-pop-sub-item nav-pop-sub-item-{{item.app_nav.length}}-{{$index+1}}"
+                     ng-include="'tpl/showcase/tpl_shopnav/show_app_nav_item.html'">
+                </li>
+                <li ng-if="$index ==1" class="nav-special-item nav-item js-nav-preview-mainIcon-region">
+                    <div ng-include="'tpl/showcase/tpl_shopnav/show_app_nav_main_item.html'">
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </div>
+    <div ng-if="item.nav_style!=1 && item.nav_style!=2 && item.nav_style!=3 " class="js-navmenu nav-show nav-menu nav-menu-{{item.nav_style}} has-menu-{{item.app_nav.length}}">
+        <div class="js-nav-preview-region">
+            <ul class="nav-pop-sub">
+                <li ng-repeat="navItem in item.app_nav" class="nav-item nav-pop-sub-item nav-pop-sub-item-{{item.app_nav.length}}-{{$index+1}}"
+                    ng-include="'tpl/showcase/tpl_shopnav/show_app_nav_item.html'">
+                </li>
+            </ul>
+        </div>
+        <div class="js-nav-preview-mainIcon-region">
+        <ul ng-if="item.nav_style==4 || item.nav_style ==5" class="nav-pop-main">
+            <li ng-if="item.nav_style==4 || item.app_nav_main_icon.length==0" class="nav-item pull-left">
+                <a href="javascript:;"></a>
+            </li>
+            <li ng-if="item.nav_style==5 && item.app_nav_main_icon.length>0" class="nav-item pull-left">
+                <a href="javascript:;" ng-style="{'background-image':'url({{item.app_nav_main_icon[0].image_url}})'}"></a>
+            </li>
+            <li class="nav-item nav-special-item"><a href="javascript:;"></a></li>
+            <li ng-if="item.nav_style==4 || item.app_nav_main_icon.length<2" class="nav-item pull-right">
+                <a href="javascript:;"></a>
+            </li>
+            <li ng-if="item.nav_style==5 && item.app_nav_main_icon.length>1" class="nav-item pull-right">
+                <a href="javascript:;" ng-style="{'background-image':'url({{item.app_nav_main_icon[1].image_url}})'}"></a>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>

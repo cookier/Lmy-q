@@ -1,0 +1,188 @@
+<link rel="stylesheet" href="css/licence_b4ca7e8f48.css" type="text/css">
+
+<div class="app-init-container"	ng-controller="QualificationAuthController">
+	<nav class="ui-nav">
+		<ul>
+			<li id="tab-0" class="{{category==0?'active':''}}"><a ui-sref="console.supplier_qualification_auth({category:0})">通用资质</a></li>
+			<li id="tab-1" class="{{category==1?'active':''}}"><a ui-sref="console.supplier_qualification_auth({category:1})">品牌资质</a></li>
+			<li id="tab-2" class="{{category==2?'active':''}}"><a ui-sref="console.supplier_qualification_auth({category:2})">行业资质</a></li>
+		</ul>
+	</nav>
+
+	<div class="app__content js-app-main" id="js-app-main">
+		<table class="ui-table ui-table-list">
+			<thead>
+				<tr>
+					<th>资质名称</th>
+					<th>证书</th>
+					<th>审核状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody ng-show="category==0">
+				<tr ng-repeat="data in pageData.list">
+					<td>{{data.name}}</td>
+					<td>
+						<div class="img-box" ng-show="data.pic!=null">
+							<img src="{{data.pic}}">
+						</div>
+						<div class="img-box not-upload" ng-show="data.pic==null">未上传</div>
+					</td>
+					<td><span ng-show="data.pic==null">——</span> <span
+						ng-show="data.pic!=null&&data.status==0">待审核</span> <span
+						ng-show="data.status==1">审核中</span> <span ng-show="data.status==2">审核通过</span>
+						<span ng-show="data.status==3">审核未通过</span></td>
+					<td>
+						<div ng-show="data.pic!=null">
+<!-- 						<a href="javascript:;" class="js-add-sku-atom add-sku" -->
+<!-- 							stackable-toggle="'active'" -->
+<!-- 							stackable-trigger="pop_auth">审核</a> -->
+<!-- 						<stackable-popover  -->
+<!-- 							stackable="pop_auth" stackable-placement="top" -->
+<!-- 							stackable-alignment="center" -->
+<!-- 							stackable-enable-escape="true"> -->
+<!-- 						<div class="popover-inner popover-change"> -->
+<!-- 							<div class="popover-content text-center form-inline"> -->
+<!-- 								<div> -->
+<!-- 									<select id="status_{{data.id}}" style="height: 30px;width: 150px;"> -->
+<!-- 										<option value="0" selected="selected">待审核</option> -->
+<!-- 										<option value="1">审核中</option> -->
+<!-- 										<option value="2">审核通过</option> -->
+<!-- 										<option value="3">审核不通过</option> -->
+<!-- 									</select> -->
+<!-- 								</div> -->
+<!-- 								<div><br> -->
+<!-- 									<button type="button" -->
+<!-- 										class="btn btn-primary js-btn-confirm" -->
+<!-- 										data-loading-text="确定" -->
+<!-- 										ng-click="save(data.id)">确定</button> -->
+<!-- 									<button type="reset" class="btn js-btn-cancel" -->
+<!-- 										ng-click="pop_auth.show=false">取消</button> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						</stackable-popover> -->
+							<a id="console1{{$index}}" ng-click="pop={check_show:true}" class="js-add-sku-atom add-sku" name="btn" title="top" style="font-style: normal">审核</a>
+							<dialog ng-if="pop.check_show==true" for="console1{{$index}}" align="top" close="pop.check_show=false" close-action="outerchick">
+							    <div dialog-content>
+							    	<div class="popover-content text-center form-inline">
+										<div>
+											<select id="status_{{data.id}}" style="height: 30px;width: 150px;">
+												<option value="0" selected="selected">待审核</option>
+												<option value="1">审核中</option>
+												<option value="2">审核通过</option>
+												<option value="3">审核不通过</option>
+											</select>
+										</div>
+										<div>
+										<br>
+											<button type="button"
+												class="btn btn-primary js-btn-confirm"
+												data-loading-text="确定"
+												ng-click="save(data.id,pop)">确定</button>
+											<button type="reset" class="btn js-btn-cancel"
+												ng-click="pop.check_show=false">取消</button>
+										</div>
+								</div>
+								</div>
+							</dialog>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tbody ng-show="category!=0">
+				<tr ng-repeat="data in pageData.list">
+					<td>{{data.name}}</td>
+					<td>
+						<div ng-repeat="item in data.detail.items">
+							<ul class="js-upload-image-list upload-image-list clearfix ui-sortable">
+									<li><span>{{item.name}}</span></li>
+									<li class="upload-preview-img sort">
+									<img src="{{item.url}}"></li>
+								</ul>
+						</div>
+					</td>
+					<td>
+						<span ng-show="data.status==0">待审核</span> 
+						<span ng-show="data.status==1">审核中</span> 
+						<span ng-show="data.status==2">审核通过</span>
+						<span ng-show="data.status==3">审核未通过</span>
+					</td>
+					<td>
+						<a id="console2{{$index}}" ng-click="pop={check_show:true}" class="js-add-sku-atom add-sku" style="font-style: normal">审核</a>
+						<dialog ng-if="pop.check_show==true" for="console2{{$index}}" align="top" close="pop.check_show=false" close-action="outerchick">
+						    <div dialog-content>
+						    	<div class="popover-content text-center form-inline">
+									<div>
+										<select id="status_{{data.id}}" style="height: 30px;width: 150px;">
+											<option value="0" selected="selected">待审核</option>
+											<option value="1">审核中</option>
+											<option value="2">审核通过</option>
+											<option value="3">审核不通过</option>
+										</select>
+									</div>
+									<div>
+									<br>
+										<button type="button"
+											class="btn btn-primary js-btn-confirm"
+											data-loading-text="确定"
+											ng-click="save(data.id,pop)">确定</button>
+										<button type="reset" class="btn js-btn-cancel"
+											ng-click="pop.check_show=false">取消</button>
+									</div>
+								</div>
+							</div>
+						</dialog>
+<!-- 					 	<a href="javascript:;" class="js-add-sku-atom add-sku" -->
+<!-- 							stackable-toggle="'active'" -->
+<!-- 							stackable-trigger="pop_auth">审核</a> -->
+<!-- 						<stackable-popover  -->
+<!-- 							stackable="pop_auth" stackable-placement="top" -->
+<!-- 							stackable-alignment="center" -->
+<!-- 							stackable-enable-escape="true"> -->
+<!-- 						<div class="popover-inner popover-change"> -->
+<!-- 							<div class="popover-content text-center form-inline"> -->
+<!-- 								<div> -->
+<!-- 									<select id="status_{{data.id}}" style="height: 30px;width: 150px;"> -->
+<!-- 										<option value="0" selected="selected">待审核</option> -->
+<!-- 										<option value="1">审核中</option> -->
+<!-- 										<option value="2">审核通过</option> -->
+<!-- 										<option value="3">审核不通过</option> -->
+<!-- 									</select> -->
+<!-- 								</div> -->
+<!-- 								<div> -->
+<!-- 								<br> -->
+<!-- 									<button type="button" -->
+<!-- 										class="btn btn-primary js-btn-confirm" -->
+<!-- 										data-loading-text="确定" -->
+<!-- 										ng-click="save(data.id)">确定</button> -->
+<!-- 									<button type="reset" class="btn js-btn-cancel" -->
+<!-- 										ng-click="pop_auth.show=false">取消</button> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						</stackable-popover> -->
+					</td>
+				</tr>
+			</tbody>
+			
+					 	
+		</table>
+		<div class="panel panel-default">
+			<footer class="panel-footer">
+				<div class="row">
+					<div ng-show="pageData.totalRow>0&&curTab!=0">
+						<custom-pagination boundary-links="true" ng-change="pageChanged()"
+							total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+							page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+							previous-text="&lsaquo;" next-text="&rsaquo;"
+							first-text="&laquo;" last-text="&raquo;"></custom-pagination>
+					</div>
+					<div ng-show="(pageData.totalRow==0)||(pageData=='')"
+						style="text-align: center;">没有找到相关记录!</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>

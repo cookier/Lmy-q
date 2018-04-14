@@ -1,0 +1,31 @@
+<div class="choice-image">
+        <a ng-show="item.image_id===''" class="add-image js-trigger-image" ng-click="addPic(item)"><i class="icon-add"></i>  添加图片</a>
+        <img ng-show="item.image_id != ''" ng-src="{{item.image_url}}"  width="118" height="118" class="thumb-image">
+        <a  ng-show="item.image_id != ''" class="modify-image js-trigger-image" ng-click="addPic(item)">重新上传</a>
+
+    <!-- for error msg -->
+    <div class="control-group">
+        <div class="controls">
+            <input type="hidden" name="image_url">
+        </div>
+    </div>
+</div>
+<div class="choice-content">
+    <div class="control-group">
+        <label class="control-label">标题：</label>
+        <div class="controls">
+            <input class="" type="text" ng-model="item.title" >
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">链接：</label>
+        <div class="controls">
+            <ui-setup-link link_id="item.link_id"  link_url="item.link_url" link_title="item.link_title" link_type="item.link_type"></ui-setup-link>
+        </div>
+    </div>
+</div>
+
+<div class="actions">
+    <span class="action add close-modal" title="添加" ng-click="add()">+</span>
+    <span class="action delete close-modal" title="删除" ng-click="del(item)">×</span>
+</div>

@@ -1,0 +1,35 @@
+<div class="control-group">
+    <div class="custom-tag-list clearfix">
+        <div class="custom-tag-list-menu-block js-collection-region" style="min-height: 323px;">
+            <ul ng-show="item.sub_entry.length<1" class="custom-tag-list-side-menu">
+                <li class="current"><a href="javascript:;"><span>商品组一</span></a></li>
+                <li class=""><a href="javascript:;"><span>商品组二</span></a></li>
+                <li class=""><a href="javascript:;"><span>商品组三</span></a></li>
+                <li class=""><a href="javascript:;"><span>商品组四</span></a></li>
+            </ul>
+            <ul ng-show="item.sub_entry.length>0" class="custom-tag-list-side-menu">
+                <li ng-repeat="subItem in item.sub_entry" ng-class="{'current':$index==0}" ><a href="javascript:;"><span>{{subItem.title}}</span></a></li>
+            </ul>
+        </div>
+        <div class="custom-tag-list-goods">
+            <ul class="custom-tag-list-goods-list">
+                <li ng-repeat="img in images_url" class="custom-tag-list-single-goods clearfix">
+                    <div class="custom-tag-list-goods-img">
+                        <img ng-src="{{img}}" style="display: inline;">
+                    </div>
+                    <div class="custom-tag-list-goods-detail">
+                        <p class="custom-tag-list-goods-title">此处显示商品名称</p>
+                        <span class="custom-tag-list-goods-price">￥100.00</span>
+                        <a class="custom-tag-list-goods-buy" href="javascript:void(0)"><span></span></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

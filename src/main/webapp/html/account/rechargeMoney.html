@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="./css/newsettlement_b46b28c7ef.css" type="text/css">
+<div class="app-init-container" ng-controller="RechargeMoneyAction">
+    <alert class="alert">
+
+    </alert>
+
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="js-nav-settlement-income" class="">
+                <a ui-sref="console.account">我的收入</a>
+            </li>
+            <li id="js-nav-settlement-trade" class="">
+                <a ui-sref="console.trading_list">交易记录</a>
+            </li>
+            <li id="js-nav-settlement-inoutdetail" class="">
+                <a ui-sref="console.income_detail">收支明细</a>
+            </li>
+            <li id="js-nav-settlement-withdraw" class="">
+                <a ui-sref="console.withdrawals_record">提现记录</a>
+            </li>
+            <li id="js-nav-settlement-applywithdrawal" class="active">
+                <a ui-sref="app.rechargeMoney">充值</a>
+            </li>
+        </ul>
+        <!--<div class="common-helps-entry pull-right">
+            <a href="" target="_blank">
+                <span class="help-icon"></span>收入／提现常见问题总结
+            </a>
+        </div>
+    --></nav>
+
+    <div class="app__content js-app-main">
+        <div>
+            <div class="page-settlement">
+                <div class="ui-box rechargeMoney-region" style="border:#e5e5e5 solid 1px;">
+                    <div class="header">充值</div>
+
+                    <form id="taobaoRecharge" action="https://shenghuo.alipay.com/send/payment/fill.htm" method="post"
+                          target="_blank">
+                        <input name="optEmail" type="hidden" value="3203348649@qq.com">
+                        <input name="payAmount" type="hidden" value="0.01">
+                        <input name="title" type="hidden" value="平台充值" placeholder="付款说明">
+                        <input name="pay" type="image" value="购买域名"
+                               src="http://www.yunzhongbang.com/images/pic_logo_2.png">
+                        <input name="memo" type="hidden" value="注意：收款人和金额已设定，支付过程中请勿修改任何信息，直接点击 下一步 ">
+                    </form>
+
+                    <div class="form-horizontal">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label">账户可用余额：</label>
+                                <div class="controls">
+                                    <span class="money">{{account.available_money}}</span>
+                                    <span class="unit">元</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">充值金额：</label>
+                                <div class="controls">
+
+                                    <!-- 显示需要的金额 -->
+                                    <input class="js-money" type="number" ng-model="data.money" name="money"
+                                           placeholder="请输入充值金额" required/>&nbsp;&nbsp;元
+
+                                </div>
+
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">充值类型：</label>
+                                <div class="controls">
+                                    <label class="i-checks i-checks-sm">
+                                        <input type="radio" ng-model="data.trade_type" value="9" checked=""
+                                               name="trade_type"><i></i>普通充值
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="control-group period-group">
+                                <label class="control-label">支付方式：</label>
+                                <div class="controls">
+                                    <div class="scan-pay">扫码支付</div>
+                                    <div class="recharge-tip">大额充值建议您分批次进行</div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-actions">
+                            <button class="btn btn-primary js-submit" data-loading-text="处理中..."
+                                    ng-click="doGenerator()">确认充值
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-settlement">
+                <div class="ui-box rechargeMoney-region" style="border:#e5e5e5 solid 1px;">
+                    <div class="form-horizontal">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label">使用遇到问题？</label>
+                            </div>
+                            <div class="control-group">
+                                <div class="problem-tip">·输入充值金额后，为什么无法成功充值？</div>
+                                <div class="problem-answer">答：大额充值会受到充值额度的限制，建议您分批进行充值，每次充值金额不超过10000元。</div>
+                            </div>
+                            <div class="control-group">
+                                <div class="problem-tip">·充值成功了，为什么收支明细里没有记录？</div>
+                                <div class="problem-answer">
+                                    答：充值金额是实时到账的，若收支明细中没有记录，可能是系统延时引起的，您可稍后查看。若超过一天仍未显示，请与有赞客服联系。
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

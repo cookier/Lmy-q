@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityParticipatorMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityParticipator">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="activity_id" jdbcType="INTEGER" property="activityId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="share_qr_path" jdbcType="VARCHAR" property="shareQrPath"/>
+        <result column="share_qr_url" jdbcType="VARCHAR" property="shareQrUrl"/>
+        <result column="share_link_url" jdbcType="VARCHAR" property="shareLinkUrl"/>
+        <result column="sales" jdbcType="DOUBLE" property="sales"/>
+        <result column="recommend_num" jdbcType="INTEGER" property="recommendNum"/>
+        <result column="ranking" jdbcType="INTEGER" property="ranking"/>
+        <result column="role" jdbcType="INTEGER" property="role"/>
+        <result column="remainder_sales" jdbcType="DOUBLE" property="remainderSales"/>
+        <result column="remainder_bonus_number" jdbcType="INTEGER" property="remainderBonusNumber"/>
+        <result column="bonus_total_money" jdbcType="DOUBLE" property="bonusTotalMoney"/>
+        <result column="blanklist_flag" jdbcType="INTEGER" property="blanklistFlag"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ActivityParticipator">
+        <result column="extr_content" jdbcType="LONGVARCHAR" property="extrContent"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, activity_id, user_id, create_time, update_time, share_qr_path, share_qr_url, 
+    share_link_url, sales, recommend_num, ranking, role, remainder_sales, remainder_bonus_number, 
+    bonus_total_money, blanklist_flag
+  </sql>
+    <sql id="Blob_Column_List">
+    extr_content
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityParticipatorExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_participator
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityParticipatorExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_participator
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_participator
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_participator
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityParticipatorExample">
+        delete from t_activity_participator
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityParticipator">
+    insert into t_activity_participator (id, activity_id, user_id, 
+      create_time, update_time, share_qr_path, 
+      share_qr_url, share_link_url, sales, 
+      recommend_num, ranking, role, 
+      remainder_sales, remainder_bonus_number, bonus_total_money, 
+      blanklist_flag, extr_content)
+    values (#{id,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{shareQrPath,jdbcType=VARCHAR}, 
+      #{shareQrUrl,jdbcType=VARCHAR}, #{shareLinkUrl,jdbcType=VARCHAR}, #{sales,jdbcType=DOUBLE}, 
+      #{recommendNum,jdbcType=INTEGER}, #{ranking,jdbcType=INTEGER}, #{role,jdbcType=INTEGER}, 
+      #{remainderSales,jdbcType=DOUBLE}, #{remainderBonusNumber,jdbcType=INTEGER}, #{bonusTotalMoney,jdbcType=DOUBLE}, 
+      #{blanklistFlag,jdbcType=INTEGER}, #{extrContent,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityParticipator">
+        insert into t_activity_participator
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="shareQrPath != null">
+                share_qr_path,
+            </if>
+            <if test="shareQrUrl != null">
+                share_qr_url,
+            </if>
+            <if test="shareLinkUrl != null">
+                share_link_url,
+            </if>
+            <if test="sales != null">
+                sales,
+            </if>
+            <if test="recommendNum != null">
+                recommend_num,
+            </if>
+            <if test="ranking != null">
+                ranking,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+            <if test="remainderSales != null">
+                remainder_sales,
+            </if>
+            <if test="remainderBonusNumber != null">
+                remainder_bonus_number,
+            </if>
+            <if test="bonusTotalMoney != null">
+                bonus_total_money,
+            </if>
+            <if test="blanklistFlag != null">
+                blanklist_flag,
+            </if>
+            <if test="extrContent != null">
+                extr_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shareQrPath != null">
+                #{shareQrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="shareQrUrl != null">
+                #{shareQrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="shareLinkUrl != null">
+                #{shareLinkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sales != null">
+                #{sales,jdbcType=DOUBLE},
+            </if>
+            <if test="recommendNum != null">
+                #{recommendNum,jdbcType=INTEGER},
+            </if>
+            <if test="ranking != null">
+                #{ranking,jdbcType=INTEGER},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=INTEGER},
+            </if>
+            <if test="remainderSales != null">
+                #{remainderSales,jdbcType=DOUBLE},
+            </if>
+            <if test="remainderBonusNumber != null">
+                #{remainderBonusNumber,jdbcType=INTEGER},
+            </if>
+            <if test="bonusTotalMoney != null">
+                #{bonusTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="blanklistFlag != null">
+                #{blanklistFlag,jdbcType=INTEGER},
+            </if>
+            <if test="extrContent != null">
+                #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityParticipatorExample"
+            resultType="java.lang.Long">
+        select count(*) from t_activity_participator
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_participator
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.activityId != null">
+                activity_id = #{record.activityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.shareQrPath != null">
+                share_qr_path = #{record.shareQrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shareQrUrl != null">
+                share_qr_url = #{record.shareQrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shareLinkUrl != null">
+                share_link_url = #{record.shareLinkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sales != null">
+                sales = #{record.sales,jdbcType=DOUBLE},
+            </if>
+            <if test="record.recommendNum != null">
+                recommend_num = #{record.recommendNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.ranking != null">
+                ranking = #{record.ranking,jdbcType=INTEGER},
+            </if>
+            <if test="record.role != null">
+                role = #{record.role,jdbcType=INTEGER},
+            </if>
+            <if test="record.remainderSales != null">
+                remainder_sales = #{record.remainderSales,jdbcType=DOUBLE},
+            </if>
+            <if test="record.remainderBonusNumber != null">
+                remainder_bonus_number = #{record.remainderBonusNumber,jdbcType=INTEGER},
+            </if>
+            <if test="record.bonusTotalMoney != null">
+                bonus_total_money = #{record.bonusTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.blanklistFlag != null">
+                blanklist_flag = #{record.blanklistFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.extrContent != null">
+                extr_content = #{record.extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_activity_participator
+        set id = #{record.id,jdbcType=INTEGER},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        share_qr_path = #{record.shareQrPath,jdbcType=VARCHAR},
+        share_qr_url = #{record.shareQrUrl,jdbcType=VARCHAR},
+        share_link_url = #{record.shareLinkUrl,jdbcType=VARCHAR},
+        sales = #{record.sales,jdbcType=DOUBLE},
+        recommend_num = #{record.recommendNum,jdbcType=INTEGER},
+        ranking = #{record.ranking,jdbcType=INTEGER},
+        role = #{record.role,jdbcType=INTEGER},
+        remainder_sales = #{record.remainderSales,jdbcType=DOUBLE},
+        remainder_bonus_number = #{record.remainderBonusNumber,jdbcType=INTEGER},
+        bonus_total_money = #{record.bonusTotalMoney,jdbcType=DOUBLE},
+        blanklist_flag = #{record.blanklistFlag,jdbcType=INTEGER},
+        extr_content = #{record.extrContent,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_participator
+        set id = #{record.id,jdbcType=INTEGER},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        share_qr_path = #{record.shareQrPath,jdbcType=VARCHAR},
+        share_qr_url = #{record.shareQrUrl,jdbcType=VARCHAR},
+        share_link_url = #{record.shareLinkUrl,jdbcType=VARCHAR},
+        sales = #{record.sales,jdbcType=DOUBLE},
+        recommend_num = #{record.recommendNum,jdbcType=INTEGER},
+        ranking = #{record.ranking,jdbcType=INTEGER},
+        role = #{record.role,jdbcType=INTEGER},
+        remainder_sales = #{record.remainderSales,jdbcType=DOUBLE},
+        remainder_bonus_number = #{record.remainderBonusNumber,jdbcType=INTEGER},
+        bonus_total_money = #{record.bonusTotalMoney,jdbcType=DOUBLE},
+        blanklist_flag = #{record.blanklistFlag,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityParticipator">
+        update t_activity_participator
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shareQrPath != null">
+                share_qr_path = #{shareQrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="shareQrUrl != null">
+                share_qr_url = #{shareQrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="shareLinkUrl != null">
+                share_link_url = #{shareLinkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sales != null">
+                sales = #{sales,jdbcType=DOUBLE},
+            </if>
+            <if test="recommendNum != null">
+                recommend_num = #{recommendNum,jdbcType=INTEGER},
+            </if>
+            <if test="ranking != null">
+                ranking = #{ranking,jdbcType=INTEGER},
+            </if>
+            <if test="role != null">
+                role = #{role,jdbcType=INTEGER},
+            </if>
+            <if test="remainderSales != null">
+                remainder_sales = #{remainderSales,jdbcType=DOUBLE},
+            </if>
+            <if test="remainderBonusNumber != null">
+                remainder_bonus_number = #{remainderBonusNumber,jdbcType=INTEGER},
+            </if>
+            <if test="bonusTotalMoney != null">
+                bonus_total_money = #{bonusTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="blanklistFlag != null">
+                blanklist_flag = #{blanklistFlag,jdbcType=INTEGER},
+            </if>
+            <if test="extrContent != null">
+                extr_content = #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityParticipator">
+    update t_activity_participator
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      share_qr_path = #{shareQrPath,jdbcType=VARCHAR},
+      share_qr_url = #{shareQrUrl,jdbcType=VARCHAR},
+      share_link_url = #{shareLinkUrl,jdbcType=VARCHAR},
+      sales = #{sales,jdbcType=DOUBLE},
+      recommend_num = #{recommendNum,jdbcType=INTEGER},
+      ranking = #{ranking,jdbcType=INTEGER},
+      role = #{role,jdbcType=INTEGER},
+      remainder_sales = #{remainderSales,jdbcType=DOUBLE},
+      remainder_bonus_number = #{remainderBonusNumber,jdbcType=INTEGER},
+      bonus_total_money = #{bonusTotalMoney,jdbcType=DOUBLE},
+      blanklist_flag = #{blanklistFlag,jdbcType=INTEGER},
+      extr_content = #{extrContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityParticipator">
+    update t_activity_participator
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      share_qr_path = #{shareQrPath,jdbcType=VARCHAR},
+      share_qr_url = #{shareQrUrl,jdbcType=VARCHAR},
+      share_link_url = #{shareLinkUrl,jdbcType=VARCHAR},
+      sales = #{sales,jdbcType=DOUBLE},
+      recommend_num = #{recommendNum,jdbcType=INTEGER},
+      ranking = #{ranking,jdbcType=INTEGER},
+      role = #{role,jdbcType=INTEGER},
+      remainder_sales = #{remainderSales,jdbcType=DOUBLE},
+      remainder_bonus_number = #{remainderBonusNumber,jdbcType=INTEGER},
+      bonus_total_money = #{bonusTotalMoney,jdbcType=DOUBLE},
+      blanklist_flag = #{blanklistFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

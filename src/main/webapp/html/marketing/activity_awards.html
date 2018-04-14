@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="css/supplier_goods_bf368e53cc.css" type="text/css">
+<div class="app-init-container" ng-controller="ActivityAwardsController">
+    <div id="sku-info-region" class="goods-info-group">
+        <div class="goods-info-group-inner">
+        </div>
+        <div class="info-group-cont">
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>名次</th>
+                        <th>用户名</th>
+                        <th>用户手机号</th>
+                        <th>参与时间</th>
+                        <th>销售额</th>
+                        <th>奖励金额</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in list track by $index">
+                        <td>{{data.ranking}}</td>
+                        <td>{{data.nickname}}</td>
+                        <td>{{data.mobile}}</td>
+                        <td>{{data.create_time}}</td>
+                        <td>{{data.sales}}</td>
+                        <td>{{data.bonus}}</td>
+                        <td>
+                            <button ng-show="!data.completed_flag" href="javascript:;"
+                                    class="ui-btn ui-btn-success js-filter" ng-click="loadAward(data);">选择奖励
+                            </button>
+                            <button ng-show="data.completed_flag" href="javascript:;"
+                                    class="ui-btn ui-btn-success js-filter" ng-disabled="true"
+                                    ng-click="loadAward(data);" style="background-color:red;border-color:red;">已发送奖励
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div ng-show="(list==null) || (list.length==0)"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

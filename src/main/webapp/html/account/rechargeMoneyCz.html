@@ -1,0 +1,17 @@
+<div class="widget-feature-template">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+        <h3 class="title">扫码充值</h3>
+    </div>
+
+    <div class="modal-header">
+        <div style="margin-left:auto;margin-right:auto;width:150px;"><h4>充值金额:<span style="color:#ff0000;">{{data.money}}</span>元
+        </h4></div>
+    </div>
+
+    <div class="modal-body">
+        <div><img ng-src="wechatRechargeMoney/getRqImage?money={{money}}&rm={{rm}}&tradeType={{tradeType}}"></div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>

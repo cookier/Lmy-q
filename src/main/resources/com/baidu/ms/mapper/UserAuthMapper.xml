@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.UserAuthMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.UserAuth">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="identity_type" jdbcType="INTEGER" property="identityType"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="identity_pic_2" jdbcType="VARCHAR" property="identityPic2"/>
+        <result column="identity_pic_1" jdbcType="VARCHAR" property="identityPic1"/>
+        <result column="biz_licence" jdbcType="VARCHAR" property="bizLicence"/>
+        <result column="identity_num" jdbcType="VARCHAR" property="identityNum"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="enterprise_type" jdbcType="INTEGER" property="enterpriseType"/>
+        <result column="audit_remark" jdbcType="VARCHAR" property="auditRemark"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, user_id, shop_id, type, identity_type, real_name, identity_pic_2, identity_pic_1, 
+    biz_licence, identity_num, create_time, status, enterprise_type, audit_remark
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.UserAuthExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_user_auth
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user_auth
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_auth
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.UserAuthExample">
+        delete from t_user_auth
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.UserAuth">
+    insert into t_user_auth (id, user_id, shop_id, 
+      type, identity_type, real_name, 
+      identity_pic_2, identity_pic_1, biz_licence, 
+      identity_num, create_time, status, 
+      enterprise_type, audit_remark)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{identityType,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
+      #{identityPic2,jdbcType=VARCHAR}, #{identityPic1,jdbcType=VARCHAR}, #{bizLicence,jdbcType=VARCHAR}, 
+      #{identityNum,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{enterpriseType,jdbcType=INTEGER}, #{auditRemark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.UserAuth">
+        insert into t_user_auth
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="identityType != null">
+                identity_type,
+            </if>
+            <if test="realName != null">
+                real_name,
+            </if>
+            <if test="identityPic2 != null">
+                identity_pic_2,
+            </if>
+            <if test="identityPic1 != null">
+                identity_pic_1,
+            </if>
+            <if test="bizLicence != null">
+                biz_licence,
+            </if>
+            <if test="identityNum != null">
+                identity_num,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="enterpriseType != null">
+                enterprise_type,
+            </if>
+            <if test="auditRemark != null">
+                audit_remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="identityType != null">
+                #{identityType,jdbcType=INTEGER},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="identityPic2 != null">
+                #{identityPic2,jdbcType=VARCHAR},
+            </if>
+            <if test="identityPic1 != null">
+                #{identityPic1,jdbcType=VARCHAR},
+            </if>
+            <if test="bizLicence != null">
+                #{bizLicence,jdbcType=VARCHAR},
+            </if>
+            <if test="identityNum != null">
+                #{identityNum,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="enterpriseType != null">
+                #{enterpriseType,jdbcType=INTEGER},
+            </if>
+            <if test="auditRemark != null">
+                #{auditRemark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.UserAuthExample" resultType="java.lang.Long">
+        select count(*) from t_user_auth
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_user_auth
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.identityType != null">
+                identity_type = #{record.identityType,jdbcType=INTEGER},
+            </if>
+            <if test="record.realName != null">
+                real_name = #{record.realName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.identityPic2 != null">
+                identity_pic_2 = #{record.identityPic2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.identityPic1 != null">
+                identity_pic_1 = #{record.identityPic1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bizLicence != null">
+                biz_licence = #{record.bizLicence,jdbcType=VARCHAR},
+            </if>
+            <if test="record.identityNum != null">
+                identity_num = #{record.identityNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.enterpriseType != null">
+                enterprise_type = #{record.enterpriseType,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditRemark != null">
+                audit_remark = #{record.auditRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_user_auth
+        set id = #{record.id,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=INTEGER},
+        identity_type = #{record.identityType,jdbcType=INTEGER},
+        real_name = #{record.realName,jdbcType=VARCHAR},
+        identity_pic_2 = #{record.identityPic2,jdbcType=VARCHAR},
+        identity_pic_1 = #{record.identityPic1,jdbcType=VARCHAR},
+        biz_licence = #{record.bizLicence,jdbcType=VARCHAR},
+        identity_num = #{record.identityNum,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        status = #{record.status,jdbcType=INTEGER},
+        enterprise_type = #{record.enterpriseType,jdbcType=INTEGER},
+        audit_remark = #{record.auditRemark,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.UserAuth">
+        update t_user_auth
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="identityType != null">
+                identity_type = #{identityType,jdbcType=INTEGER},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="identityPic2 != null">
+                identity_pic_2 = #{identityPic2,jdbcType=VARCHAR},
+            </if>
+            <if test="identityPic1 != null">
+                identity_pic_1 = #{identityPic1,jdbcType=VARCHAR},
+            </if>
+            <if test="bizLicence != null">
+                biz_licence = #{bizLicence,jdbcType=VARCHAR},
+            </if>
+            <if test="identityNum != null">
+                identity_num = #{identityNum,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="enterpriseType != null">
+                enterprise_type = #{enterpriseType,jdbcType=INTEGER},
+            </if>
+            <if test="auditRemark != null">
+                audit_remark = #{auditRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.UserAuth">
+    update t_user_auth
+    set user_id = #{userId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      identity_type = #{identityType,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      identity_pic_2 = #{identityPic2,jdbcType=VARCHAR},
+      identity_pic_1 = #{identityPic1,jdbcType=VARCHAR},
+      biz_licence = #{bizLicence,jdbcType=VARCHAR},
+      identity_num = #{identityNum,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      enterprise_type = #{enterpriseType,jdbcType=INTEGER},
+      audit_remark = #{auditRemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

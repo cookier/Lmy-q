@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="css/goods_edit_69a4c9a1bf.css" type="text/css">
+<link rel="stylesheet" href="css/goods_58f81727ac.css" type="text/css">
+<div class="app-init-container" ng-controller="ActivityEditController">
+    <div id="app-region" class="app__content">
+        <div class="goods-edit-area">
+            <ul class="ui-nav-tab">
+                <li data-next-step="1" class="js-switch-step js-step-1" ng-class="{'active':curTab==1}"><a
+                        ng-click="editInfo()">1.编辑基本信息</a></li>
+                <li data-next-step="2" class="js-switch-step js-step-2" ng-class="{'active':curTab==2}"><a
+                        ng-click="editRule()">2.编辑活动规则</a></li>
+            </ul>
+            <div ng-show="curTab==1" ng-include="'html/marketing/activity_info_edit.html'"></div>
+            <div ng-show="curTab==2" ng-include="'html/marketing/activity_rules.html'"></div>
+        </div>
+        <div class="app-actions" style="bottom: 0px;">
+            <div class="form-actions text-center">
+                <button class="btn" ng-click="back()">返回</button>
+                <!-- <button class="btn btn-primary js-switch-step"  ng-show="curTab==1&&(activity.id==undefined||activity.status==0||activity.status==2)" ng-click="editRule()">下一步</button>
+                <button class="btn js-switch-step"  ng-show="curTab==2&&(activity.id==undefined||activity.status==0||activity.status==2)" ng-click="editInfo()">上一步</button>
+                <button class="btn btn-primary js-btn-load" ng-show="curTab==1&&(activity.id==undefined||activity.status==0||activity.status==2)" ng-click="save('activity')">保存</button>
+                <button class="btn btn-primary js-btn-load" ng-show="curTab==2&&(activity.id==undefined||activity.status==0||activity.status==2)" ng-click="save('rule')">确定</button> -->
+
+                <button class="btn btn-primary js-switch-step" ng-show="curTab==1" ng-click="editRule()">下一步</button>
+                <button class="btn js-switch-step" ng-show="curTab==2" ng-click="editInfo()">上一步</button>
+                <button class="btn btn-primary js-btn-load" ng-show="curTab==1" ng-click="save('activity')">保存</button>
+                <button class="btn btn-primary js-btn-load" ng-show="curTab==2" ng-click="save('rule')">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

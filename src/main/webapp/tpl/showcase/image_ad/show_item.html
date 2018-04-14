@@ -1,0 +1,13 @@
+<% if (show_method == '0') { %>
+    <a href="javascript: void(0);" style="height: <%- Math.round(height) || 160 %>px;">
+        <% if (title !== '') { %>
+            <h3 class="title"><%- title %></h3>
+        <% } %>
+        <img src="<%= image_url %>" style="max-height: <%- Math.round(height) || 160 %>px;">
+    </a>
+<% } else { %>
+    <% if (title !== '') { %>
+    <h3 class="title"><%- title %></h3>
+    <% } %>
+    <img src="<%= image_url %>">
+<% } %>

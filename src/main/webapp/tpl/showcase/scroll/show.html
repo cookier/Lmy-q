@@ -1,0 +1,23 @@
+<div class="control-group">
+    <%
+        var image_url = '';
+        if(first_page_image_url) {
+            image_url = fullfillImage(first_page_image_url);
+        } else {
+            image_url = window._global.url.cdn_static + '/image/scroll/default2.gif';
+        }
+    %>
+    <div class="www-tpl-scroll">
+        <% if(homepage_icon == '1') { %>
+            <div class="ui-left-btns">
+                <i class="ui-homepage-btn"></i>
+            </div>
+        <% } %>
+        <% if(music_icon == '1') { %>
+            <div class="ui-right-btns">
+                <i class="ui-music-btn"></i>
+            </div>
+        <% } %>
+        <img src="<%= image_url %>" alt="全画幅场景">
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="control-group">
+    <ul ng-show="item.sub_entry.length < 1" class="custom-nav clearfix">
+        <li>
+            <a class="clearfix" href="javascript:void(0);">
+                <span class="custom-nav-title">点此添加一个『文本导航』</span><i class="pull-right right-arrow"></i>
+            </a>
+        </li>
+    </ul>
+    <ul ng-show="item.sub_entry.length > 0" class="custom-nav clearfix js-custom-nav">
+        <li ng-repeat="subItem in item.sub_entry">
+            <a class="clearfix" href="javascript:void(0);">
+                <span class="custom-nav-title">{{subItem.title}}</span><i class="pull-right right-arrow"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+  <script>
+    var htmlDecode = function(str){
+      var arrEntities = {'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+      return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){
+        return arrEntities[t];
+      });
+    };
+    var a = '~!@#$%^&amp;*()_+&lt;&gt;:&rdquo;{}|';
+    var fileId = 14651978969260926730;
+    alert("" + fileId + "");
+    a = htmlDecode(a);
+    console.log(a);
+  </script>
+  </body>
+</html>

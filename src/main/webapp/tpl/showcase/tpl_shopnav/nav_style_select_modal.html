@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <a class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+    <h3 class="title">选择导航模板</h3>
+</div>
+<div class="modal-body shopnav-modal" style="padding: 30px;">
+    <div class="pull-left clearfix">
+        <div class="shopnav-sample">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="nav_style" value="1" ng-model="nav_style" ng-checked="nav_style==1" > 微信公众号自定义菜单样式
+            </label>
+            <div class="shopnav-sample-wechat"></div>
+        </div>
+        <div class="shopnav-sample">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="nav_style" value="2" ng-model="nav_style" ng-checked="nav_style==2"><i></i> APP导航模板（图标及底色都可配置）
+            </label>
+            <div class="shopnav-sample-app shopnav-sample-app2"></div>
+        </div>
+    </div>
+    <div class="pull-left clearfix" style="margin-left: 20px;">
+        <div class="shopnav-sample">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="nav_style" value="3" ng-model="nav_style" ng-checked="nav_style==3"><i></i>带购物车导航模板
+            </label>
+            <div class="shopnav-sample-app shopnav-sample-app3"></div>
+        </div>
+        <div class="shopnav-sample">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="nav_style" value="4" ng-model="nav_style" ng-checked="nav_style==4"><i></i>Path展开形式导航
+            </label>
+            <div class="shopnav-sample-app shopnav-sample-app4"></div>
+        </div>
+        <div class="shopnav-sample">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="nav_style" value="5" ng-model="nav_style" ng-checked="nav_style==5"><i></i>两侧展开形式导航
+            </label>
+            <div class="shopnav-sample-app shopnav-sample-app5"></div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+<div class="modal-footer">
+    <a href="javascript:;" class="ui-btn ui-btn-primary js-confirm" ng-click="ok()">确定</a>
+    <a href="javascript:;" class="ui-btn js-cancel" ng-click="cancel()">取消</a>
+</div>

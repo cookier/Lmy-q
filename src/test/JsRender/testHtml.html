@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- To run the current sample code in your own environment, copy this to an html page. -->
+
+<html>
+  <head>
+    <script src="jquery-1.10.2.js"></script>
+    <script src="jsrender.js"></script>
+  </head>
+  <body>
+  <!--<div id="list"></div>-->
+  <script type="text/tmp" id="tmp5">
+    {{for}}
+      <li>id:{{:ID}} name:{{:Name}}</li>
+    {{/for}}
+  
+  </script>
+
+  <!--<script>-->
+  <!--var arr = [-->
+  <!--{ID:1,Name:"tom"},-->
+  <!--{ID:2,Name:"jack"},-->
+  <!--{ID:3,Name:"lucy"}-->
+  <!--];-->
+
+  <!--var html = $("#tmp5").render(arr);-->
+  <!--$("#list").html(html);-->
+  <!--</script>-->
+
+  <script type="text/tmp" id="tmp7">
+    {{for}}
+      <li>
+        index:{{:#getIndex()+1}}
+        name:{{:name}}
+        <ul>
+          {{for hobbies}}
+            <li>{{:#getIndex()+1}}:{{:#data}}</li>
+          {{/for}}
+         </ul>
+       </li>
+     {{/for}}
+  
+  </script>
+
+  <!--<script>-->
+  <!--arr = [-->
+  <!--{name:"tom",hobbies:["篮球","足球"]},-->
+  <!--{name:"jack",hobbies:["篮球","橄榄球"]},-->
+  <!--{name:"luck",hobbies:["游泳","羽毛球"]}-->
+  <!--];-->
+  <!--var html = $("#tmp7").render(arr);-->
+  <!--$("#list").html(html);-->
+  <!--</script>-->
+
+  <script type="text/tmp" id="tmp8">
+   {{for}}
+    <li>
+        name:{{:name}}
+        <ul>
+            {{for hobbies}}
+              <li>{{:#getIndex() + 1}}:{{:#data}}</li>
+            {{/for}}
+        </ul>
+    </li>
+  {{/for}} 
+  
+  </script>
+
+  <!--<script>-->
+  <!--arr = [-->
+  <!--{name:"tom",hobbies:["篮球","足球"]},-->
+  <!--{name:"jack",hobbies:["篮球","橄榄球"]},-->
+  <!--{name:"lucy",hobbies:["游泳","羽毛球"]}-->
+  <!--];-->
+  <!---->
+  <!--var html = $("#tmp7").render(arr);-->
+  <!--$("#list").html(html);-->
+  <!--</script>-->
+
+  <table border="1px">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>家庭成员</th>
+      </tr>
+    </thead>
+    <!--<tbody id="list">-->
+    <!--</tbody>-->
+  </table>
+
+  <script id="testImpl" type="text/x-jsrender">
+    <tr>
+      <td>{{:#index + 1}}</td>
+      <td>{{:name}}</td>
+      <td>{{:age}}</td>
+      <td>
+        {{for family ~parentIndex=#index ~parentName=name ~parentAge=age}}
+          <b>{{:~parentIndex+1}}.{{:#index+1}}</b>
+          {{:~parentName}}的{{:#data}}{{:~parentAge}}
+        {{/for}}
+      </td>
+    </tr>
+  
+  </script>
+
+  <!--<script>-->
+  <!--var dataSource = [-->
+  <!--{-->
+  <!--name:"张三",-->
+  <!--age:3,-->
+  <!--family:["爸爸","妈妈","哥哥"]-->
+  <!--},-->
+  <!--{-->
+  <!--name: "李四",-->
+  <!--age:4,-->
+  <!--family: ["爷爷","奶奶","叔叔" ]-->
+  <!--}-->
+  <!--];-->
+  <!---->
+  <!--$("#list").append($("#testImpl").render(dataSource));-->
+  <!--</script>-->
+
+  {{html:move.description}}
+  {{url:getTheFilePath()}}
+  {{daymonth:invoice.date}}
+  <script>
+    $.views.converters("getRsbPointStr",function(responsiblePointList){
+      var rspsbPointName = "";
+      for(var index in responsiblePointList){
+        rspsbPointName += responsiblePointList[index].PointName;
+        rspsbPointName += ",";
+      }
+      if(rspsbPointName.length > 1){
+        rpsbPointName = rspsbPointName.substr(0,rspsPointName.Length - 1)
+      }
+      return rspsbPointName;
+    });
+  </script>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<div class="app-init-container" ng-controller="AccountBillListController">
+    <div class="app__content js-app-main">
+        <div class="goods-list">
+            <div class="js-list-filter-region clearfix ui-box"
+                 style="position: relative;text-align: right;">
+                <div class="widget-list-filter">
+                    <div class="filter-box">
+                        <div class="js-list-search seach-box">
+                            <div class="pull-right">
+                                <div class="time-filter-groups clearfix">
+                                    <div class="control-group">
+                                        交易类型：
+                                        <select ng-model="tradeType" style="height: 30px;width: 100px;">
+                                            <option value="">全部</option>
+                                            <option value=1>订单交易</option>
+                                            <option value=2>提现</option>
+                                            <option value=3>返现</option>
+                                            <option value=4>返现退回</option>
+                                            <option value=5>退款</option>
+                                            <option value=6>交易手续费</option>
+                                            <option value=7>交易补贴</option>
+                                            <option value=8>系统退款</option>
+                                            <option value=9>充值</option>
+                                            <option value=10>冻结保证金</option>
+                                        </select>
+                                        <label class="control-label">时间：</label>
+                                        <input type="text" id="beginCreateTime" ng-model="beginTime"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                        <input type="text" id="endCreateTime" ng-model="endTime"
+                                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                               class="Wdate" style="width: 150px; height: 30px;"> <a
+                                            class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</a>
+                                        <a class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</a>
+
+                                        <button class="btn btn-sm btn-default" type="button" ng-click="pageChanged()">
+                                            Go!
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-box">
+                <div class="panel panel-default">
+                    <table class="ui-table ui-table-list" style="padding: 0px;">
+                        <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                        <tr class="widget-list-header">
+                            <th width="30px;"><label class="i-checks i-checks-sm">
+                                <input type="checkbox" ng-checked="isCheckedAll()"
+                                       ng-click="checkAll()"><i></i>
+                            </label></th>
+                            <th>店铺名称</th>
+                            <th>交易编号</th>
+                            <th>订单编号</th>
+                            <th>交易类型</th>
+                            <th>交易名称</th>
+                            <th>交易对象</th>
+                            <th>下单时间</th>
+                            <th>支付时间</th>
+                            <th>完成时间</th>
+                            <th>支付流水号</th>
+                            <th>支付名称</th>
+                            <th>支付类型</th>
+                            <th>支付状态</th>
+                            <th>支付金额</th>
+                        </tr>
+                        </thead>
+
+                        <tbody class="js-list-body-region">
+                        <tr class="widget-list-item" ng-repeat="data in pageData.list">
+                            <td><label class="i-checks i-checks-sm"> <input
+                                    id={{data.id}} type="checkbox" ng-checked="data.chk"
+                                    ng-click="data.chk = !data.chk"><i></i></label></td>
+                            <td class="goods-meta">
+                                <p class="goods-title"><a>{{data.shop_name}} </a></p>
+                            </td>
+                            <td>
+                                <p>{{data.trade_no}}</p>
+                            </td>
+                            <td>
+                                <p>{{data.order_no}}</p>
+                            </td>
+                            <td>
+                                <p ng-show="data.trade_type==1">订单交易</p>
+                                <p ng-show="data.trade_type==2">提现</p>
+                                <p ng-show="data.trade_type==3">返现</p>
+                                <p ng-show="data.trade_type==4">返现退回</p>
+                                <p ng-show="data.trade_type==5">退款</p>
+                                <p ng-show="data.trade_type==6">交易手续费</p>
+                                <p ng-show="data.trade_type==7">交易补贴</p>
+                                <p ng-show="data.trade_type==8">系统退款</p>
+                                <p ng-show="data.trade_type==9">充值</p>
+                                <p ng-show="data.trade_type==10">冻结保证金</p>
+                            </td>
+                            <td>
+                                <p>{{data.trade_name}}</p>
+                            </td>
+                            <td>
+                                <p>{{data.trade_object}}</p>
+                            </td>
+                            <td>
+                                <p>{{data.order_time}}</p>
+                            </td>
+                            <td>
+                                <p>{{data.pay_time}}</p>
+                            </td>
+                            <td>
+                                <p>{{data.finish_time}}</p>
+                            </td>
+                            <td>
+                                <p>{{data.pay_no}}</p>
+                            </td>
+                            <td>
+                                <p>{{data.pay_name}}</p>
+                            </td>
+                            <td>
+                                <p ng-show="data.pay_type==1">微信</p>
+                                <p ng-show="data.pay_type==2">支付宝</p>
+                                <p ng-show="data.pay_type==3">银联</p>
+                            </td>
+                            <td>
+                                <p ng-show="data.bill_status==0">等待支付</p>
+                                <p ng-show="data.bill_status==2">支付成功</p>
+                                <!--<p ng-show="data.pay_status==2">支付失败</p>-->
+                            </td>
+                            <td>
+                                <p>￥{{data.money}}</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="js-list-empty-region"></div>
+                    <footer class="panel-footer" style="text-align: right;">
+                        <div class="row">
+                            <div ng-show="pageData.totalRow>0">
+                                <custom-pagination boundary-links="true"
+                                                   ng-change="pageChanged()" total-items="pageData.totalRow"
+                                                   ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                                   class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                                   next-text="&rsaquo;" first-text="&laquo;"
+                                                   last-text="&raquo;"></custom-pagination>
+                            </div>
+                            <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                                 style="text-align: center;">没有找到相关记录!
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+
+        </div>
+    </div>

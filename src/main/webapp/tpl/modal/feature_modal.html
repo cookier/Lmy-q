@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+    <div class="modal-header">
+        <a class="close js-news-modal-dismiss" data-dismiss="modal" ng-click="cancel()">×</a>
+        <!-- 顶部tab -->
+        <ul class="module-nav modal-tab">
+            <li ng-class="{'active':data_type == 'feature'}">
+                <a data-type="feature" class="js-modal-tab" ng-click="changeType('feature')">微页面</a> |
+            </li>
+            <li ng-class="{'active':data_type == 'category'}">
+                <a data-type="category" class="js-modal-tab" ng-click="changeType('category')">微页面分类</a>
+            </li>
+        </ul>
+    </div>
+    <div class="modal-body">
+        <div class="tab-content">
+            <div id="js-module-feature" class="module-feature">
+                <table class="table">
+                    <colgroup>
+                        <col class="modal-col-title">
+                        <col class="modal-col-time" span="2">
+                        <col class="modal-col-action">
+                    </colgroup>
+
+                    <!-- 表格头部 -->
+                    <thead>
+                    <tr>
+                        <th class="title">
+                            <div class="td-cont">
+                                <span>标题</span> <a class="js-update" href="javascript:void(0);">刷新</a>
+                            </div>
+                        </th>
+                        <th class="time">
+                            <div class="td-cont">
+                                <span>创建时间</span>
+                            </div>
+                        </th>
+                        <th class="opts">
+
+                                <form class="form-search">
+                                    <div class="input-append">
+                                        <input class="input-small js-modal-search-input" type="text" ng-model="q.keyword">
+                                        <a class="btn js-fetch-page js-modal-search" data-action-type="search" ng-click="doSearch()">搜</a>
+                                    </div>
+                                </form>
+
+                        </th>
+                    </tr>
+
+                    </thead>
+                    <!-- 表格数据区 -->
+                    <tbody>
+                    <tr ng-repeat="item in pageData.list">
+                        <td class="title">
+                            <div class="td-cont">
+                                <a target="_blank" class="new_window"
+                                   href="http://www.yunzhongbang.com/v2/showcase/feature?alias=1hnpn4hvy">{{item.title}}</a>
+                            </div>
+                        </td>
+                        <td class="time">
+                            <div class="td-cont">
+                                <span>{{item.create_time}}</span>
+                            </div>
+                        </td>
+                        <td class="opts">
+                            <div class="td-cont">
+                                <button class="btn js-choose " ng-class="{'btn-primary':item.checked}" ng-click="choose(item)">{{item.checked?'取消':'选取'}}</button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="js-confirm-choose pull-left">
+            <input type="button" class="btn btn-primary" ng-show="selected.length>0" value="确定使用" ng-click="ok()">
+        </div>
+        <div class="pagenavi pull-right">
+            <custom-pagination boundary-links="true" ng-change="pageChanged()" can-change-page-size="false"
+                               total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                               page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                               previous-text="&lsaquo;" next-text="&rsaquo;"
+                               first-text="&laquo;" last-text="&raquo;"></custom-pagination>
+        </div>
+    </div>

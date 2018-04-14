@@ -1,0 +1,38 @@
+<div class="modal-header">
+	<a class="close js-news-modal-dismiss" data-dismiss="modal"
+		ng-click="cancel()">×</a>
+		<ul class="module-nav modal-tab">
+		<li class="active"><a href="#js-module-goods" data-type="goods"
+			class="js-modal-tab">数据导出</a></li>
+		<!-- <li><a ui-sref="app.goodsinfo_edit({id:0})" target="_parent"
+			data-type="tag" class="js-modal-tab">新建商品</a> |</li>
+		<li class="link-group link-group-0"><a
+			ui-sref="app.goods_list({menuType:3})" target="_parent"
+			class="new_window">草稿管理</a></li> -->
+		
+	</ul>
+</div>
+
+<div class="modal-body">
+	<div class="tab-content">
+		<div id="js-module-goods" class="tab-pane module-goods active">
+			<div style="width: 100%; text-align: center; line-height: 30px;">
+				<input type="radio" ng-model="export_page" value=0>全部数据
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" ng-model="export_page" value=1>当前页数据
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="panel-footer">
+	<div class="row">
+	</div>
+</footer>
+
+<div style="text-align: center; margin-bottom: 20px;"
+	ng-show="chooseMode!=1">
+	<button ng-click="ok()">确定</button>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<button ng-click="cancel()">取消</button>
+</div>

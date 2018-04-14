@@ -1,0 +1,27 @@
+<h4>封底页</h4>
+<div class="clearfix">
+    <div class="pull-left">
+        <% if(last_page_image_url) { %>
+            <div class="image-box">
+                <img src="<%= fullfillImage(last_page_image_url, '!140x140+2x.jpg') %>" class="image">
+                <a href="javascript:;" class="modify-image js-last-page-image">重新上传</a>
+            </div>
+        <% } else { %>
+            <a href="javascript:;" class="add-image js-last-page-image"><i class="icon-add"></i> 添加图片</a>
+            <div class="control-group">
+                <div class="controls" style="margin: 2px;">
+                    <input type="hidden" name="last_page_image_url">
+                </div>
+            </div>
+        <% } %>
+    </div>
+    <div class="pull-left">
+        <div class="control-group">
+            <label class="control-label">链接：</label>
+            <div class="controls">
+                <%= renderLink(last_page_link_url, last_page_link_title, last_page_link_type) %>
+            </div>
+        </div>
+    </div>
+</div>
+

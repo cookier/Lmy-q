@@ -1,0 +1,106 @@
+<div class="modal-header">
+	<a class="close js-news-modal-dismiss" data-dismiss="modal"
+		ng-click="cancel()">×</a>
+
+	<ul class="module-nav modal-tab">
+		<li class="active"><a href="#js-module-goods" data-type="goods"
+			class="js-modal-tab">会员</a></li>
+		<!-- <li><a ui-sref="app.goodsinfo_edit({id:0})" target="_parent"
+			data-type="tag" class="js-modal-tab">新建商品</a> |</li>
+		<li class="link-group link-group-0"><a
+			ui-sref="app.goods_list({menuType:3})" target="_parent"
+			class="new_window">草稿管理</a></li> -->
+		<li><input placeholder="请输入会员名称" type="text" ng-model="title"
+			style="width: 200px;height: 30px;">
+			<button class="btn btn-default" type="button"
+				ng-click="pageChanged()">Go!</button></li>
+	</ul>
+</div>
+
+<div class="modal-body">
+	<div class="tab-content">
+		<div id="js-module-goods" class="tab-pane module-goods active">
+			<table class="table">
+				<!-- <colgroup>
+					<col class="modal-col-title">
+					<col class="modal-col-time" span="2">
+					<col class="modal-col-action">
+				</colgroup> -->
+				<!-- 表格头部 -->
+				<thead>
+					<tr>
+						<th style="width: 20px;"><label class="i-checks i-checks-sm"
+							ng-show="chooseMode!=1"> <input type="checkbox"
+								ng-checked="isCheckedAll()" ng-click="checkAll()"><i></i>
+						</label></th>
+						<th class="title">
+							<div class="td-cont">
+								<span>会员名</span> <a class="js-update" ng-click="pageChanged()">刷新</a>
+							</div>
+						</th>
+						<th class="title">
+							<div class="td-cont">
+								<span>昵称</span>
+							</div>
+						</th>
+						<th class="title">
+							<div class="td-cont">
+								<span>电话号码</span>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<!-- 表格数据区 -->
+				<tbody>
+					<tr ng-repeat="data in pageData.list">
+						<td><label class="i-checks i-checks-sm"
+							ng-show="chooseMode!=1"> <input id="{{data.id}}"
+								type="checkbox" ng-checked="data.chk"
+								ng-click="data.chk = !data.chk"><i></i>
+						</label> <label class="i-checks i-checks-sm" ng-show="chooseMode==1">
+								<input type="radio" ng-model="goods.single" ng-value="data" ng-click="setGoods(data)">
+								<i></i>
+						</label></td>
+						<td class="title">
+							<div class="td-cont">
+								<a>{{data.id}}</a>
+							</div>
+						</td>
+						<td class="title">
+							<div class="td-cont">
+								<a>{{data.nickname}}</a>
+							</div>
+						</td>
+						<td class="title">
+							<div class="td-cont">
+								<span>{{data.mobile}} </span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
+
+<footer class="panel-footer">
+	<div class="row">
+		<div ng-show="pageData.totalRow>0">
+			<custom-pagination boundary-links="true" ng-change="pageChanged()"
+				total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+				page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+				previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+				last-text="&raquo;"></custom-pagination>
+		</div>
+		<div ng-show="(pageData.totalRow==0)||(pageData=='')"
+			style="text-align: center;">没有找到相关记录!</div>
+	</div>
+</footer>
+
+<div style="text-align: center; margin-bottom: 20px;"
+	ng-show="chooseMode!=1">
+	<button ng-click="selectGoods()">确定</button>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<button ng-click="cancel()">取消</button>
+</div>

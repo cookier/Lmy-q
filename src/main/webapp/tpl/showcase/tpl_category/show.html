@@ -1,0 +1,47 @@
+<h1>
+	<span>{{item.title}}</span>
+</h1>
+<div class="custom-title text-left">
+	<h2 class="title">{{item.title}}</h2>
+</div>
+<div class="js-collection-region">
+	<ul ng-if="item.show_method ==0" class="custom-nav custom-nav-noicon clearfix">
+		<li ng-repeat="subItem in item.sub_entry">
+		<a class="clearfix" href="javascript:;" target="_blank">
+				<span class="custom-nav-title">{{subItem.title}}</span> <i
+				class="pull-right right-arrow"></i>
+		</a>
+		</li>
+	</ul>
+	<div ng-if="item.show_method ==1">
+		<div class="custom-messages single" ng-repeat="subItem in item.sub_entry">
+			<a href="javascript:void(0);" class="clearfix" target="_blank">
+				<div class="custom-messages-image">
+					<div class="image">
+						<img src="" ng-src="{{subItem.img_url}}">
+					</div>
+				</div>
+				<div class="custom-messages-content">
+					<div class="title">
+						<h4>{{subItem.title}}</h4>
+					</div>
+					<div class="summary">
+						{{subItem.intro}}
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div ng-show="item.show_method ==1" class="custom-paginations-container">
+	<div class="js-custom-paginations custom-paginations clearfix">
+		<a href="javascript:;" class="custom-paginations-list">目录</a>
+		<a href="javascript:;" class="custom-paginations-page disabled">上一页</a>
+		<a href="javascript:;" class="custom-paginations-page custom-paginations-last">下一页</a>
+	</div>
+</div>
+<div class="actions">
+	<div class="actions-wrap">
+		<span class="action edit">编辑</span><span class="action add">加内容</span>
+	</div>
+</div>

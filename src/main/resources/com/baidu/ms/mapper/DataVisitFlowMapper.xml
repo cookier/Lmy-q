@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.DataVisitFlowMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.DataVisitFlow">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="browser_uv" jdbcType="INTEGER" property="browserUv"/>
+        <result column="browser_pv" jdbcType="INTEGER" property="browserPv"/>
+        <result column="inside_uv" jdbcType="INTEGER" property="insideUv"/>
+        <result column="inside_pv" jdbcType="INTEGER" property="insidePv"/>
+        <result column="share_pv" jdbcType="INTEGER" property="sharePv"/>
+        <result column="share_uv" jdbcType="INTEGER" property="shareUv"/>
+        <result column="export_uv" jdbcType="INTEGER" property="exportUv"/>
+        <result column="export_pv" jdbcType="INTEGER" property="exportPv"/>
+        <result column="reach_pv" jdbcType="INTEGER" property="reachPv"/>
+        <result column="reach_uv" jdbcType="INTEGER" property="reachUv"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="calcu_date" jdbcType="TIMESTAMP" property="calcuDate"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, browser_uv, browser_pv, inside_uv, inside_pv, share_pv, share_uv, export_uv, 
+    export_pv, reach_pv, reach_uv, shop_id, calcu_date
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.DataVisitFlowExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_data_visit_flow
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_data_visit_flow
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_data_visit_flow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.DataVisitFlowExample">
+        delete from t_data_visit_flow
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.DataVisitFlow">
+    insert into t_data_visit_flow (id, browser_uv, browser_pv, 
+      inside_uv, inside_pv, share_pv, 
+      share_uv, export_uv, export_pv, 
+      reach_pv, reach_uv, shop_id, 
+      calcu_date)
+    values (#{id,jdbcType=INTEGER}, #{browserUv,jdbcType=INTEGER}, #{browserPv,jdbcType=INTEGER}, 
+      #{insideUv,jdbcType=INTEGER}, #{insidePv,jdbcType=INTEGER}, #{sharePv,jdbcType=INTEGER}, 
+      #{shareUv,jdbcType=INTEGER}, #{exportUv,jdbcType=INTEGER}, #{exportPv,jdbcType=INTEGER}, 
+      #{reachPv,jdbcType=INTEGER}, #{reachUv,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{calcuDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.DataVisitFlow">
+        insert into t_data_visit_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="browserUv != null">
+                browser_uv,
+            </if>
+            <if test="browserPv != null">
+                browser_pv,
+            </if>
+            <if test="insideUv != null">
+                inside_uv,
+            </if>
+            <if test="insidePv != null">
+                inside_pv,
+            </if>
+            <if test="sharePv != null">
+                share_pv,
+            </if>
+            <if test="shareUv != null">
+                share_uv,
+            </if>
+            <if test="exportUv != null">
+                export_uv,
+            </if>
+            <if test="exportPv != null">
+                export_pv,
+            </if>
+            <if test="reachPv != null">
+                reach_pv,
+            </if>
+            <if test="reachUv != null">
+                reach_uv,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="calcuDate != null">
+                calcu_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="browserUv != null">
+                #{browserUv,jdbcType=INTEGER},
+            </if>
+            <if test="browserPv != null">
+                #{browserPv,jdbcType=INTEGER},
+            </if>
+            <if test="insideUv != null">
+                #{insideUv,jdbcType=INTEGER},
+            </if>
+            <if test="insidePv != null">
+                #{insidePv,jdbcType=INTEGER},
+            </if>
+            <if test="sharePv != null">
+                #{sharePv,jdbcType=INTEGER},
+            </if>
+            <if test="shareUv != null">
+                #{shareUv,jdbcType=INTEGER},
+            </if>
+            <if test="exportUv != null">
+                #{exportUv,jdbcType=INTEGER},
+            </if>
+            <if test="exportPv != null">
+                #{exportPv,jdbcType=INTEGER},
+            </if>
+            <if test="reachPv != null">
+                #{reachPv,jdbcType=INTEGER},
+            </if>
+            <if test="reachUv != null">
+                #{reachUv,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="calcuDate != null">
+                #{calcuDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.DataVisitFlowExample" resultType="java.lang.Long">
+        select count(*) from t_data_visit_flow
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_data_visit_flow
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.browserUv != null">
+                browser_uv = #{record.browserUv,jdbcType=INTEGER},
+            </if>
+            <if test="record.browserPv != null">
+                browser_pv = #{record.browserPv,jdbcType=INTEGER},
+            </if>
+            <if test="record.insideUv != null">
+                inside_uv = #{record.insideUv,jdbcType=INTEGER},
+            </if>
+            <if test="record.insidePv != null">
+                inside_pv = #{record.insidePv,jdbcType=INTEGER},
+            </if>
+            <if test="record.sharePv != null">
+                share_pv = #{record.sharePv,jdbcType=INTEGER},
+            </if>
+            <if test="record.shareUv != null">
+                share_uv = #{record.shareUv,jdbcType=INTEGER},
+            </if>
+            <if test="record.exportUv != null">
+                export_uv = #{record.exportUv,jdbcType=INTEGER},
+            </if>
+            <if test="record.exportPv != null">
+                export_pv = #{record.exportPv,jdbcType=INTEGER},
+            </if>
+            <if test="record.reachPv != null">
+                reach_pv = #{record.reachPv,jdbcType=INTEGER},
+            </if>
+            <if test="record.reachUv != null">
+                reach_uv = #{record.reachUv,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.calcuDate != null">
+                calcu_date = #{record.calcuDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_data_visit_flow
+        set id = #{record.id,jdbcType=INTEGER},
+        browser_uv = #{record.browserUv,jdbcType=INTEGER},
+        browser_pv = #{record.browserPv,jdbcType=INTEGER},
+        inside_uv = #{record.insideUv,jdbcType=INTEGER},
+        inside_pv = #{record.insidePv,jdbcType=INTEGER},
+        share_pv = #{record.sharePv,jdbcType=INTEGER},
+        share_uv = #{record.shareUv,jdbcType=INTEGER},
+        export_uv = #{record.exportUv,jdbcType=INTEGER},
+        export_pv = #{record.exportPv,jdbcType=INTEGER},
+        reach_pv = #{record.reachPv,jdbcType=INTEGER},
+        reach_uv = #{record.reachUv,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        calcu_date = #{record.calcuDate,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.DataVisitFlow">
+        update t_data_visit_flow
+        <set>
+            <if test="browserUv != null">
+                browser_uv = #{browserUv,jdbcType=INTEGER},
+            </if>
+            <if test="browserPv != null">
+                browser_pv = #{browserPv,jdbcType=INTEGER},
+            </if>
+            <if test="insideUv != null">
+                inside_uv = #{insideUv,jdbcType=INTEGER},
+            </if>
+            <if test="insidePv != null">
+                inside_pv = #{insidePv,jdbcType=INTEGER},
+            </if>
+            <if test="sharePv != null">
+                share_pv = #{sharePv,jdbcType=INTEGER},
+            </if>
+            <if test="shareUv != null">
+                share_uv = #{shareUv,jdbcType=INTEGER},
+            </if>
+            <if test="exportUv != null">
+                export_uv = #{exportUv,jdbcType=INTEGER},
+            </if>
+            <if test="exportPv != null">
+                export_pv = #{exportPv,jdbcType=INTEGER},
+            </if>
+            <if test="reachPv != null">
+                reach_pv = #{reachPv,jdbcType=INTEGER},
+            </if>
+            <if test="reachUv != null">
+                reach_uv = #{reachUv,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="calcuDate != null">
+                calcu_date = #{calcuDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.DataVisitFlow">
+    update t_data_visit_flow
+    set browser_uv = #{browserUv,jdbcType=INTEGER},
+      browser_pv = #{browserPv,jdbcType=INTEGER},
+      inside_uv = #{insideUv,jdbcType=INTEGER},
+      inside_pv = #{insidePv,jdbcType=INTEGER},
+      share_pv = #{sharePv,jdbcType=INTEGER},
+      share_uv = #{shareUv,jdbcType=INTEGER},
+      export_uv = #{exportUv,jdbcType=INTEGER},
+      export_pv = #{exportPv,jdbcType=INTEGER},
+      reach_pv = #{reachPv,jdbcType=INTEGER},
+      reach_uv = #{reachUv,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      calcu_date = #{calcuDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.GoodsReviewMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.GoodsReview">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="review_content" jdbcType="VARCHAR" property="reviewContent"/>
+        <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, goods_id, order_no, user_id, score, review_content, review_time
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.GoodsReviewExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_goods_review
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_goods_review
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_goods_review
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.GoodsReviewExample">
+        delete from t_goods_review
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.GoodsReview">
+    insert into t_goods_review (id, goods_id, order_no, 
+      user_id, score, review_content, 
+      review_time)
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{reviewContent,jdbcType=VARCHAR}, 
+      #{reviewTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.GoodsReview">
+        insert into t_goods_review
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="reviewContent != null">
+                review_content,
+            </if>
+            <if test="reviewTime != null">
+                review_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="reviewContent != null">
+                #{reviewContent,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewTime != null">
+                #{reviewTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.GoodsReviewExample" resultType="java.lang.Long">
+        select count(*) from t_goods_review
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_goods_review
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.goodsId != null">
+                goods_id = #{record.goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderNo != null">
+                order_no = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.score != null">
+                score = #{record.score,jdbcType=INTEGER},
+            </if>
+            <if test="record.reviewContent != null">
+                review_content = #{record.reviewContent,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reviewTime != null">
+                review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_goods_review
+        set id = #{record.id,jdbcType=INTEGER},
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        score = #{record.score,jdbcType=INTEGER},
+        review_content = #{record.reviewContent,jdbcType=VARCHAR},
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.GoodsReview">
+        update t_goods_review
+        <set>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="reviewContent != null">
+                review_content = #{reviewContent,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewTime != null">
+                review_time = #{reviewTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.GoodsReview">
+    update t_goods_review
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      review_content = #{reviewContent,jdbcType=VARCHAR},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

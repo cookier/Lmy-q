@@ -1,0 +1,153 @@
+<link rel="stylesheet" href="css/order.css" type="text/css">
+
+<div class="app-init-container" ng-controller="PoiListController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form"
+                          onsubmit="return false;">
+                        <div class="clearfix" ng-enter='pageChanged()'>
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">用户名：</label>
+                                    <div class="controls">
+                                        <input type="text" name="nickname" ng-model="data.nickname" value=""
+                                               placeholder="请输入用户昵称!" style="height: 30px;">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">审核状态：</label>
+                                    <div class="controls">
+                                        <select name="state" ng-model="data.state" style="height: 30px;width: 200px;"
+                                                ng-options="f.value as f.name for f in state">
+                                            <option value="">全部</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">文档类型：</label>
+                                    <div class="controls">
+                                        <select name="type" ng-model="data.type" style="height: 30px;width: 200px;"
+                                                ng-options="f.value as f.name for f in type">
+                                            <option value="">全部</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="time-filter-groups clearfix">
+                                    <div class="control-group">
+                                        <label class="control-label">发表时间：</label>
+                                        <div class="controls">
+                                            <input type="text" id="beginCreateTime" ng-model="data.beginCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                            <input type="text" id="endCreateTime" ng-model="data.endCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span
+                                                class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                                            <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div style='float:left;'>
+                                            <label class="control-label">公开范围：</label>
+                                            <div class="controls">
+                                                <select name="permissions" ng-model="data.permissions"
+                                                        style="height: 30px;width: 200px;"
+                                                        ng-options="f.value as f.name for f in permissions">
+                                                    <option value="">全部</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div style='float:left;'>
+                                        <label class="control-label"><a href="javascript:;"
+                                                                        class="ui-btn ui-btn-primary js-filter"
+                                                                        data-loading-text="正在筛选..."
+                                                                        ng-click="pageChanged()">筛选</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="ui-nav clearfix">
+                        <div class="common-helps-entry pull-right hide">
+                            <a href="#" target="_blank"> <span class="help-icon"></span>
+                                订单类型简介及管理方法
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>标题和摘要</th>
+                        <th width='80px'>所属类目</th>
+                        <th width='80px'>公开范围</th>
+                        <th width='170px'>时间</th>
+                        <th width='80px'>点击次数</th>
+                        <th width='80px'>评论次数</th>
+                        <th width='125px' style='text-align:center;'>审核状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="widget-list-item" ng-repeat="data in pageData.list">
+                    <tr ng-init='data.stateUpdate=true;'>
+                        <td style='line-height:16px;'>
+                            <img src='{{data.images[0]?data.images[0]:""}}' onerror="this.src='./img/no_pic.png'"
+                                 style='height:70px;float:left;margin-right:10px;'>
+                            <div style='line-height:20px;margin-bottom:10px;'>{{data.title}} <span
+                                    ng-if='data.sub_title'>( {{data.sub_title}} )</span></div>
+                            <div>地址 : {{data.address}}</div>
+                        </td>
+                        <td>
+                            {{data.type==1?"店铺":data.type==2?"钓场":data.type==3?"农家乐":data.type==4?"农特产":data.type==5?"景点":data.type==6?"餐饮":data.type==7?"住宿":""}}
+                        </td>
+                        <td>
+                            {{data.permissions==0?"不公开":data.permissions==1?"好友":data.permissions==2?"圈子":data.permissions==3?"好友和圈子":data.permissions==4?"所有人":data.permissions==5?"部分好友":""}}
+                        </td>
+                        <td>
+                            <div>创建 : {{data.create_time}}</div>
+                            <div ng-if='data.update_time'>更新 : {{data.update_time}}</div>
+                        </td>
+                        <td>{{data.click_count}}</td>
+                        <td>{{data.comment_count}}</td>
+                        <td align='right'>
+                            <span ng-if='data.stateUpdate'>{{data.state=="-1"?"审核不通过":data.state=="0"?"待审核":data.state=="1"?"审核通过":""}}<img
+                                    src='./image/content/edit.png' width='15px' style='margin-left:10px;'
+                                    ng-click='data.stateUpdate=false'></span>
+                            <span ng-if='!data.stateUpdate'>
+          				<select name="state" ng-model="data.state" style="height: 25px;width: 75px;"
+                                ng-options="f.value as f.name for f in state">
+                    	</select><img src='./image/content/editSave.png' width='18px' style='margin-left:10px;'
+                                      ng-click='updateState(data.id,data.state,$index)'></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='') || !pageData.list"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

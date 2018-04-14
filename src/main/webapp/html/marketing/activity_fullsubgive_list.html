@@ -1,0 +1,103 @@
+<!-- 满减送促销 -->
+<link rel="stylesheet" href="./css/reward_694598e089.css"
+      type="text/css">
+
+<div class="app-init-container"
+     ng-controller="ActivityFullSubGiveListController">
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="tab--1" class="active"><a ng-click="setTab('-1')">所有促销</a></li>
+            <li id="tab-0"><a ng-click="setTab('0')">未开始</a></li>
+            <li id="tab-1"><a ng-click="setTab('1')">进行中</a></li>
+            <li id="tab-3"><a ng-click="setTab('3')">已结束</a></li>
+        </ul>
+        <div class="pull-right common-helps-entry hide">
+            <a href="#" target="_blank"> <span class="help-icon"></span>
+                查看【满减／送】使用教程
+            </a>
+        </div>
+    </nav>
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix ui-box"
+                 style="position: relative;">
+                <div class="widget-list-filter">
+                    <div class="dropdown">
+                        <a class="ui-btn ui-btn-success" ui-sref="console.ump_activityfullsubgive_edit('0')">新建满减送</a>
+                    </div>
+
+                    <div class="js-list-search ui-search-box">
+                        <input ng-model="name" type="text" placeholder="搜索"
+                               class="input-sm"/>
+                        <button class="btn btn-sm btn-default" type="button"
+                                ng-click="pageChanged()">Go!
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-box">
+                <div class="js-list-empty-region">
+                    <div class="panel panel-default">
+                        <table class="ui-table ui-table-list" style="padding: 0px;">
+                            <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                            <tr class="widget-list-header">
+                                <th class="cell-30">活动名称</th>
+                                <th class="cell-40 text-center">有效时间</th>
+                                <th class="cell-10 text-center">活动状态</th>
+                                <th class="cell-20 text-right">操作</th>
+                            </tr>
+                            </thead>
+                            <thead class="js-list-header-region tableFloatingHeader"
+                                   style="display: none;">
+                            <tr class="widget-list-header">
+                                <th class="cell-30">活动名称</th>
+                                <th class="cell-40 text-center">有效时间</th>
+                                <th class="cell-10 text-center">活动状态</th>
+                                <th class="cell-20 text-right">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="js-list-body-region">
+                            <tr class="widget-list-item" ng-repeat="data in pageData.list">
+                                <td>{{data.name}}</td>
+                                <td class="text-center">{{data.begin_time}}至
+                                    {{data.end_time}}
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="data.status==0">未开始</span>
+                                    <span ng-show="data.status==1">进行中</span>
+                                    <span ng-show="data.status==2">已暂停</span>
+                                    <span ng-show="data.status==3">已结束</span>
+                                    <span ng-show="data.status==4">已失效</span>
+                                </td>
+                                <td class="text-right">
+                                    <a ui-sref="console.ump_activityfullsubgive_edit({id:data.id})">详情&nbsp;&nbsp;</a>
+                                    <a href="javascript:void(0);" class="js-disabled"
+                                       ng-show="data.status==0||data.status==1" ng-click="setInvalid({{data}})">使失效&nbsp;&nbsp;</a>
+                                    <a ng-show="data.status==0" ng-click="del({{data.id}})" class="js-delete">删除&nbsp;&nbsp;</a>
+                                    <a ng-show="data.status==0" ng-click="start({{data.id}})" class="js-delete">开始&nbsp;&nbsp;</a>
+                                    <a ng-show="data.status==1" ng-click="stop({{data.id}})" class="js-delete">结束</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div ng-show="pageData.totalRow>0">
+                                    <custom-pagination boundary-links="true"
+                                                       ng-change="pageChanged()" total-items="pageData.totalRow"
+                                                       ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                                       class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                                       next-text="&rsaquo;" first-text="&laquo;"
+                                                       last-text="&raquo;"></custom-pagination>
+                                </div>
+                                <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                                     style="text-align: center;">没有找到相关记录!
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

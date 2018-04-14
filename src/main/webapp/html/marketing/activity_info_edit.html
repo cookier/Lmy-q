@@ -1,0 +1,143 @@
+<form id="form_activity" name="form" class="form-validation form-horizontal fm-goods-info">
+    <div id="goods-info-region" class="goods-info-group">
+        <div class="goods-info-group-inner">
+            <div style="width: 100px;">
+                <div class="group-inner">活动信息</div>
+            </div>
+            <div class="info-group-cont">
+                <div class="group-inner">
+                    <div class="control-group">
+                        <label class="control-label">活动Logo：</label>
+                        <div class="controls">
+                            <input type="button" value="上传" ng-click="uploadPic()"/>
+                            <div id="logo"
+                                 style="margin-top: 5px;width: 200px;height: 200px;margin-bottom: 20px;"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><em class="required">*</em>活动主题：</label>
+                        <div class="controls">
+                            <input type="text" class="form-control"
+                                   placeholder="请输入活动名称!" style="width: 400px;"
+                                   ng-model="activity.title" required>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><em class="required">*</em>活动对应的文件夹名称：</label>
+                        <div class="controls">
+                            <input type="text" class="form-control"
+                                   placeholder="请输入活动首页地址!" style="width: 400px;"
+                                   ng-model="activity.folder" required>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><em class="required">*</em>活动首页地址：</label>
+                        <div class="controls">
+                            <input type="text" class="form-control"
+                                   placeholder="请输入活动首页地址!" style="width: 400px;"
+                                   ng-model="activity.url" required>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">活动引导页：</label>
+                        <div class="controls">
+                            <input type="text" class="form-control"
+                                   placeholder="请输入活动首页地址!" style="width: 400px;"
+                                   ng-model="activity.guide_url" required>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">活动主页地址：</label>
+                        <div class="controls">
+                            <input type="text" class="form-control"
+                                   placeholder="请输入活动主页地址!" style="width: 400px;"
+                                   ng-model="activity.home_url">&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">活动描述：</label>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <textarea ng-model="activity.description" rows="2" cols="100"
+                                      placeholder="活动描述～"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><em class="required">*</em>活动时间：</label>
+                        <div class="controls">
+                            <input type="text" id="beginCreateTime" ng-model="activity.begin_time"
+                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                   class="Wdate" style="width: 150px; height: 30px;" required> <span>至</span>
+                            <input type="text" id="endCreateTime" ng-model="activity.end_time"
+                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                   class="Wdate" style="width: 150px; height: 30px;" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">活动地址：</label>
+                        <div class="controls">
+                            <input type="text" class="form-control"
+                                   placeholder="请输入活动地址!" style="width: 400px;"
+                                   ng-model="activity.address">&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">活动内容：</label>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <textarea ng-model="activity.content" rows="2" cols="100"
+                                      placeholder="活动内容～"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">活动备注：</label>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <textarea ng-model="activity.remark" rows="2" cols="100"
+                                      placeholder="活动备注～"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    var showPic = function (obj, id) {
+        var pic_type = ".jpg.gif.png.jpeg";
+        var picpath = $(obj).val();
+        var picpath = picpath.replace(/.*(\/|\\)/, "");
+        var ext = (/[.]/.exec(picpath)) ? /[^.]+$/.exec(picpath.toLowerCase()) : '';
+        if (pic_type.indexOf(ext) == -1) {
+            alert("错误的文件类型!");
+            flag = false;
+        } else {
+            var files = obj.files;
+            var file = files[0];
+            if (file.size > 1024 * 1024) {
+                alert("您选择的图片超过1M，太大了,请重新选择!");
+                return false;
+            }
+            var imgUrl = getObjectURL(file);
+            if (imgUrl) {
+                $("#" + id).show();
+                $("#" + id).html("<img src='" + imgUrl + "' width='200' height='200'/>");
+            }
+        }
+    };
+
+    //建立一個可存取到該file的url
+    var getObjectURL = function (file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    };
+
+</script>

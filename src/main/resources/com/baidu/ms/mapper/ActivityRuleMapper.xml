@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityRuleMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityRule">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="activity_id" jdbcType="INTEGER" property="activityId"/>
+        <result column="rule_type" jdbcType="INTEGER" property="ruleType"/>
+        <result column="rewards_object" jdbcType="INTEGER" property="rewardsObject"/>
+        <result column="prize_type" jdbcType="INTEGER" property="prizeType"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="receive_type" jdbcType="INTEGER" property="receiveType"/>
+        <result column="receive_num" jdbcType="INTEGER" property="receiveNum"/>
+        <result column="invalid_status" jdbcType="INTEGER" property="invalidStatus"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ActivityRuleWithBLOBs">
+        <result column="prize" jdbcType="LONGVARCHAR" property="prize"/>
+        <result column="extr_content" jdbcType="LONGVARCHAR" property="extrContent"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, name, activity_id, rule_type, rewards_object, prize_type, create_time, receive_type, 
+    receive_num, invalid_status
+  </sql>
+    <sql id="Blob_Column_List">
+    prize, extr_content
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityRuleExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityRuleExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_rule
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_rule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityRuleExample">
+        delete from t_activity_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityRuleWithBLOBs">
+    insert into t_activity_rule (id, name, activity_id, 
+      rule_type, rewards_object, prize_type, 
+      create_time, receive_type, receive_num, 
+      invalid_status, prize, extr_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{activityId,jdbcType=INTEGER}, 
+      #{ruleType,jdbcType=INTEGER}, #{rewardsObject,jdbcType=INTEGER}, #{prizeType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{receiveType,jdbcType=INTEGER}, #{receiveNum,jdbcType=INTEGER}, 
+      #{invalidStatus,jdbcType=INTEGER}, #{prize,jdbcType=LONGVARCHAR}, #{extrContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityRuleWithBLOBs">
+        insert into t_activity_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="ruleType != null">
+                rule_type,
+            </if>
+            <if test="rewardsObject != null">
+                rewards_object,
+            </if>
+            <if test="prizeType != null">
+                prize_type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="receiveType != null">
+                receive_type,
+            </if>
+            <if test="receiveNum != null">
+                receive_num,
+            </if>
+            <if test="invalidStatus != null">
+                invalid_status,
+            </if>
+            <if test="prize != null">
+                prize,
+            </if>
+            <if test="extrContent != null">
+                extr_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="ruleType != null">
+                #{ruleType,jdbcType=INTEGER},
+            </if>
+            <if test="rewardsObject != null">
+                #{rewardsObject,jdbcType=INTEGER},
+            </if>
+            <if test="prizeType != null">
+                #{prizeType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiveType != null">
+                #{receiveType,jdbcType=INTEGER},
+            </if>
+            <if test="receiveNum != null">
+                #{receiveNum,jdbcType=INTEGER},
+            </if>
+            <if test="invalidStatus != null">
+                #{invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="prize != null">
+                #{prize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="extrContent != null">
+                #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityRuleExample" resultType="java.lang.Long">
+        select count(*) from t_activity_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_rule
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.activityId != null">
+                activity_id = #{record.activityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.ruleType != null">
+                rule_type = #{record.ruleType,jdbcType=INTEGER},
+            </if>
+            <if test="record.rewardsObject != null">
+                rewards_object = #{record.rewardsObject,jdbcType=INTEGER},
+            </if>
+            <if test="record.prizeType != null">
+                prize_type = #{record.prizeType,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.receiveType != null">
+                receive_type = #{record.receiveType,jdbcType=INTEGER},
+            </if>
+            <if test="record.receiveNum != null">
+                receive_num = #{record.receiveNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.invalidStatus != null">
+                invalid_status = #{record.invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.prize != null">
+                prize = #{record.prize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.extrContent != null">
+                extr_content = #{record.extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_activity_rule
+        set id = #{record.id,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        rule_type = #{record.ruleType,jdbcType=INTEGER},
+        rewards_object = #{record.rewardsObject,jdbcType=INTEGER},
+        prize_type = #{record.prizeType,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        receive_type = #{record.receiveType,jdbcType=INTEGER},
+        receive_num = #{record.receiveNum,jdbcType=INTEGER},
+        invalid_status = #{record.invalidStatus,jdbcType=INTEGER},
+        prize = #{record.prize,jdbcType=LONGVARCHAR},
+        extr_content = #{record.extrContent,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_rule
+        set id = #{record.id,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+        rule_type = #{record.ruleType,jdbcType=INTEGER},
+        rewards_object = #{record.rewardsObject,jdbcType=INTEGER},
+        prize_type = #{record.prizeType,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        receive_type = #{record.receiveType,jdbcType=INTEGER},
+        receive_num = #{record.receiveNum,jdbcType=INTEGER},
+        invalid_status = #{record.invalidStatus,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityRuleWithBLOBs">
+        update t_activity_rule
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="ruleType != null">
+                rule_type = #{ruleType,jdbcType=INTEGER},
+            </if>
+            <if test="rewardsObject != null">
+                rewards_object = #{rewardsObject,jdbcType=INTEGER},
+            </if>
+            <if test="prizeType != null">
+                prize_type = #{prizeType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiveType != null">
+                receive_type = #{receiveType,jdbcType=INTEGER},
+            </if>
+            <if test="receiveNum != null">
+                receive_num = #{receiveNum,jdbcType=INTEGER},
+            </if>
+            <if test="invalidStatus != null">
+                invalid_status = #{invalidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="prize != null">
+                prize = #{prize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="extrContent != null">
+                extr_content = #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityRuleWithBLOBs">
+    update t_activity_rule
+    set name = #{name,jdbcType=VARCHAR},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      rule_type = #{ruleType,jdbcType=INTEGER},
+      rewards_object = #{rewardsObject,jdbcType=INTEGER},
+      prize_type = #{prizeType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      receive_type = #{receiveType,jdbcType=INTEGER},
+      receive_num = #{receiveNum,jdbcType=INTEGER},
+      invalid_status = #{invalidStatus,jdbcType=INTEGER},
+      prize = #{prize,jdbcType=LONGVARCHAR},
+      extr_content = #{extrContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityRule">
+    update t_activity_rule
+    set name = #{name,jdbcType=VARCHAR},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      rule_type = #{ruleType,jdbcType=INTEGER},
+      rewards_object = #{rewardsObject,jdbcType=INTEGER},
+      prize_type = #{prizeType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      receive_type = #{receiveType,jdbcType=INTEGER},
+      receive_num = #{receiveNum,jdbcType=INTEGER},
+      invalid_status = #{invalidStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

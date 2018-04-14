@@ -1,0 +1,92 @@
+<form class="form-horizontal" novalidate>
+    <div class="control-group">
+        <label class="control-label">列表样式：</label>
+        <div class="controls">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" ng-model="data.size" name="size" value="0" ng-checked="data.size =='0'" ><i></i>大图
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" ng-model="data.size" name="size" value="1" ng-checked="data.size =='1'"><i></i>小图
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" ng-model="data.size" name="size" value="2" ng-checked="data.size =='2'" ><i></i>一大两小
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" ng-model="data.size" name="size" value="3" ng-checked="data.size =='3'" ><i></i>详细列表
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <div class="controls-card">
+                <div class="controls-card-tab">
+                    <label class="i-checks i-checks-sm">
+                        <input type="radio" name="size_type" value="0" ng-model="data.size_type" ng-checked="data.size_type =='0'"><i></i>
+                        卡片样式
+                    </label>
+                    <label ng-show="data.size ==1" class="i-checks i-checks-sm">
+                        <input type="radio" name="size_type" value="1" ng-model="data.size_type" ng-checked="data.size_type =='1'"><i></i>
+                        瀑布流
+                    </label>
+                    <label class="i-checks i-checks-sm">
+                        <input type="radio" name="size_type" value="2" ng-model="data.size_type" ng-checked="data.size_type =='2'"><i></i>
+                        极简样式
+                    </label>
+                    <!--<label ng-show="data.size ==1" class="i-checks i-checks-sm">
+                        <input type="radio" name="size_type" value="3" ng-model="data.size_type" ng-checked="data.size_type =='3'"><i></i>
+                        促销
+                    </label>-->
+                </div>
+                <div ng-show="data.size_type != '3' && (data.size_type != '2' || data.size == '3')" class="controls-card-item">
+                    <div>
+                        <label  class="i-checks i-checks-sm">
+                                <input type="checkbox" name="buy_btn" value="0" ng-model="data.buy_btn" ng-true-value="'1'" ng-false-value="'0'" checked="data.buy_btn=='1'"><i></i>显示购买按钮
+                        </label>
+                    </div>
+                    <div ng-show="data.buy_btn =='1'" style="margin: 10px 0 0 20px;">
+                        <label class="i-checks i-checks-sm">
+                            <input type="radio" name="buy_btn_type" value="1" ng-model="data.buy_btn_type" ng-checked="data.buy_btn_type =='1'"><i></i>
+                            样式1
+                        </label>
+                        <label class="i-checks i-checks-sm">
+                            <input type="radio" name="buy_btn_type" value="2" ng-model="data.buy_btn_type" ng-checked="data.buy_btn_type =='2'"><i></i>
+                            样式2
+                        </label>
+                        <label ng-show="!(data.size == '3' && data.size_type == '2')" class="i-checks i-checks-sm">
+                            <input type="radio" name="buy_btn_type" value="3" ng-model="data.buy_btn_type" ng-checked="data.buy_btn_type =='3'"><i></i>
+                            样式3
+                        </label>
+                        <label class="i-checks i-checks-sm">
+                            <input type="radio" name="buy_btn_type" value="4" ng-model="data.buy_btn_type" ng-checked="data.buy_btn_type =='4'"><i></i>
+                            样式4
+                        </label>
+                    </div>
+                </div>
+                <div class="controls-card-item">
+                    <div>
+                        <label  class="i-checks i-checks-sm">
+                            <input type="checkbox" name="show_wish_btn" value="0" ng-model="data.show_wish_btn" ng-true-value="'1'" ng-false-value="'0'" ng-checked="data.show_wish_btn=='1'"><i></i>显示加入心愿单按钮
+                        </label>
+                    </div>
+                </div>
+                <div ng-show="data.size_type != '3' && data.size != '3'">
+                    <div ng-show="!(data.size == '1' && data.size_type == '2')" class="controls-card-item">
+                        <label  class="i-checks i-checks-sm">
+                            <input type="checkbox" name="show_title" ng-model="data.show_title" ng-true-value="'1'" ng-false-value="'0'" ng-checked="data.show_title=='1'" ><i></i>显示商品名   <span style="margin-left:7px;" ng-show="data.size == '2'">(小图不显示名称)</span>
+                        </label>
+                    </div>
+                    <!--<div ng-show="data.size == '0'" class="controls-card-item">
+                        <label  class="i-checks i-checks-sm">
+                            <input type="checkbox" name="show_sub_title" ng-model="data.show_sub_title" ng-true-value="'1'" ng-false-value="'0'" ng-checked="data.show_sub_title=='1'"><i></i>显示商品简介
+                        </label>
+                    </div>-->
+                    <div class="controls-card-item">
+                        <label  class="i-checks i-checks-sm">
+                                <input type="checkbox" name="price" ng-model="data.price" ng-true-value="'1'" ng-false-value="'0'" ng-checked="data.price=='1'"><i></i>显示价格
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

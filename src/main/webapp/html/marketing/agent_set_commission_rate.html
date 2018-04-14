@@ -1,0 +1,112 @@
+<div>
+    <div class="app-init-container" ng-controller="AgentDefaultCommissionRate">
+        <div class="app__content js-app-main">
+            <div class="widget-list">
+                <div class="js-list-filter-region clearfix">
+                    <div class="widget-list-filter">
+                        <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;">
+                            <div class="clearfix">
+                                <div class="filter-groups">
+                                    <div>
+                                        <label class="col-sm-3 control-label text-left">供应商名称</label>
+                                        <div class="controls">
+                                            <input type="text" ng-model="nickname" style="height: 30px;width:160px;">&nbsp;
+                                            &nbsp; &nbsp;
+                                            <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                               data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                                            <a href="javascript:;" class="ui-btn js-export"
+                                               data-loading-text="正在筛选..." ng-click="add={save_show:true}">新增</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if='add.save_show==true'
+                                 style='border:1px solid #ccc;height:130px;padding:10px;border-radius: 5px;margin:10px 35px;'>
+                                <div style='padding:0  0 10px 0;'>新增提成比例</div>
+                                <div class="filter-groups">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label text-left" style='float:left;'>供应商名称
+                                            ：</label>
+                                        <ui-select style='width:270px;' ng-model="person.selected" theme="bootstrap">
+                                            <ui-select-match placeholder="请输入或选择供应商名称">{{$select.selected.shop_name}}
+                                            </ui-select-match>
+                                            <ui-select-choices group-by="'group'"
+                                                               repeat="item in supplierData | filter: $select.search">
+                                                <span ng-bind-html="item.shop_name | highlight: $select.search"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label text-left" style='float:left;'>提 成 比 例
+                                            ：</label>
+                                        <input style='width:270px;padding:5px;' type="text"
+                                               onkeyup="value=value.replace(/[^\d.]/g,'')" id="percent" value='0.02'
+                                               style="height: 30px;"> &nbsp; &nbsp; &nbsp;
+                                        <a class="ui-btn ui-btn-primary js-filter"
+                                           data-loading-text="正在筛选..." ng-click="addSupplierRate()">保存</a>
+                                        <a class="ui-btn js-export"
+                                           data-loading-text="正在筛选..." ng-click="add.save_show=false">取消</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="ui-btn-group">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="ui-box">
+                    <table class="ui-table-order" style="padding: 0px;">
+                        <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                        <tr class="widget-list-header">
+                            <th>供应商名称</th>
+                            <th width='120px'>手机号码</th>
+                            <th width='240px'>提成比例</th>
+                        </tr>
+                        </thead>
+                        <tbody class="js-list-body-region">
+                        <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">
+                            <td>{{data.nickname}}</td>
+                            <td>{{data.mobile}}</td>
+                            <td ng-init='data.id_update_show=false'>
+									<span ng-if='data.id_update_show!=true'>
+										{{data.percent}}
+										<a class="js-add-sku-atom add-sku" ng-click="update(data.id_update_show=true)"
+                                           style="font-style:normal"> &nbsp; 编辑</a>
+									</span>
+                                <span ng-if='data.id_update_show==true'>
+										<input ng-model='data.percent' value='{{data.percent}}'
+                                               id='{{data.supplier_id}}_percent'>
+										<a class="js-add-sku-atom add-sku"
+                                           ng-click="updateSupplierRate(data.id,data.supplier_id,data.id_update_show)"
+                                           style="font-style:normal"> &nbsp; 保存</a>
+									</span>
+
+                                <a class="js-add-sku-atom add-sku" ng-click="del(data.id)" style="font-style:normal">
+                                    &nbsp; 删除</a>
+                            </td>
+                        </tr>
+                        <tr ng-if='pageData.list.length==0' class="widget-list-item">
+                            <td colspan='5' align='center'>未找到相关数据</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="js-list-empty-region"></div>
+                </div>
+                <div class="js-list-footer-region ui-box">
+                    <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                        <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                           total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                           page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                           previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                           last-text="&raquo;"></custom-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

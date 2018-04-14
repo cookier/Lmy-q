@@ -1,0 +1,69 @@
+<div class="app-init-container" ng-controller="DocumentCategoryListController">
+    <div class="app__content js-app-main">
+        <div class="goods-list">
+            <div class="ui-btn-group">
+                <a href="#/console/activity_edit/0" class="ui-btn ui-btn-success js-filter"
+                   ui-sref="console.help_create_category({id:0})">新建栏目</a>
+            </div>
+            <div class="js-list-filter-region clearfix ui-box"
+                 style="position: relative; text-align: right;">
+                <div class="widget-list-filter">
+                    <div class="filter-box"
+                    <div class="js-list-search seach-box">
+                        栏目名称：<input ng-enter="pageChanged()" ng-model="name" type="text" class="input-sm"/>
+                        <button class="btn btn-sm btn-default" type="button"
+                                ng-click="pageChanged()">Go!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-box">
+            <table class="ui-table-order" style="padding: 0px;">
+                <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                <tr class="widget-list-header">
+                    <th>排序号</th>
+                    <th>栏目名称</th>
+                    <th>上级栏目</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="js-list-body-region">
+                <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">
+                    <td>
+                        <div style="width:10%;float: left;">
+                            {{$index+1}}
+                        </div>
+                        <div style="width:40%;float: left;">
+                            <img src="{{data.icon}}" style="max-width:50px;max-height:50px;">
+                            <div>
+                    </td>
+
+                    <td>{{data.name}}</td>
+                    <td>{{data.parentName}}</td>
+                    <td>{{data.description}}</td>
+                    <td>
+                        <a class="btn" style="background: #33CC00;color: white;"
+                           ui-sref="console.help_create_category({id:data.id})">修改 </a>
+                        <a class="btn" style="background: #FF0066;color: white;" ng-click="delete(data.id)">删除 </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="js-list-empty-region"></div>
+        </div>
+        <div class="js-list-footer-region ui-box">
+            <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                   total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                   page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                   previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                   last-text="&raquo;"></custom-pagination>
+            </div>
+            <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                 style="text-align: center;">没有找到相关记录!
+            </div>
+        </div>
+    </div>
+</div>

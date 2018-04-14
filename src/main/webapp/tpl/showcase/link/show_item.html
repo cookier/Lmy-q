@@ -1,0 +1,10 @@
+<a href="javascript:;" class="custom-link-link">
+    <h3 class="title">
+        <% if (source_type == 'link') { %>
+            <%- source_title %>
+        <% } else { %>
+            第<%= index %>条 <%- source_title %> 的『关联链接』
+        <% } %>
+    </h3>
+    <i class="pull-right right-arrow"></i>
+</a>

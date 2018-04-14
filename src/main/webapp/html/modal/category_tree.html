@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <a class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+    <ul class="module-nav modal-tab js-modal-tab">
+        <li class="js-modal-tab-item js-modal-tab-upload active">
+            <a>请选择类目</a></li>
+    </ul>
+</div>
+
+<div>
+    <abn-tree tree-data="treedata"
+              on-select="showSelected(branch)" expand-level="1"
+              initial-selection="士大夫撒旦法 " icon-leaf="fa fa-file-o"
+              icon-expand="fa fa-plus" icon-collapse="fa fa-minus"></abn-tree>
+</div>
+
+<div class="modal-footer">
+    <div class="modal-action pull-right">
+        <input type="button" class="btn btn-primary js-upload-image"
+               value="确定" ng-click="setCategory()">
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="control-group">
+    <ul ng-show="item.coupon.length==0" class="custom-coupon clearfix">
+        <li>
+            <a href="javascript:;">
+                <div class="custom-coupon-price"><span>￥</span>100</div>
+                <div class="custom-coupon-desc">
+                    满500元可用
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <div class="custom-coupon-price"><span>￥</span>200</div>
+                <div class="custom-coupon-desc">
+                    满800元可用
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <div class="custom-coupon-price"><span>￥</span>300</div>
+                <div class="custom-coupon-desc">
+                    满1000元可用
+                </div>
+            </a>
+        </li>
+    </ul>
+    <ul ng-show="item.coupon.length>0" class="custom-coupon clearfix">
+        <li ng-repeat="coupon in item.coupon">
+            <a href="javascript:;">
+                <div class="custom-coupon-price"><span>￥</span>{{coupon.value }}</div>
+                <div ng-if="coupon.at_least" class="custom-coupon-desc">满{{coupon.at_least}}元可用</div>
+                <div ng-if="!coupon.at_least" class="custom-coupon-desc">无门槛使用</div>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="actions">
+    <div class="actions-wrap">
+        <span class="action edit" ng-click="edit(item)">编辑</span>
+        <span class="action add" ng-click="append($index,$event)">加内容</span>
+        <span class="action delete" ng-click="del(item,$event)">删除</span>
+    </div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

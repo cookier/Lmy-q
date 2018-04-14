@@ -1,0 +1,18 @@
+<form class="form-horizontal" novalidate ng-controller="UIComponentController">
+    <div class="control-group control-group-large">
+        <label class="control-label">自定义页面模块：</label>
+        <div class="controls" name="_id">
+            <div class="control-action">
+                    <div ng-show="data._id !==''" class="pull-left link-to">
+                        <a href="<%= link %>" target="_blank" class="new-window link-to-title">
+                            <span class="label label-success">
+                                <em class="link-to-title-text">{{data.title}}</em>
+                            </span>
+                        </a>
+                    </div>
+                    <a ng-show="data._id !==''" href="javascript:void(0);" class="js-add-component add-component" ng-click="setComponent()">修改</a>
+                    <a ng-show="data._id ===''" href="javascript:void(0);" class="js-add-component add-component" ng-click="setComponent()">+添加</a>
+            </div>
+        </div>
+    </div>
+</form>

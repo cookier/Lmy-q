@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <a class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+    <ul class="module-nav modal-tab js-modal-tab">
+        <li class="js-modal-tab-item js-modal-tab-upload active">
+            <a>活动奖金奖励</a></li>
+    </ul>
+</div>
+<div class="form-horizontal">
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label">转账金额：</label>
+            <div class="controls">
+                <!-- 显示需要的金额 -->
+                <input style="height: 31px; width: 70px;"
+                       class="js-money ng-touched ng-dirty ng-valid-number ng-valid ng-valid-required" type="number"
+                       ng-model="money" name="money" required="">&nbsp;&nbsp;元
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">类型：</label>
+            <div class="controls">
+                <label class="i-checks i-checks-sm">
+                    平台转账给用户
+                </label>
+            </div>
+
+        </div>
+        <div class="control-group period-group">
+            <label class="control-label">短信验证码：</label>
+            <div class="controls">
+                <input type="text" ng-model="smsCode" name="smsCode" value="" style="width: 90px;height: 31px;"
+                       datatype="n4-6" nullmsg="请输入验证码!">
+                <button id="btn_sms" type="button" class="btn"
+                        style="width: 100px;font-size: 10px;cursor: pointer;background:#2591e6;color:white"
+                        ng-click=getSMSCode()>获取
+                </button>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-actions">
+        <button class="btn btn-primary js-submit" data-loading-text="处理中..." ng-click="doGenerator()">确认</button>
+    </div>
+</div>

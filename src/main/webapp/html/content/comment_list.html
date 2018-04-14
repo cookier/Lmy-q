@@ -1,0 +1,189 @@
+<link rel="stylesheet" href="css/order.css" type="text/css">
+<style>
+    .comments {
+        padding-left: 60px;
+        margin-top: 15px;
+    }
+
+    .comments .user_img {
+        top: -5px;
+    }
+
+    .comments .user_img img {
+        width: 40px;
+        border-radius: 100%;
+    }
+
+    .comment .comment_content {
+        margin-left: 60px;
+        padding-right: 70px;
+    }
+
+    .comments .comment_content {
+        margin-left: 50px;
+        padding-right: 60px;
+    }
+
+    .content_del {
+        display: none;
+        padding-left: 50px;
+        color: #157c8c;
+    }
+</style>
+<div class="app-init-container" ng-controller="CommentListController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form"
+                          onsubmit="return false;">
+                        <div class="clearfix" ng-enter='pageChanged()'>
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">用户名：</label>
+                                    <div class="controls">
+                                        <input type="text" name="nickname" ng-model="comment.nickname" value=""
+                                               placeholder="请输入用户昵称!" style="height: 30px;">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div style='float:left;'>
+                                        <label class="control-label">审核状态：</label>
+                                        <div class="controls">
+                                            <select name="state" ng-model="comment.state"
+                                                    style="height: 30px;width: 200px;"
+                                                    ng-options="f.value as f.name for f in state">
+                                                <option value="">全部</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="time-filter-groups clearfix">
+                                    <div class="control-group">
+                                        <label class="control-label">发表时间：</label>
+                                        <div class="controls">
+                                            <input type="text" id="beginCreateTime" ng-model="comment.beginCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                                            <input type="text" id="endCreateTime" ng-model="comment.endCreateTime"
+                                                   date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                                   class="Wdate" style="width: 150px; height: 30px;"> <span
+                                                class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                                            <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div style='float:left;    margin-top: -4px;'>
+                                            <label class="control-label"><a href="javascript:;"
+                                                                            class="ui-btn ui-btn-primary js-filter"
+                                                                            data-loading-text="正在筛选..."
+                                                                            ng-click="pageChanged()">筛选</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="ui-nav clearfix">
+                        <div class="common-helps-entry pull-right hide">
+                            <a href="#" target="_blank"> <span class="help-icon"></span>
+                                订单类型简介及管理方法
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>评论</th>
+                        <th width='150px'>发表时间</th>
+                        <th width='100px'>评论对象类型</th>
+                        <th width='125px' style='text-align:center;'>审核状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="widget-list-item" ng-repeat="data in pageData.list track by data.id">
+                    <tr ng-init="data_index=$index;data.content_index=1;data.stateUpdate=true;">
+                        <td style='line-height:18px;' onmouseover='del_show(jQuery(this))'>
+                            <div ng-repeat="c in data.content" ng-class={true:"comment",false:"comments"}[$index==0]>
+                                <div ng-if=' $index==0 || $index < data.content_index'>
+                                    <div class='user_img' style='float:left;position: relative;height:0px;'><img
+                                            src='{{c.from_avatar}}' width='53px' onerror="this.src='./images/a0.jpg'">
+                                    </div>
+                                    <div style='width:100%;min-height: 53px;' class='comment_content'>
+                                        <div style='min-height: 20px;'><span style='color:#157c8c;'>{{c.from_name}}<span
+                                                ng-if='c.to_name'> &nbsp;<span style='color:#AAA'>回复</span>&nbsp;  {{c.to_name}}</span> : </span>{{c.content}}
+                                            &nbsp;
+                                        </div>
+                                        <div><img ng-repeat="img in c.images" src='{{img}}'
+                                                  style='margin:10px 10px 10px 3px;height:80px;border:1px solid #AAA;'>
+                                        </div>
+                                        <div style='color:#AAA;' ng-if='$index==0'>
+                                            <img src='./image/content/dz.png' width='15px'
+                                                 style='-webkit-transform: rotate(-180deg);'> 踩({{data.digg_count}})
+                                            &nbsp; &nbsp; &nbsp; &nbsp;<img src='./image/content/pl.png' width='15px'>
+                                            评论({{data.content.length-1}})
+                                            &nbsp; &nbsp; &nbsp; &nbsp;<img src='./image/content/dz.png' width='15px'>
+                                            赞({{data.support_count}})
+                                            <span style='color:#157c8c;float: right;margin-right: 10px;'>
+			          					<span ng-if='(!data.content_index && data.content.length>1) || (data.content_index==1 && data.content.length>1)'
+                                              ng-click='data.content_index=100'><img src='./image/content/up.png'
+                                                                                     width='10px'> 展开</span>
+			          					<span ng-if='data.content_index>1 && data.content.length>1'
+                                              ng-click='data.content_index=1'><img src='./image/content/up.png'
+                                                                                   width='10px'
+                                                                                   style='-webkit-transform: rotate(-180deg);'> 收起</span>
+			          				</span>
+                                        </div>
+                                        <div style='color:#AAA;padding-left: 3px;' ng-if='$index>0'>{{c.evaTime}} <span
+                                                class='content_del'
+                                                ng-click='content_del(data.id,data_index,$index)'>删除</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{data.create_time}}</td>
+                        <td>{{data.object_type}}</td>
+                        <td align='right'>
+                            <span ng-if='data.stateUpdate'>{{data.state=="-1"?"审核不通过":data.state=="0"?"待审核":data.state=="1"?"审核通过":""}}<img
+                                    src='./image/content/edit.png' width='15px' style='margin-left:10px;'
+                                    ng-click='data.stateUpdate=false'></span>
+                            <span ng-if='!data.stateUpdate'>
+          				<select name="state" ng-model="data.state" style="height: 25px;width: 75px;"
+                                ng-options="f.value as f.name for f in state">
+                    	</select><img src='./image/content/editSave.png' width='18px' style='margin-left:10px;'
+                                      ng-click='updateState(data.id,data.state,$index)'></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='') || !pageData.list"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function del_show(obj) {
+        $(".content_del").hide();
+        obj.find(".content_del").show();
+    }
+</script>

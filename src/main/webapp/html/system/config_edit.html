@@ -1,0 +1,43 @@
+<div class="app-init-container" ng-controller="ConfigEditController">
+	<nav class="ui-nav clearfix">
+	<ul class="pull-left">
+		<li>
+			<a ui-sref="app.customer_label_list">参数编辑</a>
+		</li>
+	</ul>
+	</nav>
+
+	<div class="app__content">
+		<form class="js-page-form form-horizontal ui-form" method="POST"
+			novalidate="novalidate">
+			<div class="control-group">
+				<label class="control-label">
+					<em class="required">*</em> 参数标题
+				</label>
+				<div class="controls">
+					<input type="text" class="for-post input-medium" maxlength="30"	ng-model="config.title" required>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">
+					<em class="required">*</em> 参数名称
+				</label>
+				<div class="controls">
+					<input type="text" class="for-post input-medium" maxlength="30"	ng-model="config.name" required>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">
+					 参数值
+				</label>
+				<div class="controls">
+					<textarea style="width: 300px;height: 100px;" ng-model="config.value"/>
+				</div>
+			</div>
+			<div class="form-actions">
+				<input class="btn btn-primary js-btn-save" type="button" value="保 存" ng-click="save()">
+				<input type="button" class="btn btn-default" value="取消" ng-click="cancel()">
+			</div>
+		</form>
+	</div>
+</div>

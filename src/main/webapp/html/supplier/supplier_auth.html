@@ -1,0 +1,86 @@
+<div class="app-init-container" ng-controller="SupplierAuthController">
+  <nav class="ui-nav clearfix">
+    <ul class="pull-left">
+      <li>
+        <a ui-sref="app.customer_label_list">供应商认证</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="app__content">
+    <form class="js-page-form form-horizontal ui-form" method="POST" novalidate="novalidate">
+      <div class="control-group">
+        <label class="control-label">企业名称:</label>
+        <div class="controls">
+          {{supplierInfo.shop_name}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">企业性质:</label>
+        <div class="controls">
+          <span ng-show="supplierInfo.enterprise_type==1">国企</span>
+          <span ng-show="supplierInfo.enterprise_type==2">民企</span>
+          <span ng-show="supplierInfo.enterprise_type==3">私企</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">企业地址:</label>
+        <div class="controls">
+          {{supplierInfo.province_name}}
+          {{supplierInfo.city_name}}
+          {{supplierInfo.area_name}}
+          {{supplierInfo.street_name}}
+          {{supplierInfo.shop_address}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">经营类目:</label>
+        <div class="controls">
+          {{goodsCategoryNames}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">营业执照:</label>
+        <div class="controls">
+          <img src="img/view?path={{supplierInfo.biz_licence}}&w=300&h=300" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">企业法人身份证:</label>
+        <div class="controls">
+          <img src="img/view?path={{supplierInfo.identity_pic_1}}&w=300&h=300" />
+        </div>
+        <div class="controls">
+          <img src="img/view?path={{supplierInfo.identity_pic_2}}&w=300&h=300" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">注册时间:</label>
+        <div class="controls">
+          {{supplierInfo.create_time}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">认证状态:</label>
+        <div class="controls">
+          <select ng-model="status" style="height: 30px;width: 100px;">
+            <option value="0">待审核</option>
+            <option value="1">审核中</option>
+            <option value="2">审核通过</option>
+            <option value="3">审核不通过</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+	      <label class="control-label">审核备注:</label>
+	      <div class="controls">
+	        <textarea ng-model="audit_remark"></textarea>
+	      </div>
+	   </div>
+      <div class="form-actions">
+        <input class="btn btn-primary js-btn-save" type="button" value="保存" ng-click="save()">
+        <input type="button" class="btn btn-default" value="返回" ng-click="cancel()">
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.GoodsTagsMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.GoodsTags">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="show_group_name" jdbcType="SMALLINT" property="showGroupName"/>
+        <result column="sort_priority1" jdbcType="SMALLINT" property="sortPriority1"/>
+        <result column="sort_priority2" jdbcType="SMALLINT" property="sortPriority2"/>
+        <result column="list_style" jdbcType="SMALLINT" property="listStyle"/>
+        <result column="item_style" jdbcType="SMALLINT" property="itemStyle"/>
+        <result column="show_product_name" jdbcType="SMALLINT" property="showProductName"/>
+        <result column="show_price" jdbcType="SMALLINT" property="showPrice"/>
+        <result column="show_cart_icon" jdbcType="SMALLINT" property="showCartIcon"/>
+        <result column="show_buy_icon" jdbcType="SMALLINT" property="showBuyIcon"/>
+        <result column="show_buy_icon_style" jdbcType="SMALLINT" property="showBuyIconStyle"/>
+        <result column="group_label_introduction" jdbcType="VARCHAR" property="groupLabelIntroduction"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="system_group_flag" jdbcType="SMALLINT" property="systemGroupFlag"/>
+        <result column="product_count" jdbcType="SMALLINT" property="productCount"/>
+        <result column="delete_flag" jdbcType="SMALLINT" property="deleteFlag"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.GoodsTags">
+        <result column="template_content" jdbcType="LONGVARCHAR" property="templateContent"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, group_name, show_group_name, sort_priority1, sort_priority2, list_style, 
+    item_style, show_product_name, show_price, show_cart_icon, show_buy_icon, show_buy_icon_style, 
+    group_label_introduction, create_time, last_update_time, system_group_flag, product_count, 
+    delete_flag, url
+  </sql>
+    <sql id="Blob_Column_List">
+    template_content
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.GoodsTagsExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_goods_tags
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.GoodsTagsExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_goods_tags
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_goods_tags
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_goods_tags
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.GoodsTagsExample">
+        delete from t_goods_tags
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.GoodsTags">
+    insert into t_goods_tags (id, shop_id, group_name, 
+      show_group_name, sort_priority1, sort_priority2, 
+      list_style, item_style, show_product_name, 
+      show_price, show_cart_icon, show_buy_icon, 
+      show_buy_icon_style, group_label_introduction, 
+      create_time, last_update_time, system_group_flag, 
+      product_count, delete_flag, url, 
+      template_content)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, 
+      #{showGroupName,jdbcType=SMALLINT}, #{sortPriority1,jdbcType=SMALLINT}, #{sortPriority2,jdbcType=SMALLINT}, 
+      #{listStyle,jdbcType=SMALLINT}, #{itemStyle,jdbcType=SMALLINT}, #{showProductName,jdbcType=SMALLINT}, 
+      #{showPrice,jdbcType=SMALLINT}, #{showCartIcon,jdbcType=SMALLINT}, #{showBuyIcon,jdbcType=SMALLINT}, 
+      #{showBuyIconStyle,jdbcType=SMALLINT}, #{groupLabelIntroduction,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{systemGroupFlag,jdbcType=SMALLINT}, 
+      #{productCount,jdbcType=SMALLINT}, #{deleteFlag,jdbcType=SMALLINT}, #{url,jdbcType=VARCHAR}, 
+      #{templateContent,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.GoodsTags">
+        insert into t_goods_tags
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="showGroupName != null">
+                show_group_name,
+            </if>
+            <if test="sortPriority1 != null">
+                sort_priority1,
+            </if>
+            <if test="sortPriority2 != null">
+                sort_priority2,
+            </if>
+            <if test="listStyle != null">
+                list_style,
+            </if>
+            <if test="itemStyle != null">
+                item_style,
+            </if>
+            <if test="showProductName != null">
+                show_product_name,
+            </if>
+            <if test="showPrice != null">
+                show_price,
+            </if>
+            <if test="showCartIcon != null">
+                show_cart_icon,
+            </if>
+            <if test="showBuyIcon != null">
+                show_buy_icon,
+            </if>
+            <if test="showBuyIconStyle != null">
+                show_buy_icon_style,
+            </if>
+            <if test="groupLabelIntroduction != null">
+                group_label_introduction,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time,
+            </if>
+            <if test="systemGroupFlag != null">
+                system_group_flag,
+            </if>
+            <if test="productCount != null">
+                product_count,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="templateContent != null">
+                template_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="showGroupName != null">
+                #{showGroupName,jdbcType=SMALLINT},
+            </if>
+            <if test="sortPriority1 != null">
+                #{sortPriority1,jdbcType=SMALLINT},
+            </if>
+            <if test="sortPriority2 != null">
+                #{sortPriority2,jdbcType=SMALLINT},
+            </if>
+            <if test="listStyle != null">
+                #{listStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="itemStyle != null">
+                #{itemStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="showProductName != null">
+                #{showProductName,jdbcType=SMALLINT},
+            </if>
+            <if test="showPrice != null">
+                #{showPrice,jdbcType=SMALLINT},
+            </if>
+            <if test="showCartIcon != null">
+                #{showCartIcon,jdbcType=SMALLINT},
+            </if>
+            <if test="showBuyIcon != null">
+                #{showBuyIcon,jdbcType=SMALLINT},
+            </if>
+            <if test="showBuyIconStyle != null">
+                #{showBuyIconStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="groupLabelIntroduction != null">
+                #{groupLabelIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateTime != null">
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="systemGroupFlag != null">
+                #{systemGroupFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="productCount != null">
+                #{productCount,jdbcType=SMALLINT},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="templateContent != null">
+                #{templateContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.GoodsTagsExample" resultType="java.lang.Long">
+        select count(*) from t_goods_tags
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_goods_tags
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.groupName != null">
+                group_name = #{record.groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.showGroupName != null">
+                show_group_name = #{record.showGroupName,jdbcType=SMALLINT},
+            </if>
+            <if test="record.sortPriority1 != null">
+                sort_priority1 = #{record.sortPriority1,jdbcType=SMALLINT},
+            </if>
+            <if test="record.sortPriority2 != null">
+                sort_priority2 = #{record.sortPriority2,jdbcType=SMALLINT},
+            </if>
+            <if test="record.listStyle != null">
+                list_style = #{record.listStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="record.itemStyle != null">
+                item_style = #{record.itemStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="record.showProductName != null">
+                show_product_name = #{record.showProductName,jdbcType=SMALLINT},
+            </if>
+            <if test="record.showPrice != null">
+                show_price = #{record.showPrice,jdbcType=SMALLINT},
+            </if>
+            <if test="record.showCartIcon != null">
+                show_cart_icon = #{record.showCartIcon,jdbcType=SMALLINT},
+            </if>
+            <if test="record.showBuyIcon != null">
+                show_buy_icon = #{record.showBuyIcon,jdbcType=SMALLINT},
+            </if>
+            <if test="record.showBuyIconStyle != null">
+                show_buy_icon_style = #{record.showBuyIconStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="record.groupLabelIntroduction != null">
+                group_label_introduction = #{record.groupLabelIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastUpdateTime != null">
+                last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.systemGroupFlag != null">
+                system_group_flag = #{record.systemGroupFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.productCount != null">
+                product_count = #{record.productCount,jdbcType=SMALLINT},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.templateContent != null">
+                template_content = #{record.templateContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_goods_tags
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+        show_group_name = #{record.showGroupName,jdbcType=SMALLINT},
+        sort_priority1 = #{record.sortPriority1,jdbcType=SMALLINT},
+        sort_priority2 = #{record.sortPriority2,jdbcType=SMALLINT},
+        list_style = #{record.listStyle,jdbcType=SMALLINT},
+        item_style = #{record.itemStyle,jdbcType=SMALLINT},
+        show_product_name = #{record.showProductName,jdbcType=SMALLINT},
+        show_price = #{record.showPrice,jdbcType=SMALLINT},
+        show_cart_icon = #{record.showCartIcon,jdbcType=SMALLINT},
+        show_buy_icon = #{record.showBuyIcon,jdbcType=SMALLINT},
+        show_buy_icon_style = #{record.showBuyIconStyle,jdbcType=SMALLINT},
+        group_label_introduction = #{record.groupLabelIntroduction,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+        system_group_flag = #{record.systemGroupFlag,jdbcType=SMALLINT},
+        product_count = #{record.productCount,jdbcType=SMALLINT},
+        delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+        url = #{record.url,jdbcType=VARCHAR},
+        template_content = #{record.templateContent,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_goods_tags
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+        show_group_name = #{record.showGroupName,jdbcType=SMALLINT},
+        sort_priority1 = #{record.sortPriority1,jdbcType=SMALLINT},
+        sort_priority2 = #{record.sortPriority2,jdbcType=SMALLINT},
+        list_style = #{record.listStyle,jdbcType=SMALLINT},
+        item_style = #{record.itemStyle,jdbcType=SMALLINT},
+        show_product_name = #{record.showProductName,jdbcType=SMALLINT},
+        show_price = #{record.showPrice,jdbcType=SMALLINT},
+        show_cart_icon = #{record.showCartIcon,jdbcType=SMALLINT},
+        show_buy_icon = #{record.showBuyIcon,jdbcType=SMALLINT},
+        show_buy_icon_style = #{record.showBuyIconStyle,jdbcType=SMALLINT},
+        group_label_introduction = #{record.groupLabelIntroduction,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+        system_group_flag = #{record.systemGroupFlag,jdbcType=SMALLINT},
+        product_count = #{record.productCount,jdbcType=SMALLINT},
+        delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+        url = #{record.url,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.GoodsTags">
+        update t_goods_tags
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="showGroupName != null">
+                show_group_name = #{showGroupName,jdbcType=SMALLINT},
+            </if>
+            <if test="sortPriority1 != null">
+                sort_priority1 = #{sortPriority1,jdbcType=SMALLINT},
+            </if>
+            <if test="sortPriority2 != null">
+                sort_priority2 = #{sortPriority2,jdbcType=SMALLINT},
+            </if>
+            <if test="listStyle != null">
+                list_style = #{listStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="itemStyle != null">
+                item_style = #{itemStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="showProductName != null">
+                show_product_name = #{showProductName,jdbcType=SMALLINT},
+            </if>
+            <if test="showPrice != null">
+                show_price = #{showPrice,jdbcType=SMALLINT},
+            </if>
+            <if test="showCartIcon != null">
+                show_cart_icon = #{showCartIcon,jdbcType=SMALLINT},
+            </if>
+            <if test="showBuyIcon != null">
+                show_buy_icon = #{showBuyIcon,jdbcType=SMALLINT},
+            </if>
+            <if test="showBuyIconStyle != null">
+                show_buy_icon_style = #{showBuyIconStyle,jdbcType=SMALLINT},
+            </if>
+            <if test="groupLabelIntroduction != null">
+                group_label_introduction = #{groupLabelIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="systemGroupFlag != null">
+                system_group_flag = #{systemGroupFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="productCount != null">
+                product_count = #{productCount,jdbcType=SMALLINT},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="templateContent != null">
+                template_content = #{templateContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.GoodsTags">
+    update t_goods_tags
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      show_group_name = #{showGroupName,jdbcType=SMALLINT},
+      sort_priority1 = #{sortPriority1,jdbcType=SMALLINT},
+      sort_priority2 = #{sortPriority2,jdbcType=SMALLINT},
+      list_style = #{listStyle,jdbcType=SMALLINT},
+      item_style = #{itemStyle,jdbcType=SMALLINT},
+      show_product_name = #{showProductName,jdbcType=SMALLINT},
+      show_price = #{showPrice,jdbcType=SMALLINT},
+      show_cart_icon = #{showCartIcon,jdbcType=SMALLINT},
+      show_buy_icon = #{showBuyIcon,jdbcType=SMALLINT},
+      show_buy_icon_style = #{showBuyIconStyle,jdbcType=SMALLINT},
+      group_label_introduction = #{groupLabelIntroduction,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      system_group_flag = #{systemGroupFlag,jdbcType=SMALLINT},
+      product_count = #{productCount,jdbcType=SMALLINT},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+      url = #{url,jdbcType=VARCHAR},
+      template_content = #{templateContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.GoodsTags">
+    update t_goods_tags
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      show_group_name = #{showGroupName,jdbcType=SMALLINT},
+      sort_priority1 = #{sortPriority1,jdbcType=SMALLINT},
+      sort_priority2 = #{sortPriority2,jdbcType=SMALLINT},
+      list_style = #{listStyle,jdbcType=SMALLINT},
+      item_style = #{itemStyle,jdbcType=SMALLINT},
+      show_product_name = #{showProductName,jdbcType=SMALLINT},
+      show_price = #{showPrice,jdbcType=SMALLINT},
+      show_cart_icon = #{showCartIcon,jdbcType=SMALLINT},
+      show_buy_icon = #{showBuyIcon,jdbcType=SMALLINT},
+      show_buy_icon_style = #{showBuyIconStyle,jdbcType=SMALLINT},
+      group_label_introduction = #{groupLabelIntroduction,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      system_group_flag = #{systemGroupFlag,jdbcType=SMALLINT},
+      product_count = #{productCount,jdbcType=SMALLINT},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

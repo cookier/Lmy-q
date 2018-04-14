@@ -1,0 +1,40 @@
+<div class="control-group">
+    <div class="tpl-shop">
+        <div class="tpl-shop-header" style="background-image: url({{item.backgroundImage}}); background-color: {{item.backgroundColor}};">
+            <div class="tpl-shop-title">{{item.name}}</div>
+            <div class="tpl-shop-avatar">
+                <img ng-src="{{item.logo}}"  alt="">
+            </div>
+        </div>
+        <div class="tpl-shop-content">
+            <ul class="clearfix">
+                <li>
+                    <a href="javascript:;">
+                        <span class="count">0</span>
+                        <span class="text">全部商品</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <span class="count">0</span>
+                        <span class="text">上新商品</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <span class="count user"></span>
+                        <span class="text">我的订单</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <div class="actions-wrap">
+        <span class="action edit">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span>
+    </div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

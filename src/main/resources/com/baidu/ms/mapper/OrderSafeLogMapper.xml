@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.OrderSafeLogMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.OrderSafeLog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="safe_no" jdbcType="VARCHAR" property="safeNo"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="feedback" jdbcType="VARCHAR" property="feedback"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="safe_reason" jdbcType="INTEGER" property="safeReason"/>
+        <result column="safe_type" jdbcType="INTEGER" property="safeType"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="explains" jdbcType="VARCHAR" property="explains"/>
+        <result column="refund_fee" jdbcType="DOUBLE" property="refundFee"/>
+        <result column="supplier_refund_fee" jdbcType="DOUBLE" property="supplierRefundFee"/>
+        <result column="real_pay" jdbcType="DOUBLE" property="realPay"/>
+        <result column="supplier_real_pay" jdbcType="DOUBLE" property="supplierRealPay"/>
+        <result column="safe_type_str" jdbcType="VARCHAR" property="safeTypeStr"/>
+        <result column="safe_reason_str" jdbcType="VARCHAR" property="safeReasonStr"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.OrderSafeLog">
+        <result column="explain_detail" jdbcType="LONGVARCHAR" property="explainDetail"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, safe_no, order_no, feedback, create_time, update_time, remark, safe_reason, safe_type, 
+    phone, explains, refund_fee, supplier_refund_fee, real_pay, supplier_real_pay, safe_type_str, 
+    safe_reason_str
+  </sql>
+    <sql id="Blob_Column_List">
+    explain_detail
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.OrderSafeLogExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order_safe_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.OrderSafeLogExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_order_safe_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order_safe_log
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order_safe_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.OrderSafeLogExample">
+        delete from t_order_safe_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.OrderSafeLog">
+    insert into t_order_safe_log (id, safe_no, order_no, 
+      feedback, create_time, update_time, 
+      remark, safe_reason, safe_type, 
+      phone, explains, refund_fee, 
+      supplier_refund_fee, real_pay, supplier_real_pay, 
+      safe_type_str, safe_reason_str, explain_detail
+      )
+    values (#{id,jdbcType=INTEGER}, #{safeNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{feedback,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{safeReason,jdbcType=INTEGER}, #{safeType,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, #{explains,jdbcType=VARCHAR}, #{refundFee,jdbcType=DOUBLE}, 
+      #{supplierRefundFee,jdbcType=DOUBLE}, #{realPay,jdbcType=DOUBLE}, #{supplierRealPay,jdbcType=DOUBLE}, 
+      #{safeTypeStr,jdbcType=VARCHAR}, #{safeReasonStr,jdbcType=VARCHAR}, #{explainDetail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.OrderSafeLog">
+        insert into t_order_safe_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="safeNo != null">
+                safe_no,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="feedback != null">
+                feedback,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="safeReason != null">
+                safe_reason,
+            </if>
+            <if test="safeType != null">
+                safe_type,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="explains != null">
+                explains,
+            </if>
+            <if test="refundFee != null">
+                refund_fee,
+            </if>
+            <if test="supplierRefundFee != null">
+                supplier_refund_fee,
+            </if>
+            <if test="realPay != null">
+                real_pay,
+            </if>
+            <if test="supplierRealPay != null">
+                supplier_real_pay,
+            </if>
+            <if test="safeTypeStr != null">
+                safe_type_str,
+            </if>
+            <if test="safeReasonStr != null">
+                safe_reason_str,
+            </if>
+            <if test="explainDetail != null">
+                explain_detail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="safeNo != null">
+                #{safeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="feedback != null">
+                #{feedback,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="safeReason != null">
+                #{safeReason,jdbcType=INTEGER},
+            </if>
+            <if test="safeType != null">
+                #{safeType,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="explains != null">
+                #{explains,jdbcType=VARCHAR},
+            </if>
+            <if test="refundFee != null">
+                #{refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="supplierRefundFee != null">
+                #{supplierRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="realPay != null">
+                #{realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="supplierRealPay != null">
+                #{supplierRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="safeTypeStr != null">
+                #{safeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="safeReasonStr != null">
+                #{safeReasonStr,jdbcType=VARCHAR},
+            </if>
+            <if test="explainDetail != null">
+                #{explainDetail,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.OrderSafeLogExample" resultType="java.lang.Long">
+        select count(*) from t_order_safe_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_order_safe_log
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.safeNo != null">
+                safe_no = #{record.safeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderNo != null">
+                order_no = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.feedback != null">
+                feedback = #{record.feedback,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.safeReason != null">
+                safe_reason = #{record.safeReason,jdbcType=INTEGER},
+            </if>
+            <if test="record.safeType != null">
+                safe_type = #{record.safeType,jdbcType=INTEGER},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.explains != null">
+                explains = #{record.explains,jdbcType=VARCHAR},
+            </if>
+            <if test="record.refundFee != null">
+                refund_fee = #{record.refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="record.supplierRefundFee != null">
+                supplier_refund_fee = #{record.supplierRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="record.realPay != null">
+                real_pay = #{record.realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="record.supplierRealPay != null">
+                supplier_real_pay = #{record.supplierRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="record.safeTypeStr != null">
+                safe_type_str = #{record.safeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.safeReasonStr != null">
+                safe_reason_str = #{record.safeReasonStr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.explainDetail != null">
+                explain_detail = #{record.explainDetail,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_order_safe_log
+        set id = #{record.id,jdbcType=INTEGER},
+        safe_no = #{record.safeNo,jdbcType=VARCHAR},
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+        feedback = #{record.feedback,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        safe_reason = #{record.safeReason,jdbcType=INTEGER},
+        safe_type = #{record.safeType,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        explains = #{record.explains,jdbcType=VARCHAR},
+        refund_fee = #{record.refundFee,jdbcType=DOUBLE},
+        supplier_refund_fee = #{record.supplierRefundFee,jdbcType=DOUBLE},
+        real_pay = #{record.realPay,jdbcType=DOUBLE},
+        supplier_real_pay = #{record.supplierRealPay,jdbcType=DOUBLE},
+        safe_type_str = #{record.safeTypeStr,jdbcType=VARCHAR},
+        safe_reason_str = #{record.safeReasonStr,jdbcType=VARCHAR},
+        explain_detail = #{record.explainDetail,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_order_safe_log
+        set id = #{record.id,jdbcType=INTEGER},
+        safe_no = #{record.safeNo,jdbcType=VARCHAR},
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+        feedback = #{record.feedback,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        safe_reason = #{record.safeReason,jdbcType=INTEGER},
+        safe_type = #{record.safeType,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        explains = #{record.explains,jdbcType=VARCHAR},
+        refund_fee = #{record.refundFee,jdbcType=DOUBLE},
+        supplier_refund_fee = #{record.supplierRefundFee,jdbcType=DOUBLE},
+        real_pay = #{record.realPay,jdbcType=DOUBLE},
+        supplier_real_pay = #{record.supplierRealPay,jdbcType=DOUBLE},
+        safe_type_str = #{record.safeTypeStr,jdbcType=VARCHAR},
+        safe_reason_str = #{record.safeReasonStr,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.OrderSafeLog">
+        update t_order_safe_log
+        <set>
+            <if test="safeNo != null">
+                safe_no = #{safeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="feedback != null">
+                feedback = #{feedback,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="safeReason != null">
+                safe_reason = #{safeReason,jdbcType=INTEGER},
+            </if>
+            <if test="safeType != null">
+                safe_type = #{safeType,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="explains != null">
+                explains = #{explains,jdbcType=VARCHAR},
+            </if>
+            <if test="refundFee != null">
+                refund_fee = #{refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="supplierRefundFee != null">
+                supplier_refund_fee = #{supplierRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="realPay != null">
+                real_pay = #{realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="supplierRealPay != null">
+                supplier_real_pay = #{supplierRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="safeTypeStr != null">
+                safe_type_str = #{safeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="safeReasonStr != null">
+                safe_reason_str = #{safeReasonStr,jdbcType=VARCHAR},
+            </if>
+            <if test="explainDetail != null">
+                explain_detail = #{explainDetail,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.OrderSafeLog">
+    update t_order_safe_log
+    set safe_no = #{safeNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      feedback = #{feedback,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      safe_reason = #{safeReason,jdbcType=INTEGER},
+      safe_type = #{safeType,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      explains = #{explains,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=DOUBLE},
+      supplier_refund_fee = #{supplierRefundFee,jdbcType=DOUBLE},
+      real_pay = #{realPay,jdbcType=DOUBLE},
+      supplier_real_pay = #{supplierRealPay,jdbcType=DOUBLE},
+      safe_type_str = #{safeTypeStr,jdbcType=VARCHAR},
+      safe_reason_str = #{safeReasonStr,jdbcType=VARCHAR},
+      explain_detail = #{explainDetail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.OrderSafeLog">
+    update t_order_safe_log
+    set safe_no = #{safeNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      feedback = #{feedback,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      safe_reason = #{safeReason,jdbcType=INTEGER},
+      safe_type = #{safeType,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      explains = #{explains,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=DOUBLE},
+      supplier_refund_fee = #{supplierRefundFee,jdbcType=DOUBLE},
+      real_pay = #{realPay,jdbcType=DOUBLE},
+      supplier_real_pay = #{supplierRealPay,jdbcType=DOUBLE},
+      safe_type_str = #{safeTypeStr,jdbcType=VARCHAR},
+      safe_reason_str = #{safeReasonStr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

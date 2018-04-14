@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.DataGoodsCalcuMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.DataGoodsCalcu">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+        <result column="exposure" jdbcType="INTEGER" property="exposure"/>
+        <result column="exposure_reach" jdbcType="INTEGER" property="exposureReach"/>
+        <result column="browser_uv" jdbcType="INTEGER" property="browserUv"/>
+        <result column="browser_pv" jdbcType="INTEGER" property="browserPv"/>
+        <result column="export_uv" jdbcType="INTEGER" property="exportUv"/>
+        <result column="export_pv" jdbcType="INTEGER" property="exportPv"/>
+        <result column="click_buy" jdbcType="INTEGER" property="clickBuy"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="calcu_date" jdbcType="TIMESTAMP" property="calcuDate"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, goods_name, goods_id, exposure, exposure_reach, browser_uv, browser_pv, export_uv, 
+    export_pv, click_buy, shop_id, calcu_date
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.DataGoodsCalcuExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_data_goods_calcu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_data_goods_calcu
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_data_goods_calcu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.DataGoodsCalcuExample">
+        delete from t_data_goods_calcu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.DataGoodsCalcu">
+    insert into t_data_goods_calcu (id, goods_name, goods_id, 
+      exposure, exposure_reach, browser_uv, 
+      browser_pv, export_uv, export_pv, 
+      click_buy, shop_id, calcu_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
+      #{exposure,jdbcType=INTEGER}, #{exposureReach,jdbcType=INTEGER}, #{browserUv,jdbcType=INTEGER}, 
+      #{browserPv,jdbcType=INTEGER}, #{exportUv,jdbcType=INTEGER}, #{exportPv,jdbcType=INTEGER}, 
+      #{clickBuy,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{calcuDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.DataGoodsCalcu">
+        insert into t_data_goods_calcu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="exposure != null">
+                exposure,
+            </if>
+            <if test="exposureReach != null">
+                exposure_reach,
+            </if>
+            <if test="browserUv != null">
+                browser_uv,
+            </if>
+            <if test="browserPv != null">
+                browser_pv,
+            </if>
+            <if test="exportUv != null">
+                export_uv,
+            </if>
+            <if test="exportPv != null">
+                export_pv,
+            </if>
+            <if test="clickBuy != null">
+                click_buy,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="calcuDate != null">
+                calcu_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="exposure != null">
+                #{exposure,jdbcType=INTEGER},
+            </if>
+            <if test="exposureReach != null">
+                #{exposureReach,jdbcType=INTEGER},
+            </if>
+            <if test="browserUv != null">
+                #{browserUv,jdbcType=INTEGER},
+            </if>
+            <if test="browserPv != null">
+                #{browserPv,jdbcType=INTEGER},
+            </if>
+            <if test="exportUv != null">
+                #{exportUv,jdbcType=INTEGER},
+            </if>
+            <if test="exportPv != null">
+                #{exportPv,jdbcType=INTEGER},
+            </if>
+            <if test="clickBuy != null">
+                #{clickBuy,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="calcuDate != null">
+                #{calcuDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.DataGoodsCalcuExample" resultType="java.lang.Long">
+        select count(*) from t_data_goods_calcu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_data_goods_calcu
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.goodsName != null">
+                goods_name = #{record.goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.goodsId != null">
+                goods_id = #{record.goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="record.exposure != null">
+                exposure = #{record.exposure,jdbcType=INTEGER},
+            </if>
+            <if test="record.exposureReach != null">
+                exposure_reach = #{record.exposureReach,jdbcType=INTEGER},
+            </if>
+            <if test="record.browserUv != null">
+                browser_uv = #{record.browserUv,jdbcType=INTEGER},
+            </if>
+            <if test="record.browserPv != null">
+                browser_pv = #{record.browserPv,jdbcType=INTEGER},
+            </if>
+            <if test="record.exportUv != null">
+                export_uv = #{record.exportUv,jdbcType=INTEGER},
+            </if>
+            <if test="record.exportPv != null">
+                export_pv = #{record.exportPv,jdbcType=INTEGER},
+            </if>
+            <if test="record.clickBuy != null">
+                click_buy = #{record.clickBuy,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.calcuDate != null">
+                calcu_date = #{record.calcuDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_data_goods_calcu
+        set id = #{record.id,jdbcType=INTEGER},
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+        exposure = #{record.exposure,jdbcType=INTEGER},
+        exposure_reach = #{record.exposureReach,jdbcType=INTEGER},
+        browser_uv = #{record.browserUv,jdbcType=INTEGER},
+        browser_pv = #{record.browserPv,jdbcType=INTEGER},
+        export_uv = #{record.exportUv,jdbcType=INTEGER},
+        export_pv = #{record.exportPv,jdbcType=INTEGER},
+        click_buy = #{record.clickBuy,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        calcu_date = #{record.calcuDate,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.DataGoodsCalcu">
+        update t_data_goods_calcu
+        <set>
+            <if test="goodsName != null">
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="exposure != null">
+                exposure = #{exposure,jdbcType=INTEGER},
+            </if>
+            <if test="exposureReach != null">
+                exposure_reach = #{exposureReach,jdbcType=INTEGER},
+            </if>
+            <if test="browserUv != null">
+                browser_uv = #{browserUv,jdbcType=INTEGER},
+            </if>
+            <if test="browserPv != null">
+                browser_pv = #{browserPv,jdbcType=INTEGER},
+            </if>
+            <if test="exportUv != null">
+                export_uv = #{exportUv,jdbcType=INTEGER},
+            </if>
+            <if test="exportPv != null">
+                export_pv = #{exportPv,jdbcType=INTEGER},
+            </if>
+            <if test="clickBuy != null">
+                click_buy = #{clickBuy,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="calcuDate != null">
+                calcu_date = #{calcuDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.DataGoodsCalcu">
+    update t_data_goods_calcu
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      exposure = #{exposure,jdbcType=INTEGER},
+      exposure_reach = #{exposureReach,jdbcType=INTEGER},
+      browser_uv = #{browserUv,jdbcType=INTEGER},
+      browser_pv = #{browserPv,jdbcType=INTEGER},
+      export_uv = #{exportUv,jdbcType=INTEGER},
+      export_pv = #{exportPv,jdbcType=INTEGER},
+      click_buy = #{clickBuy,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      calcu_date = #{calcuDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.OrderCommentMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.OrderComment">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_item_id" jdbcType="INTEGER" property="orderItemId"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+        <result column="supplier_goods_id" jdbcType="INTEGER" property="supplierGoodsId"/>
+        <result column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="description_score" jdbcType="INTEGER" property="descriptionScore"/>
+        <result column="service_score" jdbcType="INTEGER" property="serviceScore"/>
+        <result column="delivery_score" jdbcType="INTEGER" property="deliveryScore"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="fx_goods_id" jdbcType="INTEGER" property="fxGoodsId"/>
+        <result column="img_flag" jdbcType="SMALLINT" property="imgFlag"/>
+        <result column="reviews_flag" jdbcType="SMALLINT" property="reviewsFlag"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.OrderComment">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, order_item_id, level, goods_id, supplier_goods_id, order_id, user_id, description_score, 
+    service_score, delivery_score, create_time, fx_goods_id, img_flag, reviews_flag
+  </sql>
+    <sql id="Blob_Column_List">
+    content
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.OrderCommentExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.OrderCommentExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_order_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order_comment
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order_comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.OrderCommentExample">
+        delete from t_order_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.OrderComment">
+    insert into t_order_comment (id, order_item_id, level, 
+      goods_id, supplier_goods_id, order_id, 
+      user_id, description_score, service_score, 
+      delivery_score, create_time, fx_goods_id, 
+      img_flag, reviews_flag, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderItemId,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{goodsId,jdbcType=INTEGER}, #{supplierGoodsId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{descriptionScore,jdbcType=INTEGER}, #{serviceScore,jdbcType=INTEGER}, 
+      #{deliveryScore,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{fxGoodsId,jdbcType=INTEGER}, 
+      #{imgFlag,jdbcType=SMALLINT}, #{reviewsFlag,jdbcType=SMALLINT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.OrderComment">
+        insert into t_order_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderItemId != null">
+                order_item_id,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="supplierGoodsId != null">
+                supplier_goods_id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="descriptionScore != null">
+                description_score,
+            </if>
+            <if test="serviceScore != null">
+                service_score,
+            </if>
+            <if test="deliveryScore != null">
+                delivery_score,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="fxGoodsId != null">
+                fx_goods_id,
+            </if>
+            <if test="imgFlag != null">
+                img_flag,
+            </if>
+            <if test="reviewsFlag != null">
+                reviews_flag,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderItemId != null">
+                #{orderItemId,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="supplierGoodsId != null">
+                #{supplierGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="descriptionScore != null">
+                #{descriptionScore,jdbcType=INTEGER},
+            </if>
+            <if test="serviceScore != null">
+                #{serviceScore,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryScore != null">
+                #{deliveryScore,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fxGoodsId != null">
+                #{fxGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="imgFlag != null">
+                #{imgFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="reviewsFlag != null">
+                #{reviewsFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.OrderCommentExample" resultType="java.lang.Long">
+        select count(*) from t_order_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_order_comment
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderItemId != null">
+                order_item_id = #{record.orderItemId,jdbcType=INTEGER},
+            </if>
+            <if test="record.level != null">
+                level = #{record.level,jdbcType=INTEGER},
+            </if>
+            <if test="record.goodsId != null">
+                goods_id = #{record.goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="record.supplierGoodsId != null">
+                supplier_goods_id = #{record.supplierGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderId != null">
+                order_id = #{record.orderId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.descriptionScore != null">
+                description_score = #{record.descriptionScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.serviceScore != null">
+                service_score = #{record.serviceScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.deliveryScore != null">
+                delivery_score = #{record.deliveryScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.fxGoodsId != null">
+                fx_goods_id = #{record.fxGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="record.imgFlag != null">
+                img_flag = #{record.imgFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.reviewsFlag != null">
+                reviews_flag = #{record.reviewsFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_order_comment
+        set id = #{record.id,jdbcType=INTEGER},
+        order_item_id = #{record.orderItemId,jdbcType=INTEGER},
+        level = #{record.level,jdbcType=INTEGER},
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+        supplier_goods_id = #{record.supplierGoodsId,jdbcType=INTEGER},
+        order_id = #{record.orderId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        description_score = #{record.descriptionScore,jdbcType=INTEGER},
+        service_score = #{record.serviceScore,jdbcType=INTEGER},
+        delivery_score = #{record.deliveryScore,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        fx_goods_id = #{record.fxGoodsId,jdbcType=INTEGER},
+        img_flag = #{record.imgFlag,jdbcType=SMALLINT},
+        reviews_flag = #{record.reviewsFlag,jdbcType=SMALLINT},
+        content = #{record.content,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_order_comment
+        set id = #{record.id,jdbcType=INTEGER},
+        order_item_id = #{record.orderItemId,jdbcType=INTEGER},
+        level = #{record.level,jdbcType=INTEGER},
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+        supplier_goods_id = #{record.supplierGoodsId,jdbcType=INTEGER},
+        order_id = #{record.orderId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        description_score = #{record.descriptionScore,jdbcType=INTEGER},
+        service_score = #{record.serviceScore,jdbcType=INTEGER},
+        delivery_score = #{record.deliveryScore,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        fx_goods_id = #{record.fxGoodsId,jdbcType=INTEGER},
+        img_flag = #{record.imgFlag,jdbcType=SMALLINT},
+        reviews_flag = #{record.reviewsFlag,jdbcType=SMALLINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.OrderComment">
+        update t_order_comment
+        <set>
+            <if test="orderItemId != null">
+                order_item_id = #{orderItemId,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="supplierGoodsId != null">
+                supplier_goods_id = #{supplierGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="descriptionScore != null">
+                description_score = #{descriptionScore,jdbcType=INTEGER},
+            </if>
+            <if test="serviceScore != null">
+                service_score = #{serviceScore,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryScore != null">
+                delivery_score = #{deliveryScore,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fxGoodsId != null">
+                fx_goods_id = #{fxGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="imgFlag != null">
+                img_flag = #{imgFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="reviewsFlag != null">
+                reviews_flag = #{reviewsFlag,jdbcType=SMALLINT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.OrderComment">
+    update t_order_comment
+    set order_item_id = #{orderItemId,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      supplier_goods_id = #{supplierGoodsId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      description_score = #{descriptionScore,jdbcType=INTEGER},
+      service_score = #{serviceScore,jdbcType=INTEGER},
+      delivery_score = #{deliveryScore,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      fx_goods_id = #{fxGoodsId,jdbcType=INTEGER},
+      img_flag = #{imgFlag,jdbcType=SMALLINT},
+      reviews_flag = #{reviewsFlag,jdbcType=SMALLINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.OrderComment">
+    update t_order_comment
+    set order_item_id = #{orderItemId,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      supplier_goods_id = #{supplierGoodsId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      description_score = #{descriptionScore,jdbcType=INTEGER},
+      service_score = #{serviceScore,jdbcType=INTEGER},
+      delivery_score = #{deliveryScore,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      fx_goods_id = #{fxGoodsId,jdbcType=INTEGER},
+      img_flag = #{imgFlag,jdbcType=SMALLINT},
+      reviews_flag = #{reviewsFlag,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

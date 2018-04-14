@@ -1,0 +1,11 @@
+<% if(image_url) { %>
+<div class="scroll-nav-item" style="background-image: url('<%= fullfillImage(image_url) %>');">
+<% } else { %>
+<div class="scroll-nav-item">
+<% } %>
+    <div class="scroll-nav-item-bg"></div>
+    <div class="scroll-nav-item-title"><%- title %></div>
+    <div class="scroll-nav-item-sub-title"><%- sub_title %></div>
+</div>
+
+

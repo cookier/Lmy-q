@@ -1,0 +1,40 @@
+<div class="choice-image-box">
+    <% if(image_url) { %>
+        <div class="image-box">
+            <img src="<%= fullfillImage(image_url, '!140x140+2x.jpg') %>" class="image">
+            <a href="javascript:;" class="modify-image js-page-image">重新上传</a>
+        </div>
+    <% } else { %>
+        <a href="javascript:;" class="add-image js-page-image"><i class="icon-add"></i> 添加图片</a>
+        <div class="control-group">
+            <div class="controls">
+                <input type="hidden" name="image_url">
+            </div>
+        </div>
+    <% } %>
+</div>
+<div class="choice-content">
+    <div class="control-group">
+        <label class="control-label">标题：</label>
+        <div class="controls">
+            <input class="" type="text" name="title" value="<%= title %>">
+        </div>
+    </div>
+    <div class="control-group">
+            <label class="control-label">副标题：</label>
+            <div class="controls">
+                <input class="" type="text" name="sub_title" value="<%= sub_title %>">
+            </div>
+        </div>
+    <div class="control-group">
+        <label class="control-label">链接：</label>
+        <div class="controls">
+            <%= renderLink(link_url, link_title, link_type) %>
+        </div>
+    </div>
+</div>
+<% if(index != 0 && index != 1) { %>
+<div class="actions">
+    <span class="action delete close-modal" title="删除">×</span>
+</div>
+<% } %>

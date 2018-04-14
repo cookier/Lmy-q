@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="css/order.css" type="text/css">
+
+<div class="app-init-container" ng-controller="OrderAgainController">
+	<div class="app__content js-app-main">
+		<div class="widget-list">
+			<div class="js-list-filter-region clearfix">
+				<div class="widget-list-filter">
+					<form class="form-horizontal ui-box list-filter-form"
+						onsubmit="return false;">
+						<div class="clearfix">
+							<div class="filter-groups">
+								<div class="control-group">
+									<label class="control-label">订单号：</label>
+									<div class="controls">
+										<input type="text" name="order_no" value=""
+											ng-model="order_no">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<div class="ui-btn-group">
+									<a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+										data-loading-text="正在筛选..." ng-click="pageChanged()">重发</a>
+								</div>
+							</div>
+						</div>
+					</form>
+
+					<div class="ui-nav clearfix">
+						<div class="common-helps-entry pull-right hide">
+							<a href="#" target="_blank"> <span class="help-icon"></span>
+								订单类型简介及管理方法
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

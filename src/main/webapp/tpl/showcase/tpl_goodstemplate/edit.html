@@ -1,0 +1,29 @@
+<div class="form-horizontal" novalidate ng-controller="UIGoodsTemplateConfigController">
+
+	<div class="control-group">
+		<label class="control-label"><em class="required">*</em>模板名称：</label>
+		<div class="controls">
+			<input class="input-xxlarge" type="text" name="title" ng-model="data.title">
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">模板样式：</label>
+		<div class="controls">
+			<label class="i-checks i-checks-sm">
+				<input type="radio"
+				name="template_style" value="0"  ng-model="data.template_style" ng-checked="data.template_style ==0"><i></i>普通版
+			</label>
+			<a href="javascript:;" data-index="0"
+				class="goods-template-demo-link js-show-demo">示例</a>
+			<label
+				class="i-checks i-checks-sm">
+				<input type="radio"
+				name="template_style" value="1" ng-model="data.template_style" ng-checked="data.template_style ==1"><i></i>简洁流畅版
+			</label>
+			<a href="javascript:;" data-index="1"
+				class="goods-template-demo-link js-show-demo">示例</a>
+		</div>
+	</div>
+</div>
+

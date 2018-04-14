@@ -1,0 +1,38 @@
+<div ng-controller="UIGoodsEditorController">
+<form class="form-horizontal" novalidate>
+    <div class="control-group">
+        <label class="control-label">商品来源：</label>
+        <div class="controls">
+                <div ng-show="data.goods" class="control-action clearfix">
+                    <div class="pull-left link-to">
+                        <a href="{{data.goods.url}}" class="link-to-title" target="_blank">
+                            <span class="label label-success">
+                                <span ng-show="data.goods.type === 'feature'">微页面</span>
+                                <span ng-show="data.goods.type !== 'feature'">商品标签</span>
+                                <em class="link-to-title-text">{{data.goods.title}}</em>
+                            </span>
+                        </a>
+                    </div>
+                    <a href="javascript:void(0);" class="pull-right js-add-goods add-goods" ng-click="setGoodsTag()">修改</a>
+                </div>
+                <a ng-show="!data.goods" href="javascript:void(0);" class="js-add-goods add-goods control-action" ng-click="setGoodsTag()">从商品分组中选择</a>
+            <p class="help-desc">选择商品来源后，左侧实时预览暂不支持显示其包含的商品数据</p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">显示个数：</label>
+        <div class="controls">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="goods_number_type" value="0" ng-model="data.goods_number_type" ng-checked="data.goods_number_type == '0'" ng-change="setGoodsNumber()"><i></i>6
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="goods_number_type" value="1" ng-model="data.goods_number_type" ng-checked="data.goods_number_type == '1'" ng-change="setGoodsNumber()"><i></i>12
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="goods_number_type" value="2" ng-model="data.goods_number_type" ng-checked="data.goods_number_type == '2'" ng-change="setGoodsNumber()"><i></i>18
+            </label>
+        </div>
+    </div>
+</form>
+<div class="js-goods-style-region" style="margin-top: 10px;" ng-include="'tpl/showcase/goods_list/edit_goods_style.html'"></div>
+</div>

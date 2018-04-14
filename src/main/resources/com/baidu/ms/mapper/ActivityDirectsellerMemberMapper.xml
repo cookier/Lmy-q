@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityDirectsellerMemberMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityDirectsellerMember">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="trading_volume" jdbcType="DOUBLE" property="tradingVolume"/>
+        <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+        <result column="auto_settle_amount" jdbcType="DOUBLE" property="autoSettleAmount"/>
+        <result column="auto_settle_num" jdbcType="INTEGER" property="autoSettleNum"/>
+        <result column="manual_settle_amount" jdbcType="DOUBLE" property="manualSettleAmount"/>
+        <result column="manual_settle_num" jdbcType="INTEGER" property="manualSettleNum"/>
+        <result column="settle_money" jdbcType="DOUBLE" property="settleMoney"/>
+        <result column="wait_settle_money" jdbcType="DOUBLE" property="waitSettleMoney"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, member_id, created_time, trading_volume, order_num, auto_settle_amount, 
+    auto_settle_num, manual_settle_amount, manual_settle_num, settle_money, wait_settle_money
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerMemberExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_directseller_member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_activity_directseller_member
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_directseller_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerMemberExample">
+        delete from t_activity_directseller_member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityDirectsellerMember">
+    insert into t_activity_directseller_member (id, shop_id, member_id, 
+      created_time, trading_volume, order_num, 
+      auto_settle_amount, auto_settle_num, manual_settle_amount, 
+      manual_settle_num, settle_money, wait_settle_money
+      )
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{tradingVolume,jdbcType=DOUBLE}, #{orderNum,jdbcType=INTEGER}, 
+      #{autoSettleAmount,jdbcType=DOUBLE}, #{autoSettleNum,jdbcType=INTEGER}, #{manualSettleAmount,jdbcType=DOUBLE}, 
+      #{manualSettleNum,jdbcType=INTEGER}, #{settleMoney,jdbcType=DOUBLE}, #{waitSettleMoney,jdbcType=DOUBLE}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityDirectsellerMember">
+        insert into t_activity_directseller_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="tradingVolume != null">
+                trading_volume,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="autoSettleAmount != null">
+                auto_settle_amount,
+            </if>
+            <if test="autoSettleNum != null">
+                auto_settle_num,
+            </if>
+            <if test="manualSettleAmount != null">
+                manual_settle_amount,
+            </if>
+            <if test="manualSettleNum != null">
+                manual_settle_num,
+            </if>
+            <if test="settleMoney != null">
+                settle_money,
+            </if>
+            <if test="waitSettleMoney != null">
+                wait_settle_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tradingVolume != null">
+                #{tradingVolume,jdbcType=DOUBLE},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="autoSettleAmount != null">
+                #{autoSettleAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="autoSettleNum != null">
+                #{autoSettleNum,jdbcType=INTEGER},
+            </if>
+            <if test="manualSettleAmount != null">
+                #{manualSettleAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="manualSettleNum != null">
+                #{manualSettleNum,jdbcType=INTEGER},
+            </if>
+            <if test="settleMoney != null">
+                #{settleMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="waitSettleMoney != null">
+                #{waitSettleMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityDirectsellerMemberExample"
+            resultType="java.lang.Long">
+        select count(*) from t_activity_directseller_member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_directseller_member
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberId != null">
+                member_id = #{record.memberId,jdbcType=INTEGER},
+            </if>
+            <if test="record.createdTime != null">
+                created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.tradingVolume != null">
+                trading_volume = #{record.tradingVolume,jdbcType=DOUBLE},
+            </if>
+            <if test="record.orderNum != null">
+                order_num = #{record.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.autoSettleAmount != null">
+                auto_settle_amount = #{record.autoSettleAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.autoSettleNum != null">
+                auto_settle_num = #{record.autoSettleNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.manualSettleAmount != null">
+                manual_settle_amount = #{record.manualSettleAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.manualSettleNum != null">
+                manual_settle_num = #{record.manualSettleNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.settleMoney != null">
+                settle_money = #{record.settleMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.waitSettleMoney != null">
+                wait_settle_money = #{record.waitSettleMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_directseller_member
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        member_id = #{record.memberId,jdbcType=INTEGER},
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+        trading_volume = #{record.tradingVolume,jdbcType=DOUBLE},
+        order_num = #{record.orderNum,jdbcType=INTEGER},
+        auto_settle_amount = #{record.autoSettleAmount,jdbcType=DOUBLE},
+        auto_settle_num = #{record.autoSettleNum,jdbcType=INTEGER},
+        manual_settle_amount = #{record.manualSettleAmount,jdbcType=DOUBLE},
+        manual_settle_num = #{record.manualSettleNum,jdbcType=INTEGER},
+        settle_money = #{record.settleMoney,jdbcType=DOUBLE},
+        wait_settle_money = #{record.waitSettleMoney,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityDirectsellerMember">
+        update t_activity_directseller_member
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tradingVolume != null">
+                trading_volume = #{tradingVolume,jdbcType=DOUBLE},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="autoSettleAmount != null">
+                auto_settle_amount = #{autoSettleAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="autoSettleNum != null">
+                auto_settle_num = #{autoSettleNum,jdbcType=INTEGER},
+            </if>
+            <if test="manualSettleAmount != null">
+                manual_settle_amount = #{manualSettleAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="manualSettleNum != null">
+                manual_settle_num = #{manualSettleNum,jdbcType=INTEGER},
+            </if>
+            <if test="settleMoney != null">
+                settle_money = #{settleMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="waitSettleMoney != null">
+                wait_settle_money = #{waitSettleMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityDirectsellerMember">
+    update t_activity_directseller_member
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      member_id = #{memberId,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      trading_volume = #{tradingVolume,jdbcType=DOUBLE},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      auto_settle_amount = #{autoSettleAmount,jdbcType=DOUBLE},
+      auto_settle_num = #{autoSettleNum,jdbcType=INTEGER},
+      manual_settle_amount = #{manualSettleAmount,jdbcType=DOUBLE},
+      manual_settle_num = #{manualSettleNum,jdbcType=INTEGER},
+      settle_money = #{settleMoney,jdbcType=DOUBLE},
+      wait_settle_money = #{waitSettleMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

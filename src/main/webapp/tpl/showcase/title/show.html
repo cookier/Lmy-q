@@ -1,0 +1,49 @@
+<div class="control-group">
+    <div ng-if="item.title_template == '0' && item.show_method == '0'"
+         ng-class="{'custom-title-noline':item.color !== '#ffffff' && item.color !== '#F9F9F9'}"
+         ng-style="{'background-color':'{{item.color}}'}" >
+
+        <div class="custom-title text-left">
+            <h2 ng-show="item.title !=''" class="title">{{item.title}}<span class="custom-title-link-container"></span></h2>
+            <h2 ng-show="item.title ==''" class="title">点击编辑『标题』<span class="custom-title-link-container"></span></h2>
+            <p class="sub_title">{{item.sub_title}}</p>
+        </div>
+    </div>
+    <div ng-if="item.title_template == '0' && item.show_method == '1'"
+         ng-class="{'custom-title-noline':item.color !== '#ffffff' && item.color !== '#F9F9F9'}"
+         ng-style="{'background-color':'{{item.color}}'}">
+        <div class="custom-title text-center">
+            <h2 ng-show="item.title !=''" class="title">{{item.title}}<span class="custom-title-link-container"></span></h2>
+            <h2 ng-show="item.title ==''" class="title">点击编辑『标题』<span class="custom-title-link-container"></span></h2>
+            <p class="sub_title">{{item.sub_title}}</p>
+        </div>
+    </div>
+    <div ng-if="item.title_template == '0' && item.show_method != '0' && item.show_method !='1'"
+         ng-class="{'custom-title-noline':item.color !== '#ffffff' && item.color !== '#F9F9F9'}"
+         ng-style="{'background-color':'{{item.color}}'}">
+        <div class="custom-title text-right">
+            <h2 ng-show="item.title !=''" class="title">{{item.title}}<span class="custom-title-link-container"></span></h2>
+            <h2 ng-show="item.title ==''" class="title">点击编辑『标题』<span class="custom-title-link-container"></span></h2>
+            <p class="sub_title">{{item.sub_title}}</p>
+        </div>
+    </div>
+    <div ng-if="item.title_template != '0'">
+        <div class="custom-title text-left">
+            <h2 ng-show="item.title !=''" class="title">{{item.title}}</h2>
+            <h2 ng-show="item.title ==''" class="title">点击编辑『标题』</h2>
+            <p ng-if="item.wx_title_date != '' || item.wx_title_author != '' || item.wx_title_link != ''" class="sub_title">
+                <span class="sub_title_date">{{item.wx_title_date}}</span>
+                <span class="sub_title_author">{{item.wx_title_author}}</span>
+                <a class="sub_title_link" href="javascript:;">{{item.wx_title_link}}</a>
+            </p>
+        </div>
+    </div>
+    <div class="component-border"></div>
+    
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

@@ -1,0 +1,5 @@
+<label>封面<span class="label-desc">(图片建议尺寸：900 x 500像素)</span></label>
+    <img ng-show="item.cover_url" ng-src="item.cover_url"  width="100" height="100"/>
+    <a ng-show="item.cover_url" class="js-add-image control-action" href="javascript:;">重新选择</a>
+    <a ng-show="!item.cover_url" class="js-add-image control-action" href="javascript:;">添加图片...</a>
+<input type="hidden" name="cover_url" ng-model="item.cover_url" data-error-style="block">

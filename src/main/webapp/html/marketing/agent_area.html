@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1,minimum-scale=1.0,maximum-scale=1.0 ,user-scalable=no">
+    <title>代理商入驻</title>
+    <link href="css/agent-pc.css" rel="stylesheet" type="text/css"/>
+</head>
+<style>
+    .agentArea {
+        color: #696969;
+    }
+</style>
+<body>
+<a style='padding:10px 20px;' class="close" data-dismiss="modal" ng-click="cancel()">×</a>
+<div class="agent-pc-register-two-search" style='padding:20px;'>
+    <div class="agent-pc-register-two-search-1">
+        <em>搜索城市</em>
+        <input type="text" name="fname" placeholder="请输入地区">
+        <a href="" class="search-but"></a>
+
+    </div>
+
+    <div class="agent-pc-register-two-search-5">
+        <i>已选的代理区域 &nbsp;</i><span id='myAgentArea'></span>
+        <button ng-click='submit()'>确定修改</button>
+    </div>
+    <div style='margin-left: 30px;padding-top:10px;font-size:14px;color:#AAA;line-height:20px;'>请注意 : 已产生下级代理商的省代区域不能编辑
+        !&nbsp; &nbsp;选择省级做为您的代理区域,会自动包含下级区域 !
+    </div>
+</div>
+
+<div class="agent-pc-register-two-search-4" id='city'>
+</div>
+<script type="text/javascript">
+    function clickAgent(obj) {
+        var id = obj.attr("data-id");
+        var level = parseInt(obj.attr("data-level"));
+        var name = obj.text();
+        var parentId = obj.attr("levelOneId");
+        if (obj.parent().attr("class").indexOf("clickAgent") > -1) {
+            return;
+        }
+        if (obj.parent().attr("class").indexOf("agentArea") > -1) {
+            layer.alert("sorry , " + obj.text() + "已被人代理 !", {icon: 5});
+            return;
+        }
+        if (obj.attr("levelOne").indexOf("agentArea") > -1) {
+            layer.alert("想代理" + obj.text() + " , 赶紧跟" + obj.attr("levelOneName") + "代理联系吧 ! ", {icon: 6});
+            return;
+        }
+
+        if (parseInt(level) == 1) {
+            $(".top_agent_" + id).parent().html("");
+            $(".main_agent_" + id).removeClass("clickAgent");
+            $(".main_agent_" + id).each(function () {
+                if ($(this).attr("class").indexOf("agentArea") < 0) {
+                    $(this).addClass("clickAgent");
+                    myAgentArea($(this).find("span").attr("data-id"), $(this).find("span").attr("data-level"), $(this).find("span").text(), "agent_" + id);
+                }
+            })
+        } else {
+            var num = 0;
+            $(".main_" + parentId).each(function () {
+                if ($(this).attr("class").indexOf("clickAgent") < 0 && $(this).attr("class").indexOf("agentArea") < 0) {
+                    num++;
+                }
+            })
+            if (num == 1) {//市代都已选择
+                $("#" + parentId).addClass("clickAgent");
+            }
+            myAgentArea(id, level, name, parentId);
+        }
+        obj.parent().addClass("clickAgent");
+    }
+
+    function myAgentArea(id, level, name, parentId) {
+        $("#myAgentArea_" + id).parent().html("");
+        var parentName = "";
+        if ($("#" + parentId).text() != '' && $(".top_" + parentId).text() == "") {
+            parentName = "<div><span id='parentName_" + parentId + "'>" + $("#" + parentId).find("span").text().trim() + " : </span></div>";
+            $("#parentName_" + parentId).parent().html("");
+        }
+        $("#myAgentArea").append(parentName);
+        var html = "<span><span id='myAgentArea_" + id + "' data-id='" + id + "' data-level='" + level + "' data-name='" + name + "' class='clickAgent top_" + parentId + "'>" + name + "<em onclick='deleteAgent(" + id + ")'>x</em></span></span>";
+        $("#parentName_" + parentId).parent().append(html);
+    }
+
+    function deleteAgent(id) {
+        var parentNameId = "agent_" + id;
+        if ($("#agent_" + id + ">span").attr("data-level") == 2) {
+            var parentId = $("#agent_" + id + ">span").attr("levelOneId");
+            parentNameId = parentId;
+            var num = 0;
+            $(".main_" + parentId).each(function () {
+                if ($(this).attr("class").indexOf("clickAgent") > 0) {
+                    num++;
+                }
+            })
+            if (num == 1) {//删除最后一个市级去掉省级
+                var leveloneid = $("#agent_" + id).find("span").attr("leveloneid");
+                var parentId = leveloneid.substring(6, leveloneid.length);
+                $("#agent_" + parentId).removeClass("clickAgent");
+                $("#myAgentArea_" + parentId).parent().html("");
+            }
+        } else {
+            $(".main_agent_" + id).each(function () {
+                $("#agent_" + $(this).find("span").attr("data-id")).removeClass("clickAgent");
+                $("#myAgentArea_" + $(this).find("span").attr("data-id")).parent().html("");
+            })
+        }
+        $("#agent_" + id).removeClass("clickAgent");
+        $("#myAgentArea_" + id).parent().html("");
+        if ($(".top_" + parentNameId).text() == '') {
+            $("#parentName_" + parentNameId).parent().html("");
+        }
+    }
+
+</script>
+</body>
+</html>
+   

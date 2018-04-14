@@ -1,0 +1,105 @@
+<div class="app-init-container" ng-controller="SupplierGoodsListController">
+	<div class="app__content js-app-main">
+		<div class="goods-list">
+			<div class="js-list-filter-region clearfix ui-box"
+				style="position: relative;text-align: right;">
+				<div class="widget-list-filter" ng-enter='pageChanged()'>
+					<div class="filter-box">
+						<div class="js-list-search seach-box">
+							审核状态：
+							<select name="auth_status" style="height: 30px;"
+								ng-model="auth_status">
+								<option value="">全部</option>
+								<option value="0">待审核</option>
+								<option value="1">审核中</option>
+								<option value="2">已审核</option>
+								<option value="3">审核不通过</option>
+							</select>
+							商品名称：<input ng-model="title" type="text" class="input-sm" />
+							供应商：<input ng-model="shop_name" type="text" class="input-sm" />
+							<button class="btn btn-sm btn-default" type="button"
+								ng-click="pageChanged()">Go!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ui-box">
+			<div class="panel panel-default">
+				<table class="ui-table ui-table-list" style="padding: 0px;">
+					<thead class="js-list-header-region tableFloatingHeaderOriginal">
+						<tr class="widget-list-header">
+							<!-- <th width="30px;"><label class="i-checks i-checks-sm">
+									<input type="checkbox" ng-checked="isCheckedAll()"
+									ng-click="checkAll()"><i></i>
+							</label></th> -->
+							<th colspan='2'>商品</th>
+							<th width='80px'>供货价</th>
+							<th width='80px'>建议零售价</th>
+							<th width='130px'>微商城售价</th>
+							<th width='80px'>库存</th>
+							<th width='80px'>总销量</th>
+							<th width='70px'>商品状态</th>
+							<th width='90px'>创建时间</th>
+							<th width='100px'>供应商</th>
+							<th width='70px'>操作</th>
+						</tr>
+						</tr>
+					</thead>
+
+					<tbody class="js-list-body-region">
+						<tr class="widget-list-item" ng-repeat="data in pageData.list">
+							<td width='80px'><img src="{{data.default_pic_url}}" onerror="this.src='./img/404.jpg'" width='60px' height='60px'></td>
+							<td class="goods-meta">
+								<p class="goods-title">
+									<a href='{{data.url}}' target="blank"> {{data.title}} </a>
+								</p>
+							</td>
+							<td>
+								<p class="goods-price">{{data.fx_price}}</p>
+							</td>
+							<td>
+								<p class="goods-price">{{data.product_price}}</p>
+							</td>
+							<td>
+								<p>￥{{data.min_retail_price}} - ￥{{data.max_retail_price}}</p>
+							</td>
+							<td>
+								<p>{{data.stock}}</p>
+							</td>
+							<td>
+								<p>{{data.sale_count}}</p>
+							</td>
+							<td>{{data.auditing_status==1?'审核中':(data.auditing_status==2?'已审核':(data.auditing_status==3?'审核不通过':'待审核'))}}
+								{{data.auditing_remark}}
+							</td>
+							<td>{{data.create_time}}</td>
+							<td>{{data.shop_name}}</td>
+							<td>
+								<!-- <p><a ui-sref="console.supplier_goods_auth({id:data.id})">商品审核</a></p> -->
+								<p><a ng-click="toAuthGoods('{{data.id}}');">商品审核</a></p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="js-list-empty-region"></div>
+				<footer class="panel-footer" style="text-align: right;">
+					<div class="row">
+						<div ng-show="pageData.totalRow>0">
+							<custom-pagination boundary-links="true"
+								ng-change="pageChanged()" total-items="pageData.totalRow"
+								ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+								class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></custom-pagination>
+						</div>
+						<div ng-show="(pageData.totalRow==0)||(pageData=='')"
+							style="text-align: center;">没有找到相关记录!</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+
+
+	</div>
+</div>

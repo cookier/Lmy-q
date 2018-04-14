@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.WechatRqcodeMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.WechatRqcode">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="data_id" jdbcType="INTEGER" property="dataId"/>
+        <result column="data_sign_type" jdbcType="INTEGER" property="dataSignType"/>
+        <result column="data_type" jdbcType="INTEGER" property="dataType"/>
+        <result column="ticket" jdbcType="VARCHAR" property="ticket"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="scan_times" jdbcType="INTEGER" property="scanTimes"/>
+        <result column="scene_id" jdbcType="INTEGER" property="sceneId"/>
+        <result column="last_scan_time" jdbcType="TIMESTAMP" property="lastScanTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="enable_flag" jdbcType="SMALLINT" property="enableFlag"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, type, data_id, data_sign_type, data_type, ticket, url, scan_times, scene_id, 
+    last_scan_time, create_time, enable_flag
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.WechatRqcodeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_wechat_rqcode
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_wechat_rqcode
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_wechat_rqcode
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.WechatRqcodeExample">
+        delete from t_wechat_rqcode
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.WechatRqcode">
+    insert into t_wechat_rqcode (id, shop_id, type, 
+      data_id, data_sign_type, data_type, 
+      ticket, url, scan_times, 
+      scene_id, last_scan_time, create_time, 
+      enable_flag)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{dataId,jdbcType=INTEGER}, #{dataSignType,jdbcType=INTEGER}, #{dataType,jdbcType=INTEGER}, 
+      #{ticket,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{scanTimes,jdbcType=INTEGER}, 
+      #{sceneId,jdbcType=INTEGER}, #{lastScanTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{enableFlag,jdbcType=SMALLINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.WechatRqcode">
+        insert into t_wechat_rqcode
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="dataId != null">
+                data_id,
+            </if>
+            <if test="dataSignType != null">
+                data_sign_type,
+            </if>
+            <if test="dataType != null">
+                data_type,
+            </if>
+            <if test="ticket != null">
+                ticket,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="scanTimes != null">
+                scan_times,
+            </if>
+            <if test="sceneId != null">
+                scene_id,
+            </if>
+            <if test="lastScanTime != null">
+                last_scan_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="enableFlag != null">
+                enable_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="dataId != null">
+                #{dataId,jdbcType=INTEGER},
+            </if>
+            <if test="dataSignType != null">
+                #{dataSignType,jdbcType=INTEGER},
+            </if>
+            <if test="dataType != null">
+                #{dataType,jdbcType=INTEGER},
+            </if>
+            <if test="ticket != null">
+                #{ticket,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="scanTimes != null">
+                #{scanTimes,jdbcType=INTEGER},
+            </if>
+            <if test="sceneId != null">
+                #{sceneId,jdbcType=INTEGER},
+            </if>
+            <if test="lastScanTime != null">
+                #{lastScanTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enableFlag != null">
+                #{enableFlag,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.WechatRqcodeExample" resultType="java.lang.Long">
+        select count(*) from t_wechat_rqcode
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_wechat_rqcode
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.dataId != null">
+                data_id = #{record.dataId,jdbcType=INTEGER},
+            </if>
+            <if test="record.dataSignType != null">
+                data_sign_type = #{record.dataSignType,jdbcType=INTEGER},
+            </if>
+            <if test="record.dataType != null">
+                data_type = #{record.dataType,jdbcType=INTEGER},
+            </if>
+            <if test="record.ticket != null">
+                ticket = #{record.ticket,jdbcType=VARCHAR},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.scanTimes != null">
+                scan_times = #{record.scanTimes,jdbcType=INTEGER},
+            </if>
+            <if test="record.sceneId != null">
+                scene_id = #{record.sceneId,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastScanTime != null">
+                last_scan_time = #{record.lastScanTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.enableFlag != null">
+                enable_flag = #{record.enableFlag,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_wechat_rqcode
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=INTEGER},
+        data_id = #{record.dataId,jdbcType=INTEGER},
+        data_sign_type = #{record.dataSignType,jdbcType=INTEGER},
+        data_type = #{record.dataType,jdbcType=INTEGER},
+        ticket = #{record.ticket,jdbcType=VARCHAR},
+        url = #{record.url,jdbcType=VARCHAR},
+        scan_times = #{record.scanTimes,jdbcType=INTEGER},
+        scene_id = #{record.sceneId,jdbcType=INTEGER},
+        last_scan_time = #{record.lastScanTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        enable_flag = #{record.enableFlag,jdbcType=SMALLINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.WechatRqcode">
+        update t_wechat_rqcode
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="dataId != null">
+                data_id = #{dataId,jdbcType=INTEGER},
+            </if>
+            <if test="dataSignType != null">
+                data_sign_type = #{dataSignType,jdbcType=INTEGER},
+            </if>
+            <if test="dataType != null">
+                data_type = #{dataType,jdbcType=INTEGER},
+            </if>
+            <if test="ticket != null">
+                ticket = #{ticket,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="scanTimes != null">
+                scan_times = #{scanTimes,jdbcType=INTEGER},
+            </if>
+            <if test="sceneId != null">
+                scene_id = #{sceneId,jdbcType=INTEGER},
+            </if>
+            <if test="lastScanTime != null">
+                last_scan_time = #{lastScanTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enableFlag != null">
+                enable_flag = #{enableFlag,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.WechatRqcode">
+    update t_wechat_rqcode
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      data_id = #{dataId,jdbcType=INTEGER},
+      data_sign_type = #{dataSignType,jdbcType=INTEGER},
+      data_type = #{dataType,jdbcType=INTEGER},
+      ticket = #{ticket,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      scan_times = #{scanTimes,jdbcType=INTEGER},
+      scene_id = #{sceneId,jdbcType=INTEGER},
+      last_scan_time = #{lastScanTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      enable_flag = #{enableFlag,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

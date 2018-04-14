@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="echarts.min.new.js"></script>
+    <script src="require.min.js"></script>
+  </head>
+
+  <body>
+  <div id="radar" style="width:600px;height: 600px;padding-top: 10px; margin: 0 auto;"></div>
+  <script>
+    require(['echarts.min.new.js'],
+      function(echarts){
+        var myChart = echarts.init(document.getElementById("radar"));
+
+        var colors = ['#5691df','#c0504e','#93c13b'];
+
+        option = {
+          color:colors,
+
+          tooltip:{
+            trigger:'axis',
+            axisPointer:{
+              type:'cross'
+            }
+          },
+          grid:{
+            right:'20%'
+          },
+          toolbox:{
+            feature:{
+              dataView:{
+                show:true,
+                readOnly:false
+              },
+              restore:{
+                show:true
+              },
+              saveAsImage:{
+                show:true
+              }
+            }
+          },
+          legend:{
+            data:['蒸发量'],
+            selectedMode:false  //让用户无法点击
+          },
+          grid:{
+            show:false
+          },
+          xAxis:[{
+            type:'category',
+            axisTick:{
+              alignWithLabel:true
+            },
+            nameGap:52,
+            data:['1月','2月','3月','4月','5月']
+          }],
+          yAxis:[{
+            type:'value',
+            name:'蒸发量',
+            min:0,
+            max:250,
+            position:'right',
+            axisLine:{
+              lineStyle:{
+                color:colors[0]
+              }
+            },
+            axisLabel:{
+              formatter:'{value} ml'
+            }
+          },{
+            type:'value',
+            name:'蒸发量',
+            min:0,
+            max:250,
+            position:'left',
+            axisLine:{
+              lineStyle:{
+                color:colors[0]
+              }
+            },
+            axisLabel:{
+              formatter:'{value} ml'
+            }
+          }],
+          series:[{
+            name:'已提交',
+            type:'bar',
+            stack: '广告',
+            data:[10,20,30,20,20]
+          },
+            {
+              name:'未提交',
+              type:'bar',
+              stack: '广告',
+              data:[20,30,110,15,22]
+            },{
+              name:'提交率',
+              type:'line',
+              data:[123,23,11,33,44]
+            }]
+        };
+        myChart.setOption(option);
+      });
+  </script>
+  </body>
+
+</html>

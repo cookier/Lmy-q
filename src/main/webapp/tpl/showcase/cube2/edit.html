@@ -1,0 +1,30 @@
+<form class="form-horizontal custom-cube2-table cube2-edit" ng-controller="UICubeEditorController" novalidate>
+    <div class="control-group layout-map">
+        <label class="control-label">布局：</label>
+        <div class="controls" id="layout_map">
+            <table class="cube2_table">
+                <tbody>
+                <tr ng-repeat="r in rows">
+                    <td ng-repeat="c in cols" ng-if="!layoutMap[r][c] || layoutMap[r][c].y == r && layoutMap[r][c].x ==c"  class="empty cols-{{layoutMap[r][c].width}} rows-{{layoutMap[r][c].height}} index-{{layoutMap[r][c].index}}" data-x="{{c}}" data-y="{{r}}" ng-click="edit(c,r,$event)"
+                        ng-class="{'index-{{layoutMap[r][c].index}}':layoutMap[r][c] && !layoutMap[r][c].image_url,
+                         'empty':!layoutMap[r][c],'current':layoutMap[r][c] && currentSelection == layoutMap[r][c].index,
+                         'not-empty':layoutMap[r][c] && layoutMap[r][c].y == r && layoutMap[r][c].x ==c,
+                         'cols-{{layoutMap[r][c].width}}':layoutMap[r][c] && layoutMap[r][c].y == r && layoutMap[r][c].x ==c,
+                         'rows-{{layoutMap[r][c].height}}':layoutMap[r][c] && layoutMap[r][c].y == r && layoutMap[r][c].x ==c}"
+                        colspan="{{layoutMap[r][c].width}}" rowspan="{{layoutMap[r][c].height}}" data-index="{{layoutMap[r][c].index}}" >
+                        <a ng-if="layoutMap[r][c] && layoutMap[r][c].image_url" > <img src="{{layoutMap[r][c].image_url}}"></a>
+                        <span ng-if="layoutMap[r][c] && !layoutMap[r][c].image_url" src="{{layoutMap[r][c].image_url}}">{{layoutMap[r][c].width*160+'x'+layoutMap[r][c].height*160}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="help-desc">点击 + 号添加内容</p>
+        </div>
+    </div>
+    <div class="control-group js-item-region">
+        <ul class="choices" ng-show="curCell">
+            <li class="choice" ng-include="'tpl/showcase/cube2/edit_item.html'">
+            </li>
+        </ul>
+    </div>
+</form>

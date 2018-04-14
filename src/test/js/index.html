@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-2.0.3.js"></script>
+    <script src="callback.js"></script>
+  </head>
+  <body>
+  <script>
+    var cb = myJq.callback();
+    cb.add(function(data){
+      alert(data.str)
+    });
+    cb.add(function(data){
+      alert(data.str)
+    })
+    cb.fire({str:'fuck you'});
+  </script>
+  </body>
+</html>

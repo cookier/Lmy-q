@@ -1,0 +1,128 @@
+<div class="app-init-container" ng-controller="SupplierListController">
+  <div class="app__content js-app-main">
+    <div class="goods-list" ng-enter='pageChanged()'>
+      <div class="js-list-filter-region clearfix ui-box"
+           style="position: relative; text-align: right;">
+        <div class="widget-list-filter">
+          <div class="filter-box">
+            <div class="js-list-search seach-box">
+              审核状态：
+              <select name="auth_status" style="height: 30px;"
+                      ng-model="auth_status">
+                <option value="">全部</option>
+                <option value="0">待认证</option>
+                <option value="1">认证中</option>
+                <option value="2">已认证</option>
+                <option value="3">认证不通过</option>
+              </select>
+              企业名称：<input ng-model="shop_name" type="text" class="input-sm" />
+              手机号码：<input ng-model="mobile" type="text" class="input-sm" />
+              <button class="btn btn-sm btn-default" type="button"
+                      ng-click="pageChanged()">Go!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui-box">
+        <div class="panel panel-default">
+          <table class="ui-table ui-table-list" style="padding: 0px;">
+            <thead class="js-list-header-region tableFloatingHeaderOriginal">
+            <tr class="widget-list-header">
+              <!-- <th style="width: 20px;"><label
+                      class="i-checks i-checks-sm"> <input type="checkbox"
+                                                           ng-checked="isCheckedAll()" ng-click="checkAll()"><i></i>
+              </label></th> -->
+              <th width='100px'>昵称</th>
+              <th width='70px'>提成比例</th>
+              <th width='90px'>手机号</th>
+              <th>企业名称</th>
+              <th>经营类目</th>
+              <th width='70px'>认证状态</th>
+              <th width='70px'>账号状态</th>
+              <th width='250px' style="text-align: center;">操作</th>
+            </tr>
+            </thead>
+            <tbody class="js-list-body-region">
+            <tr ng-repeat="data in pageData.list">
+              <!--  <td><label class="i-checks i-checks-sm"> <input
+                      id={{data.id}} type="checkbox" ng-checked="data.chk"
+                      ng-click="data.chk = !data.chk"><i></i>
+              </label></td>-->
+              <td class="goods-image-td">
+                {{data.nickname}}
+               
+              </td>
+              <td style='text-align:center;color:red;'>{{data.deduct_percentage}}</td>
+              <td>{{data.mobile}}</td>
+              <td class="goods-meta">{{data.shop_name}}</td>
+              <td class="goods-meta">{{data.goods_category_name}}</td>
+              <td>
+                <span ng-show="data.uastatus<=0">待认证</span>
+                <span ng-show="data.uastatus==1">认证中</span>
+                <span ng-show="data.uastatus==2">已认证</span>
+                <span ng-show="data.uastatus==3">认证不通过</span>
+              </td>
+              <td>
+                <span ng-show="data.uflag==1">已被冻结</span>
+                <span ng-show="data.uflag==0">正常</span>
+              </td>
+              <td style="text-align: left;">
+                <a style='color:red;' ng-click="freeze(data.uid)" ng-show="data.uflag==0"> 封号 &nbsp;&nbsp;</a>
+                <a style='color:red;' ng-click="unfreeze(data.uid)" ng-show="data.uflag==1"> 解冻&nbsp;&nbsp;</a>
+                <a ng-show="data.qyrz||data.shop_name.length>0" ng-click="toSupplierAuth(data.uid)"> 企业认证&nbsp;&nbsp;</a>
+                <a ng-click="toQualificationAuth(data.uid)"> 资质审核&nbsp;&nbsp;</a>
+                <a id="console{{$index}}" ng-click="data.percent_show=true"> 设置提成比例&nbsp;&nbsp;</a>
+                <dialog ng-if="data.percent_show==true" for="console{{$index}}" align="left" close="data.percent_show=false" close-action="outerchick">
+                  <div dialog-content>
+                    <div class="popover-content text-center form-inline">
+                      <form name="form" class="form-validation">
+                        <div>
+                          提成比例：<input type="number" ng-model="data.deduct_percentage" style="width:90px;" placeholder="小于0.3的数字" ui-validate=" '$value > 0 && $value <=0.3' " required/>
+                          <p style="color:#EC4844">请输入小于0.3的数字</p>
+                        </div>
+                        <div>
+                          <br>
+                          <button type="submit" ng-disabled="form.$invalid"
+                                  class="btn btn-primary js-btn-confirm"
+                                  data-loading-text="确定"
+                                  ng-click="setDeduct(data)">确定
+                          </button>
+                          <button type="reset" class="btn js-btn-cancel"
+                                  ng-click="data.percent_show=false">取消
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="js-list-empty-region"></div>
+          <footer class="panel-footer" style="text-align: right;">
+            <div class="row">
+              <div style="text-align: left; margin-left: 10px;"
+                   ng-show="pageData.totalRow>0">
+
+                <custom-pagination boundary-links="true"
+                                   ng-change="pageChanged(data.uid)" total-items="pageData.totalRow"
+                                   ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                   class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                   next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </custom-pagination>
+              </div>
+              <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                   style="text-align: center;">没有找到相关记录!
+              </div>
+
+            </div>
+          </footer>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

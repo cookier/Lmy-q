@@ -1,0 +1,56 @@
+<form class="form-horizontal edit-tpl-11-11" novalidate onsubmit="return false">
+    <div class="control-group">
+        <label class="control-label">背景图片：</label>
+        <div class="controls">
+            <% if (banner === '') { %>
+                <a class="control-action js-trigger-image" href="javascript: void(0);">选择图片</a>
+            <% } else { %>
+                <div class="tpl-shop-header" style="width: 320px; background-image: url(<%- fullfillImage(banner) %>);">
+                    <a class="close-modal small hide js-delete-image" data-index="0">×</a>
+                </div>
+                <a class="control-action js-trigger-image" href="javascript: void(0);">修改</a>
+            <% } %>
+            <p class="help-desc">最佳尺寸：640 x 200 像素。</p>
+            <p class="help-desc">尺寸不匹配时，图片将被压缩或拉伸以铺满画面。</p>
+            <input type="hidden" name="banner">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">优惠券：</label>
+        <div class="controls">
+            <ul class="coupon-list">
+            <% _.each(tradeincard, function(item) { %>
+                <li>
+                    <div class="coupon-list-content">
+                        <div class="coupon-list-summary">
+                            <span class="label label-success">优惠券</span>
+                            <span><%- item.name %></span>
+                            <span class="c-gray">
+                                <% if(item.at_least) { %>
+                                    （满<%= item.at_least %>元可用）
+                                <% } else { %>
+                                    无限制
+                                <% } %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="coupon-list-opts">
+                        <a href="javascript:;" class="js-remove-tradeincard">删除</a>
+                    </div>
+                </li>
+
+            <% }); %>
+            </ul>
+            <% if(tradeincard.length < 3) { %>
+                <a href="javascript:;" class="control-action js-add-tradeincard">添加优惠券</a>
+            <% } %>
+            <input type="hidden" name="tradeincard">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">公告：</label>
+        <div class="controls">
+            <input type="text" name="notice" value="<%= notice %>" class="input-xxlarge" placeholder="请填写内容，如果过长，将会在手机上滚动显示">
+        </div>
+    </div>
+</form>

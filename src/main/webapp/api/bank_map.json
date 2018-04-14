@@ -1,0 +1,136 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "bank_map": [
+      {
+        "bank_code": "10001",
+        "bank_name": "中国工商银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10002",
+        "bank_name": "中国农业银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10003",
+        "bank_name": "中国银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10004",
+        "bank_name": "中国建设银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10005",
+        "bank_name": "交通银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10006",
+        "bank_name": "中国邮政储蓄银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10007",
+        "bank_name": "招商银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10008",
+        "bank_name": "中信银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10009",
+        "bank_name": "中国光大银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10010",
+        "bank_name": "中国民生银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10011",
+        "bank_name": "兴业银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10012",
+        "bank_name": "浦东发展银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10013",
+        "bank_name": "广发银行",
+        "bank_type": 0
+      },
+      {
+        "bank_code": "10014",
+        "bank_name": "平安银行",
+        "bank_type": 0
+      }
+    ],
+    "bank_map_config": {
+      "10001": [
+        false,
+        false
+      ],
+      "10002": [
+        false,
+        true
+      ],
+      "10003": [
+        true,
+        true
+      ],
+      "10004": [
+        false,
+        true
+      ],
+      "10005": [
+        false,
+        true
+      ],
+      "10006": [
+        true,
+        true
+      ],
+      "10007": [
+        false,
+        true
+      ],
+      "10008": [
+        false,
+        true
+      ],
+      "10009": [
+        true,
+        true
+      ],
+      "10010": [
+        false,
+        true
+      ],
+      "10011": [
+        true,
+        true
+      ],
+      "10012": [
+        false,
+        true
+      ],
+      "10013": [
+        true,
+        true
+      ],
+      "10014": [
+        false,
+        true
+      ]
+    }
+  }
+}

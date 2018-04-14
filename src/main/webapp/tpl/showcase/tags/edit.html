@@ -1,0 +1,20 @@
+<div ng-controller="UITagListController">
+<form class="form-horizontal" novalidate>
+    <div class="control-group js-collection-region">
+        <ul class="choices">
+            <li ng-repeat="item in data.sub_entry" class="choice" ng-include="'tpl/showcase/tags/edit_item.html'">
+            </li>
+        </ul>
+    </div>
+    <div class="control-group options js-add-subentry">
+        <a class="add-option js-add-option" ng-click="addGoodsTag()"><i class="icon-add"></i> 添加商品分组</a>
+    </div>
+
+    <div class="control-group">
+        <p class="app-component-desc help-desc">选择商品来源后，左侧实时预览暂不支持显示其包含的商品数据</p>
+    </div>
+
+</form>
+
+<div class="js-goods-style-region" style="margin-top: 10px;" ng-include="'tpl/showcase/goods_list/edit_goods_style.html'"></div>
+</div>

@@ -1,0 +1,28 @@
+<form class="form-horizontal" novalidate ng-controller="UIGoodsConfigController">
+    <div class="control-group js-goods-sidebar-sub-title">
+        <label class="control-label">商品页模板：</label>
+        <div class="controls">
+            <select class="js-goods-template chosen-select" ng-model="data.goods_template" name="goods_template"
+                    ng-options="f.id as f.name for f in goods_template"
+                    data-placeholder="选择商品页模板">
+            </select>
+            <p class="help-inline">
+                <a class="js-refresh-goods-template" href="javascript:void(0);" ng-click="loadGoodsTemplate()">刷新</a> <span>|</span>
+                <a class="new_window" target="_blank"  href="">+新建</a>
+                <div class="ui-block-head-help soldout-help js-soldout-help hide" style="display: block; top: -180px;">
+                    <a href="javascript:void(0);" class="js-help-notes" data-class="left"></a>
+                    <div class="js-notes-cont hide">
+                        <p>默认启用简洁流畅版， 了解什么是<a href="" target="_blank" class="new-window">商品模板</a></p>
+                    </div>
+                </div>
+            </p>
+        </div>
+    </div>
+    <div class="control-group js-goods-sidebar-sub-title">
+        <p class="">商品简介(选填，微信分享给好友时会显示这里的文案)</p>
+        <textarea rows="2" class="js-sub-title input-sub-title" ng-model="data.sub_title" style="clear: both;width: 440px;margin: 10px 0 5px 0;resize: none;"></textarea>
+    </div>
+    <div class="control-group" lazy-load="textAngular">
+        <div class="js-editor" text-angular config='ue_config' ng-model="data.content"></div>
+    </div>
+</form>

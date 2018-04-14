@@ -1,0 +1,67 @@
+<div class="pull-left">
+    <%if(image_url){%>
+        <div class="image-box">
+            <img src="<%= fullfillImage(image_url) %>">
+            <a href="javascript:;" class="modify-image js-upload-image">重新上传</a>
+        </div>
+    <%} else {%>
+        <a href="javascript:;" class="add-image js-upload-image"><i class="icon-add"></i>添加图片</a>
+    <%}%>
+</div>
+
+
+<div class="anm-elem-form">
+    <div class="form-inline ui-box">
+        <span class="form-inline-label">宽</span>
+        <input type="text" class="input-mini" name="width" value="<%= width %>" maxlength="3" >
+        <span class="form-inline-label">高</span>
+        <input type="text" class="input-mini" name="height" value="<%= height %>" maxlength="3" >
+    </div>
+    
+    <div class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">横向位置：</label>
+            <div class="controls">
+                <input type="text" class="input-mini" name="x" value="<%= x %>" maxlength="3">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">纵向位置：</label>
+            <div class="controls">
+                <input type="text" class="input-mini" name="y" value="<%= y %>" maxlength="3">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">动画效果：</label>
+            <div class="controls">
+                <select name="anm_style" class="input-small">
+                    <option value="-1">无</option>
+                    <option value="fadeIn">淡入</option>
+                    <option value="drop">下坠</option>
+                    <option value="float">上浮</option>
+                    <option value="leftin">左入</option>
+                    <option value="rightin">右入</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">开始时间：</label>
+            <div class="controls">
+                <input type="text" class="input-mini" name="delay" value="<%= delay %>" maxlength="3"> 秒
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">动画持续：</label>
+            <div class="controls">
+                <input type="text" class="input-mini" name="duration" value="<%= duration %>" maxlength="3"> 秒
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="actions">
+    <span class="action delete close-modal js-delete" title="删除">×</span>
+</div>

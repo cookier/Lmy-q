@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.Order">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="order_type" jdbcType="INTEGER" property="orderType"/>
+        <result column="send_type" jdbcType="INTEGER" property="sendType"/>
+        <result column="send_status" jdbcType="INTEGER" property="sendStatus"/>
+        <result column="send_time" jdbcType="TIMESTAMP" property="sendTime"/>
+        <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime"/>
+        <result column="order_source" jdbcType="INTEGER" property="orderSource"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime"/>
+        <result column="valid_time" jdbcType="TIMESTAMP" property="validTime"/>
+        <result column="refund_status" jdbcType="INTEGER" property="refundStatus"/>
+        <result column="refund_time" jdbcType="TIMESTAMP" property="refundTime"/>
+        <result column="refund_money" jdbcType="DOUBLE" property="refundMoney"/>
+        <result column="success_time" jdbcType="TIMESTAMP" property="successTime"/>
+        <result column="pay_status" jdbcType="INTEGER" property="payStatus"/>
+        <result column="pay_type" jdbcType="INTEGER" property="payType"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="pay_id" jdbcType="INTEGER" property="payId"/>
+        <result column="total_money" jdbcType="DOUBLE" property="totalMoney"/>
+        <result column="member_discount_money" jdbcType="DOUBLE" property="memberDiscountMoney"/>
+        <result column="adjust_money" jdbcType="DOUBLE" property="adjustMoney"/>
+        <result column="need_pay_money" jdbcType="DOUBLE" property="needPayMoney"/>
+        <result column="real_pay_money" jdbcType="DOUBLE" property="realPayMoney"/>
+        <result column="commission_money" jdbcType="DOUBLE" property="commissionMoney"/>
+        <result column="postage" jdbcType="DOUBLE" property="postage"/>
+        <result column="adjust_postage" jdbcType="DOUBLE" property="adjustPostage"/>
+        <result column="free_postage" jdbcType="INTEGER" property="freePostage"/>
+        <result column="address_id" jdbcType="INTEGER" property="addressId"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="street" jdbcType="VARCHAR" property="street"/>
+        <result column="detail_address" jdbcType="VARCHAR" property="detailAddress"/>
+        <result column="receiver" jdbcType="VARCHAR" property="receiver"/>
+        <result column="receiver_mobile" jdbcType="VARCHAR" property="receiverMobile"/>
+        <result column="receiver_zipcode" jdbcType="VARCHAR" property="receiverZipcode"/>
+        <result column="message" jdbcType="VARCHAR" property="message"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="star_mark" jdbcType="INTEGER" property="starMark"/>
+        <result column="operate_permission" jdbcType="VARCHAR" property="operatePermission"/>
+        <result column="customer_order_id" jdbcType="INTEGER" property="customerOrderId"/>
+        <result column="coupon_type" jdbcType="INTEGER" property="couponType"/>
+        <result column="coupon_id" jdbcType="INTEGER" property="couponId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+        <result column="order_status_desc" jdbcType="VARCHAR" property="orderStatusDesc"/>
+        <result column="discount_money" jdbcType="DOUBLE" property="discountMoney"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.Order">
+        <result column="discount_info" jdbcType="LONGVARCHAR" property="discountInfo"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, order_no, shop_id, member_id, order_type, send_type, send_status, send_time, 
+    receive_time, order_source, update_time, cancel_time, valid_time, refund_status, 
+    refund_time, refund_money, success_time, pay_status, pay_type, pay_time, pay_id, 
+    total_money, member_discount_money, adjust_money, need_pay_money, real_pay_money, 
+    commission_money, postage, adjust_postage, free_postage, address_id, province, city, 
+    area, street, detail_address, receiver, receiver_mobile, receiver_zipcode, message, 
+    remark, star_mark, operate_permission, customer_order_id, coupon_type, coupon_id, 
+    create_time, order_status, order_status_desc, discount_money, delete_flag
+  </sql>
+    <sql id="Blob_Column_List">
+    discount_info
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.OrderExample" resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.OrderExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.OrderExample">
+        delete from t_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.Order">
+    insert into t_order (id, order_no, shop_id, 
+      member_id, order_type, send_type, 
+      send_status, send_time, receive_time, 
+      order_source, update_time, cancel_time, 
+      valid_time, refund_status, refund_time, 
+      refund_money, success_time, pay_status, 
+      pay_type, pay_time, pay_id, 
+      total_money, member_discount_money, adjust_money, 
+      need_pay_money, real_pay_money, commission_money, 
+      postage, adjust_postage, free_postage, 
+      address_id, province, city, 
+      area, street, detail_address, 
+      receiver, receiver_mobile, receiver_zipcode, 
+      message, remark, star_mark, 
+      operate_permission, customer_order_id, coupon_type, 
+      coupon_id, create_time, order_status, 
+      order_status_desc, discount_money, delete_flag, 
+      discount_info)
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, 
+      #{memberId,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, 
+      #{sendStatus,jdbcType=INTEGER}, #{sendTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, 
+      #{orderSource,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{cancelTime,jdbcType=TIMESTAMP}, 
+      #{validTime,jdbcType=TIMESTAMP}, #{refundStatus,jdbcType=INTEGER}, #{refundTime,jdbcType=TIMESTAMP}, 
+      #{refundMoney,jdbcType=DOUBLE}, #{successTime,jdbcType=TIMESTAMP}, #{payStatus,jdbcType=INTEGER}, 
+      #{payType,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, #{payId,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=DOUBLE}, #{memberDiscountMoney,jdbcType=DOUBLE}, #{adjustMoney,jdbcType=DOUBLE}, 
+      #{needPayMoney,jdbcType=DOUBLE}, #{realPayMoney,jdbcType=DOUBLE}, #{commissionMoney,jdbcType=DOUBLE}, 
+      #{postage,jdbcType=DOUBLE}, #{adjustPostage,jdbcType=DOUBLE}, #{freePostage,jdbcType=INTEGER}, 
+      #{addressId,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, 
+      #{receiver,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR}, #{receiverZipcode,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{starMark,jdbcType=INTEGER}, 
+      #{operatePermission,jdbcType=VARCHAR}, #{customerOrderId,jdbcType=INTEGER}, #{couponType,jdbcType=INTEGER}, 
+      #{couponId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, 
+      #{orderStatusDesc,jdbcType=VARCHAR}, #{discountMoney,jdbcType=DOUBLE}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{discountInfo,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.Order">
+        insert into t_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="sendType != null">
+                send_type,
+            </if>
+            <if test="sendStatus != null">
+                send_status,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+            <if test="receiveTime != null">
+                receive_time,
+            </if>
+            <if test="orderSource != null">
+                order_source,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="cancelTime != null">
+                cancel_time,
+            </if>
+            <if test="validTime != null">
+                valid_time,
+            </if>
+            <if test="refundStatus != null">
+                refund_status,
+            </if>
+            <if test="refundTime != null">
+                refund_time,
+            </if>
+            <if test="refundMoney != null">
+                refund_money,
+            </if>
+            <if test="successTime != null">
+                success_time,
+            </if>
+            <if test="payStatus != null">
+                pay_status,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="payId != null">
+                pay_id,
+            </if>
+            <if test="totalMoney != null">
+                total_money,
+            </if>
+            <if test="memberDiscountMoney != null">
+                member_discount_money,
+            </if>
+            <if test="adjustMoney != null">
+                adjust_money,
+            </if>
+            <if test="needPayMoney != null">
+                need_pay_money,
+            </if>
+            <if test="realPayMoney != null">
+                real_pay_money,
+            </if>
+            <if test="commissionMoney != null">
+                commission_money,
+            </if>
+            <if test="postage != null">
+                postage,
+            </if>
+            <if test="adjustPostage != null">
+                adjust_postage,
+            </if>
+            <if test="freePostage != null">
+                free_postage,
+            </if>
+            <if test="addressId != null">
+                address_id,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="street != null">
+                street,
+            </if>
+            <if test="detailAddress != null">
+                detail_address,
+            </if>
+            <if test="receiver != null">
+                receiver,
+            </if>
+            <if test="receiverMobile != null">
+                receiver_mobile,
+            </if>
+            <if test="receiverZipcode != null">
+                receiver_zipcode,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="starMark != null">
+                star_mark,
+            </if>
+            <if test="operatePermission != null">
+                operate_permission,
+            </if>
+            <if test="customerOrderId != null">
+                customer_order_id,
+            </if>
+            <if test="couponType != null">
+                coupon_type,
+            </if>
+            <if test="couponId != null">
+                coupon_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="orderStatusDesc != null">
+                order_status_desc,
+            </if>
+            <if test="discountMoney != null">
+                discount_money,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="discountInfo != null">
+                discount_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="orderType != null">
+                #{orderType,jdbcType=INTEGER},
+            </if>
+            <if test="sendType != null">
+                #{sendType,jdbcType=INTEGER},
+            </if>
+            <if test="sendStatus != null">
+                #{sendStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiveTime != null">
+                #{receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderSource != null">
+                #{orderSource,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cancelTime != null">
+                #{cancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="validTime != null">
+                #{validTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundStatus != null">
+                #{refundStatus,jdbcType=INTEGER},
+            </if>
+            <if test="refundTime != null">
+                #{refundTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundMoney != null">
+                #{refundMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="successTime != null">
+                #{successTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payStatus != null">
+                #{payStatus,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payId != null">
+                #{payId,jdbcType=INTEGER},
+            </if>
+            <if test="totalMoney != null">
+                #{totalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="memberDiscountMoney != null">
+                #{memberDiscountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="adjustMoney != null">
+                #{adjustMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="needPayMoney != null">
+                #{needPayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="realPayMoney != null">
+                #{realPayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionMoney != null">
+                #{commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="postage != null">
+                #{postage,jdbcType=DOUBLE},
+            </if>
+            <if test="adjustPostage != null">
+                #{adjustPostage,jdbcType=DOUBLE},
+            </if>
+            <if test="freePostage != null">
+                #{freePostage,jdbcType=INTEGER},
+            </if>
+            <if test="addressId != null">
+                #{addressId,jdbcType=INTEGER},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="street != null">
+                #{street,jdbcType=VARCHAR},
+            </if>
+            <if test="detailAddress != null">
+                #{detailAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="receiver != null">
+                #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverMobile != null">
+                #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverZipcode != null">
+                #{receiverZipcode,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null">
+                #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="starMark != null">
+                #{starMark,jdbcType=INTEGER},
+            </if>
+            <if test="operatePermission != null">
+                #{operatePermission,jdbcType=VARCHAR},
+            </if>
+            <if test="customerOrderId != null">
+                #{customerOrderId,jdbcType=INTEGER},
+            </if>
+            <if test="couponType != null">
+                #{couponType,jdbcType=INTEGER},
+            </if>
+            <if test="couponId != null">
+                #{couponId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatusDesc != null">
+                #{orderStatusDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="discountMoney != null">
+                #{discountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="discountInfo != null">
+                #{discountInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.OrderExample" resultType="java.lang.Long">
+        select count(*) from t_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_order
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderNo != null">
+                order_no = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberId != null">
+                member_id = #{record.memberId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderType != null">
+                order_type = #{record.orderType,jdbcType=INTEGER},
+            </if>
+            <if test="record.sendType != null">
+                send_type = #{record.sendType,jdbcType=INTEGER},
+            </if>
+            <if test="record.sendStatus != null">
+                send_status = #{record.sendStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.sendTime != null">
+                send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.receiveTime != null">
+                receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.orderSource != null">
+                order_source = #{record.orderSource,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.cancelTime != null">
+                cancel_time = #{record.cancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.validTime != null">
+                valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.refundStatus != null">
+                refund_status = #{record.refundStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.refundTime != null">
+                refund_time = #{record.refundTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.refundMoney != null">
+                refund_money = #{record.refundMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.successTime != null">
+                success_time = #{record.successTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.payStatus != null">
+                pay_status = #{record.payStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.payType != null">
+                pay_type = #{record.payType,jdbcType=INTEGER},
+            </if>
+            <if test="record.payTime != null">
+                pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.payId != null">
+                pay_id = #{record.payId,jdbcType=INTEGER},
+            </if>
+            <if test="record.totalMoney != null">
+                total_money = #{record.totalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.memberDiscountMoney != null">
+                member_discount_money = #{record.memberDiscountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.adjustMoney != null">
+                adjust_money = #{record.adjustMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.needPayMoney != null">
+                need_pay_money = #{record.needPayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.realPayMoney != null">
+                real_pay_money = #{record.realPayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.commissionMoney != null">
+                commission_money = #{record.commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.postage != null">
+                postage = #{record.postage,jdbcType=DOUBLE},
+            </if>
+            <if test="record.adjustPostage != null">
+                adjust_postage = #{record.adjustPostage,jdbcType=DOUBLE},
+            </if>
+            <if test="record.freePostage != null">
+                free_postage = #{record.freePostage,jdbcType=INTEGER},
+            </if>
+            <if test="record.addressId != null">
+                address_id = #{record.addressId,jdbcType=INTEGER},
+            </if>
+            <if test="record.province != null">
+                province = #{record.province,jdbcType=VARCHAR},
+            </if>
+            <if test="record.city != null">
+                city = #{record.city,jdbcType=VARCHAR},
+            </if>
+            <if test="record.area != null">
+                area = #{record.area,jdbcType=VARCHAR},
+            </if>
+            <if test="record.street != null">
+                street = #{record.street,jdbcType=VARCHAR},
+            </if>
+            <if test="record.detailAddress != null">
+                detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiver != null">
+                receiver = #{record.receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiverMobile != null">
+                receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiverZipcode != null">
+                receiver_zipcode = #{record.receiverZipcode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.message != null">
+                message = #{record.message,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.starMark != null">
+                star_mark = #{record.starMark,jdbcType=INTEGER},
+            </if>
+            <if test="record.operatePermission != null">
+                operate_permission = #{record.operatePermission,jdbcType=VARCHAR},
+            </if>
+            <if test="record.customerOrderId != null">
+                customer_order_id = #{record.customerOrderId,jdbcType=INTEGER},
+            </if>
+            <if test="record.couponType != null">
+                coupon_type = #{record.couponType,jdbcType=INTEGER},
+            </if>
+            <if test="record.couponId != null">
+                coupon_id = #{record.couponId,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.orderStatus != null">
+                order_status = #{record.orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderStatusDesc != null">
+                order_status_desc = #{record.orderStatusDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.discountMoney != null">
+                discount_money = #{record.discountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.discountInfo != null">
+                discount_info = #{record.discountInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_order
+        set id = #{record.id,jdbcType=INTEGER},
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        member_id = #{record.memberId,jdbcType=INTEGER},
+        order_type = #{record.orderType,jdbcType=INTEGER},
+        send_type = #{record.sendType,jdbcType=INTEGER},
+        send_status = #{record.sendStatus,jdbcType=INTEGER},
+        send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+        receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+        order_source = #{record.orderSource,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        cancel_time = #{record.cancelTime,jdbcType=TIMESTAMP},
+        valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+        refund_status = #{record.refundStatus,jdbcType=INTEGER},
+        refund_time = #{record.refundTime,jdbcType=TIMESTAMP},
+        refund_money = #{record.refundMoney,jdbcType=DOUBLE},
+        success_time = #{record.successTime,jdbcType=TIMESTAMP},
+        pay_status = #{record.payStatus,jdbcType=INTEGER},
+        pay_type = #{record.payType,jdbcType=INTEGER},
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+        pay_id = #{record.payId,jdbcType=INTEGER},
+        total_money = #{record.totalMoney,jdbcType=DOUBLE},
+        member_discount_money = #{record.memberDiscountMoney,jdbcType=DOUBLE},
+        adjust_money = #{record.adjustMoney,jdbcType=DOUBLE},
+        need_pay_money = #{record.needPayMoney,jdbcType=DOUBLE},
+        real_pay_money = #{record.realPayMoney,jdbcType=DOUBLE},
+        commission_money = #{record.commissionMoney,jdbcType=DOUBLE},
+        postage = #{record.postage,jdbcType=DOUBLE},
+        adjust_postage = #{record.adjustPostage,jdbcType=DOUBLE},
+        free_postage = #{record.freePostage,jdbcType=INTEGER},
+        address_id = #{record.addressId,jdbcType=INTEGER},
+        province = #{record.province,jdbcType=VARCHAR},
+        city = #{record.city,jdbcType=VARCHAR},
+        area = #{record.area,jdbcType=VARCHAR},
+        street = #{record.street,jdbcType=VARCHAR},
+        detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+        receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+        receiver_zipcode = #{record.receiverZipcode,jdbcType=VARCHAR},
+        message = #{record.message,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        star_mark = #{record.starMark,jdbcType=INTEGER},
+        operate_permission = #{record.operatePermission,jdbcType=VARCHAR},
+        customer_order_id = #{record.customerOrderId,jdbcType=INTEGER},
+        coupon_type = #{record.couponType,jdbcType=INTEGER},
+        coupon_id = #{record.couponId,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+        order_status_desc = #{record.orderStatusDesc,jdbcType=VARCHAR},
+        discount_money = #{record.discountMoney,jdbcType=DOUBLE},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        discount_info = #{record.discountInfo,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_order
+        set id = #{record.id,jdbcType=INTEGER},
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        member_id = #{record.memberId,jdbcType=INTEGER},
+        order_type = #{record.orderType,jdbcType=INTEGER},
+        send_type = #{record.sendType,jdbcType=INTEGER},
+        send_status = #{record.sendStatus,jdbcType=INTEGER},
+        send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+        receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+        order_source = #{record.orderSource,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        cancel_time = #{record.cancelTime,jdbcType=TIMESTAMP},
+        valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+        refund_status = #{record.refundStatus,jdbcType=INTEGER},
+        refund_time = #{record.refundTime,jdbcType=TIMESTAMP},
+        refund_money = #{record.refundMoney,jdbcType=DOUBLE},
+        success_time = #{record.successTime,jdbcType=TIMESTAMP},
+        pay_status = #{record.payStatus,jdbcType=INTEGER},
+        pay_type = #{record.payType,jdbcType=INTEGER},
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+        pay_id = #{record.payId,jdbcType=INTEGER},
+        total_money = #{record.totalMoney,jdbcType=DOUBLE},
+        member_discount_money = #{record.memberDiscountMoney,jdbcType=DOUBLE},
+        adjust_money = #{record.adjustMoney,jdbcType=DOUBLE},
+        need_pay_money = #{record.needPayMoney,jdbcType=DOUBLE},
+        real_pay_money = #{record.realPayMoney,jdbcType=DOUBLE},
+        commission_money = #{record.commissionMoney,jdbcType=DOUBLE},
+        postage = #{record.postage,jdbcType=DOUBLE},
+        adjust_postage = #{record.adjustPostage,jdbcType=DOUBLE},
+        free_postage = #{record.freePostage,jdbcType=INTEGER},
+        address_id = #{record.addressId,jdbcType=INTEGER},
+        province = #{record.province,jdbcType=VARCHAR},
+        city = #{record.city,jdbcType=VARCHAR},
+        area = #{record.area,jdbcType=VARCHAR},
+        street = #{record.street,jdbcType=VARCHAR},
+        detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+        receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+        receiver_zipcode = #{record.receiverZipcode,jdbcType=VARCHAR},
+        message = #{record.message,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        star_mark = #{record.starMark,jdbcType=INTEGER},
+        operate_permission = #{record.operatePermission,jdbcType=VARCHAR},
+        customer_order_id = #{record.customerOrderId,jdbcType=INTEGER},
+        coupon_type = #{record.couponType,jdbcType=INTEGER},
+        coupon_id = #{record.couponId,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+        order_status_desc = #{record.orderStatusDesc,jdbcType=VARCHAR},
+        discount_money = #{record.discountMoney,jdbcType=DOUBLE},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.Order">
+        update t_order
+        <set>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="orderType != null">
+                order_type = #{orderType,jdbcType=INTEGER},
+            </if>
+            <if test="sendType != null">
+                send_type = #{sendType,jdbcType=INTEGER},
+            </if>
+            <if test="sendStatus != null">
+                send_status = #{sendStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiveTime != null">
+                receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderSource != null">
+                order_source = #{orderSource,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cancelTime != null">
+                cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="validTime != null">
+                valid_time = #{validTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundStatus != null">
+                refund_status = #{refundStatus,jdbcType=INTEGER},
+            </if>
+            <if test="refundTime != null">
+                refund_time = #{refundTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundMoney != null">
+                refund_money = #{refundMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="successTime != null">
+                success_time = #{successTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payStatus != null">
+                pay_status = #{payStatus,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payId != null">
+                pay_id = #{payId,jdbcType=INTEGER},
+            </if>
+            <if test="totalMoney != null">
+                total_money = #{totalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="memberDiscountMoney != null">
+                member_discount_money = #{memberDiscountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="adjustMoney != null">
+                adjust_money = #{adjustMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="needPayMoney != null">
+                need_pay_money = #{needPayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="realPayMoney != null">
+                real_pay_money = #{realPayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionMoney != null">
+                commission_money = #{commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="postage != null">
+                postage = #{postage,jdbcType=DOUBLE},
+            </if>
+            <if test="adjustPostage != null">
+                adjust_postage = #{adjustPostage,jdbcType=DOUBLE},
+            </if>
+            <if test="freePostage != null">
+                free_postage = #{freePostage,jdbcType=INTEGER},
+            </if>
+            <if test="addressId != null">
+                address_id = #{addressId,jdbcType=INTEGER},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="street != null">
+                street = #{street,jdbcType=VARCHAR},
+            </if>
+            <if test="detailAddress != null">
+                detail_address = #{detailAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="receiver != null">
+                receiver = #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverMobile != null">
+                receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverZipcode != null">
+                receiver_zipcode = #{receiverZipcode,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null">
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="starMark != null">
+                star_mark = #{starMark,jdbcType=INTEGER},
+            </if>
+            <if test="operatePermission != null">
+                operate_permission = #{operatePermission,jdbcType=VARCHAR},
+            </if>
+            <if test="customerOrderId != null">
+                customer_order_id = #{customerOrderId,jdbcType=INTEGER},
+            </if>
+            <if test="couponType != null">
+                coupon_type = #{couponType,jdbcType=INTEGER},
+            </if>
+            <if test="couponId != null">
+                coupon_id = #{couponId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatusDesc != null">
+                order_status_desc = #{orderStatusDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="discountMoney != null">
+                discount_money = #{discountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="discountInfo != null">
+                discount_info = #{discountInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.Order">
+    update t_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      member_id = #{memberId,jdbcType=INTEGER},
+      order_type = #{orderType,jdbcType=INTEGER},
+      send_type = #{sendType,jdbcType=INTEGER},
+      send_status = #{sendStatus,jdbcType=INTEGER},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      order_source = #{orderSource,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      refund_status = #{refundStatus,jdbcType=INTEGER},
+      refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      refund_money = #{refundMoney,jdbcType=DOUBLE},
+      success_time = #{successTime,jdbcType=TIMESTAMP},
+      pay_status = #{payStatus,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_id = #{payId,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=DOUBLE},
+      member_discount_money = #{memberDiscountMoney,jdbcType=DOUBLE},
+      adjust_money = #{adjustMoney,jdbcType=DOUBLE},
+      need_pay_money = #{needPayMoney,jdbcType=DOUBLE},
+      real_pay_money = #{realPayMoney,jdbcType=DOUBLE},
+      commission_money = #{commissionMoney,jdbcType=DOUBLE},
+      postage = #{postage,jdbcType=DOUBLE},
+      adjust_postage = #{adjustPostage,jdbcType=DOUBLE},
+      free_postage = #{freePostage,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      receiver_zipcode = #{receiverZipcode,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      star_mark = #{starMark,jdbcType=INTEGER},
+      operate_permission = #{operatePermission,jdbcType=VARCHAR},
+      customer_order_id = #{customerOrderId,jdbcType=INTEGER},
+      coupon_type = #{couponType,jdbcType=INTEGER},
+      coupon_id = #{couponId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_status_desc = #{orderStatusDesc,jdbcType=VARCHAR},
+      discount_money = #{discountMoney,jdbcType=DOUBLE},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      discount_info = #{discountInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.Order">
+    update t_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      member_id = #{memberId,jdbcType=INTEGER},
+      order_type = #{orderType,jdbcType=INTEGER},
+      send_type = #{sendType,jdbcType=INTEGER},
+      send_status = #{sendStatus,jdbcType=INTEGER},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      order_source = #{orderSource,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      refund_status = #{refundStatus,jdbcType=INTEGER},
+      refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      refund_money = #{refundMoney,jdbcType=DOUBLE},
+      success_time = #{successTime,jdbcType=TIMESTAMP},
+      pay_status = #{payStatus,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_id = #{payId,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=DOUBLE},
+      member_discount_money = #{memberDiscountMoney,jdbcType=DOUBLE},
+      adjust_money = #{adjustMoney,jdbcType=DOUBLE},
+      need_pay_money = #{needPayMoney,jdbcType=DOUBLE},
+      real_pay_money = #{realPayMoney,jdbcType=DOUBLE},
+      commission_money = #{commissionMoney,jdbcType=DOUBLE},
+      postage = #{postage,jdbcType=DOUBLE},
+      adjust_postage = #{adjustPostage,jdbcType=DOUBLE},
+      free_postage = #{freePostage,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      receiver_zipcode = #{receiverZipcode,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      star_mark = #{starMark,jdbcType=INTEGER},
+      operate_permission = #{operatePermission,jdbcType=VARCHAR},
+      customer_order_id = #{customerOrderId,jdbcType=INTEGER},
+      coupon_type = #{couponType,jdbcType=INTEGER},
+      coupon_id = #{couponId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_status_desc = #{orderStatusDesc,jdbcType=VARCHAR},
+      discount_money = #{discountMoney,jdbcType=DOUBLE},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

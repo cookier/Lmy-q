@@ -1,0 +1,251 @@
+<link rel="stylesheet" href="css/supplier_goods.css" type="text/css">
+<link rel="stylesheet" href="css/skin.min.css" type="text/css">
+<link rel="stylesheet" href="css/content.min.css" type="text/css">
+
+<div class="app-init-container" ng-controller="GoodsAuthController" style="width: 100%">
+	<div class="alert fx-goods-notice">
+		<p>为促成交易顺利进行，并保障买家的购物体验，请注意以下情况：</p>
+		<p>
+			1.多件起售的商品，请通过添加商品规格的方式设置多件价格。<a
+				href="http://bbs.yunzhongbang.com/forum.php?mod=viewthread&amp;tid=74555"
+				target="_blank" class="new-window">了解具体方法</a>
+		</p>
+		<p>2.如果对配送时间和区域有特殊限制，请务必在商品详情中详细注明（如“24小时发货”、“海外及港澳台地区不送”等）。</p>
+		<p>3.预售商品请务必在商品详情中注明发货时间。</p>
+	</div>
+	<div id="app-region" class="app__content">
+		<div class="goods-edit-area">
+			<div id="step-content-region">
+				<form id="form" name="form" novalidate
+					class="form-horizontal fm-goods-info">
+
+					<div id="goods-info-region" class="goods-info-group">
+						<div class="goods-info-group-inner">
+							<div>
+								<div class="group-inner group-inner-title">● 商品信息</div>
+							</div>
+							<div class="info-group-cont">
+								<div class="group-inner">
+									<div class="control-group">
+										商品名称：{{goods.title}}	
+									</div>
+									<div class="control-group">
+										商品类目：{{goods.category}}
+									</div>
+									<div class="control-group">
+										商品图片：
+										<div class="controls">
+											<div class="picture-list ui-sortable">
+												<ul class="js-picture-list app-image-list clearfix">
+													<li class="sort" ng-repeat="pic in goodsPics">
+														<img src="{{pic.thumb_url}}"> 
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="control-group">
+										销售价格：￥{{goods.discount_price}}
+									</div>
+									<div class="control-group">
+										市场价：{{goods.sale_price}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="base-info-region" class="goods-info-group"></div>
+					<div id="auction-info-region" class="goods-info-group"></div>
+
+					<div id="sku-info-region" class="goods-info-group">
+						<div class="goods-info-group-inner">
+							<div>
+								<div class="group-inner group-inner-title">● 库存/规格</div>
+							</div>
+							<div class="info-group-cont">
+								<div class="group-inner">
+									<div class="js-goods-stock control-group"
+										ng-show="goodsSpecs.length>0">
+										<label class="control-label">商品库存：</label>
+										<div id="stock-region" style="width: 1100px; overflow: auto;">
+											<table>
+												<thead>
+													<tr>
+														<th ng-repeat="item in goodsSpecs">{{item.text}}</th>
+														<th class="th-price">价格（元）</th>
+														<th class="th-stock">库存</th>
+														<th class="th-code">商家编码</th>
+														<th class="text-right">销量</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="item in stocks track by $index">
+														<td ng-repeat="spece in goodsSpecs track by $index" rowspan="{{combine[$index]}}" ng-if="($parent.$index % combine[$index])==0">
+															{{item['v'+($index+1)]}}
+														</td>
+														<td>{{item.price}}</td>
+														<td>{{item.stock_num}}</td>
+														<td>{{item.product_code}}</td>
+														<td class="text-right">{{item.sold_num==""?0:item.sold_num}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+									<div class="js-goods-stock control-group"
+										style="display: none;">
+										<label class="control-label">商品库存：</label>
+										<div id="stock-region" class="controls sku-stock">
+											<table class="table-sku-stock"></table>
+										</div>
+									</div>
+
+									<div class="control-group">
+											总库存：{{goods.stock}}
+											（{{goods.show_stock_flag==1?'页面显示商品库存':'页面不显示库存'}}）
+									</div>
+
+									<div class="control-group">
+										商家编码：{{goods.seller_code}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="other-info-region" class="goods-info-group">
+						<div class="goods-info-group-inner">
+							<div>
+								<div class="group-inner group-inner-title">● 物流/其它</div>
+							</div>
+							<div class="info-group-cont">
+								<div class="group-inner">
+									<div class="control-group">
+										运费设置：
+											<span ng-show="goods.delivery_model==0">统一邮费￥{{goods.postage}}</span>
+											<span ng-show="goods.delivery_model==1">
+												<table class='table-td-font-14' style='display: inline-flex;'>
+						                      	    <tr><td rowspan='{{deliveryTpl.length}}'> 运费模板</td><td>  可配送至</td><td>首件(个)</td><td>运费(元)</td><td>续件(个)</td><td>运费(元)</td></tr>
+						                      	   	<tr ng-repeat="send in deliveryTpl" ng-if='send.regions!=null'>
+							                      	   	<td><span ng-repeat="r in send.regions">{{r.name}} ; </span></td>
+							                      	   	<td>{{send.first_amount}}</td>
+							                      	   	<td>{{send.first_fee}}</td>
+							                      	   	<td>{{send.additional_amount}}</td>
+							                      	   	<td>{{send.additional_fee}}</td>
+						                      	   	</tr>
+						                      	   </table>
+											</span>
+									</div>
+									<div class="control-group" ng-if='memberGrades.length>0'>
+										等级折扣：
+										<div class="controls goods-auth">
+											<table>
+											<tr>
+												<td>名称</td>
+												<td>折扣</td>
+												<td>使用须知</td>
+												<td>升级条件</td>
+											</tr>
+											<tr ng-repeat="mg in memberGrades">
+												<td>{{mg.card_name}}</td>
+												<td>{{mg.discount}}折</td>
+												<td>{{mg.usage_notes}}</td>
+												<td>成功交易订单满{{mg.trade_upgrade_limit}}笔 或者 累计交易金额满{{mg.money_upgrade_limit}} 或者 会员积分达到{{mg.point_upgrade_limit}}</td>
+											</tr>
+											</table>
+										</div>
+									</div>
+									<div class="control-group">
+										每人限购：
+										<span ng-if='goods.quota>0'>
+											{{goods.quota}}
+										</span>
+										<span ng-if='goods.quota==0'>不限购</span>
+									</div>
+									<div class="control-group">
+										开售时间：
+											<span ng-show="goods.sale_time_model==0">立即开售</span>
+											<span ng-show="goods.sale_time_model==1">goods.sale_time</span>
+									</div>
+									<div class="control-group">
+										发票：{{goods.have_invoice==0?'有':'无'}}
+									</div>
+									<div class="control-group">
+										保修：{{goods.can_repair==0?'无':'有'}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="intro-info-region" class="goods-info-group" ng-if='goods.sub_title.length>0'>
+						<div class="goods-info-group-inner">
+							<div style="border-bottom: 0 none;">
+								<div class="group-inner group-inner-title">● 商品简介</div>
+							</div>
+							<div class="info-group-cont">
+								<div class="group-inner">
+									<div class="control-group">
+										<div>
+											{{goods.sub_title}}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="desc-info-region" class="goods-info-group" ng-if='goods.fx_description.length>0'>
+						<div class="goods-info-group-inner">
+							<div>
+								<div class="group-inner group-inner-title">● 分销说明</div>
+							</div>
+							<div class="info-group-cont">
+								<div class="group-inner">
+								{{goods.fx_description}}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="detail-info-region" class="goods-info-group">
+						<div class="goods-info-group-inner">
+							<div>
+								<div class="group-inner group-inner-title">● 商品详情</div>
+							</div>
+							<div class="info-group-cont" style='padding-top:10px;'>
+								<div ng-repeat="pa in references.sub_entry" style='height:30px;width:100%;line-height:25px;padding-left:10px;'>
+						          	{{pa.name}} : &nbsp;{{pa.value}}
+						        </div>
+								<div id="goods_detail" style='width:328px;border: 1px solid #dedede;margin:10px;'></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">审核状态:</label>
+						<div class="controls">
+							<select ng-model="status" style="height: 30px;width: 200px;">
+								<option value="0">待审核</option>
+								<option value="1">审核中</option>
+								<option value="2">审核通过</option>
+								<option value="3">审核不通过</option>
+							</select>
+						</div>
+					</div>
+
+					<div id="review-info-region"
+						class="goods-info-group review-info-group"></div>
+
+					<div class="app-actions">
+						<div class="form-actions" style="text-align: center;">
+							<input class="btn btn-primary js-btn-save" type="button" value="保存" ng-click="save()">
+							<input type="button" class="btn btn-default" value="返回" ng-click="cancel()">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

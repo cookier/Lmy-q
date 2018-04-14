@@ -1,0 +1,118 @@
+<form class="form-horizontal" novalidate ng-controller="UITitleController">
+    <div class="control-group">
+        <label class="control-label"><em class="required">*</em>标题名：</label>
+
+        <div class="controls">
+            <input type="text" name="title" ng-model="data.title" maxlength="100">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">标题模板：</label>
+
+        <div class="controls">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="title_template" value="0" ng-model="data.title_template"
+                       ng-checked="data.title_template ==0"><i></i>传统样式
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="title_template" value="1" ng-model="data.title_template"
+                       ng-checked="data.title_template ==1"><i></i>模仿微信图文页样式
+            </label>
+        </div>
+    </div>
+    <div ng-show="data.title_template == '0'">
+        <div class="control-group">
+            <label class="control-label">副标题：</label>
+
+            <div class="controls">
+                <input type="hidden" class="js-time-holder">
+                <input type="text" name="sub_title" ng-model="data.sub_title" maxlength="100">
+                <a href="javascript: void(0);" class="js-time">日期</a>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">显示：</label>
+
+            <div class="controls">
+                <label class="i-checks i-checks-sm">
+                    <input type="radio" name="show_method" value="0" ng-model="data.show_method"
+                           ng-checked="data.show_method == '0'"><i></i>居左显示
+                </label>
+                <label class="i-checks i-checks-sm">
+                    <input type="radio" name="show_method" value="1" ng-model="data.show_method"
+                           ng-checked="data.show_method == '1'"><i></i>居中显示
+                </label>
+                <label class="i-checks i-checks-sm">
+                    <input type="radio" name="show_method" value="2" ng-model="data.show_method"
+                           ng-checked="data.show_method == '2'">
+                           <i></i>居右显示
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">背景颜色：</label>
+
+            <div class="controls">
+                <input type="color" ng-model="data.color" name="color">
+                <button class="btn js-reset-bg" type="button" ng-click="data.color ='#F9F9F9'">重置</button>
+            </div>
+        </div>
+        <div class="control-group js-collection-region">
+            <ul class="choices">
+                <li ng-repeat="item in data.sub_entry" class="choice" ng-include="'tpl/showcase/title/edit_item.html'">
+                </li>
+            </ul>
+        </div>
+        <div class="control-group options">
+            <a href="javascript:void(0);" ng-show="data.sub_entry.length==0" class="add-option js-add-option"
+               ng-click="add()"><i class="icon-add"></i> 添加一个文本导航</a>
+        </div>
+    </div>
+    <div ng-show="data.title_template != '0'">
+        <div class="control-group">
+            <label class="control-label">日期：</label>
+
+            <div class="controls">
+                <input type="text" name="wx_title_date" ng-model="data.wx_title_date" maxlength="100"
+                       class="js-wx-time-holder span2">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">作者：</label>
+
+            <div class="controls">
+                <input type="text" name="wx_title_author" ng-model="data.wx_title_author" maxlength="100" class="span2">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">链接标题：</label>
+
+            <div class="controls">
+                <input type="text" name="wx_title_link" ng-model="data.wx_title_link" maxlength="100" class="span2">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">链接地址：</label>
+
+            <div class="controls">
+                <label class="radio">
+                    <input type="radio" value="0" ng-model="data.wx_title_link_type"
+                           ng-checked="data.wx_title_link_type == 0">引导关注
+                    <a target="_blank" style="margin-left:20px">设置快速关注链接</a>
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="radio wx-template-radio">
+                    <input type="radio" value="1" ng-model="data.wx_title_link_type"
+                           ng-checked="data.wx_title_link_type == 1">其它链接
+                    <div class="pull-right js-link-to link-to">
+                        <ui-setup-link link_id="item.wx_link.link_id" link_url="item.wx_link.link_url" link_title="item.wx_link.link_title"
+                                       link_type="item.wx_link.link_type"></ui-setup-link>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</form>

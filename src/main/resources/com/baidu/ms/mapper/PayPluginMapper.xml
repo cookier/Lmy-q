@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.PayPluginMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.PayPlugin">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="p_name" jdbcType="VARCHAR" property="pName"/>
+        <result column="ttype" jdbcType="INTEGER" property="ttype"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+        <result column="poundage" jdbcType="DOUBLE" property="poundage"/>
+        <result column="poundage_type" jdbcType="INTEGER" property="poundageType"/>
+        <result column="open_status" jdbcType="INTEGER" property="openStatus"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.PayPlugin">
+        <result column="description" jdbcType="LONGVARCHAR" property="description"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, p_name, ttype, logo, poundage, poundage_type, open_status
+  </sql>
+    <sql id="Blob_Column_List">
+    description
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.PayPluginExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_pay_plugin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.PayPluginExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_pay_plugin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_pay_plugin
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_pay_plugin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.PayPluginExample">
+        delete from t_pay_plugin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.PayPlugin">
+    insert into t_pay_plugin (id, p_name, ttype, 
+      logo, poundage, poundage_type, 
+      open_status, description)
+    values (#{id,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, #{ttype,jdbcType=INTEGER}, 
+      #{logo,jdbcType=VARCHAR}, #{poundage,jdbcType=DOUBLE}, #{poundageType,jdbcType=INTEGER}, 
+      #{openStatus,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.PayPlugin">
+        insert into t_pay_plugin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pName != null">
+                p_name,
+            </if>
+            <if test="ttype != null">
+                ttype,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="poundage != null">
+                poundage,
+            </if>
+            <if test="poundageType != null">
+                poundage_type,
+            </if>
+            <if test="openStatus != null">
+                open_status,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pName != null">
+                #{pName,jdbcType=VARCHAR},
+            </if>
+            <if test="ttype != null">
+                #{ttype,jdbcType=INTEGER},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="poundage != null">
+                #{poundage,jdbcType=DOUBLE},
+            </if>
+            <if test="poundageType != null">
+                #{poundageType,jdbcType=INTEGER},
+            </if>
+            <if test="openStatus != null">
+                #{openStatus,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.PayPluginExample" resultType="java.lang.Long">
+        select count(*) from t_pay_plugin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_pay_plugin
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.pName != null">
+                p_name = #{record.pName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ttype != null">
+                ttype = #{record.ttype,jdbcType=INTEGER},
+            </if>
+            <if test="record.logo != null">
+                logo = #{record.logo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.poundage != null">
+                poundage = #{record.poundage,jdbcType=DOUBLE},
+            </if>
+            <if test="record.poundageType != null">
+                poundage_type = #{record.poundageType,jdbcType=INTEGER},
+            </if>
+            <if test="record.openStatus != null">
+                open_status = #{record.openStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.description != null">
+                description = #{record.description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_pay_plugin
+        set id = #{record.id,jdbcType=INTEGER},
+        p_name = #{record.pName,jdbcType=VARCHAR},
+        ttype = #{record.ttype,jdbcType=INTEGER},
+        logo = #{record.logo,jdbcType=VARCHAR},
+        poundage = #{record.poundage,jdbcType=DOUBLE},
+        poundage_type = #{record.poundageType,jdbcType=INTEGER},
+        open_status = #{record.openStatus,jdbcType=INTEGER},
+        description = #{record.description,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_pay_plugin
+        set id = #{record.id,jdbcType=INTEGER},
+        p_name = #{record.pName,jdbcType=VARCHAR},
+        ttype = #{record.ttype,jdbcType=INTEGER},
+        logo = #{record.logo,jdbcType=VARCHAR},
+        poundage = #{record.poundage,jdbcType=DOUBLE},
+        poundage_type = #{record.poundageType,jdbcType=INTEGER},
+        open_status = #{record.openStatus,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.PayPlugin">
+        update t_pay_plugin
+        <set>
+            <if test="pName != null">
+                p_name = #{pName,jdbcType=VARCHAR},
+            </if>
+            <if test="ttype != null">
+                ttype = #{ttype,jdbcType=INTEGER},
+            </if>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="poundage != null">
+                poundage = #{poundage,jdbcType=DOUBLE},
+            </if>
+            <if test="poundageType != null">
+                poundage_type = #{poundageType,jdbcType=INTEGER},
+            </if>
+            <if test="openStatus != null">
+                open_status = #{openStatus,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.PayPlugin">
+    update t_pay_plugin
+    set p_name = #{pName,jdbcType=VARCHAR},
+      ttype = #{ttype,jdbcType=INTEGER},
+      logo = #{logo,jdbcType=VARCHAR},
+      poundage = #{poundage,jdbcType=DOUBLE},
+      poundage_type = #{poundageType,jdbcType=INTEGER},
+      open_status = #{openStatus,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.PayPlugin">
+    update t_pay_plugin
+    set p_name = #{pName,jdbcType=VARCHAR},
+      ttype = #{ttype,jdbcType=INTEGER},
+      logo = #{logo,jdbcType=VARCHAR},
+      poundage = #{poundage,jdbcType=DOUBLE},
+      poundage_type = #{poundageType,jdbcType=INTEGER},
+      open_status = #{openStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

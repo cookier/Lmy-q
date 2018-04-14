@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-2.0.3.js"></script>
+    <script src="require.js"></script>
+  </head>
+  <body>
+    <script>
+      require(['jsrender.min.js'],
+        function(){
+          var a = {
+            bo:"<h1 style='color:red;'>fu ou</h1>"
+          };
+          var html = $("#previewResTmpl").render(a);
+          $("#one").html(html);
+        });
+    </script>
+    <script type="text/tmp" id="previewResTmpl">
+      {{:bo}}
+    </script>
+  <div id="one"></div>
+  </body>
+</html>

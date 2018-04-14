@@ -1,0 +1,90 @@
+<div class="app-init-container" ng-controller="DocumentListController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;">
+                        <div class="clearfix">
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">文档标题：</label>
+                                    <div class="controls">
+                                        <input ng-enter="pageChanged()" type="text" ng-model="title"
+                                               style="height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">文档栏目：</label>
+                                    <div class="controls">
+                                        <select ng-enter="pageChanged()" style="height: 30px;width: 100px;"
+                                                name="categoryId" class="js-state-select"
+                                                ng-model="categoryId"
+                                                ng-options="f.id as f.name for f in categorys">
+                                            <option value="">全部</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="ui-btn-group">
+                                    <a href="javascript:;" class="ui-btn ui-btn-success js-filter"
+                                       ui-sref="console.help_doc_edit({id:0})">新建文档</a>
+                                    <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                       data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>所属栏目</th>
+                        <th>文档标题</th>
+                        <th>摘要</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>浏览次数</th>
+                        <th>评论次数</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">
+                        <td>{{data.categoryName}}</td>
+                        <td>{{data.title}}</td>
+                        <td>{{data.digest}}</td>
+                        <td>{{data.create_time}}</td>
+                        <td>{{data.update_time}}</td>
+                        <td>{{data.click_count}}</td>
+                        <td>{{data.comment_click}}</td>
+                        <td>
+                            <input type="button" ng-click="edit({{data.id}})" value="编辑"/>
+                            <input type="button" ng-click="del({{data.id}})" value="删除"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>

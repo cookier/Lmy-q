@@ -1,0 +1,27 @@
+<div class="control-group">
+    <style>
+        .tpl-fbb {
+            background-image: url(<%= fullfillImage(background) %>);
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: 320px <%= height / (width / 320) %>px;
+            height: <%= height / (width / 320) %>px;
+        }
+        .swiper-wrapper {
+            width: 500px;
+        }
+        .tpl-course {
+            position: relative;
+        }
+    </style>
+    <div class="tpl-fbb tpl-course">
+        <h1 class="tpl-course-title" style="color: <%- title_color %>"><%- title %></h1>
+        <h2 class="tpl-course-sub-title" style="color: <%- sub_title_color %>"><%- sub_title %></h2>
+        <div class="text-center butn-section" style="top: <%- top %>%;">
+            <a href="javascript:;" class="butn butn-xxlarge butn-primary butn-buy"><%- button_text %></a>
+        </div>
+        <div class="swiper-container js-tpl-fbb js-collection-region">
+
+        </div>
+    </div>
+</div>

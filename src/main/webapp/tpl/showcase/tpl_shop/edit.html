@@ -1,0 +1,28 @@
+<form class="form-horizontal" novalidate ng-controller="UIShopHeaderController">
+    <div class="control-group">
+        <label class="control-label">背景图片：</label>
+        <div class="controls">
+                <a ng-show="!data.backgroundImage" class="control-action js-trigger-image" ng-click="setBackgroundImage()">选择图片</a>
+                <div ng-show="data.backgroundImage" class="tpl-shop-header" style="width: 320px;" style="background-image: url({{item.backgroundImage}});">
+                    <a class="close-modal small js-delete-image" ng-click="data.backgroundImage=null">×</a>
+                </div>
+                <a ng-show="data.backgroundImage" class="control-action js-trigger-image" ng-click="setBackgroundImage()">修改</a>
+            <p class="help-desc">最佳尺寸：640 x 200 像素。</p>
+            <p class="help-desc">尺寸不匹配时，图片将被压缩或拉伸以铺满画面。</p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">背景颜色：</label>
+        <div class="controls">
+            <input type="color" ng-model="data.backgroundColor" name="backgroundColor">
+            <button class="btn js-reset-bg" type="button" ng-click="data.backgroundColor='#EF483F'">重置</button>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">店铺Logo：</label>
+        <div class="controls">
+            <img ng-src="{{data.logo}}" src="" width="80" height="80" class="thumb-image" style="width: 80px; height: 80px;">
+            <a class="control-action js-trigger-avatar" href="javascript: void(0);" ng-click="setLogo()">修改店铺Logo</a>
+        </div>
+    </div>
+</form>

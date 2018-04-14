@@ -1,0 +1,27 @@
+<div class="control-group">
+    <div class="custom-shop-banner"
+        style="background-image: url(<%= fullfillImage(background_image) %>);">
+
+        <div class="custom-shop-banner-inner">
+            <div class="custom-shop-banner-logo">
+                <img src="<%= logo() %>" alt="Logo">
+            </div>
+            <h1><%= _global.mp_data.team_name %></h1>
+            <p style="color: #fff;padding: 0 20px;"><%= intro %></p>
+        </div>
+
+    </div>
+</div>
+<div class="actions">
+    <div class="actions-wrap">
+        <span class="action edit">编辑</span>
+        <% if (!isFenxiao()) { %>
+        <span class="action add">加内容</span>
+        <% } %>
+    </div>
+</div>
+<% if (!isFenxiao()) { %>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>
+<% } %>

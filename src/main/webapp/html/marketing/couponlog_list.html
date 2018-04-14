@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="./css/promocode_59b07591c8.css" type="text/css">
+
+<div class="app-init-container" ng-controller="CouponLogListController">
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="js-list-all" class="active"><a
+                    ui-sref="app.ump_coupon_list">所有优惠券</a></li>
+        </ul>
+        <div class="pull-right common-helps-entry hide">
+            <a href="#" target="_blank"> <span class="help-icon"></span>
+                查看【优惠码券设置及应用教程
+            </a>
+        </div>
+    </nav>
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix ui-box"
+                 style="position: relative;">
+                <div class="widget-list-filter">
+                    <div class="codes-list-title">
+                        <span><em style="font-style:normal" ng-show="status==1">已领取列表</em><em style="font-style:normal"
+                                                                                              ng-show="status==2">已使用列表</em></span>
+                        | <span class="orange">{{coupon.name}}</span>
+                    </div>
+                    <div class="js-list-search ui-search-box">
+                        <input ng-model="user_nickname" type="text" placeholder="昵称"
+                               class="input-sm"/>
+                        <input ng-model="user_mobile" type="text" placeholder="手机号码"
+                               class="input-sm"/>
+                        <button class="btn btn-sm btn-default" type="button"
+                                ng-click="pageChanged()">Go!
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table ui-table-list" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal"
+                           style="position: static; top: 0px; margin-top: 0px; left: 598.667px; z-index: 1; width: 849px;">
+                    <tr class="widget-list-header">
+                        <th style="width: 20px;"><label class="i-checks i-checks-sm">
+                            <input type="checkbox" ng-checked="isCheckedAll()"
+                                   ng-click="checkAll()"><i></i>
+                        </label></th>
+                        <th>面额(元)</th>
+                        <th>验证码</th>
+                        <th>领取人</th>
+                        <th>领取时间</th>
+                        <th>手机号码</th>
+                        <th ng-show="status==2">使用时间</th>
+                        <th ng-show="status==2">订单详情</th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in pageData.list">
+                        <td><label class="i-checks i-checks-sm"> <input
+                                id={{data.id}} type="checkbox" ng-checked="data.chk"
+                                ng-click="data.chk = !data.chk"><i></i>
+                        </label></td>
+                        <td>{{data.discount_money}}</td>
+                        <td>{{data.verify_code}}</td>
+                        <td>
+                            <img src="{{data.icon_url!=null?data.icon_url:data.icon}}"
+                                 ng-show="data.icon_url!=null||data.icon!=null" style="width: 50px;height: 50px;"/>
+                            <span class="gray">{{data.nickname}}</span>
+                        </td>
+                        <td><span class="gray">{{data.receive_time}}</span></td>
+                        <td><span class="gray">{{data.mobile}}</span></td>
+                        <td ng-show="status==2"><span class="gray">{{data.use_time}}</span></td>
+                        <td ng-show="status==2"><span class="gray"><a target="blank" href="{{data.order_url}}">{{data.order_no}}</a></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+                <footer class="panel-footer">
+                    <div class="row">
+                        <div ng-show="pageData.totalRow>0">
+                            <!-- <div class="col-sm-4 hidden-xs">
+                                <button class="btn btn-sm btn-default" ng-click="delCouponCodeSn()">批量删除</button>
+                                <button class="btn btn-sm btn-default">批量导出</button>
+                            </div> -->
+                            <custom-pagination boundary-links="true"
+                                               ng-change="pageChanged()" total-items="pageData.totalRow"
+                                               ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                               class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                               next-text="&rsaquo;" first-text="&laquo;"
+                                               last-text="&raquo;"></custom-pagination>
+                        </div>
+                        <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                             style="text-align: center;">没有找到相关记录!
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

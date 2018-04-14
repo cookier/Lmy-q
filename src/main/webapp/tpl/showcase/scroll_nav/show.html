@@ -1,0 +1,19 @@
+<div class="control-group">
+    <%
+        var image_url = window._global.url.cdn_static + '/image/scroll_nav/default.gif';
+
+        if(background_images && background_images.length) {
+            image_url = fullfillImage(background_images[0].url, '!640x320.jpg');
+        }
+    %>
+    <div class="www-tpl-scroll www-scroll-nav">
+        <% if(homepage_icon == '1') { %>
+            <div class="ui-left-btns">
+                <i class="ui-homepage-btn"></i>
+            </div>
+        <% } %>
+        <img src="<%= image_url %>" alt="">
+
+        <div class="js-scroll-nav-show-collection-region nav-style-<%= nav_style %>"></div>
+    </div>
+</div>

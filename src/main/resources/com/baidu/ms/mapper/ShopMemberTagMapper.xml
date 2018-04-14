@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ShopMemberTagMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ShopMemberTag">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="label_name" jdbcType="VARCHAR" property="labelName"/>
+        <result column="wechat_vip_count" jdbcType="INTEGER" property="wechatVipCount"/>
+        <result column="mobile_vip_count" jdbcType="INTEGER" property="mobileVipCount"/>
+        <result column="trade_upgrade_limit" jdbcType="INTEGER" property="tradeUpgradeLimit"/>
+        <result column="money_upgrade_limit" jdbcType="DOUBLE" property="moneyUpgradeLimit"/>
+        <result column="point_upgrade_limit" jdbcType="INTEGER" property="pointUpgradeLimit"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, label_name, wechat_vip_count, mobile_vip_count, trade_upgrade_limit, 
+    money_upgrade_limit, point_upgrade_limit, create_time, update_time
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ShopMemberTagExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_shop_member_tag
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_shop_member_tag
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_shop_member_tag
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ShopMemberTagExample">
+        delete from t_shop_member_tag
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ShopMemberTag">
+    insert into t_shop_member_tag (id, shop_id, label_name, 
+      wechat_vip_count, mobile_vip_count, trade_upgrade_limit, 
+      money_upgrade_limit, point_upgrade_limit, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{labelName,jdbcType=VARCHAR}, 
+      #{wechatVipCount,jdbcType=INTEGER}, #{mobileVipCount,jdbcType=INTEGER}, #{tradeUpgradeLimit,jdbcType=INTEGER}, 
+      #{moneyUpgradeLimit,jdbcType=DOUBLE}, #{pointUpgradeLimit,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ShopMemberTag">
+        insert into t_shop_member_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="labelName != null">
+                label_name,
+            </if>
+            <if test="wechatVipCount != null">
+                wechat_vip_count,
+            </if>
+            <if test="mobileVipCount != null">
+                mobile_vip_count,
+            </if>
+            <if test="tradeUpgradeLimit != null">
+                trade_upgrade_limit,
+            </if>
+            <if test="moneyUpgradeLimit != null">
+                money_upgrade_limit,
+            </if>
+            <if test="pointUpgradeLimit != null">
+                point_upgrade_limit,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="labelName != null">
+                #{labelName,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatVipCount != null">
+                #{wechatVipCount,jdbcType=INTEGER},
+            </if>
+            <if test="mobileVipCount != null">
+                #{mobileVipCount,jdbcType=INTEGER},
+            </if>
+            <if test="tradeUpgradeLimit != null">
+                #{tradeUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="moneyUpgradeLimit != null">
+                #{moneyUpgradeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="pointUpgradeLimit != null">
+                #{pointUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ShopMemberTagExample" resultType="java.lang.Long">
+        select count(*) from t_shop_member_tag
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_shop_member_tag
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.labelName != null">
+                label_name = #{record.labelName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wechatVipCount != null">
+                wechat_vip_count = #{record.wechatVipCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.mobileVipCount != null">
+                mobile_vip_count = #{record.mobileVipCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.tradeUpgradeLimit != null">
+                trade_upgrade_limit = #{record.tradeUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="record.moneyUpgradeLimit != null">
+                money_upgrade_limit = #{record.moneyUpgradeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="record.pointUpgradeLimit != null">
+                point_upgrade_limit = #{record.pointUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_shop_member_tag
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        label_name = #{record.labelName,jdbcType=VARCHAR},
+        wechat_vip_count = #{record.wechatVipCount,jdbcType=INTEGER},
+        mobile_vip_count = #{record.mobileVipCount,jdbcType=INTEGER},
+        trade_upgrade_limit = #{record.tradeUpgradeLimit,jdbcType=INTEGER},
+        money_upgrade_limit = #{record.moneyUpgradeLimit,jdbcType=DOUBLE},
+        point_upgrade_limit = #{record.pointUpgradeLimit,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ShopMemberTag">
+        update t_shop_member_tag
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="labelName != null">
+                label_name = #{labelName,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatVipCount != null">
+                wechat_vip_count = #{wechatVipCount,jdbcType=INTEGER},
+            </if>
+            <if test="mobileVipCount != null">
+                mobile_vip_count = #{mobileVipCount,jdbcType=INTEGER},
+            </if>
+            <if test="tradeUpgradeLimit != null">
+                trade_upgrade_limit = #{tradeUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="moneyUpgradeLimit != null">
+                money_upgrade_limit = #{moneyUpgradeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="pointUpgradeLimit != null">
+                point_upgrade_limit = #{pointUpgradeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ShopMemberTag">
+    update t_shop_member_tag
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      label_name = #{labelName,jdbcType=VARCHAR},
+      wechat_vip_count = #{wechatVipCount,jdbcType=INTEGER},
+      mobile_vip_count = #{mobileVipCount,jdbcType=INTEGER},
+      trade_upgrade_limit = #{tradeUpgradeLimit,jdbcType=INTEGER},
+      money_upgrade_limit = #{moneyUpgradeLimit,jdbcType=DOUBLE},
+      point_upgrade_limit = #{pointUpgradeLimit,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

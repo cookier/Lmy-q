@@ -1,0 +1,181 @@
+<div class="modal-header">
+    <a class="close" data-dismiss="modal" ng-click="cancel()">×</a> <input
+        type="hidden" value="picture" ng-model="fileType"/>
+    <!-- 顶部tab -->
+    <ul class="module-nav modal-tab js-modal-tab">
+        <li class="js-modal-tab-item js-modal-tab-image"
+            ng-show="from==undefined"><a href="javascript:;"
+                                         data-pane="image" ng-click="pageChanged()">用过的图片</a> <span>|</span></li>
+        <li class="js-modal-tab-item js-modal-tab-icon hide"><a
+                href="javascript:;" data-pane="icon">图标库</a> <span>|</span></li>
+        <li class="js-modal-tab-item js-modal-tab-upload"><a
+                href="javascript:;" data-pane="upload" ng-click="upload()">新图片</a></li>
+    </ul>
+</div>
+
+<div class="modal-body">
+    <div id="div_pic_list" ng-show="curTab==1">
+        <div class="js-list-filter-region clearfix ui-box" style="position: relative; min-height: 28px;">
+            <div class="widget-list-filter">
+                <div class="widget-image-refresh">
+                    <span>点击图片即可选中</span>
+                    <a href="javascript:;" class="js-refresh" ng-click="pageChanged()">刷新</a>
+                </div>
+                <div class="js-list-search ui-search-box hide">
+                    <input class="txt" type="text" placeholder="搜索" value="">
+                </div>
+            </div>
+        </div>
+        <div class="ui-box">
+            <ul class="js-list-body-region widget-image-list">
+                <li class="widget-image-item" ng-repeat="data in pageData.list">
+                    <div class="js-choose" title="{{data.file_name}}">
+                        <div class="widget-image-item-content"
+                             style="background-image: url({{data.url}}-60-60)" ng-click="selectPic(data)">
+                        </div>
+                        <div ng-show="data.width>0 && data.height>0" class="widget-image-meta">{{data.width>0 &&
+                            data.height>0?data.width+'x'+data.height:''}}
+                        </div>
+                        <div class="selected-style" ng-show="data.checked">
+                            <i class="icon-ok icon-white"></i>
+                        </div>
+                    </div>
+                </li>
+                <div class="js-list-empty-region"></div>
+        </div>
+    </div>
+
+    <div id="div_upload" ng-show="curTab==2">
+        <div class="js-upload-network-region">
+            <div class="get-web-img js-get-web-img">
+                <form class="form-horizontal" onsubmit="return false;">
+                    <div class="control-group">
+                        <label class="control-label">网络图片：</label>
+
+                        <div class="controls">
+                            <input type="text" ng-model="network_url"
+                                   class="get-web-img-input js-web-img-input"
+                                   placeholder="请贴入网络图片地址" value="">
+                            <input type="button"
+                                   ng-click="fetchNetworkUrl()"
+                                   class="btn js-upload-network-img"
+                                   data-loading-text="提取中..."
+                                   value="提取">
+                        </div>
+                        <div class="controls preview-container"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="js-upload-local-region">
+            <div class="upload-local-img">
+                <form class="form-horizontal" enctype="multipart/form-data">
+                    <div class="control-group">
+                        <label class="control-label">本地图片：</label>
+                        <div class="controls">
+                            <div class="control-action">
+                                <ul class="js-upload-image-list upload-image-list clearfix ui-sortable">
+                                    <li class="fileinput-button js-add-image"
+                                        ng-show="uploadMode==1 && uploader.queue.length==0">
+                                        <a class="fileinput-button-icon" href="javascript:;">+</a>
+                                        <input name="file" type="file" nv-file-select="" uploader="uploader"/>
+                                    </li>
+                                    <li class="fileinput-button js-add-image" ng-show="uploadMode!=1">
+                                        <a class="fileinput-button-icon" href="javascript:;">+</a>
+                                        <input name="file" type="file" nv-file-select="" uploader="uploader"
+                                               ng-show="uploadMode!=1" multiple="multiple"/>
+                                    </li>
+                                    <!-- <li class="upload-preview-img sort" ng-show="uploadMode==1&&uploader.queue.length>0">
+                                       <img src="{{item.file.originalName}}"><a ng-click="" class="close-modal small js-remove-image">×</a>
+                                   </li> -->
+                                </ul>
+                                <p class="help-desc">最大支持 1 MB 的图片( jpg / gif / png)，不能选中大于 1 MB 的图片</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="wrapper-md">
+                <table class="table bg-white-only b-a">
+                    <thead>
+                    <tr>
+                        <th width="50%">文件名</th>
+                        <th ng-show="uploader.isHTML5">大小</th>
+                        <th ng-show="uploader.isHTML5">进度</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in uploader.queue">
+                        <td style="word-wrap:break-word;word-break:break-all;"><strong>{{ item.file.name }}</strong>
+                        </td>
+                        <td ng-show="uploader.isHTML5" nowrap>{{
+                            item.file.size/1024/1024|number:2 }} MB
+                        </td>
+                        <td ng-show="uploader.isHTML5">
+                            <div class="progress progress-sm m-b-none m-t-xs">
+                                <div class="progress-bar bg-info" role="progressbar"
+                                     ng-style="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                        </td>
+                        <td class="text-center"><span ng-show="item.isSuccess"
+                                                      class="text-success"><i
+                                class="glyphicon glyphicon-ok"></i></span>
+                            <span ng-show="item.isCancel" class="text-warning"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></span> <span
+                                    ng-show="item.isError" class="text-danger"><i
+                                    class="glyphicon glyphicon-remove"></i></span></td>
+                        <td nowrap>
+                            <button type="button" class="btn btn-default btn-xs"
+                                    ng-click="item.upload()"
+                                    ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                上传
+                            </button>
+                            <button type="button" class="btn btn-default btn-xs"
+                                    ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                取消
+                            </button>
+                            <button type="button" class="btn btn-default btn-xs"
+                                    ng-click="item.remove();item.clearAll()">移除
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <div class="js-list-footer-region ui-box" ng-show="curTab==1">
+        <div class="js-confirm-choose pull-left">
+            <input type="button" class="btn btn-primary" ng-show="selected.length>0" value="确定使用" ng-click="ok()">
+        </div>
+        <div class="pagenavi">
+            <custom-pagination boundary-links="true" ng-change="pageChanged()" can-change-page-size="false"
+                               total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                               page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                               previous-text="&lsaquo;" next-text="&rsaquo;"
+                               first-text="&laquo;" last-text="&raquo;"></custom-pagination>
+        </div>
+    </div>
+    <div class="modal-action pull-right" ng-show="curTab==2">
+        <input type="button" class="btn btn-primary js-upload-image"
+               data-loading-text="上传中..." value="确定上传"
+               ng-click="uploader.uploadAll()"
+               ng-disabled="!uploader.getNotUploadedItems().length"> <input
+            type="button" class="btn btn-primary js-upload-image"
+            data-loading-text="上传中..." value="取消上传"
+            ng-click="uploader.cancelAll()"
+            ng-disabled="!uploader.isUploading">
+        <input type="button"
+               class="btn btn-primary js-upload-image"
+               data-loading-text="上传中..."
+               value="清除所有" ng-click="uploader.clearQueue()"
+               ng-disabled="!uploader.queue.length">
+    </div>
+</div>
+
+

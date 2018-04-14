@@ -1,0 +1,58 @@
+<form class="form-horizontal" novalidate ng-controller="UIDocConfigController">
+	<div class="control-group">
+		<label class="control-label"><em class="required">*</em>文档标题：</label>
+		<div class="controls">
+			<input class="input-xxlarge" type="text" name="title" ng-model="data.title" required="required">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">摘要：</label>
+		<div class="controls">
+			<input class="input-xxlarge" type="text" name="digest" ng-model="data.digest"
+				 placeholder="用户通过微信分享给朋友时，会自动显示页面描述">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">搜索标签：</label>
+		<div class="controls">
+			<!-- <input class="input-xxlarge" type="text" name="keywords" ng-model="data.keywords"
+				 placeholder=""> -->
+			<ui-select multiple ng-model="choices.keywords" theme="bootstrap" ng-disabled="disabled">
+				<ui-select-match placeholder="请选择">{{$item.name}}</ui-select-match>
+				<ui-select-choices repeat="keywords in keywordses | propsFilter: {name: $select.search}">
+					<div ng-bind-html="keywords.name | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">文档分类：</label>
+		<div class="controls">
+			<ui-select multiple ng-model="choices.categorys" theme="bootstrap" ng-disabled="disabled">
+				<ui-select-match placeholder="请选择分类">{{$item.name}}</ui-select-match>
+				<ui-select-choices repeat="category in categoryList | propsFilter: {name: $select.search}">
+					<div ng-bind-html="category.name | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">相关问题：</label>
+		<div class="controls">
+			<ui-select multiple ng-model="choices.questions" theme="bootstrap" ng-disabled="disabled">
+				<ui-select-match placeholder="请选择相关问题">{{$item.content}}</ui-select-match>
+				<ui-select-choices repeat="question in questions | propsFilter: {content: $select.search}">
+					<div ng-bind-html="question.content | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">背景颜色：</label>
+		<div class="controls">
+			<input type="color" ng-model="data.color">
+			<button class="btn js-reset-bg" type="button">重置</button>
+			<p class="help-desc">背景颜色只在手机端显示。</p>
+		</div>
+	</div>
+</form>

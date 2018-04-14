@@ -1,0 +1,88 @@
+<div class="app-init-container" ng-controller="ProxyShopAuthController">
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li>
+                <a>分销商店铺审核</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="app__content js-app-main">
+        <div class="goods-list">
+            <div class="ui-box">
+                <div class="panel panel-default">
+                    <table class="ui-table ui-table-list" style="padding: 0px;">
+                        <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                        <tr class="widget-list-header">
+                            <!-- <th style="width: 20px;">
+                            <label class="i-checks i-checks-sm"> 
+                               <input type="checkbox" ng-checked="isCheckedAll()" ng-click="checkAll()"><i></i>
+                            </label></th> -->
+                            <th colspan='2'>店铺名称</th>
+                            <th>店铺地址</th>
+                            <th>手机号码</th>
+                            <th>经营类目</th>
+                            <th>证件类型</th>
+                            <th>真实姓名</th>
+                            <th>证件号码</th>
+                            <th>注册时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="js-list-body-region">
+                        <tr ng-repeat="data in pageData">
+                         <!--   <td ><label class="i-checks i-checks-sm"> <input
+                                    id={{data.id}} type="checkbox" ng-checked="data.chk"
+                                    ng-click="data.chk = !data.chk"><i></i>
+                            </label></td> --> 
+                            <td width='60px' class="goods-image-td">
+                                <div class="goods-image">
+                                    <a href="{{data.url}}" target="blank"><img src="{{data.logo}}-50-50" onerror="this.src='./img/main_ico_29.png'" width='40px'></a>
+                                    
+                                </div>
+                            </td>
+                            <td><a href="{{data.url}}" target="blank"> {{data.shop_name}}</a></td>
+                            <td class="goods-meta">{{data.receiverAddress}}</td>
+                            <td>{{data.contact_mobile}}</td>
+                            <td>{{data.categoryNames}}</td>
+                            <td>
+                                <span ng-show="{{data.auth.identity_type==0}}">身份证</span>
+                                <span ng-show="{{data.auth.identity_type==1}}">户口本</span>
+                                <span ng-show="{{data.auth.identity_type==2}}">军人证</span>
+                                <span ng-show="{{data.auth.identity_type==3}}">护照</span>
+                            </td>
+                            <td>{{data.auth.real_name}}</td>
+                            <td>{{data.auth.identity_num}}</td>
+                            <td>{{data.create_time}}</td>
+                            <td><span ng-show="{{data.certification_status<=0}}">待认证</span>
+                                <span ng-show="{{data.certification_status==1}}">认证中</span>
+                                <span ng-show="{{data.certification_status==2}}">已认证</span>
+                                <span ng-show="{{data.certification_status==3}}">认证不通过</span></td>
+                            <td>
+                                <a href="javascript:;" class="js-add-sku-atom add-sku" ng-show="{{data.certification_status!=0}}"
+                                    ng-click="toQualificationAuth({{data.auth.shop_id}})">审核</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="js-list-empty-region"></div>
+                    <footer class="panel-footer" style="text-align: right;">
+                        <div class="row">
+                            <div style="text-align: left; margin-left: 10px;"
+                                 ng-show="pageData.lengt>0">
+                                共找到{{pageData.length}}条数据!
+
+                            </div>
+                            <div ng-show="pageData.length==0"
+                                 style="text-align: center;">没有找到相关记录!</div>
+
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,173 @@
+<div class="app-init-container" ng-controller="QuestionListController">
+    <link rel="stylesheet" href="css/question.css" media="screen"/>
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;">
+                        <div class="clearfix">
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">问题描述：</label>
+                                    <div class="controls">
+                                        <input ng-enter="pageChanged()" type="text" ng-model="content"
+                                               style="height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">标签：</label>
+                                    <div class="controls">
+                                        <select ng-enter="pageChanged()" style="height: 30px;width: 100px;"
+                                                name="keywords" class="js-state-select"
+                                                ng-model="keywords"
+                                                ng-options="f.id as f.name for f in keywordses">
+                                            <option value="">全部</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="ui-btn-group">
+                                    <a href="javascript:;" class="ui-btn ui-btn-success js-filter"
+                                       ui-sref="console.help_question_edit({id:0})">新建问题</a>
+                                    <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                       data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th></th>
+                        <th></th>
+                        <!-- 							<th>创建时间</th> -->
+                        <!-- 							<th>更新时间</th> -->
+                        <!-- 							<th>来源</th> -->
+                        <!-- 							<th>状态</th> -->
+                        <!-- 							<th>操作</th> -->
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">
+                        <td style="max-width: 100px;">
+                            <!-- 						<div class="tm-rate-premiere"> -->
+                            <a style="font-style: normal"><label>问题：{{data.content}}　　<i
+                                    ng-show="data.title&&data.title!=''" style="font-style: normal; color: orange;">所关联的文档名称：<a
+                                    href="{{data.url}}">{{data.title}}</a></i></label></a>
+                            <!-- 	                        <dialog ng-show="pop.bSP_show==true" for="ms{{$index}}" close="pop.bSP_show=false" close-action="outerchick"> -->
+
+                            <div style="width:540px;height:50%;" class="tm-col-master">
+                                <div class="tm-rate-premiere">
+                                    <div ng-repeat="dialogue in data.replies" class="tm-rate-content">
+                                        <div class="tm-rate-tag" style="float: left; width: 30%;">
+                                            <div class="tm-rate-title">
+                                                {{dialogue.nickName}}
+                                            </div>
+                                            <div class="tm-rate-date">
+                                                {{dialogue.time}}
+                                            </div>
+                                        </div>
+                                        <div style="width: 800px;">
+                                            <div class="tm-rate-fulltxt"
+                                                 ng-class="{true: 'fontColor', false: ''}[dialogue.userId==0]">
+                                                <i style="font-style: normal;" ng-show="dialogue.userId==0">答复：</i>
+                                                <i style="font-style: normal;" ng-show="dialogue.userId!=0">问题补充：</i>
+                                                {{dialogue.text}}
+                                            </div>
+                                            <div class="tm-m-photos">
+                                                <ul class="tm-m-photos-thumb"
+                                                    ng-if="dialogue.imgs&&dialogue.imgs.length>0" style="width: 100%">
+                                                    <li ng-repeat="img in dialogue.imgs"
+                                                        ng-class="{true: 'libian', false: 'tm-m-photos-thumb'}[dialogue['chk_'+$index]==true]">
+                                                        <img class="tm-child" src=".{{img}}"
+                                                             style="max-height: 34px;max-width: 40px;"
+                                                             ng-click="enlarge(dialogue,img,$index)"/>
+                                                        <b ng-if="dialogue['chk_'+$index]==true"
+                                                           class="tm-photos-arrow"></b>
+                                                    </li>
+                                                </ul>
+                                                <div class="tm-m-photo-viewer" style="width: 402px; height: 269px; "
+                                                     ng-show="dialogue.chk==true" ng-click="bigImgHide(dialogue)">
+                                                    <img src=".{{dialogue.enlargePic}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/><br/>
+                                    </div>
+                                    <div ng-if="data.replies&&data.replies!=''" class="tm-rate-tag"
+                                         style="float: left; width: 30%;">
+                                        <div style="color: white;">不显示的东西</div>
+                                    </div>
+                                    <div style="float: left;">
+                                        <div ng-show="data.chk==true">
+                                            <textarea ng-model="data.replyText"></textarea>
+                                            <div class="controls">
+                                                <div class="picture-list ui-sortable">
+                                                    <ul class="js-picture-list app-image-list clearfix">
+                                                        <i class="id_hidePic">
+                                                            <li class="sort" ng-repeat="pic in goodsPics"><img
+                                                                    src=".{{pic.thumb_url}}"> <a
+                                                                    ng-hide="goods.auditing_status==2"
+                                                                    class="js-delete-picture close-modal small"
+                                                                    ng-click="delGoodsPic(pic)">×</a></li>
+                                                        </i>
+                                                        <li ng-hide="goods.auditing_status==2"><a href="javascript:;"
+                                                                                                  class="add-goods js-add-picture"
+                                                                                                  ng-click="uploadPic()">+加图</a>
+                                                        </li>
+                                                    </ul>
+                                                    <input type="hidden" ng-model="goodsPics[0]"
+                                                           required="required"/>
+                                                </div>
+                                                <div style="margin-top: 10px;">
+                                                    <p class="help-desc">建议尺寸：640 x 640 像素；第一张图将作为商品的默认预览图！</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button id="buttom_reply" ng-click="reply(data,$event)"
+                                                class="btn btn-sm btn-info">
+                                            <i ng-if="data.chk==true" style="font-style:normal;">保存</i>
+                                            <i ng-if="!data.chk||data.chk==false" style="font-style:normal;">回复</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 						</div> -->
+                        </td>
+                        <!-- 						<td><a href="{{data.url}}" target="_blank">{{data.title}}</a></td> -->
+                        <!-- 						<td>{{data.create_time}}</td> -->
+                        <!-- 						<td>{{data.update_time}}</td> -->
+                        <!-- 						<td>{{data.user_id==0?"系统":"用户"}}</td> -->
+                        <!-- 						<td>{{data.reply_status==0?"未答复":"已答复"}}</td> -->
+                        <!-- 						<td> -->
+                        <!-- 							<input type="button" ng-click="edit({{data.id}})" value="{{data.user_id==0?'编辑':'答复'}}"/> -->
+                        <!-- 							<input type="button" ng-click="del({{data.id}})" value="删除"/> -->
+                        <!-- 						</td> -->
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                    <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                       total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                       page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                       last-text="&raquo;"></custom-pagination>
+                </div>
+                <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,227 @@
+<div class="control-group">
+    <div>
+        <!-- 大图  -->
+        <ul ng-if="item.size =='0'"  class="sc-goods-list clearfix size-{{item.size}}"
+            ng-class="{'list':item.size==3,
+            'pic':item.size !=3,
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+           
+            <li ng-repeat="goods in item.goods" class="goods-card big-pic" ng-class="{
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3,
+            'has-sub-title':item.show_sub_title==1}">
+                <a href="javascript: void(0);" class="link js-goods clearfix">
+                    <div class="photo-block">
+                        <img class="goods-photo js-goods-lazy" ng-src="{{goods.image_url}}" />
+                    </div>
+                    <div ng-if="item.title == 1 || item.price == 1 || (item.size == 0 && item.show_sub_title == 1)"
+                         class="info clearfix btn{{item.buy_btn_type}}"
+                         ng-class="{'info-no-title':item.title ==1,'info-price':item.price==1,'info-no-price':item.price ==0}"   >
+                        <p class="goods-title">{{goods.title}}</p>
+                        <p ng-show="item.size == '0' && item.show_sub_title == '1'" class="goods-sub-title c-black">{{goods.item.sub_title}}</p>
+                        <p ng-show="item.price ==1" class="goods-price"><em>￥{{goods.price}}</em></p>
+                        <p class="goods-price-taobao"></p>
+                    </div>
+                    <div ng-if=" item.buy_btn==1 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3)"
+                         class="goods-buy btn{{item.buy_btn_type}}"
+                         ng-class="{'info-title info-no-price': title == '1' && price == '0'}"   ></div>
+                    <div ng-if="item.title==1 && item.price==0 && item.size_type != 0" class='buy-tag-space'></div>
+                    <div ng-if="item.wish_btn_type ==1" class="goods-wish btn-wish"></div>
+                </a>
+            </li>
+        </ul>
+
+        <!-- 小图 非瀑布流模式 -->
+        <ul ng-if="item.size == '1' && item.size_type !='1'"  class="sc-goods-list clearfix size-{{item.size}}"
+            ng-class="{'list':item.size==3,
+            'pic':item.size !=3,
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+            <li ng-repeat="goods in item.goods" class="goods-card small-pic" ng-class="{
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+                <a href="javascript: void(0);" class="link js-goods clearfix">
+                    <div class="photo-block">
+                        <img class="goods-photo js-goods-lazy" ng-src="{{goods.image_url}}" />
+                    </div>
+                    <div ng-if="item.price != 0 || (item.title != 0 && item.size_type != 3 && (item.size_type == 0 || item.size_type ==1 || item.size_type ==3)) || item.size_type == 3"
+                         class="info clearfix"
+                         ng-class="{'info-no-title':item.title ==0 }">
+                        <p class="goods-title">{{goods.title}}</p>
+                        <p ng-show="item.price == '1'" class="goods-price"><em>￥{{goods.price}}</em></p>
+                        <p class="goods-price-taobao">{{goods.price_tao}}</p>
+                    </div>
+                    <div ng-show="item.buy_btn==1 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3)" class="goods-buy btn{{item.buy_btn_type}}">
+                        <span ng-if="item.size_type != 0 && item.size_type != 1 && item.size_type != 3">我要抢购</span>
+                    </div>
+                    <div ng-if="item.title==1 && item.price==0 && item.size_type != 0" class='buy-tag-space'></div>
+                    <div ng-if="item.wish_btn_type ==1" class="goods-wish btn-wish"></div>
+                </a>
+            </li>
+        </ul>
+
+        <!-- 小图 瀑布流模式 -->
+        <ul ng-if="item.size == '1' && item.size_type =='1'"  class="sc-goods-list clearfix size-{{item.size}}"
+            ng-class="{'list':item.size==3,
+            'pic':item.size !=3,
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+            <li class="sc-waterfall-half clearfix">
+                <ul class="clearfix">
+                    <li ng-repeat="goods in item.goods" ng-if="$index % 2 != 1"  class="goods-card small-pic waterfall">
+                        <a href="javascript: void(0);" class="link js-goods clearfix">
+                            <div class="photo-block">
+                                <img class="goods-photo js-goods-lazy"  ng-src="{{goods.image_url}}" style="height:{{145+$index*30}}px;"/>
+                            </div>
+                            <div ng-if="!(item.price == 0 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3) && item.title == 0 )"
+                                 class="info clearfix"
+                                 ng-class="{'info-no-title':item.title ==0 }"   >
+                                <p class="goods-title">{{goods.title}}</p>
+                                <p ng-show="item.price ==1" class="goods-price"><em>￥{{goods.price}}</em></p>
+                                <p class="goods-price-taobao"></p>
+                            </div>
+                            <div ng-show="item.buy_btn==1 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3)" class="goods-buy btn{{item.buy_btn_type}}">
+                                <span ng-if="item.size_type != 0 && item.size_type != 1 && item.size_type != 3">我要抢购</span>
+                            </div>
+                            <div ng-if="item.title==1 && item.price==0" class='buy-tag-space'></div>
+                            <div ng-if="item.wish_btn_type ==1" class="goods-wish btn-wish"></div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sc-waterfall-half clearfix">
+                <ul class="clearfix">
+                    <li ng-repeat="goods in item.goods" ng-if="$index % 2 == 1"  class="goods-card small-pic waterfall">
+                        <a href="javascript: void(0);" class="link js-goods clearfix">
+                            <div class="photo-block">
+                                <img class="goods-photo js-goods-lazy"  ng-src="{{goods.image_url}}" style="height:{{145+$index*30}}px;"/>
+                            </div>
+                            <div ng-if="!(item.price == 0 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3) && item.title == 0 )"
+                                 class="info clearfix"
+                                 ng-class="{'info-no-title':item.title ==0 }"   >
+                                <p class="goods-title">{{goods.title}}</p>
+                                <p ng-show="item.price ==1" class="goods-price"><em>￥{{goods.price}}</em></p>
+                                <p class="goods-price-taobao"></p>
+                            </div>
+                            <div ng-show="item.buy_btn==1 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3)" class="goods-buy btn{{item.buy_btn_type}}">
+                                <span ng-if="item.size_type != 0 && item.size_type != 1 && item.size_type != 3">我要抢购</span>
+                            </div>
+                            <div ng-if="item.title==1 && item.price==0" class='buy-tag-space'></div>
+                            <div ng-if="item.wish_btn_type ==1" class="goods-wish btn-wish"></div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- 一大两小 -->
+        <ul ng-if="item.size == '2'" class="sc-goods-list clearfix size-{{item.size}}"
+            ng-class="{'list':item.size==3,
+            'pic':item.size !=3,
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+            <div ng-repeat="goods in item.goods">
+                <li ng-if="($index+1) % 3 == 1" class="goods-card big-pic"
+                    ng-class="{
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+                    <a href="javascript: void(0);" class="link js-goods clearfix">
+                        <div class="photo-block">
+                            <img class="goods-photo js-goods-lazy" ng-src="{{goods.image_url}}" />
+                        </div>
+                        <div ng-if="item.title == 1 || item.price == 1 || (item.size == 0 && item.show_sub_title == 1)"
+                             class="info clearfix btn{{item.buy_btn_type}}"
+                             ng-class="{'info-no-title':item.title ==1,'info-price':item.price==1,'info-no-price':item.price ==0}"   >
+                            <p class="goods-title">{{goods.title}}</p>
+                            <p ng-show="item.size == '0' && item.show_sub_title == '1'" class="goods-sub-title c-black">{{goods.sub_title}}</p>
+                            <p ng-show="item.price ==1" class="goods-price"><em>￥{{goods.price}}</em></p>
+                            <p class="goods-price-taobao"></p>
+                        </div>
+                        <div ng-if=" item.buy_btn==1 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3)"
+                             class="goods-buy btn{{item.buy_btn_type}}"
+                             ng-class="{'info-title info-no-price': title == '1' && price == '0'}"   ></div>
+                        <div ng-if="item.title==1 && item.price==0 && item.size_type != 0" class='buy-tag-space'></div>
+                        <div ng-if="item.wish_btn_type ==1" class="goods-wish btn-wish"></div>
+                    </a>
+                </li>
+
+
+                <li ng-if="($index+1) % 3 != 1" class="goods-card small-pic"
+                    ng-class="{
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+                    <a href="javascript: void(0);" class="link js-goods clearfix">
+                        <div class="photo-block">
+                            <img class="goods-photo js-goods-lazy" ng-src="{{goods.image_url}}" />
+                        </div>
+                        <div ng-if="!(item.price == 0 && ((item.size_type != 0 && item.size_type !=1 && item.size_type !=3) || (item.size_type == 0 || item.size_type ==1 || item.size_type ==3) && item.title == 0 ))"
+                             class="info clearfix"
+                             ng-class="{'info-no-title':item.title ==0 }">
+                            <p class="goods-title">{{goods.title}}</p>
+                            <p ng-show="item.price == '1'" class="goods-price"><em>￥{{goods.price}}</em></p>
+                            <p class="goods-price-taobao">{{goods.price_tao}}</p>
+                        </div>
+                        <div ng-show="item.buy_btn==1 && (item.size_type == 0 || item.size_type== 1 || item.size_type == 3)" class="goods-buy btn{{item.buy_btn_type}}">
+                        </div>
+                        <div ng-if="item.title==1 && item.price==0 && item.size_type != 0" class='buy-tag-space'></div>
+                        <div ng-if="item.wish_btn_type ==1" class="goods-wish btn-wish"></div>
+                    </a>
+                </li>
+            </div>
+        </ul>
+
+
+        <!-- 列表 -->
+        <ul ng-if="item.size == '3'" class="sc-goods-list clearfix size-{{item.size}}"
+            ng-class="{'list':item.size==3,
+            'pic':item.size !=3,
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+            <li ng-repeat="goods in item.goods" class="goods-card" ng-class="{
+            'card':item.size_type == 0,
+            'waterfall':item.size_type == 1,
+            'promotion':item.size_type==3,
+            'normal':item.size_type != 0 && item.size_type!= 1 && item.size_type != 3}">
+                <a href="javascript: void(0);" class="link js-goods clearfix">
+                    <div class="photo-block">
+                        <img class="goods-photo js-goods-lazy" ng-src="{{goods.image_url}}"/>
+                    </div>
+                    <div class="info">
+                        <p class="goods-title">{{goods.title}}</p>
+                        <p class="goods-price"><em>￥{{goods.price}}</em></p>
+                        <p class="goods-price-taobao"></p>
+                        <div ng-show="item.buy_btn==1" class="goods-buy btn{{item.buy_btn_type}}">
+                        </div>
+                        <div ng-if="item.wish_btn_type ==1" class="goods-wish btn-wish"></div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

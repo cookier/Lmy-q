@@ -1,0 +1,63 @@
+<form class="form-horizontal edit-shopnav" novalidate ng-controller="UIShopNavConfigController">
+    <div class="edit-shopnav-on-page">
+        <div>将导航应用在以下页面：</div>
+        <div>
+            <label class="i-checks i-checks-sm">
+                <input type="checkbox" name="on_page" value="1"  ng-click="setOnPages($event)" ng-checked="data.on_page.indexOf(1) !== -1" /><i></i>店铺主页
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="checkbox" name="on_page" value="4" ng-click="setOnPages($event)" ng-checked="data.on_page.indexOf(4) !== -1" /><i></i>会员主页
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="checkbox" name="on_page" value="3" ng-click="setOnPages($event)" ng-checked="data.on_page.indexOf(3) !== -1"/><i></i>微页面及分类
+            </label>
+            <label class="i-checks i-checks-sm">
+                <input type="checkbox" name="on_page" value="6" ng-click="setOnPages($event)" ng-checked="data.on_page.indexOf(6) !== -1" /><i></i>商品分组
+            </label>
+        </div>
+        <div>
+            <label class="i-checks i-checks-sm">
+                <input type="checkbox" name="on_page" value="7" ng-click="setOnPages($event)" ng-checked="data.on_page.indexOf(7) !== -1" /><i></i>商品搜索
+            </label>
+        </div>
+    </div>
+    <div class="edit-shopnav-header clearfix">
+        <span>当前模板：</span>
+        <span >{{"1" == data.nav_style ? "微信公众号自定义菜单样式" : "2" == data.nav_style ? "APP导航样式" : "3" == data.nav_style ? "带购物车导航模板" : "4" == data.nav_style ? "Path展开形式导航" : "两侧展开形式导航"}}</span>
+
+        <a  href="javascript:;" class="ui-btn ui-btn-primary pull-right js-select-nav-style" ng-click="chooseStyle()">修改模板</a>
+    </div>
+    <div ng-show="data.nav_style == 2 || data.nav_style == 3" class="shopnav-background-color">
+        <span>底色：</span>
+        <input type="color" name="background_color"  class="span2" ng-model="data.background_color" />
+        <a href="javascript:;" class="btn js-reset-background-color" ng-click="resetBackgroundColor()">重置</a>
+    </div>
+    <p ng-show="data.nav_style == 3" class="shop-nav-class">添加中间主图标</p>
+    <p ng-show="data.nav_style == 5" class="shop-nav-class">添加两侧一级图标</p>
+    <div ng-show="data.nav_style ==3 || data.nav_style ==5" class="js-main-icon-setting main-icon-setting">
+        <ul class="choices ui-sortable">
+            <li ng-repeat="item in data.app_nav_main_icon" class="choice" ng-include="'tpl/showcase/tpl_shopnav/edit_app_nav_item.html'">
+            </li>
+        </ul>
+    </div>
+
+    <p ng-show="data.nav_style == 3" class="shop-nav-class">添加两侧图标</p>
+    <p ng-show="data.nav_style == 3" class="shop-nav-icon-tips">此导航模板建议您用两个或者四个自定义图标效果图最佳哦！</p>
+
+    <p ng-show="data.nav_style == 4" class="shop-nav-class"></p>
+    <p ng-show="data.nav_style == 4" class="shop-nav-icon-tips">此导航模板建议您用三个自定义图标效果最佳哦！</p>
+
+    <p ng-show="data.nav_style == 5" class="shop-nav-class">添加中间二级图标</p>
+    <p ng-show="data.nav_style == 5" class="shop-nav-icon-tips">此导航模板建议您用四个自定义图标效果最佳哦！</p>
+    <div class="js-nav-region clearfix">
+        <ul ng-show="data.nav_style ==1" class="choices ui-sortable">
+            <li ng-repeat="item in data.nav" class="choice" ng-include="'tpl/showcase/tpl_shopnav/edit_wx_nav_1st_item.html'">
+            </li>
+        </ul>
+        <ul ng-show="data.nav_style !=1" class="choices ui-sortable">
+            <li ng-repeat="item in data.app_nav" class="choice" ng-include="'tpl/showcase/tpl_shopnav/edit_app_nav_item.html'">
+            </li>
+        </ul>
+    </div>
+    <p class="add-shopnav js-add-nav" ng-click="addFirstNav()">{{data.nav_style == 1 ? '添加一级导航' : '添加导航'}}</p>
+</form>

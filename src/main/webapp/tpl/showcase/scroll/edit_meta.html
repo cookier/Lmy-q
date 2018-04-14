@@ -1,0 +1,47 @@
+<div class="control-group">
+    <label class="control-label">主页图标：</label>
+    <div class="controls">
+        <label  class="i-checks i-checks-sm">
+            <input type="checkbox" name="homepage_icon" <% if(homepage_icon == '1') {%>checked<%}%>>
+            <i></i>显示店铺主页图标，用户点击后进入店铺主页
+        </label>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">背景音乐：</label>
+    <div class="controls">
+        <label  class="i-checks i-checks-sm">
+            <input type="checkbox" name="music_icon" <% if(music_icon == '1') {%>checked<%}%>>
+            <i></i>启用背景音乐：
+        </label>
+
+        <% if(music_url) { %>
+            <div class="music-box">
+                <span class="label label-success js-music"><%= music_title %></span>
+                <a href="javascript:;" class="js-delete-music close-modal" title="删除">×</a>
+            </div>
+            <a href="javascript:;" class="choose-music js-music">修改</a>
+        <% } else { %>
+            <a href="javascript:;" class="choose-music js-music">选择音乐</a>
+        <% } %>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">循环滚动：</label>
+    <div class="controls">
+        <label  class="i-checks i-checks-sm">
+            <input type="checkbox" name="loop" <% if(loop == '1') {%>checked<%}%>>
+            <i></i>封底页可继续滑动切换到封面
+        </label>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" style="width: 108px">场景切换方式：</label>
+    <div class="controls">
+        <select name="flipway" class="input-small">
+            <option value="default" <%if(flipway=='default'){%>selected<%}%> >普通</option>
+            <option value="zoomOut" <%if(flipway=='zoomOut'){%>selected<%}%> >缩小</option>
+        </select>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<form class="form-horizontal" novalidate>
+
+    <div class="control-group js-link-region">
+        <label>链接到</label>
+        <%= renderLink(link_url, link_title, link_type, {showDelete: false}) %>
+        <input type="hidden" name="link_url" data-error-style="block">
+    </div>
+
+    <div class="control-group">
+        <label>标题</label>
+        <input type="text" name="title" ng-model="data.title" data-error-style="block">
+    </div>
+
+    <div class="control-group image-region js-image-region">
+        <label>封面<span class="label-desc">(图片建议尺寸：900 x 500像素)</span></label>
+        <img ng-show="data.cover_url" ng-src="data.cover_url"  width="100" height="100"/>
+        <a ng-show="data.cover_url" class="js-add-image control-action" href="javascript:;">重新选择</a>
+        <a ng-show="!data.cover_url" class="js-add-image control-action" href="javascript:;">添加图片...</a>
+        <input type="hidden" name="cover_url" ng-model="item.cover_url" data-error-style="block">
+    </div>
+
+    <div class="control-group digest">
+        <label>摘要<span class="label-desc">(多图文时可以不填)</span></label>
+        <textarea name="digest" cols="30" rows="3" data-error-style="block" ng-model="{{data.digest}}"></textarea>
+    </div>
+
+</form>

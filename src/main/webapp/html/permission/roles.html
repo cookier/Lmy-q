@@ -1,0 +1,41 @@
+﻿<div class="app-init-container" ng-controller="roleController">
+  <div class="modal-header">
+    <h3 class="modal-title">角色列表</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table table-hover table-bordered" m-check>
+      <thead>
+        <tr>
+          <th class="col-sm-2">角色</th>
+          <th>权限集</th>
+          <th class="col-sm-2">
+            <a ui-sref="console.role_edit" class="btn btn-primary btn-xs">添加角色</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in pageData.list">
+          <td>{{item.name}}</td>
+          <td>{{item.permissions?(item.permissions|merge:'permission_name':4:'...'|none:'没有关联权限'):'没有关联权限'}}</td>
+          <td>
+            <button type="button" ng-click="remove(item.id)" class="btn btn-danger btn-xs">删除</button>
+            <a ui-sref="console.role_edit({id:item.id})" class="btn btn-success btn-xs">编辑</a>
+            <a ng-click="addPermission(item.id)" class="btn btn-info btn-xs">添加权限</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="js-list-footer-region ui-box">
+      <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+        <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                           total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                           page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                           previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                           last-text="&raquo;"></custom-pagination>
+      </div>
+      <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+           style="text-align: center;">没有找到相关记录!
+      </div>
+    </div>
+  </div>
+</div>

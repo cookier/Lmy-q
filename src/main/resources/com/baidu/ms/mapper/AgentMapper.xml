@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.AgentMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.Agent">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="total_money" jdbcType="DOUBLE" property="totalMoney"/>
+        <result column="trade_no" jdbcType="INTEGER" property="tradeNo"/>
+        <result column="settled_money" jdbcType="DOUBLE" property="settledMoney"/>
+        <result column="unsettled_money" jdbcType="DOUBLE" property="unsettledMoney"/>
+        <result column="commission_rate" jdbcType="REAL" property="commissionRate"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="yesterday_money" jdbcType="DOUBLE" property="yesterdayMoney"/>
+        <result column="share_url" jdbcType="VARCHAR" property="shareUrl"/>
+        <result column="qr_path" jdbcType="VARCHAR" property="qrPath"/>
+        <result column="qr_url" jdbcType="VARCHAR" property="qrUrl"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.Agent">
+        <result column="areas" jdbcType="LONGVARCHAR" property="areas"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, user_id, parent_id, level, create_time, update_time, name, total_money, trade_no, 
+    settled_money, unsettled_money, commission_rate, delete_flag, status, yesterday_money, 
+    share_url, qr_path, qr_url
+  </sql>
+    <sql id="Blob_Column_List">
+    areas
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.AgentExample" resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_agent
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.AgentExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_agent
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_agent
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_agent
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.AgentExample">
+        delete from t_agent
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.Agent">
+    insert into t_agent (id, user_id, parent_id, 
+      level, create_time, update_time, 
+      name, total_money, trade_no, 
+      settled_money, unsettled_money, commission_rate, 
+      delete_flag, status, yesterday_money, 
+      share_url, qr_path, qr_url, 
+      areas)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{name,jdbcType=VARCHAR}, #{totalMoney,jdbcType=DOUBLE}, #{tradeNo,jdbcType=INTEGER}, 
+      #{settledMoney,jdbcType=DOUBLE}, #{unsettledMoney,jdbcType=DOUBLE}, #{commissionRate,jdbcType=REAL}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{yesterdayMoney,jdbcType=DOUBLE}, 
+      #{shareUrl,jdbcType=VARCHAR}, #{qrPath,jdbcType=VARCHAR}, #{qrUrl,jdbcType=VARCHAR}, 
+      #{areas,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.Agent">
+        insert into t_agent
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="totalMoney != null">
+                total_money,
+            </if>
+            <if test="tradeNo != null">
+                trade_no,
+            </if>
+            <if test="settledMoney != null">
+                settled_money,
+            </if>
+            <if test="unsettledMoney != null">
+                unsettled_money,
+            </if>
+            <if test="commissionRate != null">
+                commission_rate,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="yesterdayMoney != null">
+                yesterday_money,
+            </if>
+            <if test="shareUrl != null">
+                share_url,
+            </if>
+            <if test="qrPath != null">
+                qr_path,
+            </if>
+            <if test="qrUrl != null">
+                qr_url,
+            </if>
+            <if test="areas != null">
+                areas,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="totalMoney != null">
+                #{totalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="tradeNo != null">
+                #{tradeNo,jdbcType=INTEGER},
+            </if>
+            <if test="settledMoney != null">
+                #{settledMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="unsettledMoney != null">
+                #{unsettledMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionRate != null">
+                #{commissionRate,jdbcType=REAL},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="yesterdayMoney != null">
+                #{yesterdayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="shareUrl != null">
+                #{shareUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="qrPath != null">
+                #{qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="qrUrl != null">
+                #{qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="areas != null">
+                #{areas,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.AgentExample" resultType="java.lang.Long">
+        select count(*) from t_agent
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_agent
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.parentId != null">
+                parent_id = #{record.parentId,jdbcType=INTEGER},
+            </if>
+            <if test="record.level != null">
+                level = #{record.level,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalMoney != null">
+                total_money = #{record.totalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.tradeNo != null">
+                trade_no = #{record.tradeNo,jdbcType=INTEGER},
+            </if>
+            <if test="record.settledMoney != null">
+                settled_money = #{record.settledMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.unsettledMoney != null">
+                unsettled_money = #{record.unsettledMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.commissionRate != null">
+                commission_rate = #{record.commissionRate,jdbcType=REAL},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.yesterdayMoney != null">
+                yesterday_money = #{record.yesterdayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.shareUrl != null">
+                share_url = #{record.shareUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qrPath != null">
+                qr_path = #{record.qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qrUrl != null">
+                qr_url = #{record.qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.areas != null">
+                areas = #{record.areas,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_agent
+        set id = #{record.id,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+        level = #{record.level,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        name = #{record.name,jdbcType=VARCHAR},
+        total_money = #{record.totalMoney,jdbcType=DOUBLE},
+        trade_no = #{record.tradeNo,jdbcType=INTEGER},
+        settled_money = #{record.settledMoney,jdbcType=DOUBLE},
+        unsettled_money = #{record.unsettledMoney,jdbcType=DOUBLE},
+        commission_rate = #{record.commissionRate,jdbcType=REAL},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        yesterday_money = #{record.yesterdayMoney,jdbcType=DOUBLE},
+        share_url = #{record.shareUrl,jdbcType=VARCHAR},
+        qr_path = #{record.qrPath,jdbcType=VARCHAR},
+        qr_url = #{record.qrUrl,jdbcType=VARCHAR},
+        areas = #{record.areas,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_agent
+        set id = #{record.id,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+        level = #{record.level,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        name = #{record.name,jdbcType=VARCHAR},
+        total_money = #{record.totalMoney,jdbcType=DOUBLE},
+        trade_no = #{record.tradeNo,jdbcType=INTEGER},
+        settled_money = #{record.settledMoney,jdbcType=DOUBLE},
+        unsettled_money = #{record.unsettledMoney,jdbcType=DOUBLE},
+        commission_rate = #{record.commissionRate,jdbcType=REAL},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        yesterday_money = #{record.yesterdayMoney,jdbcType=DOUBLE},
+        share_url = #{record.shareUrl,jdbcType=VARCHAR},
+        qr_path = #{record.qrPath,jdbcType=VARCHAR},
+        qr_url = #{record.qrUrl,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.Agent">
+        update t_agent
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="totalMoney != null">
+                total_money = #{totalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="tradeNo != null">
+                trade_no = #{tradeNo,jdbcType=INTEGER},
+            </if>
+            <if test="settledMoney != null">
+                settled_money = #{settledMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="unsettledMoney != null">
+                unsettled_money = #{unsettledMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionRate != null">
+                commission_rate = #{commissionRate,jdbcType=REAL},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="yesterdayMoney != null">
+                yesterday_money = #{yesterdayMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="shareUrl != null">
+                share_url = #{shareUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="qrPath != null">
+                qr_path = #{qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="qrUrl != null">
+                qr_url = #{qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="areas != null">
+                areas = #{areas,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.Agent">
+    update t_agent
+    set user_id = #{userId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      total_money = #{totalMoney,jdbcType=DOUBLE},
+      trade_no = #{tradeNo,jdbcType=INTEGER},
+      settled_money = #{settledMoney,jdbcType=DOUBLE},
+      unsettled_money = #{unsettledMoney,jdbcType=DOUBLE},
+      commission_rate = #{commissionRate,jdbcType=REAL},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      yesterday_money = #{yesterdayMoney,jdbcType=DOUBLE},
+      share_url = #{shareUrl,jdbcType=VARCHAR},
+      qr_path = #{qrPath,jdbcType=VARCHAR},
+      qr_url = #{qrUrl,jdbcType=VARCHAR},
+      areas = #{areas,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.Agent">
+    update t_agent
+    set user_id = #{userId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      total_money = #{totalMoney,jdbcType=DOUBLE},
+      trade_no = #{tradeNo,jdbcType=INTEGER},
+      settled_money = #{settledMoney,jdbcType=DOUBLE},
+      unsettled_money = #{unsettledMoney,jdbcType=DOUBLE},
+      commission_rate = #{commissionRate,jdbcType=REAL},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      yesterday_money = #{yesterdayMoney,jdbcType=DOUBLE},
+      share_url = #{shareUrl,jdbcType=VARCHAR},
+      qr_path = #{qrPath,jdbcType=VARCHAR},
+      qr_url = #{qrUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

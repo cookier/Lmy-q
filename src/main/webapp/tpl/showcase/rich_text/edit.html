@@ -1,0 +1,22 @@
+<form class="form-horizontal" novalidate ng-controller="UIRichTextEditorController">
+
+    <div class="control-group">
+        <div class="pull-left">
+            <label class="control-label">背景颜色：</label>
+            <div class="input-append">
+                <input type="color" ng-model="data.color" name="color" class="span1">
+                <button class="btn js-reset-bg" type="button">重置</button>
+            </div>
+        </div>
+        <div class="pull-left">
+            <label class="control-label">是否全屏：</label>
+            <label  class="i-checks i-checks-sm">
+                <input type="checkbox" name="fullscreen" ng-model="data.fullscreen" ng-checked="data.fullscreen == 1"><i></i> 全屏显示
+            </label>
+        </div>
+    </div>
+
+    <div class="control-group" lazy-load="textAngular">
+        <div class="ueditor" config="_simpleConfig" ng-model="data.content" ng-change="saveToCache()"></div>
+    </div>
+</div>

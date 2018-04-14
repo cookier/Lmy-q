@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ActivityLuckyTurntableMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ActivityLuckyTurntable">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="intro" jdbcType="VARCHAR" property="intro"/>
+        <result column="consume_point" jdbcType="INTEGER" property="consumePoint"/>
+        <result column="user_limit" jdbcType="INTEGER" property="userLimit"/>
+        <result column="give_point" jdbcType="INTEGER" property="givePoint"/>
+        <result column="give_point_to_no_prize_only" jdbcType="INTEGER" property="givePointToNoPrizeOnly"/>
+        <result column="time_limit" jdbcType="INTEGER" property="timeLimit"/>
+        <result column="probability" jdbcType="INTEGER" property="probability"/>
+        <result column="success_tip" jdbcType="VARCHAR" property="successTip"/>
+        <result column="failed_tip" jdbcType="VARCHAR" property="failedTip"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ActivityLuckyTurntableWithBLOBs">
+        <result column="first_prize" jdbcType="LONGVARCHAR" property="firstPrize"/>
+        <result column="secound_prize" jdbcType="LONGVARCHAR" property="secoundPrize"/>
+        <result column="third_prize" jdbcType="LONGVARCHAR" property="thirdPrize"/>
+        <result column="normal_prize" jdbcType="LONGVARCHAR" property="normalPrize"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, title, create_time, update_time, start_time, end_time, intro, consume_point, 
+    user_limit, give_point, give_point_to_no_prize_only, time_limit, probability, success_tip, 
+    failed_tip
+  </sql>
+    <sql id="Blob_Column_List">
+    first_prize, secound_prize, third_prize, normal_prize
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_lucky_turntable
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_activity_lucky_turntable
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_activity_lucky_turntable
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_lucky_turntable
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableExample">
+        delete from t_activity_lucky_turntable
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableWithBLOBs">
+    insert into t_activity_lucky_turntable (id, shop_id, title, 
+      create_time, update_time, start_time, 
+      end_time, intro, consume_point, 
+      user_limit, give_point, give_point_to_no_prize_only, 
+      time_limit, probability, success_tip, 
+      failed_tip, first_prize, secound_prize, 
+      third_prize, normal_prize)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{intro,jdbcType=VARCHAR}, #{consumePoint,jdbcType=INTEGER}, 
+      #{userLimit,jdbcType=INTEGER}, #{givePoint,jdbcType=INTEGER}, #{givePointToNoPrizeOnly,jdbcType=INTEGER}, 
+      #{timeLimit,jdbcType=INTEGER}, #{probability,jdbcType=INTEGER}, #{successTip,jdbcType=VARCHAR}, 
+      #{failedTip,jdbcType=VARCHAR}, #{firstPrize,jdbcType=LONGVARCHAR}, #{secoundPrize,jdbcType=LONGVARCHAR}, 
+      #{thirdPrize,jdbcType=LONGVARCHAR}, #{normalPrize,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableWithBLOBs">
+        insert into t_activity_lucky_turntable
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="intro != null">
+                intro,
+            </if>
+            <if test="consumePoint != null">
+                consume_point,
+            </if>
+            <if test="userLimit != null">
+                user_limit,
+            </if>
+            <if test="givePoint != null">
+                give_point,
+            </if>
+            <if test="givePointToNoPrizeOnly != null">
+                give_point_to_no_prize_only,
+            </if>
+            <if test="timeLimit != null">
+                time_limit,
+            </if>
+            <if test="probability != null">
+                probability,
+            </if>
+            <if test="successTip != null">
+                success_tip,
+            </if>
+            <if test="failedTip != null">
+                failed_tip,
+            </if>
+            <if test="firstPrize != null">
+                first_prize,
+            </if>
+            <if test="secoundPrize != null">
+                secound_prize,
+            </if>
+            <if test="thirdPrize != null">
+                third_prize,
+            </if>
+            <if test="normalPrize != null">
+                normal_prize,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="intro != null">
+                #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="consumePoint != null">
+                #{consumePoint,jdbcType=INTEGER},
+            </if>
+            <if test="userLimit != null">
+                #{userLimit,jdbcType=INTEGER},
+            </if>
+            <if test="givePoint != null">
+                #{givePoint,jdbcType=INTEGER},
+            </if>
+            <if test="givePointToNoPrizeOnly != null">
+                #{givePointToNoPrizeOnly,jdbcType=INTEGER},
+            </if>
+            <if test="timeLimit != null">
+                #{timeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="probability != null">
+                #{probability,jdbcType=INTEGER},
+            </if>
+            <if test="successTip != null">
+                #{successTip,jdbcType=VARCHAR},
+            </if>
+            <if test="failedTip != null">
+                #{failedTip,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPrize != null">
+                #{firstPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="secoundPrize != null">
+                #{secoundPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="thirdPrize != null">
+                #{thirdPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="normalPrize != null">
+                #{normalPrize,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableExample"
+            resultType="java.lang.Long">
+        select count(*) from t_activity_lucky_turntable
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_activity_lucky_turntable
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.startTime != null">
+                start_time = #{record.startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.endTime != null">
+                end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.intro != null">
+                intro = #{record.intro,jdbcType=VARCHAR},
+            </if>
+            <if test="record.consumePoint != null">
+                consume_point = #{record.consumePoint,jdbcType=INTEGER},
+            </if>
+            <if test="record.userLimit != null">
+                user_limit = #{record.userLimit,jdbcType=INTEGER},
+            </if>
+            <if test="record.givePoint != null">
+                give_point = #{record.givePoint,jdbcType=INTEGER},
+            </if>
+            <if test="record.givePointToNoPrizeOnly != null">
+                give_point_to_no_prize_only = #{record.givePointToNoPrizeOnly,jdbcType=INTEGER},
+            </if>
+            <if test="record.timeLimit != null">
+                time_limit = #{record.timeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="record.probability != null">
+                probability = #{record.probability,jdbcType=INTEGER},
+            </if>
+            <if test="record.successTip != null">
+                success_tip = #{record.successTip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.failedTip != null">
+                failed_tip = #{record.failedTip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.firstPrize != null">
+                first_prize = #{record.firstPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.secoundPrize != null">
+                secound_prize = #{record.secoundPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.thirdPrize != null">
+                third_prize = #{record.thirdPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.normalPrize != null">
+                normal_prize = #{record.normalPrize,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_activity_lucky_turntable
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        intro = #{record.intro,jdbcType=VARCHAR},
+        consume_point = #{record.consumePoint,jdbcType=INTEGER},
+        user_limit = #{record.userLimit,jdbcType=INTEGER},
+        give_point = #{record.givePoint,jdbcType=INTEGER},
+        give_point_to_no_prize_only = #{record.givePointToNoPrizeOnly,jdbcType=INTEGER},
+        time_limit = #{record.timeLimit,jdbcType=INTEGER},
+        probability = #{record.probability,jdbcType=INTEGER},
+        success_tip = #{record.successTip,jdbcType=VARCHAR},
+        failed_tip = #{record.failedTip,jdbcType=VARCHAR},
+        first_prize = #{record.firstPrize,jdbcType=LONGVARCHAR},
+        secound_prize = #{record.secoundPrize,jdbcType=LONGVARCHAR},
+        third_prize = #{record.thirdPrize,jdbcType=LONGVARCHAR},
+        normal_prize = #{record.normalPrize,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_activity_lucky_turntable
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        intro = #{record.intro,jdbcType=VARCHAR},
+        consume_point = #{record.consumePoint,jdbcType=INTEGER},
+        user_limit = #{record.userLimit,jdbcType=INTEGER},
+        give_point = #{record.givePoint,jdbcType=INTEGER},
+        give_point_to_no_prize_only = #{record.givePointToNoPrizeOnly,jdbcType=INTEGER},
+        time_limit = #{record.timeLimit,jdbcType=INTEGER},
+        probability = #{record.probability,jdbcType=INTEGER},
+        success_tip = #{record.successTip,jdbcType=VARCHAR},
+        failed_tip = #{record.failedTip,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableWithBLOBs">
+        update t_activity_lucky_turntable
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="intro != null">
+                intro = #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="consumePoint != null">
+                consume_point = #{consumePoint,jdbcType=INTEGER},
+            </if>
+            <if test="userLimit != null">
+                user_limit = #{userLimit,jdbcType=INTEGER},
+            </if>
+            <if test="givePoint != null">
+                give_point = #{givePoint,jdbcType=INTEGER},
+            </if>
+            <if test="givePointToNoPrizeOnly != null">
+                give_point_to_no_prize_only = #{givePointToNoPrizeOnly,jdbcType=INTEGER},
+            </if>
+            <if test="timeLimit != null">
+                time_limit = #{timeLimit,jdbcType=INTEGER},
+            </if>
+            <if test="probability != null">
+                probability = #{probability,jdbcType=INTEGER},
+            </if>
+            <if test="successTip != null">
+                success_tip = #{successTip,jdbcType=VARCHAR},
+            </if>
+            <if test="failedTip != null">
+                failed_tip = #{failedTip,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPrize != null">
+                first_prize = #{firstPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="secoundPrize != null">
+                secound_prize = #{secoundPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="thirdPrize != null">
+                third_prize = #{thirdPrize,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="normalPrize != null">
+                normal_prize = #{normalPrize,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntableWithBLOBs">
+    update t_activity_lucky_turntable
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      intro = #{intro,jdbcType=VARCHAR},
+      consume_point = #{consumePoint,jdbcType=INTEGER},
+      user_limit = #{userLimit,jdbcType=INTEGER},
+      give_point = #{givePoint,jdbcType=INTEGER},
+      give_point_to_no_prize_only = #{givePointToNoPrizeOnly,jdbcType=INTEGER},
+      time_limit = #{timeLimit,jdbcType=INTEGER},
+      probability = #{probability,jdbcType=INTEGER},
+      success_tip = #{successTip,jdbcType=VARCHAR},
+      failed_tip = #{failedTip,jdbcType=VARCHAR},
+      first_prize = #{firstPrize,jdbcType=LONGVARCHAR},
+      secound_prize = #{secoundPrize,jdbcType=LONGVARCHAR},
+      third_prize = #{thirdPrize,jdbcType=LONGVARCHAR},
+      normal_prize = #{normalPrize,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ActivityLuckyTurntable">
+    update t_activity_lucky_turntable
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      intro = #{intro,jdbcType=VARCHAR},
+      consume_point = #{consumePoint,jdbcType=INTEGER},
+      user_limit = #{userLimit,jdbcType=INTEGER},
+      give_point = #{givePoint,jdbcType=INTEGER},
+      give_point_to_no_prize_only = #{givePointToNoPrizeOnly,jdbcType=INTEGER},
+      time_limit = #{timeLimit,jdbcType=INTEGER},
+      probability = #{probability,jdbcType=INTEGER},
+      success_tip = #{successTip,jdbcType=VARCHAR},
+      failed_tip = #{failedTip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,18 @@
+<base href="${contextPath}/"/>
+<div class="app-init-container" ng-controller='DocumentEditController'>
+    <nav class="ui-nav">
+        <ul>
+            <li id="js-nav-list-index" class="active">文档编辑</li>
+        </ul>
+    </nav>
+    <div class="app__content js-app-main">
+        <div class="app-design clearfix" ui-editor data="template_data" type="doc"></div>
+    </div>
+    <div class="app-actions" style="bottom: 0px;">
+        <div class="form-actions text-center">
+            <input class="btn btn-primary btn-add" type="submit" value="保存并发布" ng-click="save('save')">
+            <input class="btn btn-save" type="submit" value="保存成草稿" ng-click="save('saveCaoGao')">
+            <input class="btn btn-save" type="button" value="返回" ng-click="cancel()">
+        </div>
+    </div>
+</div>

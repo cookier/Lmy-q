@@ -1,0 +1,33 @@
+<div class="choice-image-box">
+    <% if(image_url) { %>
+        <div class="image-box">
+            <img src="<%= fullfillImage(image_url, '!140x140+2x.jpg') %>" class="image">
+            <a href="javascript:;" class="modify-image js-page-image">重新上传</a>
+        </div>
+    <% } else { %>
+        <a href="javascript:;" class="add-image js-page-image"><i class="icon-add"></i> 添加图片</a>
+        <div class="control-group">
+            <div class="controls">
+                <input type="hidden" name="image_url">
+            </div>
+        </div>
+    <% } %>
+</div>
+<div class="choice-content">
+    <div class="control-group">
+        <label class="control-label">链接：</label>
+        <div class="controls">
+            <%= renderLink(link_url, link_title, link_type) %>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <div class="control-action">
+                <a href="javascript:;" class="js-pop-anm-editor">设置动画</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <span class="action delete close-modal" title="删除">×</span>
+</div>

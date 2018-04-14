@@ -1,0 +1,54 @@
+<h4>封面页</h4>
+<div class="ui-box clearfix">
+    <% if(first_page_wipe == '0') { %>
+        <% if(first_page_image_url) { %>
+            <div class="image-box">
+                <img src="<%= fullfillImage(first_page_image_url, '!140x140+2x.jpg') %>" class="image">
+                <a href="javascript:;" class="modify-image js-first-page-image">重新上传</a>
+            </div>
+        <% } else { %>
+            <a href="javascript:;" class="add-image js-first-page-image"><i class="icon-add"></i> 添加图片</a>
+            <div class="control-group">
+                <div class="controls" style="margin: 2px;">
+                    <input type="hidden" name="first_page_image_url">
+                </div>
+            </div>
+        <% } %>
+    <% } else { %>
+        <div class="pull-left before-wipe">
+            <div class="pull-left">擦拭前：</div>
+            <div class="pull-left">
+                <% if(first_page_wipe_image_id) { %>
+                    <div class="image-box">
+                        <img src="<%= fullfillImage(first_page_wipe_image_url, '!140x140+2x.jpg') %>" class="image">
+                        <a href="javascript:;" class="modify-image js-first-page-wipe-image">重新上传</a>
+                    </div>
+                <% } else { %>
+                    <a href="javascript:;" class="add-image js-first-page-wipe-image"><i class="icon-add"></i> 添加图片</a>
+                <% } %>
+            </div>
+        </div>
+        <div class="pull-left after-wipe">
+            <div class="pull-left">擦拭后：</div>
+            <div class="pull-left">
+                <% if(first_page_image_id) { %>
+                    <div class="image-box">
+                        <img src="<%= fullfillImage(first_page_image_url, '!140x140+2x.jpg') %>" class="image">
+                        <a href="javascript:;" class="modify-image js-first-page-image">重新上传</a>
+                    </div>
+                <% } else { %>
+                    <a href="javascript:;" class="add-image js-first-page-image"><i class="icon-add"></i> 添加图片</a>
+                    <div class="control-group">
+                        <div class="controls" style="margin: 2px;">
+                            <input type="hidden" name="first_page_image_url">
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</div>
+<label  class="i-checks i-checks-sm">
+    <input type="checkbox" name="first_page_wipe" <% if(first_page_wipe == '1') {%>checked<%}%>>
+ <i></i>   启用擦拭屏幕后显示的交互效果
+</label>

@@ -1,0 +1,33 @@
+<div class="control-group">
+        <div ng-if="item.style ==0" class="custom-audio">
+            <div class="custom-audio-weixin clearfix "
+                    ng-class="{'custom-audio-weixin-right':item.bubble == 'right'}">
+                <img ng-src="{{item.avatar}}" src="http://img.yzcdn.cn/upload_files/shop2.png?imageView2/2/w/80/h/80/q/75/format/webp" width="40" height="40" class="custom-audio-logo">
+                <span class="custom-audio-bar">
+                    <img class="js-animation hide" src="/img/audio/player.gif" alt="播放器动画" width="13" height="17">
+                    <i class="custom-audio-animation-static js-animation-static"></i>
+                </span>
+                <span class="custom-audio-time js-duration"></span>
+            </div>
+        </div>
+        <div ng-if="item.style !=0" class="custom-audio">
+            <div class="custom-audio-music">
+                <i class="custom-audio-btn js-trigger"></i>
+                <span class="custom-audio-title">{{item.title}}</span>
+                <span class="custom-audio-status js-status"></span>
+                <span class="custom-audio-time">
+                    <span class="js-current-time"></span>
+                    <span class="js-duration"></span>
+                </span>
+                <span class="custom-audio-timeline js-percentage"></span>
+            </div>
+        </div>
+</div>
+<div class="actions">
+    <div class="actions-wrap">
+        <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+    </div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- To run the current sample code in your own environment, copy this to an html page. -->
+
+<html>
+  <head>
+    <script src="jquery-1.10.2.js"></script>
+    <script>
+      $(function(){
+        $("div").on("click",function(){
+          var $this = $(this);
+          $("body").append($this.clone());
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+  <div style="width:100px;height:100px;background: #FFF5D4; color: #FFFFFF;">ddddd</div>
+  </body>
+</html>

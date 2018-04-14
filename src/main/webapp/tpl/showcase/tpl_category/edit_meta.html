@@ -1,0 +1,39 @@
+<div class="control-group">
+	<label class="control-label"><em class="required">*</em>分类名：</label>
+	<div class="controls">
+		<input type="text" name="title" ng-model="data.title" ng-readonly="data.is_default != '0'">
+	</div>
+</div>
+<div ng-show="data.is_default == '0'" class="control-group">
+	<label class="control-label">第一优先级：</label>
+	<div class="controls">
+		<select name="first_priority" ng-model="data.first_priority">
+			<option value="0">序号越大越靠前</option>
+			<option value="1">创建时间越晚越靠前</option>
+			<option value="2">创建时间越早越靠前</option>
+			<option value="3">最热的排在前面</option>
+		</select>
+	</div>
+</div>
+<div ng-show="data.is_default == '0'" class="control-group">
+	<label class="control-label">第二优先级：</label>
+	<div class="controls">
+		<select name="second_priority" ng-model="data.second_priority">
+			<option value="0">序号越大越靠前</option>
+			<option value="1">创建时间越晚越靠前</option>
+			<option value="2">创建时间越早越靠前</option>
+			<option value="3">最热的排在前面</option>
+		</select>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label">显示方式：</label>
+	<div class="controls">
+		 <label class="i-checks i-checks-sm">
+			 <input type="radio" name="show_method" ng-model="data.show_method" value="0" ng-checked="data.show_method=0" ><i></i>仅显示杂志列表
+		</label>
+		<label class="i-checks i-checks-sm">
+			<input type="radio" name="show_method" ng-model="data.show_method" value="1" ng-checked="data.show_method=1"><i></i>用期刊方式展示
+		</label>
+	</div>
+</div>

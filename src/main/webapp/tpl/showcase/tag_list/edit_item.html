@@ -1,0 +1,36 @@
+<div class="edit-tag-list">
+    <div class="tag-source">
+        <div class="control-group">
+            <label class="control-label pull-left">商品来源：</label>
+            <div class="controls pull-left">
+                <a ng-show="item.title" href="{{item.url}}" target="_blank" class="tag-title new-window">{{item.title}}</a>
+                <a ng-show="item.title" href="javascript:;" class="tag-modify js-select-tag" ng-click="editGoodsTag(item)">修改</a>
+                <a ng-show="!item.title" href="javascript:;" class="js-select-tag pull-left" ng-click="editGoodsTag(item)">选择商品分组</a>
+            </div>
+        </div>
+    </div>
+    <div class="split-line"></div>
+    <div class="goods-number">
+        <span>显示商品数量</span>
+        <div class="dropdown hover pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">{{item.goods_number}}<i class="caret"></i></a>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a class="js-goods-number" data-value="5" ng-click="setGoodsNumber(item,5)">5</a>
+                </li>
+                <li>
+                    <a class="js-goods-number" data-value="10" ng-click="setGoodsNumber(item,10)">10</a>
+                </li>
+                <li>
+                    <a class="js-goods-number" data-value="15" ng-click="setGoodsNumber(item,15)">15</a>
+                </li>
+                <li>
+                    <a class="js-goods-number" data-value="30" ng-click="setGoodsNumber(item,30)">30</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <span class="action delete close-modal" title="删除" ng-click="delGoodsTag(item)">×</span>
+</div>

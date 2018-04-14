@@ -1,0 +1,81 @@
+<form class="form-horizontal edit-audio" novalidate ng-controller="UIAudioController">
+    <div class="control-group">
+        <label class="control-label">音频：</label>
+        <div class="controls">
+            <input type="hidden" ng-model="data.audio" name="audio">
+                <div ng-if="data.audio" class="voice-wrapper" data-voice-src="{{data.audio}}">
+                    <span class="voice-player">
+                        <span class="stop">点击播放</span>
+                        <span class="second"></span>
+                        <i class="play"></i>
+                    </span>
+                    <a href="javascript:;" class="js-choose-audio control-action" ng-click="setAudio()">重新选择音频</a>
+                </div>
+            <a  ng-if="!data.audio" href="javascript:;" class="js-choose-audio control-action" ng-click="setAudio()">选择音频</a>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">样式：</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="style"  value="0" ng-model="data.style" ng-checked="data.style== '0'">模仿微信对话样式
+            </label>
+                <div ng-if="data.style == '0'" class="control-group control-group-inner">
+                    <label class="control-label">头像：</label>
+                    <div class="controls">
+                        <div class="clearfix">
+                            <img ng-src="{{data.avatar}}" class="edit-audio-avatar">
+                            <div class="edit-audio-avatar-action">
+                                <div>
+                                    <a href="javascript:;" class="js-upload-avatar" ng-click="setAvatar()">上传头像</a>
+                                    <span class="c-gray"> | </span>
+                                    <a href="javascript:;" class="js-use-default-avatar" ng-click="setAvatarLogo()">使用店铺logo</a>
+                                </div>
+                                <p class="help-desc">建议尺寸80*80像素</p>
+                                <p class="help-desc">如果不设置，默认将使用店铺logo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="data.style == '0'" class="control-group control-group-inner">
+                    <label class="control-label">气泡：</label>
+                    <div class="controls">
+                        <label class="i-checks i-checks-sm">
+                            <input type="radio" name="bubble" value="left" ng-model="data.bubble" ng-checked="data.bubble == 'left'"><i></i>
+                            居左
+                        </label>
+                        <label class="i-checks i-checks-sm">
+                            <input type="radio" name="bubble" value="right" ng-model="data.bubble" ng-checked="data.bubble == 'right'"><i></i>
+                            居右
+                        </label>
+                    </div>
+                </div>
+            <label class="radio">
+                <input type="radio" name="style" value="1" ng-model="data.style" ng-checked="data.style== '1'">简易音乐播放器
+            </label>
+                <div ng-if="data.style == '1'" class="control-group control-group-inner">
+                    <label class="control-label">标题：</label>
+                    <div class="controls">
+                        <input type="text" placeholder="标题" name="title" ng-model="data.title">
+                    </div>
+                </div>
+                <div ng-if="data.style == '1'" class="control-group control-group-inner">
+                    循环：
+                    <label  class="i-checks i-checks-sm">
+                        <input type="checkbox" name="loop" ng-model="data.loop" ng-true-value="1" ng-false-value="0" ng-checked="data.loop ===1"   > <i></i>开启循环播放
+                    </label>
+                </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">播放：</label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="reload" value="1" ng-model="data.reload" ng-checked="data.reload == '1'">暂停后再恢复播放时，从头开始
+            </label>
+            <label class="radio">
+                <input type="radio" name="reload" value="0" ng-model="data.reload" ng-checked="data.reload == '0'">暂停后再恢复播放时，从暂停位置开始
+            </label>
+        </div>
+    </div>
+</form>

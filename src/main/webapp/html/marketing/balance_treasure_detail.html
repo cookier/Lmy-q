@@ -1,0 +1,151 @@
+<style>
+    .balance {
+        border: 1px solid #ccc;
+        height: 80px;
+        margin-bottom: 10px;
+    }
+
+    .money {
+        line-height: 40px;
+        font-size: 24px;
+        color: #f60;
+    }
+
+    .balance-title {
+        line-height: 28px;
+    }
+
+    .balance-info {
+        float: left;
+        width: 20%;
+        border-right: 1px solid #ccc;
+        padding: 5px;
+    }
+
+    .balance-info:last-child {
+        border-right: none;
+    }
+</style>
+<div class="app-init-container" ng-controller="BalanceTreasureDetailController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <div class="balance">
+                        <div class="balance-info" style='width:40%'>
+                            <div style='float:left;padding:3px 10px 0 5px;'>
+                                <div class="balance-title"><img src='{{user.icon_url}}'
+                                                                onerror="this.src='./img/main_ico_29.png'" width='45px'>
+                                </div>
+                                <div style='font-size:12px;color:#AAA;line-height:20px;'>{{user.nickname}}</div>
+                            </div>
+                            <div class="balance-title">可用余额</div>
+                            <div class="balance-content">
+                                <span class="money">{{sumMoney.available_money}}</span>
+                                <span class="unit">元</span>
+                                <!-- <a ui-sref="supplier.income_detail" class="pull-right">收支明细</a> -->
+                            </div>
+                        </div>
+                        <div class="balance-info">
+                            <div class="balance-title">累积分红名额</div>
+                            <div class="balance-content">
+                                <span class="money">{{sumMoney.bonus_num}}</span>
+                                <span class="unit">元</span>
+                                <!--  <a ui-sref="supplier.trading_list" class="pull-right">待结算记录</a>-->
+                            </div>
+                        </div>
+                        <div class="balance-info">
+                            <div class="balance-title">累积分红金额</div>
+                            <div class="balance-content">
+                                <span class="money money-font">{{sumMoney.bonus_money}}</span>
+                                <span class="unit">元</span>
+                                <!--  <a ui-sref="supplier.rechargeMoney" class="ui-btn ui-btn-primary pull-right js-recharge-money">充值</a>
+                                 <a ui-sref="supplier.applyWithdrawal" class="ui-btn ui-btn-primary pull-right btn-margin-right">提现</a> -->
+                            </div>
+                        </div>
+                        <div class="balance-info">
+                            <div class="balance-title">余额宝累积收益金额</div>
+                            <div class="balance-content">
+                                <span class="money money-font">{{sumMoney.balance_money}}</span>
+                                <span class="unit">元</span>
+                                <!--  <a ui-sref="supplier.rechargeMoney" class="ui-btn ui-btn-primary pull-right js-recharge-money">充值</a>
+                                 <a ui-sref="supplier.applyWithdrawal" class="ui-btn ui-btn-primary pull-right btn-margin-right">提现</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="filter-groups" style='float:left;'>
+                <div class="control-group">
+                    <label class="control-label">交易类型：</label>
+                    <select name="tradeType" ng-model="data.tradeType" style="height: 30px;width: 200px;"
+                            ng-options="f.value as f.name for f in tradeType">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pull-left" style='float:left;'>
+                <div class="time-filter-groups clearfix">
+                    <div class="control-group">
+                        <label class="control-label" style='margin-left:40px;'>时间：</label>
+                        <input type="text" id="beginCreateTime" ng-model="data.beginCreateTime"
+                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                               class="Wdate" style="width: 150px; height: 30px;"> <span>至</span>
+                        <input type="text" id="endCreateTime" ng-model="data.endCreateTime"
+                               date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                               class="Wdate" style="width: 150px; height: 30px;"> <span
+                            class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                        <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                        <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                           data-loading-text="正在筛选..." ng-click="pageChanged()">筛选</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-box">
+            <table class="ui-table-order" style="padding: 0px;">
+                <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                <tr class="widget-list-header">
+                    <th width='150px'>时间</th>
+                    <th>交易类型</th>
+                    <th width='150px' style='text-align:right;'>当前账号余额</th>
+                    <th width='150px' style='text-align:right;'>交易金额</th>
+                    <th width='150px' style='text-align:center;'>交易状态</th>
+                </tr>
+                </thead>
+                <tbody class="js-list-body-region">
+                <tr class="widget-list-item" ng-repeat="data in pageData.list track by $index">
+                    <td>{{data.order_time}}</td>
+                    <td>
+                        {{data.trade_type==0?"异常":data.trade_type==1?"订单交易":data.trade_type==2?"提现":data.trade_type==3?"返现":data.trade_type==4?"返现退回":data.trade_type==5?"退款":data.trade_type==6?"交易手续费":data.trade_type==7?"交易补贴":data.trade_type==8?"系统退款":data.trade_type==9?"充值":data.trade_type==10?"冻结保证金":data.trade_type==11?"平台分红":data.trade_type==12?"订单提成":data.trade_type==13?"转账":data.trade_type==14?"解冻保证金":data.trade_type==15?"余额支付":data.trade_type==16?"余额支付退款":data.trade_type==17?"余额收益":""}}
+                        <span ng-if='data.order_no'> ( 订单号:{{data.order_no}} )</span>
+                    </td>
+                    <td style='text-align:right;'>{{data.balance?data.balance:0}}</td>
+                    <td style='text-align:right;color:#f60;'><span ng-if='data.bill_type==0'>-</span><span
+                            ng-if='data.bill_type==1'>+</span> {{data.money?data.money:0}}
+                    </td>
+                    <td style='text-align:center;'>
+                        {{data.pay_status==0?"等待支付":data.pay_status==1?"支付完成":data.pay_status==2?"支付失败":""}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="js-list-empty-region"></div>
+        </div>
+        <div class="js-list-footer-region ui-box">
+            <div class="widget-list-footer" ng-show="pageData.totalRow>0">
+                <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                   total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                                   page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                                   previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                   last-text="&raquo;"></custom-pagination>
+            </div>
+            <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                 style="text-align: center;">没有找到相关记录!
+            </div>
+        </div>
+    </div>
+</div>
+</div>

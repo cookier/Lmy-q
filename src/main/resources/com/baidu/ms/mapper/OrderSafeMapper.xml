@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.OrderSafeMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.OrderSafe">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="safe_no" jdbcType="VARCHAR" property="safeNo"/>
+        <result column="refund_fee" jdbcType="DOUBLE" property="refundFee"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="postage" jdbcType="DOUBLE" property="postage"/>
+        <result column="safe_type" jdbcType="INTEGER" property="safeType"/>
+        <result column="safe_type_str" jdbcType="VARCHAR" property="safeTypeStr"/>
+        <result column="safe_reason" jdbcType="INTEGER" property="safeReason"/>
+        <result column="safe_reason_str" jdbcType="VARCHAR" property="safeReasonStr"/>
+        <result column="supplier_order_no" jdbcType="VARCHAR" property="supplierOrderNo"/>
+        <result column="supplier_refund_fee" jdbcType="DOUBLE" property="supplierRefundFee"/>
+        <result column="supplier_real_pay" jdbcType="DOUBLE" property="supplierRealPay"/>
+        <result column="seller_refund_fee" jdbcType="DOUBLE" property="sellerRefundFee"/>
+        <result column="is_assume" jdbcType="INTEGER" property="isAssume"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="seller_real_pay" jdbcType="DOUBLE" property="sellerRealPay"/>
+        <result column="platform_refund_feed" jdbcType="DOUBLE" property="platformRefundFeed"/>
+        <result column="platform_real_pay" jdbcType="DOUBLE" property="platformRealPay"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="INTEGER" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="order_item_id" jdbcType="INTEGER" property="orderItemId"/>
+        <result column="refund_address" jdbcType="VARCHAR" property="refundAddress"/>
+        <result column="refund_express_no" jdbcType="VARCHAR" property="refundExpressNo"/>
+        <result column="refund_express_name" jdbcType="VARCHAR" property="refundExpressName"/>
+        <result column="refund_pay_id" jdbcType="VARCHAR" property="refundPayId"/>
+        <result column="status_str" jdbcType="VARCHAR" property="statusStr"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, user_id, safe_no, refund_fee, order_no, postage, safe_type, safe_type_str, 
+    safe_reason, safe_reason_str, supplier_order_no, supplier_refund_fee, supplier_real_pay, 
+    seller_refund_fee, is_assume, phone, remark, seller_real_pay, platform_refund_feed, 
+    platform_real_pay, create_time, update_by, update_time, order_item_id, refund_address, 
+    refund_express_no, refund_express_name, refund_pay_id, status_str, status
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.OrderSafeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_order_safe
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order_safe
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order_safe
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.OrderSafeExample">
+        delete from t_order_safe
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.OrderSafe">
+    insert into t_order_safe (id, shop_id, user_id, 
+      safe_no, refund_fee, order_no, 
+      postage, safe_type, safe_type_str, 
+      safe_reason, safe_reason_str, supplier_order_no, 
+      supplier_refund_fee, supplier_real_pay, seller_refund_fee, 
+      is_assume, phone, remark, 
+      seller_real_pay, platform_refund_feed, platform_real_pay, 
+      create_time, update_by, update_time, 
+      order_item_id, refund_address, refund_express_no, 
+      refund_express_name, refund_pay_id, status_str, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{safeNo,jdbcType=VARCHAR}, #{refundFee,jdbcType=DOUBLE}, #{orderNo,jdbcType=VARCHAR}, 
+      #{postage,jdbcType=DOUBLE}, #{safeType,jdbcType=INTEGER}, #{safeTypeStr,jdbcType=VARCHAR}, 
+      #{safeReason,jdbcType=INTEGER}, #{safeReasonStr,jdbcType=VARCHAR}, #{supplierOrderNo,jdbcType=VARCHAR}, 
+      #{supplierRefundFee,jdbcType=DOUBLE}, #{supplierRealPay,jdbcType=DOUBLE}, #{sellerRefundFee,jdbcType=DOUBLE}, 
+      #{isAssume,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{sellerRealPay,jdbcType=DOUBLE}, #{platformRefundFeed,jdbcType=DOUBLE}, #{platformRealPay,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{orderItemId,jdbcType=INTEGER}, #{refundAddress,jdbcType=VARCHAR}, #{refundExpressNo,jdbcType=VARCHAR}, 
+      #{refundExpressName,jdbcType=VARCHAR}, #{refundPayId,jdbcType=VARCHAR}, #{statusStr,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.OrderSafe">
+        insert into t_order_safe
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="safeNo != null">
+                safe_no,
+            </if>
+            <if test="refundFee != null">
+                refund_fee,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="postage != null">
+                postage,
+            </if>
+            <if test="safeType != null">
+                safe_type,
+            </if>
+            <if test="safeTypeStr != null">
+                safe_type_str,
+            </if>
+            <if test="safeReason != null">
+                safe_reason,
+            </if>
+            <if test="safeReasonStr != null">
+                safe_reason_str,
+            </if>
+            <if test="supplierOrderNo != null">
+                supplier_order_no,
+            </if>
+            <if test="supplierRefundFee != null">
+                supplier_refund_fee,
+            </if>
+            <if test="supplierRealPay != null">
+                supplier_real_pay,
+            </if>
+            <if test="sellerRefundFee != null">
+                seller_refund_fee,
+            </if>
+            <if test="isAssume != null">
+                is_assume,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="sellerRealPay != null">
+                seller_real_pay,
+            </if>
+            <if test="platformRefundFeed != null">
+                platform_refund_feed,
+            </if>
+            <if test="platformRealPay != null">
+                platform_real_pay,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="orderItemId != null">
+                order_item_id,
+            </if>
+            <if test="refundAddress != null">
+                refund_address,
+            </if>
+            <if test="refundExpressNo != null">
+                refund_express_no,
+            </if>
+            <if test="refundExpressName != null">
+                refund_express_name,
+            </if>
+            <if test="refundPayId != null">
+                refund_pay_id,
+            </if>
+            <if test="statusStr != null">
+                status_str,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="safeNo != null">
+                #{safeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="refundFee != null">
+                #{refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="postage != null">
+                #{postage,jdbcType=DOUBLE},
+            </if>
+            <if test="safeType != null">
+                #{safeType,jdbcType=INTEGER},
+            </if>
+            <if test="safeTypeStr != null">
+                #{safeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="safeReason != null">
+                #{safeReason,jdbcType=INTEGER},
+            </if>
+            <if test="safeReasonStr != null">
+                #{safeReasonStr,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierOrderNo != null">
+                #{supplierOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierRefundFee != null">
+                #{supplierRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="supplierRealPay != null">
+                #{supplierRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="sellerRefundFee != null">
+                #{sellerRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isAssume != null">
+                #{isAssume,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerRealPay != null">
+                #{sellerRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="platformRefundFeed != null">
+                #{platformRefundFeed,jdbcType=DOUBLE},
+            </if>
+            <if test="platformRealPay != null">
+                #{platformRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderItemId != null">
+                #{orderItemId,jdbcType=INTEGER},
+            </if>
+            <if test="refundAddress != null">
+                #{refundAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="refundExpressNo != null">
+                #{refundExpressNo,jdbcType=VARCHAR},
+            </if>
+            <if test="refundExpressName != null">
+                #{refundExpressName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundPayId != null">
+                #{refundPayId,jdbcType=VARCHAR},
+            </if>
+            <if test="statusStr != null">
+                #{statusStr,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.OrderSafeExample" resultType="java.lang.Long">
+        select count(*) from t_order_safe
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_order_safe
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.safeNo != null">
+                safe_no = #{record.safeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.refundFee != null">
+                refund_fee = #{record.refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="record.orderNo != null">
+                order_no = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.postage != null">
+                postage = #{record.postage,jdbcType=DOUBLE},
+            </if>
+            <if test="record.safeType != null">
+                safe_type = #{record.safeType,jdbcType=INTEGER},
+            </if>
+            <if test="record.safeTypeStr != null">
+                safe_type_str = #{record.safeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.safeReason != null">
+                safe_reason = #{record.safeReason,jdbcType=INTEGER},
+            </if>
+            <if test="record.safeReasonStr != null">
+                safe_reason_str = #{record.safeReasonStr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.supplierOrderNo != null">
+                supplier_order_no = #{record.supplierOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.supplierRefundFee != null">
+                supplier_refund_fee = #{record.supplierRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="record.supplierRealPay != null">
+                supplier_real_pay = #{record.supplierRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="record.sellerRefundFee != null">
+                seller_refund_fee = #{record.sellerRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="record.isAssume != null">
+                is_assume = #{record.isAssume,jdbcType=INTEGER},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sellerRealPay != null">
+                seller_real_pay = #{record.sellerRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="record.platformRefundFeed != null">
+                platform_refund_feed = #{record.platformRefundFeed,jdbcType=DOUBLE},
+            </if>
+            <if test="record.platformRealPay != null">
+                platform_real_pay = #{record.platformRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateBy != null">
+                update_by = #{record.updateBy,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.orderItemId != null">
+                order_item_id = #{record.orderItemId,jdbcType=INTEGER},
+            </if>
+            <if test="record.refundAddress != null">
+                refund_address = #{record.refundAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.refundExpressNo != null">
+                refund_express_no = #{record.refundExpressNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.refundExpressName != null">
+                refund_express_name = #{record.refundExpressName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.refundPayId != null">
+                refund_pay_id = #{record.refundPayId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.statusStr != null">
+                status_str = #{record.statusStr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_order_safe
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        safe_no = #{record.safeNo,jdbcType=VARCHAR},
+        refund_fee = #{record.refundFee,jdbcType=DOUBLE},
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+        postage = #{record.postage,jdbcType=DOUBLE},
+        safe_type = #{record.safeType,jdbcType=INTEGER},
+        safe_type_str = #{record.safeTypeStr,jdbcType=VARCHAR},
+        safe_reason = #{record.safeReason,jdbcType=INTEGER},
+        safe_reason_str = #{record.safeReasonStr,jdbcType=VARCHAR},
+        supplier_order_no = #{record.supplierOrderNo,jdbcType=VARCHAR},
+        supplier_refund_fee = #{record.supplierRefundFee,jdbcType=DOUBLE},
+        supplier_real_pay = #{record.supplierRealPay,jdbcType=DOUBLE},
+        seller_refund_fee = #{record.sellerRefundFee,jdbcType=DOUBLE},
+        is_assume = #{record.isAssume,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        seller_real_pay = #{record.sellerRealPay,jdbcType=DOUBLE},
+        platform_refund_feed = #{record.platformRefundFeed,jdbcType=DOUBLE},
+        platform_real_pay = #{record.platformRealPay,jdbcType=DOUBLE},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_by = #{record.updateBy,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        order_item_id = #{record.orderItemId,jdbcType=INTEGER},
+        refund_address = #{record.refundAddress,jdbcType=VARCHAR},
+        refund_express_no = #{record.refundExpressNo,jdbcType=VARCHAR},
+        refund_express_name = #{record.refundExpressName,jdbcType=VARCHAR},
+        refund_pay_id = #{record.refundPayId,jdbcType=VARCHAR},
+        status_str = #{record.statusStr,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.OrderSafe">
+        update t_order_safe
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="safeNo != null">
+                safe_no = #{safeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="refundFee != null">
+                refund_fee = #{refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="postage != null">
+                postage = #{postage,jdbcType=DOUBLE},
+            </if>
+            <if test="safeType != null">
+                safe_type = #{safeType,jdbcType=INTEGER},
+            </if>
+            <if test="safeTypeStr != null">
+                safe_type_str = #{safeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="safeReason != null">
+                safe_reason = #{safeReason,jdbcType=INTEGER},
+            </if>
+            <if test="safeReasonStr != null">
+                safe_reason_str = #{safeReasonStr,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierOrderNo != null">
+                supplier_order_no = #{supplierOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierRefundFee != null">
+                supplier_refund_fee = #{supplierRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="supplierRealPay != null">
+                supplier_real_pay = #{supplierRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="sellerRefundFee != null">
+                seller_refund_fee = #{sellerRefundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isAssume != null">
+                is_assume = #{isAssume,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerRealPay != null">
+                seller_real_pay = #{sellerRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="platformRefundFeed != null">
+                platform_refund_feed = #{platformRefundFeed,jdbcType=DOUBLE},
+            </if>
+            <if test="platformRealPay != null">
+                platform_real_pay = #{platformRealPay,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderItemId != null">
+                order_item_id = #{orderItemId,jdbcType=INTEGER},
+            </if>
+            <if test="refundAddress != null">
+                refund_address = #{refundAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="refundExpressNo != null">
+                refund_express_no = #{refundExpressNo,jdbcType=VARCHAR},
+            </if>
+            <if test="refundExpressName != null">
+                refund_express_name = #{refundExpressName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundPayId != null">
+                refund_pay_id = #{refundPayId,jdbcType=VARCHAR},
+            </if>
+            <if test="statusStr != null">
+                status_str = #{statusStr,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.OrderSafe">
+    update t_order_safe
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      safe_no = #{safeNo,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=DOUBLE},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      postage = #{postage,jdbcType=DOUBLE},
+      safe_type = #{safeType,jdbcType=INTEGER},
+      safe_type_str = #{safeTypeStr,jdbcType=VARCHAR},
+      safe_reason = #{safeReason,jdbcType=INTEGER},
+      safe_reason_str = #{safeReasonStr,jdbcType=VARCHAR},
+      supplier_order_no = #{supplierOrderNo,jdbcType=VARCHAR},
+      supplier_refund_fee = #{supplierRefundFee,jdbcType=DOUBLE},
+      supplier_real_pay = #{supplierRealPay,jdbcType=DOUBLE},
+      seller_refund_fee = #{sellerRefundFee,jdbcType=DOUBLE},
+      is_assume = #{isAssume,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      seller_real_pay = #{sellerRealPay,jdbcType=DOUBLE},
+      platform_refund_feed = #{platformRefundFeed,jdbcType=DOUBLE},
+      platform_real_pay = #{platformRealPay,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      order_item_id = #{orderItemId,jdbcType=INTEGER},
+      refund_address = #{refundAddress,jdbcType=VARCHAR},
+      refund_express_no = #{refundExpressNo,jdbcType=VARCHAR},
+      refund_express_name = #{refundExpressName,jdbcType=VARCHAR},
+      refund_pay_id = #{refundPayId,jdbcType=VARCHAR},
+      status_str = #{statusStr,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

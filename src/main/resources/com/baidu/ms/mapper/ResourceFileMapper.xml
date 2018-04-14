@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ResourceFileMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ResourceFile">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="media_id" jdbcType="VARCHAR" property="mediaId"/>
+        <result column="media_time" jdbcType="TIMESTAMP" property="mediaTime"/>
+        <result column="file_url" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="width" jdbcType="INTEGER" property="width"/>
+        <result column="height" jdbcType="INTEGER" property="height"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, shop_id, file_name, file_type, media_id, media_time, file_url, url, width, height, 
+    create_time
+  </sql>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ResourceFileExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_resource_file
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_resource_file
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_resource_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ResourceFileExample">
+        delete from t_resource_file
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ResourceFile">
+    insert into t_resource_file (id, shop_id, file_name, 
+      file_type, media_id, media_time, 
+      file_url, url, width, 
+      height, create_time)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{mediaId,jdbcType=VARCHAR}, #{mediaTime,jdbcType=TIMESTAMP}, 
+      #{fileUrl,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{width,jdbcType=INTEGER}, 
+      #{height,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ResourceFile">
+        insert into t_resource_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="mediaId != null">
+                media_id,
+            </if>
+            <if test="mediaTime != null">
+                media_time,
+            </if>
+            <if test="fileUrl != null">
+                file_url,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="width != null">
+                width,
+            </if>
+            <if test="height != null">
+                height,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaId != null">
+                #{mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaTime != null">
+                #{mediaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fileUrl != null">
+                #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="width != null">
+                #{width,jdbcType=INTEGER},
+            </if>
+            <if test="height != null">
+                #{height,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ResourceFileExample" resultType="java.lang.Long">
+        select count(*) from t_resource_file
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_resource_file
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.fileName != null">
+                file_name = #{record.fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fileType != null">
+                file_type = #{record.fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mediaId != null">
+                media_id = #{record.mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mediaTime != null">
+                media_time = #{record.mediaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.fileUrl != null">
+                file_url = #{record.fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.width != null">
+                width = #{record.width,jdbcType=INTEGER},
+            </if>
+            <if test="record.height != null">
+                height = #{record.height,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_resource_file
+        set id = #{record.id,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+        file_type = #{record.fileType,jdbcType=VARCHAR},
+        media_id = #{record.mediaId,jdbcType=VARCHAR},
+        media_time = #{record.mediaTime,jdbcType=TIMESTAMP},
+        file_url = #{record.fileUrl,jdbcType=VARCHAR},
+        url = #{record.url,jdbcType=VARCHAR},
+        width = #{record.width,jdbcType=INTEGER},
+        height = #{record.height,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ResourceFile">
+        update t_resource_file
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaId != null">
+                media_id = #{mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaTime != null">
+                media_time = #{mediaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fileUrl != null">
+                file_url = #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="width != null">
+                width = #{width,jdbcType=INTEGER},
+            </if>
+            <if test="height != null">
+                height = #{height,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ResourceFile">
+    update t_resource_file
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      media_id = #{mediaId,jdbcType=VARCHAR},
+      media_time = #{mediaTime,jdbcType=TIMESTAMP},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      width = #{width,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

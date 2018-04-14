@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <a class="close js-news-modal-dismiss" data-dismiss="modal"
+       ng-click="cancel()">×</a>
+</div>
+<div class="modal-body">
+    <div class="tab-content">
+        <div id="js-module-goods" class="tab-pane module-goods active">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="title">
+                        <div class="td-cont">
+                            <span></span> <a class="js-update" ng-click="pageChanged()">优惠券名称</a>
+                        </div>
+                    </th>
+                    <th class="title">
+                        <div class="td-cont">
+                            <span>创建时间</span>
+                        </div>
+                    </th>
+                    <th class="title">
+                        <div class="td-cont">
+                            <span>选择</span>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <!-- 表格数据区 -->
+                <tbody>
+                <tr ng-repeat="data in list">
+                    <td class="title">
+                        <div class="td-cont">
+                            <a>{{data.name}}</a>
+                        </div>
+                    </td>
+                    <td class="title">
+                        <div class="td-cont">
+                            <span>{{data.create_time}} </span>
+                        </div>
+                    </td>
+                    <td class="time">
+                        <button ng-click="selectGoods(data)">确定</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<footer class="panel-footer">
+    <div class="row">
+        <div ng-show="(list==null)||(list.length==0)"
+             style="text-align: center;">没有找到该活动对应的优惠券 请先去分配优惠卷!
+        </div>
+    </div>
+</footer>

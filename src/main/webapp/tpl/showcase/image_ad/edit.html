@@ -1,0 +1,35 @@
+<form class="form-horizontal" novalidate ng-controller="UIImageAdEditorController">
+    <div class="control-group">
+        <label class="control-label">显示方式：</label>
+        <div class="controls">
+                <label class="i-checks i-checks-sm">
+                        <input type="radio" name="show_method" value="0" ng-model="data.show_method" ng-checked="data.show_method ==0" ><i></i>折叠轮播
+                </label>
+                <label class="i-checks i-checks-sm">
+                        <input type="radio" name="show_method" value="1" ng-model="data.show_method" ng-checked="data.show_method ==1"><i></i>分开显示
+                </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">显示大小：</label>
+        <div class="controls">
+            <label class="i-checks i-checks-sm">
+                <input type="radio" name="size" value="0" ng-model="data.size" ng-checked="data.size ==0"><i></i>大图
+            </label>
+            <label ng-show="data.show_method ==1" class="i-checks i-checks-sm">
+                <input type="radio" name="size" value="1" ng-model="data.size" ng-checked="data.size ==1"><i></i>小图
+            </label>
+        </div>
+    </div>
+
+    <div class="control-group js-choices-region">
+        <ul class="choices ui-sortable">
+            <li class="choice" ng-repeat="item in data.sub_entry" ng-include="'tpl/showcase/image_ad/edit_item.html'">
+            </li>
+        </ul>
+    </div>
+
+    <div class="control-group options">
+        <a href="javascript:void(0);" class="add-option js-add-option" ng-click="add()"><i class="icon-add"></i> 添加一个广告</a>
+    </div>
+</form>

@@ -1,0 +1,44 @@
+<div class="control-group">
+    <ul ng-show="item.sub_entry.length <1" class="custom-nav clearfix">
+            <li>
+        <a class="clearfix" href="javascript: void(0);" target="_blank">
+            <span class="custom-nav-title">点此编辑第1条『关联链接』</span>
+                            <i class="pull-right right-arrow"></i>
+                    </a>
+    </li>
+            <li>
+        <a class="clearfix" href="javascript: void(0);" target="_blank">
+            <span class="custom-nav-title">点此编辑第2条『关联链接』</span>
+                            <i class="pull-right right-arrow"></i>
+                    </a>
+    </li>
+            <li>
+        <a class="clearfix" href="javascript: void(0);" target="_blank">
+            <span class="custom-nav-title">点此编辑第n条『关联链接』</span>
+                            <i class="pull-right right-arrow"></i>
+                    </a>
+    </li>
+    </ul>
+    <ul ng-show="item.sub_entry.length >0" ng-repeat="subItem in item.sub_entry track by $index" class="custom-link clearfix">
+        <li  ng-if="subItem.source_type != 'link'" ng-repeat="n in [] | range:subItem.number" ng-repeat="subItem in item.sub_entry">
+            <a href="javascript:;" class="custom-link-link">
+                <h3 ng-if="subItem.source_type == 'link'" class="title">{{subItem.source_title}}</h3>
+                <h3 ng-if="subItem.source_type != 'link'" class="title">第{{$index+1}}条 {{subItem.source_title}} 的『关联链接』</h3>
+                <i class="pull-right right-arrow"></i>
+            </a>
+        </li>
+        <li ng-if="subItem.source_type == 'link'">
+            <a href="javascript:;" class="custom-link-link">
+                <h3 ng-if="subItem.source_type == 'link'" class="title">{{subItem.source_title}}</h3>
+                <i class="pull-right right-arrow"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="component-border"></div>
+</div>
+<div class="actions">
+    <div class="actions-wrap"><span class="action edit" ng-click="edit(item)">编辑</span><span class="action add" ng-click="append($index,$event)">加内容</span><span class="action delete" ng-click="del(item,$event)">删除</span></div>
+</div>
+<div class="sort">
+    <i class="sort-handler"></i>
+</div>

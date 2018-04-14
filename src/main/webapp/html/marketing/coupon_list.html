@@ -1,0 +1,215 @@
+<link rel="stylesheet" href="./css/tradeincard_3041b87d27.css"
+      type="text/css">
+
+<div class="app-init-container" ng-controller="CouponListController">
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="tab-0" class="active"><a ng-click="setTab('0')">所有优惠券</a></li>
+            <li id="tab-1"><a ng-click="setTab('1')">未开始</a></li>
+            <li id="tab-2"><a ng-click="setTab('2')">进行中</a></li>
+            <li id="tab-3"><a ng-click="setTab('3')">已结束</a></li>
+            <li id="tab-4"><a ng-click="setTab('4')">用户的优惠券</a></li>
+        </ul>
+        <div class="pull-right common-helps-entry hide">
+            <a href="#" target="_blank"> <span class="help-icon"></span>
+                查看【优惠券】设置及应用教程
+            </a>
+        </div>
+    </nav>
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <div class="js-list-filter-region clearfix ui-box"
+                 style="position: relative;">
+                <div class="widget-list-filter">
+                    <a ui-sref="console.ump_coupon_edit('0')" class="ui-btn ui-btn-success" ng-if="tab!=4">新建优惠券</a>
+                    <a class="ui-btn ui-btn-danger" ng-if="tab==4" ng-click="failure()">使失效</a>
+                    <div class="js-list-search ui-search-box">
+                        <input ng-model="name" type="text" placeholder="用户昵称"
+                               class="input-sm"/>
+                        <input ng-show="curTab=='4'" ng-model="mobile" type="text" placeholder="手机号码"
+                               class="input-sm"/>
+                        <button ng-show="curTab=='0'||curTab=='1'||curTab=='2'||curTab=='3'"
+                                class="btn btn-sm btn-default" type="button"
+                                ng-click="pageChanged()">Go!
+                        </button>
+                        <button ng-show="curTab=='4'" class="btn btn-sm btn-default" type="button"
+                                ng-click="pageChanged1()">Go!
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-box" ng-if="curTab=='0'||curTab=='1'||curTab=='2'||curTab=='3'">
+                <form>
+                    <div class="js-list-empty-region">
+                        <div class="panel panel-default">
+                            <div class="table-responsive">
+                                <table class="ui-table ui-table-list" style="padding: 0px;">
+                                    <thead class="js-list-header-region tableFloatingHeader">
+                                    <tr class="widget-list-header">
+                                        <th class="text-left">优惠券名称</th>
+                                        <th>来源</th>
+                                        <th>类型</th>
+                                        <th>价值(元)</th>
+                                        <th>领取限制</th>
+                                        <th>有效期</th>
+                                        <th>已领取(张)</th>
+                                        <th>总发行数(张)</th>
+                                        <th>已使用(张)</th>
+                                        <th class="text-right">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="js-list-body-region">
+                                    <tr class="widget-list-item" ng-repeat="item in pageData.list">
+                                        <td class="text-left">
+                                            <p>{{item.name}}</p>
+                                        </td>
+                                        <!-- 0平台，1供应商，2店铺 -->
+                                        <td>{{item.source==0?'平台':(item.source==1?'供应商':'分销商')}}</td>
+                                        <td>{{item.type==0?'优惠券':'购物券'}}</td>
+                                        <td>{{item.amount}}
+                                            <p class="gray">最低消费: ￥{{item.order_money_limit}}</p>
+                                        </td>
+                                        <td>
+                                            <p ng-show="item.each_one_limit_count==0">不限张数</p>
+                                            <p ng-show="item.each_one_limit_count>0">
+                                                {{item.each_one_limit_count}}张/人</p>
+                                            <p class="gray">库存：{{item.issue_quantity-item.received_people_count}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-left">{{item.valid_time}}</p>
+                                            <p class="text-left">至</p>
+                                            <p class="text-left">{{item.expire_time}}</p>
+                                        </td>
+                                        <td>
+                                            <a ui-sref="console.ump_couponlog_list({couponId:item.id,status:1})">{{item.received_people_count}}</a>
+                                        </td>
+                                        <td>{{item.issue_quantity}}</td>
+                                        <td><a ui-sref="console.ump_couponlog_list({couponId:item.id,status:2})">{{item.used_count}}</a>
+                                        </td>
+                                        <td class="text-right">
+                                            <div ng-show="item.invalid_status==0&&(item.can_receive_quantity>0)&&item.stop_grant_flag==0">
+                                                <i>
+                                                    <div class="btn-group dropdown" dropdown ng-show="false">
+                                                        <button class="btn btn-success" dropdown-toggle>发放给 <span
+                                                                class="caret"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <!-- 0=所有会员，1=平台，2=所有店铺，3=所有分销商，4=指定分销商，5=所有供应商，6=指定供应商，7=指定会员，8=活动参与者，9=活动推广者  -->
+                                                            <!-- <li><a ng-click="grant(1,{{item.id}})">平台</a></li>  -->
+                                                            <!-- <li><a ng-click="grant(8,{{item.id}},{{item.type}})">指定活动参与者</a></li> -->
+                                                            <!-- <li><a ng-click="grant(9,{{item.id}},{{item.type}})">指定活动推广者</a></li> -->
+                                                            <li><a ng-click="grant(10,item.id,item.type)">指定分销商</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </i>
+                                                <input type="hidden" ng-model="item.url"/>
+                                                <a class="js-copy-link" clip-copy="item.url" clip-click="fallback()">复制链接</a>
+                                                <span class="gray">-</span>
+                                                <a ui-sref="console.ump_coupon_edit({id:item.id})">编辑</a>
+                                                <span class="gray">-</span>
+                                                <a class="js-disabled" ng-click="setInvalid(item)">使失效</a>
+                                                <a class="js-disabled" ng-click="setStopGrant(item)">停止发放</a>
+                                            </div>
+                                            <div ng-show="item.invalid_status==1">已失效</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="panel-footer">
+                                <div class="row">
+                                    <div ng-show="pageData.totalRow>0">
+                                        <custom-pagination boundary-links="true"
+                                                           ng-change="pageChanged()" total-items="pageData.totalRow"
+                                                           ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                                           class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                                           next-text="&rsaquo;" first-text="&laquo;"
+                                                           last-text="&raquo;"></custom-pagination>
+                                    </div>
+                                    <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                                         style="text-align: center;">没有找到相关记录!
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div ng-if="curTab=='4'">
+                <form>
+                    <div class="js-list-empty-region">
+                        <div class="panel panel-default">
+                            <div class="table-responsive">
+                                <table class="ui-table ui-table-list" style="padding: 0px;">
+                                    <thead class="js-list-header-region tableFloatingHeader">
+                                    <tr class="widget-list-header">
+                                        <th style="width: 20px;">
+                                            <label class="i-checks i-checks-sm" ng-show="chooseMode!=1">
+                                                <input type="checkbox" ng-checked="isCheckedAll()"
+                                                       ng-click="checkAll()"><i></i>
+                                            </label>
+                                        </th>
+                                        <th>用户名</th>
+                                        <th>优惠券名称</th>
+                                        <th>优惠券面值</th>
+                                        <th>是否使用</th>
+                                        <th>领取时间</th>
+                                        <th>订单号</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="js-list-body-region">
+                                    <tr class="widget-list-item" ng-repeat="item in pageData.list">
+                                        <td>
+                                            <label class="i-checks i-checks-sm" ng-show="chooseMode!=1">
+                                                <input id="{{item.chk}}" type="checkbox" ng-checked="item.chk"
+                                                       ng-click="item.chk = !item.chk"><i></i>
+                                            </label>
+                                        </td>
+                                        <td>{{item.nickname}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.amount}}</td>
+                                        <td>
+                                            {{item.status?(item.status==1?'未使用':(item.status==2?'已使用':(item.status==3?'失效':(item.status==4?'锁定':'异常')))):'异常'}}
+                                        </td>
+                                        <td>{{item.receive_time}}</td>
+                                        <td>{{item.order_no}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="panel-footer" ng-show="curTab=='4'">
+                                <div class="row">
+                                    <div ng-show="pageData.totalRow>0">
+                                        <custom-pagination boundary-links="true"
+                                                           ng-change="pageChanged1()" total-items="pageData.totalRow"
+                                                           ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                                           class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                                           next-text="&rsaquo;" first-text="&laquo;"
+                                                           last-text="&raquo;"></custom-pagination>
+                                    </div>
+                                    <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                                         style="text-align: center;">没有找到相关记录!
+                                    </div>
+                                </div>
+                            </footer>
+                            <footer class="panel-footer" ng-show="curTab=='0'||curTab=='1'||curTab=='2'||curTab=='3'">
+                                <div class="row">
+                                    <div ng-show="pageData.totalRow>0">
+                                        <custom-pagination boundary-links="true"
+                                                           ng-change="pageChanged()" total-items="pageData.totalRow"
+                                                           ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                                           class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                                           next-text="&rsaquo;" first-text="&laquo;"
+                                                           last-text="&raquo;"></custom-pagination>
+                                    </div>
+                                    <div ng-show="(pageData.totalRow==0)||(pageData=='')"
+                                         style="text-align: center;">没有找到相关记录!
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

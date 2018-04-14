@@ -1,0 +1,7 @@
+<form class="form-horizontal" novalidate ng-controller="UINavController">
+    <div class="js-collection-region">
+        <ul class="choices ui-sortable">
+            <li class="choice" ng-repeat="item in data.sub_entry" ng-include="'tpl/showcase/nav/edit_item.html'"></li>
+        </ul>
+    </div>
+</form>

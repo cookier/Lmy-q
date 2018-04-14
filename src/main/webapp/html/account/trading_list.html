@@ -1,0 +1,227 @@
+<link rel="stylesheet" href="./css/newsettlement.css" type="text/css">
+
+<div class="app-init-container" ng-controller="AccountTradeListController">
+    <!-- <alert class="alert">
+        最新规范：<span class="red">套现商家处理规则</span> <a>查看详情</a>
+    </alert> -->
+    <nav class="ui-nav clearfix">
+        <ul class="pull-left">
+            <li id="js-nav-settlement-income" class="">
+                <a ui-sref="console.account">我的收入</a>
+            </li>
+            <li id="js-nav-settlement-trade" class="active">
+                <a ui-sref="console.trading_list">交易记录</a>
+            </li>
+            <li id="js-nav-settlement-inoutdetail" class="">
+                <a ui-sref="console.income_detail">收支明细</a>
+            </li>
+            <li id="js-nav-settlement-withdraw" class="">
+                <a ui-sref="console.withdrawals_record">提现记录</a>
+            </li>
+        </ul>
+        <div class="common-helps-entry pull-right hide">
+            <a href="#" target="_blank">
+                <span class="help-icon"></span>
+                收入／提现常见问题总结
+            </a>
+        </div>
+    </nav>
+    <div class="app__content js-app-main">
+        <div class="widget-list trade-list">
+            <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form">
+                        <div class="control-group">
+                            <label class="control-label">
+                                时间范围：
+                            </label>
+
+                            <div class="controls">
+                                <select ng-enter="doSearch(q.state)" name="time_type" ng-model="q.time_type"
+                                        style="height: 30px;">
+                                    <option value="create_time" selected="">创建时间</option>
+                                    <option value="pay_time">付款时间</option>
+                                </select>
+                                <input ng-enter="doSearch(q.state)" type="text" ng-model="q.start_time"
+                                       date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                       class="Wdate" style="width: 150px; height: 30px;">
+                                <span>至</span>
+                                <input ng-enter="doSearch(q.state)" type="text" ng-model="q.end_time"
+                                       date-picker='{"dateFmt":"yyyy-MM-dd HH:mm:ss"}'
+                                       class="Wdate" style="width: 150px; height: 30px;">
+                                <span class="date-quick-pick" ng-click="setQueryTime(-6)">最近7天</span>
+                                <span class="date-quick-pick" ng-click="setQueryTime(-29)">最近30天</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                <!--             <select name="no_type">
+
+                                                    <option value="order_no" selected>订单号</option>
+
+                                                    <option value="pay_no" >支付单号</option>
+
+                                                    <option value="trade_no" >交易单号</option>
+
+                                            </select> -->
+                                单号：
+                            </label>
+
+                            <div class="controls">
+                                <input ng-enter="doSearch(q.state)" type="text" ng-model="q.keyword" name="keyword"
+                                       class="span4" style="width: 283px;height: 30px;" value=""
+                                       placeholder="订单号/退款单号/支付流水号">
+                                <span style="margin-left: 18px;">交易状态：</span>
+                                <select ng-enter="doSearch(q.state)" name="state" ng-model="q.state"
+                                        class="js-state-select" style="height: 30px;">
+
+                                    <option value="-1">全部</option>
+
+                                    <option value="0">进行中</option>
+
+                                    <option value="1">退款</option>
+
+                                    <option value="2">成功</option>
+
+                                    <option value="3">失败</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="ui-btn-group">
+                                    <button class="ui-btn ui-btn-primary js-filter" style="margin-left: 0;"
+                                            data-loading-text="正在筛选..." ng-click="doSearch(q.state)">筛选
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="trade-list-nav">
+                        <ul>
+
+                            <li ng-class="{'active':state==-1}">
+                                <a ng-click="doSearch(-1)">全部</a>
+                            </li>
+
+                            <li ng-class="{'active':state==0}">
+                                <a ng-click="doSearch(0)">进行中</a>
+                            </li>
+
+                            <li ng-class="{'active':state==1}">
+                                <a ng-click="doSearch(1)">退款</a>
+                            </li>
+
+                            <li ng-class="{'active':state==2}">
+                                <a ng-click="doSearch(2)">成功</a>
+                            </li>
+
+                            <li ng-class="{'active':state==3}">
+                                <a ng-click="doSearch(3)">失败</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-box">
+                <table class="ui-table ui-table-trade" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th class="cell-12">时间</th>
+                        <th class="cell-23">名称</th>
+                        <th class="cell-15">订单号｜支付单号</th>
+                        <th class="cell-10">对方</th>
+                        <th class="cell-15 text-right">
+                            <div class="row-money">金额｜明细</div>
+                        </th>
+                        <th class="cell-15">状态</th>
+                        <th class="cell-10">操作</th>
+                    </tr>
+                    </thead>
+                    <thead class="js-list-header-region tableFloatingHeader" style="display: none;">
+                    <tr class="widget-list-header">
+                        <th class="cell-12">时间</th>
+                        <th class="cell-23">名称</th>
+                        <th class="cell-15">订单号｜支付单号</th>
+                        <th class="cell-10">对方</th>
+                        <th class="cell-15 text-right">
+                            <div class="row-money">金额｜明细</div>
+                        </th>
+                        <th class="cell-15">状态</th>
+                        <th class="cell-10">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="widget-list-item" ng-repeat="item in pageData.list">
+                    <tr>
+                        <td rowspan="2">
+                            {{item.order_time}}
+                        </td>
+                        <td>
+                            {{item.trade_name}}
+                        </td>
+                        <td>
+                            {{item.order_no}}
+                            <br>
+                            <span class="c-gray">{{item.pay_no}}</span>
+                        </td>
+                        <td>
+                            {{item.trade_object}}
+                        </td>
+                        <td class="text-right">
+                            <p class="ui-money-outlay" ng-show="item.bill_type==0">- {{item.money}}</p>
+                            <p class="ui-money-income" ng-show="item.bill_type==1">+ {{item.money}}</p>
+                            <div class="row-money js-show-detail">
+                                <p ng-if="item.detail.total_money">订单总金额:{{item.detail.total_money}}</p>
+                                <p ng-if="item.detail.discount_money">优惠金额:{{item.detail.discount_money}}</p>
+                                <p ng-if="item.detail.postage">邮费:{{item.detail.postage}}</p>
+                                <p ng-if="item.detail.purchase_pay_money">采购支出: -{{item.detail.purchase_pay_money}}</p>
+                                <p ng-if="item.detail.purchase_order_id">采购订单号: {{item.detail.purchase_order_id}}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <span ng-show="item.bill_status ==0">进行中</span>
+                            <span ng-show="item.bill_status ==1">退款</span>
+                            <span ng-show="item.bill_status ==2">交易完成</span>
+                            <span ng-show="item.bill_status ==3">交易失败</span>
+                        </td>
+                        <td>
+                            <a ng-if="item.detail.order_id"
+                               ui-sref="console.order_detail({orderId:item.detail.order_id})">查看订单详细</a>
+                        </td>
+                    </tr>
+
+
+                    <tr class="ui-table-trade-sub-item hide">
+                        <td colspan="3">采购</td>
+                        <td class="text-right">
+                            <div class="row-money">
+                                <span class="ui-money-income">+ 115.00</span>
+                            </div>
+                        </td>
+                        <td colspan="2"></td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div class="widget-list-footer">
+                    <div class="pagenavi">
+                        <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                                           total-items="pageData.totalRow"
+                                           ng-model="pageData.pageNumber" page-size="pageData.pageSize"
+                                           class="pagination-sm m-t-none m-b" previous-text="&lsaquo;"
+                                           next-text="&rsaquo;" first-text="&laquo;"
+                                           last-text="&raquo;"></custom-pagination>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.ChatRecordMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.ChatRecord">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="chat_type" jdbcType="INTEGER" property="chatType"/>
+        <result column="user1_id" jdbcType="INTEGER" property="user1Id"/>
+        <result column="user2_id" jdbcType="INTEGER" property="user2Id"/>
+        <result column="shop1_id" jdbcType="INTEGER" property="shop1Id"/>
+        <result column="shop2_id" jdbcType="INTEGER" property="shop2Id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="last_time_proxy_read_length" jdbcType="INTEGER" property="lastTimeProxyReadLength"/>
+        <result column="last_time_supplier_read_length" jdbcType="INTEGER" property="lastTimeSupplierReadLength"/>
+        <result column="last_time_save_length" jdbcType="INTEGER" property="lastTimeSaveLength"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.ChatRecordWithBLOBs">
+        <result column="extr_content" jdbcType="LONGVARCHAR" property="extrContent"/>
+        <result column="conversations" jdbcType="LONGVARCHAR" property="conversations"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, chat_type, user1_id, user2_id, shop1_id, shop2_id, create_time, update_time, 
+    last_time_proxy_read_length, last_time_supplier_read_length, last_time_save_length
+  </sql>
+    <sql id="Blob_Column_List">
+    extr_content, conversations
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.ChatRecordExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_chat_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.ChatRecordExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_chat_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_chat_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_chat_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.ChatRecordExample">
+        delete from t_chat_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.ChatRecordWithBLOBs">
+    insert into t_chat_record (id, chat_type, user1_id, 
+      user2_id, shop1_id, shop2_id, 
+      create_time, update_time, last_time_proxy_read_length, 
+      last_time_supplier_read_length, last_time_save_length, 
+      extr_content, conversations)
+    values (#{id,jdbcType=INTEGER}, #{chatType,jdbcType=INTEGER}, #{user1Id,jdbcType=INTEGER}, 
+      #{user2Id,jdbcType=INTEGER}, #{shop1Id,jdbcType=INTEGER}, #{shop2Id,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{lastTimeProxyReadLength,jdbcType=INTEGER}, 
+      #{lastTimeSupplierReadLength,jdbcType=INTEGER}, #{lastTimeSaveLength,jdbcType=INTEGER}, 
+      #{extrContent,jdbcType=LONGVARCHAR}, #{conversations,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.ChatRecordWithBLOBs">
+        insert into t_chat_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="chatType != null">
+                chat_type,
+            </if>
+            <if test="user1Id != null">
+                user1_id,
+            </if>
+            <if test="user2Id != null">
+                user2_id,
+            </if>
+            <if test="shop1Id != null">
+                shop1_id,
+            </if>
+            <if test="shop2Id != null">
+                shop2_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="lastTimeProxyReadLength != null">
+                last_time_proxy_read_length,
+            </if>
+            <if test="lastTimeSupplierReadLength != null">
+                last_time_supplier_read_length,
+            </if>
+            <if test="lastTimeSaveLength != null">
+                last_time_save_length,
+            </if>
+            <if test="extrContent != null">
+                extr_content,
+            </if>
+            <if test="conversations != null">
+                conversations,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="chatType != null">
+                #{chatType,jdbcType=INTEGER},
+            </if>
+            <if test="user1Id != null">
+                #{user1Id,jdbcType=INTEGER},
+            </if>
+            <if test="user2Id != null">
+                #{user2Id,jdbcType=INTEGER},
+            </if>
+            <if test="shop1Id != null">
+                #{shop1Id,jdbcType=INTEGER},
+            </if>
+            <if test="shop2Id != null">
+                #{shop2Id,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTimeProxyReadLength != null">
+                #{lastTimeProxyReadLength,jdbcType=INTEGER},
+            </if>
+            <if test="lastTimeSupplierReadLength != null">
+                #{lastTimeSupplierReadLength,jdbcType=INTEGER},
+            </if>
+            <if test="lastTimeSaveLength != null">
+                #{lastTimeSaveLength,jdbcType=INTEGER},
+            </if>
+            <if test="extrContent != null">
+                #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="conversations != null">
+                #{conversations,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.ChatRecordExample" resultType="java.lang.Long">
+        select count(*) from t_chat_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_chat_record
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.chatType != null">
+                chat_type = #{record.chatType,jdbcType=INTEGER},
+            </if>
+            <if test="record.user1Id != null">
+                user1_id = #{record.user1Id,jdbcType=INTEGER},
+            </if>
+            <if test="record.user2Id != null">
+                user2_id = #{record.user2Id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shop1Id != null">
+                shop1_id = #{record.shop1Id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shop2Id != null">
+                shop2_id = #{record.shop2Id,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastTimeProxyReadLength != null">
+                last_time_proxy_read_length = #{record.lastTimeProxyReadLength,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastTimeSupplierReadLength != null">
+                last_time_supplier_read_length = #{record.lastTimeSupplierReadLength,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastTimeSaveLength != null">
+                last_time_save_length = #{record.lastTimeSaveLength,jdbcType=INTEGER},
+            </if>
+            <if test="record.extrContent != null">
+                extr_content = #{record.extrContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.conversations != null">
+                conversations = #{record.conversations,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_chat_record
+        set id = #{record.id,jdbcType=INTEGER},
+        chat_type = #{record.chatType,jdbcType=INTEGER},
+        user1_id = #{record.user1Id,jdbcType=INTEGER},
+        user2_id = #{record.user2Id,jdbcType=INTEGER},
+        shop1_id = #{record.shop1Id,jdbcType=INTEGER},
+        shop2_id = #{record.shop2Id,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        last_time_proxy_read_length = #{record.lastTimeProxyReadLength,jdbcType=INTEGER},
+        last_time_supplier_read_length = #{record.lastTimeSupplierReadLength,jdbcType=INTEGER},
+        last_time_save_length = #{record.lastTimeSaveLength,jdbcType=INTEGER},
+        extr_content = #{record.extrContent,jdbcType=LONGVARCHAR},
+        conversations = #{record.conversations,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_chat_record
+        set id = #{record.id,jdbcType=INTEGER},
+        chat_type = #{record.chatType,jdbcType=INTEGER},
+        user1_id = #{record.user1Id,jdbcType=INTEGER},
+        user2_id = #{record.user2Id,jdbcType=INTEGER},
+        shop1_id = #{record.shop1Id,jdbcType=INTEGER},
+        shop2_id = #{record.shop2Id,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        last_time_proxy_read_length = #{record.lastTimeProxyReadLength,jdbcType=INTEGER},
+        last_time_supplier_read_length = #{record.lastTimeSupplierReadLength,jdbcType=INTEGER},
+        last_time_save_length = #{record.lastTimeSaveLength,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.ChatRecordWithBLOBs">
+        update t_chat_record
+        <set>
+            <if test="chatType != null">
+                chat_type = #{chatType,jdbcType=INTEGER},
+            </if>
+            <if test="user1Id != null">
+                user1_id = #{user1Id,jdbcType=INTEGER},
+            </if>
+            <if test="user2Id != null">
+                user2_id = #{user2Id,jdbcType=INTEGER},
+            </if>
+            <if test="shop1Id != null">
+                shop1_id = #{shop1Id,jdbcType=INTEGER},
+            </if>
+            <if test="shop2Id != null">
+                shop2_id = #{shop2Id,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTimeProxyReadLength != null">
+                last_time_proxy_read_length = #{lastTimeProxyReadLength,jdbcType=INTEGER},
+            </if>
+            <if test="lastTimeSupplierReadLength != null">
+                last_time_supplier_read_length = #{lastTimeSupplierReadLength,jdbcType=INTEGER},
+            </if>
+            <if test="lastTimeSaveLength != null">
+                last_time_save_length = #{lastTimeSaveLength,jdbcType=INTEGER},
+            </if>
+            <if test="extrContent != null">
+                extr_content = #{extrContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="conversations != null">
+                conversations = #{conversations,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.ChatRecordWithBLOBs">
+    update t_chat_record
+    set chat_type = #{chatType,jdbcType=INTEGER},
+      user1_id = #{user1Id,jdbcType=INTEGER},
+      user2_id = #{user2Id,jdbcType=INTEGER},
+      shop1_id = #{shop1Id,jdbcType=INTEGER},
+      shop2_id = #{shop2Id,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      last_time_proxy_read_length = #{lastTimeProxyReadLength,jdbcType=INTEGER},
+      last_time_supplier_read_length = #{lastTimeSupplierReadLength,jdbcType=INTEGER},
+      last_time_save_length = #{lastTimeSaveLength,jdbcType=INTEGER},
+      extr_content = #{extrContent,jdbcType=LONGVARCHAR},
+      conversations = #{conversations,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.ChatRecord">
+    update t_chat_record
+    set chat_type = #{chatType,jdbcType=INTEGER},
+      user1_id = #{user1Id,jdbcType=INTEGER},
+      user2_id = #{user2Id,jdbcType=INTEGER},
+      shop1_id = #{shop1Id,jdbcType=INTEGER},
+      shop2_id = #{shop2Id,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      last_time_proxy_read_length = #{lastTimeProxyReadLength,jdbcType=INTEGER},
+      last_time_supplier_read_length = #{lastTimeSupplierReadLength,jdbcType=INTEGER},
+      last_time_save_length = #{lastTimeSaveLength,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

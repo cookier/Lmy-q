@@ -1,0 +1,29 @@
+<div ng-repeat="imgtxtItem in item.items">
+    <div ng-if="$index ==0" class="appmsg appmsg-multiple-first">
+        <h4 class="appmsg-title">{{imgtxtItem.title || '标题'}}</h4>
+        <p class="appmsg-meta">{{imgtxtItem.currentDay}}</p>
+        <div class="appmsg-thumb-wrap">
+            <img ng-show="imgtxtItem.cover_url" ng-src="{{imgtxtItem.cover_url}}" />
+            <p ng-show="!imgtxtItem.cover_url">封面图片</p>
+        </div>
+        <div ng-show="imgtxtItem.digest" class="appmsg-digest">
+            {{imgtxtItem.digest}}
+        </div>
+        <div class="appmsg-view-full clearfix">
+            <span>阅读全文</span>
+            <span class="pull-right">&gt;</span>
+        </div>
+    </div>
+    <div ng-if="$index>0" class="appmsg appmsg-multiple-others">
+        <h4 class="appmsg-title">{{imgtxtItem.title || '标题'}}</h4>
+            <div ng-show="imgtxtItem.cover_url" class="appmsg-thumb-wrap">
+                <img ng-src="imgtxtItem.cover_url" width="50" height="50" />
+            </div>
+    </div>
+</div>
+<div class="actions">
+    <div class="actions-wrap">
+        <span class="action edit">编辑</span>
+        <span ng-show="item.items.length>0" class="action delete">删除</span>
+    </div>
+</div>

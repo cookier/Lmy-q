@@ -1,0 +1,9 @@
+<td class="not-empty cols-<%- width %> rows-<%- height %> <%- image_url ? '' : 'index-' + index %>" colspan="<%- width %>" rowspan="<%- height %>" data-index="<%- index %>">
+    <% if(link_url) { %>
+        <a href="<%- link_url %>">
+            <img src="<%- image_url %>">
+        </a>
+    <% } else { %>
+        <img src="<%- image_url %>">
+    <% } %>
+</td>

@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.ms.mapper.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.ms.pojo.Goods">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="fx_goods_id" jdbcType="INTEGER" property="fxGoodsId"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="show_stock_flag" jdbcType="INTEGER" property="showStockFlag"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="default_pic_id" jdbcType="INTEGER" property="defaultPicId"/>
+        <result column="default_pic_url" jdbcType="VARCHAR" property="defaultPicUrl"/>
+        <result column="have_invoice" jdbcType="INTEGER" property="haveInvoice"/>
+        <result column="can_repair" jdbcType="INTEGER" property="canRepair"/>
+        <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
+        <result column="sku_name" jdbcType="VARCHAR" property="skuName"/>
+        <result column="sku_value" jdbcType="VARCHAR" property="skuValue"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="product_type" jdbcType="INTEGER" property="productType"/>
+        <result column="quota" jdbcType="INTEGER" property="quota"/>
+        <result column="sale_time_model" jdbcType="INTEGER" property="saleTimeModel"/>
+        <result column="sale_time" jdbcType="TIMESTAMP" property="saleTime"/>
+        <result column="on_shelf_status" jdbcType="INTEGER" property="onShelfStatus"/>
+        <result column="off_shelf_time" jdbcType="TIMESTAMP" property="offShelfTime"/>
+        <result column="discount_flag" jdbcType="INTEGER" property="discountFlag"/>
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+        <result column="delivery_model" jdbcType="INTEGER" property="deliveryModel"/>
+        <result column="postage" jdbcType="DOUBLE" property="postage"/>
+        <result column="trans_template_id" jdbcType="INTEGER" property="transTemplateId"/>
+        <result column="sale_model" jdbcType="INTEGER" property="saleModel"/>
+        <result column="sale_price" jdbcType="VARCHAR" property="salePrice"/>
+        <result column="product_price" jdbcType="DOUBLE" property="productPrice"/>
+        <result column="discount" jdbcType="INTEGER" property="discount"/>
+        <result column="discount_price" jdbcType="DOUBLE" property="discountPrice"/>
+        <result column="show_template" jdbcType="INTEGER" property="showTemplate"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="qr_url" jdbcType="VARCHAR" property="qrUrl"/>
+        <result column="qr_path" jdbcType="VARCHAR" property="qrPath"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="seller_code" jdbcType="VARCHAR" property="sellerCode"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="fx_price" jdbcType="DOUBLE" property="fxPrice"/>
+        <result column="supply_price" jdbcType="DOUBLE" property="supplyPrice"/>
+        <result column="max_retail_price" jdbcType="DOUBLE" property="maxRetailPrice"/>
+        <result column="min_retail_price" jdbcType="DOUBLE" property="minRetailPrice"/>
+        <result column="auditing_status" jdbcType="INTEGER" property="auditingStatus"/>
+        <result column="auditing_remark" jdbcType="VARCHAR" property="auditingRemark"/>
+        <result column="proxy_flag" jdbcType="INTEGER" property="proxyFlag"/>
+        <result column="brand_direct_sale_flag" jdbcType="INTEGER" property="brandDirectSaleFlag"/>
+        <result column="brand_id" jdbcType="INTEGER" property="brandId"/>
+        <result column="sale_count" jdbcType="INTEGER" property="saleCount"/>
+        <result column="click_count" jdbcType="INTEGER" property="clickCount"/>
+        <result column="comp_score" jdbcType="REAL" property="compScore"/>
+        <result column="synchronize_status" jdbcType="SMALLINT" property="synchronizeStatus"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baidu.ms.pojo.GoodsWithBLOBs">
+        <result column="group_label" jdbcType="LONGVARCHAR" property="groupLabel"/>
+        <result column="extra_content" jdbcType="LONGVARCHAR" property="extraContent"/>
+        <result column="fx_description" jdbcType="LONGVARCHAR" property="fxDescription"/>
+        <result column="references" jdbcType="LONGVARCHAR" property="references"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, fx_goods_id, shop_id, show_stock_flag, stock, default_pic_id, default_pic_url, 
+    have_invoice, can_repair, sub_title, sku_name, sku_value, title, update_time, product_type, 
+    quota, sale_time_model, sale_time, on_shelf_status, off_shelf_time, discount_flag, 
+    delete_flag, delivery_model, postage, trans_template_id, sale_model, sale_price, 
+    product_price, discount, discount_price, show_template, url, qr_url, qr_path, category, 
+    seller_code, create_time, fx_price, supply_price, max_retail_price, min_retail_price, 
+    auditing_status, auditing_remark, proxy_flag, brand_direct_sale_flag, brand_id, sale_count, 
+    click_count, comp_score, synchronize_status
+  </sql>
+    <sql id="Blob_Column_List">
+    group_label, extra_content, fx_description, references
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.baidu.ms.pojo.GoodsExample" resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_goods
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.baidu.ms.pojo.GoodsExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_goods
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_goods
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.baidu.ms.pojo.GoodsExample">
+        delete from t_goods
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.baidu.ms.pojo.GoodsWithBLOBs">
+    insert into t_goods (id, fx_goods_id, shop_id, 
+      show_stock_flag, stock, default_pic_id, 
+      default_pic_url, have_invoice, can_repair, 
+      sub_title, sku_name, sku_value, 
+      title, update_time, product_type, 
+      quota, sale_time_model, sale_time, 
+      on_shelf_status, off_shelf_time, discount_flag, 
+      delete_flag, delivery_model, postage, 
+      trans_template_id, sale_model, sale_price, 
+      product_price, discount, discount_price, 
+      show_template, url, qr_url, 
+      qr_path, category, seller_code, 
+      create_time, fx_price, supply_price, 
+      max_retail_price, min_retail_price, auditing_status, 
+      auditing_remark, proxy_flag, brand_direct_sale_flag, 
+      brand_id, sale_count, click_count, 
+      comp_score, synchronize_status, group_label, 
+      extra_content, fx_description, references
+      )
+    values (#{id,jdbcType=INTEGER}, #{fxGoodsId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{showStockFlag,jdbcType=INTEGER}, #{stock,jdbcType=INTEGER}, #{defaultPicId,jdbcType=INTEGER}, 
+      #{defaultPicUrl,jdbcType=VARCHAR}, #{haveInvoice,jdbcType=INTEGER}, #{canRepair,jdbcType=INTEGER}, 
+      #{subTitle,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR}, #{skuValue,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{productType,jdbcType=INTEGER}, 
+      #{quota,jdbcType=INTEGER}, #{saleTimeModel,jdbcType=INTEGER}, #{saleTime,jdbcType=TIMESTAMP}, 
+      #{onShelfStatus,jdbcType=INTEGER}, #{offShelfTime,jdbcType=TIMESTAMP}, #{discountFlag,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{deliveryModel,jdbcType=INTEGER}, #{postage,jdbcType=DOUBLE}, 
+      #{transTemplateId,jdbcType=INTEGER}, #{saleModel,jdbcType=INTEGER}, #{salePrice,jdbcType=VARCHAR}, 
+      #{productPrice,jdbcType=DOUBLE}, #{discount,jdbcType=INTEGER}, #{discountPrice,jdbcType=DOUBLE}, 
+      #{showTemplate,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{qrUrl,jdbcType=VARCHAR}, 
+      #{qrPath,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{sellerCode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{fxPrice,jdbcType=DOUBLE}, #{supplyPrice,jdbcType=DOUBLE}, 
+      #{maxRetailPrice,jdbcType=DOUBLE}, #{minRetailPrice,jdbcType=DOUBLE}, #{auditingStatus,jdbcType=INTEGER}, 
+      #{auditingRemark,jdbcType=VARCHAR}, #{proxyFlag,jdbcType=INTEGER}, #{brandDirectSaleFlag,jdbcType=INTEGER}, 
+      #{brandId,jdbcType=INTEGER}, #{saleCount,jdbcType=INTEGER}, #{clickCount,jdbcType=INTEGER}, 
+      #{compScore,jdbcType=REAL}, #{synchronizeStatus,jdbcType=SMALLINT}, #{groupLabel,jdbcType=LONGVARCHAR}, 
+      #{extraContent,jdbcType=LONGVARCHAR}, #{fxDescription,jdbcType=LONGVARCHAR}, #{references,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.ms.pojo.GoodsWithBLOBs">
+        insert into t_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="fxGoodsId != null">
+                fx_goods_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="showStockFlag != null">
+                show_stock_flag,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="defaultPicId != null">
+                default_pic_id,
+            </if>
+            <if test="defaultPicUrl != null">
+                default_pic_url,
+            </if>
+            <if test="haveInvoice != null">
+                have_invoice,
+            </if>
+            <if test="canRepair != null">
+                can_repair,
+            </if>
+            <if test="subTitle != null">
+                sub_title,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="skuValue != null">
+                sku_value,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="productType != null">
+                product_type,
+            </if>
+            <if test="quota != null">
+                quota,
+            </if>
+            <if test="saleTimeModel != null">
+                sale_time_model,
+            </if>
+            <if test="saleTime != null">
+                sale_time,
+            </if>
+            <if test="onShelfStatus != null">
+                on_shelf_status,
+            </if>
+            <if test="offShelfTime != null">
+                off_shelf_time,
+            </if>
+            <if test="discountFlag != null">
+                discount_flag,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="deliveryModel != null">
+                delivery_model,
+            </if>
+            <if test="postage != null">
+                postage,
+            </if>
+            <if test="transTemplateId != null">
+                trans_template_id,
+            </if>
+            <if test="saleModel != null">
+                sale_model,
+            </if>
+            <if test="salePrice != null">
+                sale_price,
+            </if>
+            <if test="productPrice != null">
+                product_price,
+            </if>
+            <if test="discount != null">
+                discount,
+            </if>
+            <if test="discountPrice != null">
+                discount_price,
+            </if>
+            <if test="showTemplate != null">
+                show_template,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="qrUrl != null">
+                qr_url,
+            </if>
+            <if test="qrPath != null">
+                qr_path,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="sellerCode != null">
+                seller_code,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="fxPrice != null">
+                fx_price,
+            </if>
+            <if test="supplyPrice != null">
+                supply_price,
+            </if>
+            <if test="maxRetailPrice != null">
+                max_retail_price,
+            </if>
+            <if test="minRetailPrice != null">
+                min_retail_price,
+            </if>
+            <if test="auditingStatus != null">
+                auditing_status,
+            </if>
+            <if test="auditingRemark != null">
+                auditing_remark,
+            </if>
+            <if test="proxyFlag != null">
+                proxy_flag,
+            </if>
+            <if test="brandDirectSaleFlag != null">
+                brand_direct_sale_flag,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="saleCount != null">
+                sale_count,
+            </if>
+            <if test="clickCount != null">
+                click_count,
+            </if>
+            <if test="compScore != null">
+                comp_score,
+            </if>
+            <if test="synchronizeStatus != null">
+                synchronize_status,
+            </if>
+            <if test="groupLabel != null">
+                group_label,
+            </if>
+            <if test="extraContent != null">
+                extra_content,
+            </if>
+            <if test="fxDescription != null">
+                fx_description,
+            </if>
+            <if test="references != null">
+                references,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="fxGoodsId != null">
+                #{fxGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="showStockFlag != null">
+                #{showStockFlag,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="defaultPicId != null">
+                #{defaultPicId,jdbcType=INTEGER},
+            </if>
+            <if test="defaultPicUrl != null">
+                #{defaultPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="haveInvoice != null">
+                #{haveInvoice,jdbcType=INTEGER},
+            </if>
+            <if test="canRepair != null">
+                #{canRepair,jdbcType=INTEGER},
+            </if>
+            <if test="subTitle != null">
+                #{subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuValue != null">
+                #{skuValue,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productType != null">
+                #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="quota != null">
+                #{quota,jdbcType=INTEGER},
+            </if>
+            <if test="saleTimeModel != null">
+                #{saleTimeModel,jdbcType=INTEGER},
+            </if>
+            <if test="saleTime != null">
+                #{saleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="onShelfStatus != null">
+                #{onShelfStatus,jdbcType=INTEGER},
+            </if>
+            <if test="offShelfTime != null">
+                #{offShelfTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="discountFlag != null">
+                #{discountFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryModel != null">
+                #{deliveryModel,jdbcType=INTEGER},
+            </if>
+            <if test="postage != null">
+                #{postage,jdbcType=DOUBLE},
+            </if>
+            <if test="transTemplateId != null">
+                #{transTemplateId,jdbcType=INTEGER},
+            </if>
+            <if test="saleModel != null">
+                #{saleModel,jdbcType=INTEGER},
+            </if>
+            <if test="salePrice != null">
+                #{salePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null">
+                #{productPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="discount != null">
+                #{discount,jdbcType=INTEGER},
+            </if>
+            <if test="discountPrice != null">
+                #{discountPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="showTemplate != null">
+                #{showTemplate,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="qrUrl != null">
+                #{qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="qrPath != null">
+                #{qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerCode != null">
+                #{sellerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fxPrice != null">
+                #{fxPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="supplyPrice != null">
+                #{supplyPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="maxRetailPrice != null">
+                #{maxRetailPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="minRetailPrice != null">
+                #{minRetailPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="auditingStatus != null">
+                #{auditingStatus,jdbcType=INTEGER},
+            </if>
+            <if test="auditingRemark != null">
+                #{auditingRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="proxyFlag != null">
+                #{proxyFlag,jdbcType=INTEGER},
+            </if>
+            <if test="brandDirectSaleFlag != null">
+                #{brandDirectSaleFlag,jdbcType=INTEGER},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="clickCount != null">
+                #{clickCount,jdbcType=INTEGER},
+            </if>
+            <if test="compScore != null">
+                #{compScore,jdbcType=REAL},
+            </if>
+            <if test="synchronizeStatus != null">
+                #{synchronizeStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="groupLabel != null">
+                #{groupLabel,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="extraContent != null">
+                #{extraContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="fxDescription != null">
+                #{fxDescription,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="references != null">
+                #{references,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.ms.pojo.GoodsExample" resultType="java.lang.Long">
+        select count(*) from t_goods
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_goods
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.fxGoodsId != null">
+                fx_goods_id = #{record.fxGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopId != null">
+                shop_id = #{record.shopId,jdbcType=INTEGER},
+            </if>
+            <if test="record.showStockFlag != null">
+                show_stock_flag = #{record.showStockFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.stock != null">
+                stock = #{record.stock,jdbcType=INTEGER},
+            </if>
+            <if test="record.defaultPicId != null">
+                default_pic_id = #{record.defaultPicId,jdbcType=INTEGER},
+            </if>
+            <if test="record.defaultPicUrl != null">
+                default_pic_url = #{record.defaultPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.haveInvoice != null">
+                have_invoice = #{record.haveInvoice,jdbcType=INTEGER},
+            </if>
+            <if test="record.canRepair != null">
+                can_repair = #{record.canRepair,jdbcType=INTEGER},
+            </if>
+            <if test="record.subTitle != null">
+                sub_title = #{record.subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.skuName != null">
+                sku_name = #{record.skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.skuValue != null">
+                sku_value = #{record.skuValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.productType != null">
+                product_type = #{record.productType,jdbcType=INTEGER},
+            </if>
+            <if test="record.quota != null">
+                quota = #{record.quota,jdbcType=INTEGER},
+            </if>
+            <if test="record.saleTimeModel != null">
+                sale_time_model = #{record.saleTimeModel,jdbcType=INTEGER},
+            </if>
+            <if test="record.saleTime != null">
+                sale_time = #{record.saleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.onShelfStatus != null">
+                on_shelf_status = #{record.onShelfStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.offShelfTime != null">
+                off_shelf_time = #{record.offShelfTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.discountFlag != null">
+                discount_flag = #{record.discountFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.deliveryModel != null">
+                delivery_model = #{record.deliveryModel,jdbcType=INTEGER},
+            </if>
+            <if test="record.postage != null">
+                postage = #{record.postage,jdbcType=DOUBLE},
+            </if>
+            <if test="record.transTemplateId != null">
+                trans_template_id = #{record.transTemplateId,jdbcType=INTEGER},
+            </if>
+            <if test="record.saleModel != null">
+                sale_model = #{record.saleModel,jdbcType=INTEGER},
+            </if>
+            <if test="record.salePrice != null">
+                sale_price = #{record.salePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="record.productPrice != null">
+                product_price = #{record.productPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.discount != null">
+                discount = #{record.discount,jdbcType=INTEGER},
+            </if>
+            <if test="record.discountPrice != null">
+                discount_price = #{record.discountPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.showTemplate != null">
+                show_template = #{record.showTemplate,jdbcType=INTEGER},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qrUrl != null">
+                qr_url = #{record.qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qrPath != null">
+                qr_path = #{record.qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.category != null">
+                category = #{record.category,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sellerCode != null">
+                seller_code = #{record.sellerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.fxPrice != null">
+                fx_price = #{record.fxPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.supplyPrice != null">
+                supply_price = #{record.supplyPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.maxRetailPrice != null">
+                max_retail_price = #{record.maxRetailPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.minRetailPrice != null">
+                min_retail_price = #{record.minRetailPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.auditingStatus != null">
+                auditing_status = #{record.auditingStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditingRemark != null">
+                auditing_remark = #{record.auditingRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.proxyFlag != null">
+                proxy_flag = #{record.proxyFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.brandDirectSaleFlag != null">
+                brand_direct_sale_flag = #{record.brandDirectSaleFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.brandId != null">
+                brand_id = #{record.brandId,jdbcType=INTEGER},
+            </if>
+            <if test="record.saleCount != null">
+                sale_count = #{record.saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.clickCount != null">
+                click_count = #{record.clickCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.compScore != null">
+                comp_score = #{record.compScore,jdbcType=REAL},
+            </if>
+            <if test="record.synchronizeStatus != null">
+                synchronize_status = #{record.synchronizeStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="record.groupLabel != null">
+                group_label = #{record.groupLabel,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.extraContent != null">
+                extra_content = #{record.extraContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.fxDescription != null">
+                fx_description = #{record.fxDescription,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.references != null">
+                references = #{record.references,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_goods
+        set id = #{record.id,jdbcType=INTEGER},
+        fx_goods_id = #{record.fxGoodsId,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        show_stock_flag = #{record.showStockFlag,jdbcType=INTEGER},
+        stock = #{record.stock,jdbcType=INTEGER},
+        default_pic_id = #{record.defaultPicId,jdbcType=INTEGER},
+        default_pic_url = #{record.defaultPicUrl,jdbcType=VARCHAR},
+        have_invoice = #{record.haveInvoice,jdbcType=INTEGER},
+        can_repair = #{record.canRepair,jdbcType=INTEGER},
+        sub_title = #{record.subTitle,jdbcType=VARCHAR},
+        sku_name = #{record.skuName,jdbcType=VARCHAR},
+        sku_value = #{record.skuValue,jdbcType=VARCHAR},
+        title = #{record.title,jdbcType=VARCHAR},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        product_type = #{record.productType,jdbcType=INTEGER},
+        quota = #{record.quota,jdbcType=INTEGER},
+        sale_time_model = #{record.saleTimeModel,jdbcType=INTEGER},
+        sale_time = #{record.saleTime,jdbcType=TIMESTAMP},
+        on_shelf_status = #{record.onShelfStatus,jdbcType=INTEGER},
+        off_shelf_time = #{record.offShelfTime,jdbcType=TIMESTAMP},
+        discount_flag = #{record.discountFlag,jdbcType=INTEGER},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        delivery_model = #{record.deliveryModel,jdbcType=INTEGER},
+        postage = #{record.postage,jdbcType=DOUBLE},
+        trans_template_id = #{record.transTemplateId,jdbcType=INTEGER},
+        sale_model = #{record.saleModel,jdbcType=INTEGER},
+        sale_price = #{record.salePrice,jdbcType=VARCHAR},
+        product_price = #{record.productPrice,jdbcType=DOUBLE},
+        discount = #{record.discount,jdbcType=INTEGER},
+        discount_price = #{record.discountPrice,jdbcType=DOUBLE},
+        show_template = #{record.showTemplate,jdbcType=INTEGER},
+        url = #{record.url,jdbcType=VARCHAR},
+        qr_url = #{record.qrUrl,jdbcType=VARCHAR},
+        qr_path = #{record.qrPath,jdbcType=VARCHAR},
+        category = #{record.category,jdbcType=VARCHAR},
+        seller_code = #{record.sellerCode,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        fx_price = #{record.fxPrice,jdbcType=DOUBLE},
+        supply_price = #{record.supplyPrice,jdbcType=DOUBLE},
+        max_retail_price = #{record.maxRetailPrice,jdbcType=DOUBLE},
+        min_retail_price = #{record.minRetailPrice,jdbcType=DOUBLE},
+        auditing_status = #{record.auditingStatus,jdbcType=INTEGER},
+        auditing_remark = #{record.auditingRemark,jdbcType=VARCHAR},
+        proxy_flag = #{record.proxyFlag,jdbcType=INTEGER},
+        brand_direct_sale_flag = #{record.brandDirectSaleFlag,jdbcType=INTEGER},
+        brand_id = #{record.brandId,jdbcType=INTEGER},
+        sale_count = #{record.saleCount,jdbcType=INTEGER},
+        click_count = #{record.clickCount,jdbcType=INTEGER},
+        comp_score = #{record.compScore,jdbcType=REAL},
+        synchronize_status = #{record.synchronizeStatus,jdbcType=SMALLINT},
+        group_label = #{record.groupLabel,jdbcType=LONGVARCHAR},
+        extra_content = #{record.extraContent,jdbcType=LONGVARCHAR},
+        fx_description = #{record.fxDescription,jdbcType=LONGVARCHAR},
+        references = #{record.references,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_goods
+        set id = #{record.id,jdbcType=INTEGER},
+        fx_goods_id = #{record.fxGoodsId,jdbcType=INTEGER},
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+        show_stock_flag = #{record.showStockFlag,jdbcType=INTEGER},
+        stock = #{record.stock,jdbcType=INTEGER},
+        default_pic_id = #{record.defaultPicId,jdbcType=INTEGER},
+        default_pic_url = #{record.defaultPicUrl,jdbcType=VARCHAR},
+        have_invoice = #{record.haveInvoice,jdbcType=INTEGER},
+        can_repair = #{record.canRepair,jdbcType=INTEGER},
+        sub_title = #{record.subTitle,jdbcType=VARCHAR},
+        sku_name = #{record.skuName,jdbcType=VARCHAR},
+        sku_value = #{record.skuValue,jdbcType=VARCHAR},
+        title = #{record.title,jdbcType=VARCHAR},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        product_type = #{record.productType,jdbcType=INTEGER},
+        quota = #{record.quota,jdbcType=INTEGER},
+        sale_time_model = #{record.saleTimeModel,jdbcType=INTEGER},
+        sale_time = #{record.saleTime,jdbcType=TIMESTAMP},
+        on_shelf_status = #{record.onShelfStatus,jdbcType=INTEGER},
+        off_shelf_time = #{record.offShelfTime,jdbcType=TIMESTAMP},
+        discount_flag = #{record.discountFlag,jdbcType=INTEGER},
+        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+        delivery_model = #{record.deliveryModel,jdbcType=INTEGER},
+        postage = #{record.postage,jdbcType=DOUBLE},
+        trans_template_id = #{record.transTemplateId,jdbcType=INTEGER},
+        sale_model = #{record.saleModel,jdbcType=INTEGER},
+        sale_price = #{record.salePrice,jdbcType=VARCHAR},
+        product_price = #{record.productPrice,jdbcType=DOUBLE},
+        discount = #{record.discount,jdbcType=INTEGER},
+        discount_price = #{record.discountPrice,jdbcType=DOUBLE},
+        show_template = #{record.showTemplate,jdbcType=INTEGER},
+        url = #{record.url,jdbcType=VARCHAR},
+        qr_url = #{record.qrUrl,jdbcType=VARCHAR},
+        qr_path = #{record.qrPath,jdbcType=VARCHAR},
+        category = #{record.category,jdbcType=VARCHAR},
+        seller_code = #{record.sellerCode,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        fx_price = #{record.fxPrice,jdbcType=DOUBLE},
+        supply_price = #{record.supplyPrice,jdbcType=DOUBLE},
+        max_retail_price = #{record.maxRetailPrice,jdbcType=DOUBLE},
+        min_retail_price = #{record.minRetailPrice,jdbcType=DOUBLE},
+        auditing_status = #{record.auditingStatus,jdbcType=INTEGER},
+        auditing_remark = #{record.auditingRemark,jdbcType=VARCHAR},
+        proxy_flag = #{record.proxyFlag,jdbcType=INTEGER},
+        brand_direct_sale_flag = #{record.brandDirectSaleFlag,jdbcType=INTEGER},
+        brand_id = #{record.brandId,jdbcType=INTEGER},
+        sale_count = #{record.saleCount,jdbcType=INTEGER},
+        click_count = #{record.clickCount,jdbcType=INTEGER},
+        comp_score = #{record.compScore,jdbcType=REAL},
+        synchronize_status = #{record.synchronizeStatus,jdbcType=SMALLINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.ms.pojo.GoodsWithBLOBs">
+        update t_goods
+        <set>
+            <if test="fxGoodsId != null">
+                fx_goods_id = #{fxGoodsId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="showStockFlag != null">
+                show_stock_flag = #{showStockFlag,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="defaultPicId != null">
+                default_pic_id = #{defaultPicId,jdbcType=INTEGER},
+            </if>
+            <if test="defaultPicUrl != null">
+                default_pic_url = #{defaultPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="haveInvoice != null">
+                have_invoice = #{haveInvoice,jdbcType=INTEGER},
+            </if>
+            <if test="canRepair != null">
+                can_repair = #{canRepair,jdbcType=INTEGER},
+            </if>
+            <if test="subTitle != null">
+                sub_title = #{subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuValue != null">
+                sku_value = #{skuValue,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productType != null">
+                product_type = #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="quota != null">
+                quota = #{quota,jdbcType=INTEGER},
+            </if>
+            <if test="saleTimeModel != null">
+                sale_time_model = #{saleTimeModel,jdbcType=INTEGER},
+            </if>
+            <if test="saleTime != null">
+                sale_time = #{saleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="onShelfStatus != null">
+                on_shelf_status = #{onShelfStatus,jdbcType=INTEGER},
+            </if>
+            <if test="offShelfTime != null">
+                off_shelf_time = #{offShelfTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="discountFlag != null">
+                discount_flag = #{discountFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryModel != null">
+                delivery_model = #{deliveryModel,jdbcType=INTEGER},
+            </if>
+            <if test="postage != null">
+                postage = #{postage,jdbcType=DOUBLE},
+            </if>
+            <if test="transTemplateId != null">
+                trans_template_id = #{transTemplateId,jdbcType=INTEGER},
+            </if>
+            <if test="saleModel != null">
+                sale_model = #{saleModel,jdbcType=INTEGER},
+            </if>
+            <if test="salePrice != null">
+                sale_price = #{salePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null">
+                product_price = #{productPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="discount != null">
+                discount = #{discount,jdbcType=INTEGER},
+            </if>
+            <if test="discountPrice != null">
+                discount_price = #{discountPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="showTemplate != null">
+                show_template = #{showTemplate,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="qrUrl != null">
+                qr_url = #{qrUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="qrPath != null">
+                qr_path = #{qrPath,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerCode != null">
+                seller_code = #{sellerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fxPrice != null">
+                fx_price = #{fxPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="supplyPrice != null">
+                supply_price = #{supplyPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="maxRetailPrice != null">
+                max_retail_price = #{maxRetailPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="minRetailPrice != null">
+                min_retail_price = #{minRetailPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="auditingStatus != null">
+                auditing_status = #{auditingStatus,jdbcType=INTEGER},
+            </if>
+            <if test="auditingRemark != null">
+                auditing_remark = #{auditingRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="proxyFlag != null">
+                proxy_flag = #{proxyFlag,jdbcType=INTEGER},
+            </if>
+            <if test="brandDirectSaleFlag != null">
+                brand_direct_sale_flag = #{brandDirectSaleFlag,jdbcType=INTEGER},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                sale_count = #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="clickCount != null">
+                click_count = #{clickCount,jdbcType=INTEGER},
+            </if>
+            <if test="compScore != null">
+                comp_score = #{compScore,jdbcType=REAL},
+            </if>
+            <if test="synchronizeStatus != null">
+                synchronize_status = #{synchronizeStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="groupLabel != null">
+                group_label = #{groupLabel,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="extraContent != null">
+                extra_content = #{extraContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="fxDescription != null">
+                fx_description = #{fxDescription,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="references != null">
+                references = #{references,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baidu.ms.pojo.GoodsWithBLOBs">
+    update t_goods
+    set fx_goods_id = #{fxGoodsId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      show_stock_flag = #{showStockFlag,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=INTEGER},
+      default_pic_id = #{defaultPicId,jdbcType=INTEGER},
+      default_pic_url = #{defaultPicUrl,jdbcType=VARCHAR},
+      have_invoice = #{haveInvoice,jdbcType=INTEGER},
+      can_repair = #{canRepair,jdbcType=INTEGER},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_value = #{skuValue,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      product_type = #{productType,jdbcType=INTEGER},
+      quota = #{quota,jdbcType=INTEGER},
+      sale_time_model = #{saleTimeModel,jdbcType=INTEGER},
+      sale_time = #{saleTime,jdbcType=TIMESTAMP},
+      on_shelf_status = #{onShelfStatus,jdbcType=INTEGER},
+      off_shelf_time = #{offShelfTime,jdbcType=TIMESTAMP},
+      discount_flag = #{discountFlag,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      delivery_model = #{deliveryModel,jdbcType=INTEGER},
+      postage = #{postage,jdbcType=DOUBLE},
+      trans_template_id = #{transTemplateId,jdbcType=INTEGER},
+      sale_model = #{saleModel,jdbcType=INTEGER},
+      sale_price = #{salePrice,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=INTEGER},
+      discount_price = #{discountPrice,jdbcType=DOUBLE},
+      show_template = #{showTemplate,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      qr_url = #{qrUrl,jdbcType=VARCHAR},
+      qr_path = #{qrPath,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      seller_code = #{sellerCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      fx_price = #{fxPrice,jdbcType=DOUBLE},
+      supply_price = #{supplyPrice,jdbcType=DOUBLE},
+      max_retail_price = #{maxRetailPrice,jdbcType=DOUBLE},
+      min_retail_price = #{minRetailPrice,jdbcType=DOUBLE},
+      auditing_status = #{auditingStatus,jdbcType=INTEGER},
+      auditing_remark = #{auditingRemark,jdbcType=VARCHAR},
+      proxy_flag = #{proxyFlag,jdbcType=INTEGER},
+      brand_direct_sale_flag = #{brandDirectSaleFlag,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      sale_count = #{saleCount,jdbcType=INTEGER},
+      click_count = #{clickCount,jdbcType=INTEGER},
+      comp_score = #{compScore,jdbcType=REAL},
+      synchronize_status = #{synchronizeStatus,jdbcType=SMALLINT},
+      group_label = #{groupLabel,jdbcType=LONGVARCHAR},
+      extra_content = #{extraContent,jdbcType=LONGVARCHAR},
+      fx_description = #{fxDescription,jdbcType=LONGVARCHAR},
+      references = #{references,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.ms.pojo.Goods">
+    update t_goods
+    set fx_goods_id = #{fxGoodsId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      show_stock_flag = #{showStockFlag,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=INTEGER},
+      default_pic_id = #{defaultPicId,jdbcType=INTEGER},
+      default_pic_url = #{defaultPicUrl,jdbcType=VARCHAR},
+      have_invoice = #{haveInvoice,jdbcType=INTEGER},
+      can_repair = #{canRepair,jdbcType=INTEGER},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_value = #{skuValue,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      product_type = #{productType,jdbcType=INTEGER},
+      quota = #{quota,jdbcType=INTEGER},
+      sale_time_model = #{saleTimeModel,jdbcType=INTEGER},
+      sale_time = #{saleTime,jdbcType=TIMESTAMP},
+      on_shelf_status = #{onShelfStatus,jdbcType=INTEGER},
+      off_shelf_time = #{offShelfTime,jdbcType=TIMESTAMP},
+      discount_flag = #{discountFlag,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      delivery_model = #{deliveryModel,jdbcType=INTEGER},
+      postage = #{postage,jdbcType=DOUBLE},
+      trans_template_id = #{transTemplateId,jdbcType=INTEGER},
+      sale_model = #{saleModel,jdbcType=INTEGER},
+      sale_price = #{salePrice,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=INTEGER},
+      discount_price = #{discountPrice,jdbcType=DOUBLE},
+      show_template = #{showTemplate,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      qr_url = #{qrUrl,jdbcType=VARCHAR},
+      qr_path = #{qrPath,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      seller_code = #{sellerCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      fx_price = #{fxPrice,jdbcType=DOUBLE},
+      supply_price = #{supplyPrice,jdbcType=DOUBLE},
+      max_retail_price = #{maxRetailPrice,jdbcType=DOUBLE},
+      min_retail_price = #{minRetailPrice,jdbcType=DOUBLE},
+      auditing_status = #{auditingStatus,jdbcType=INTEGER},
+      auditing_remark = #{auditingRemark,jdbcType=VARCHAR},
+      proxy_flag = #{proxyFlag,jdbcType=INTEGER},
+      brand_direct_sale_flag = #{brandDirectSaleFlag,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      sale_count = #{saleCount,jdbcType=INTEGER},
+      click_count = #{clickCount,jdbcType=INTEGER},
+      comp_score = #{compScore,jdbcType=REAL},
+      synchronize_status = #{synchronizeStatus,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

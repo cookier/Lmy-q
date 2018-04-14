@@ -1,0 +1,33 @@
+
+
+<div ng-if="$index == 0" class="appmsg appmsg-multiple-first">
+    <h4 class="appmsg-title">{{item.title || '标题'}}</h4>
+    <p class="appmsg-meta">{{item.currentDay}}</p>
+    <div class="appmsg-thumb-wrap">
+        <img ng-show="item.image" ng-src="{{item.image}}" />
+        <p ng-show="!item.image">封面图片</p>
+    </div>
+    <div ng-show="item.digest" class="appmsg-digest">
+        {{item.digest}}
+    </div>
+    <div class="appmsg-view-full clearfix">
+        <span>阅读全文</span>
+        <span class="pull-right">&gt;</span>
+    </div>
+</div>
+
+<div ng-if="$index>0" class="appmsg appmsg-multiple-others">
+    <h4 class="appmsg-title">{{item.title || '标题'}}</h4>
+    <div class="appmsg-thumb-wrap">
+        <img ng-show="item.image" ng-src="{{item.image}}" width="50" height="50" />
+        <p ng-show="!item.image">缩略图</p>
+    </div>
+</div>
+
+
+<div class="actions">
+    <div class="actions-wrap">
+        <span class="action edit" >编辑</span>
+        <span ng-show=" ($scope.data.type ==0 && $index>0) || ($scope.data.type==1 && $index>1)" class="action delete" ng-click="del(item,$event)">删除</span>
+    </div>
+</div>

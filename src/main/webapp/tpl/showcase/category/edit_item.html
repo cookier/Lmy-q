@@ -1,0 +1,13 @@
+<div class="control-group">
+    <label class="control-label">名称：</label>
+    <div class="controls">
+        <input class="" type="text" name="title" value="<%- title %>" maxLength="6">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label"><em class="required">*</em>链接到：</label>
+    <div class="controls">
+        <input type="hidden" name="link_url">
+        <%= renderLink(link_url, link_title, link_type) %>
+    </div>
+</div>

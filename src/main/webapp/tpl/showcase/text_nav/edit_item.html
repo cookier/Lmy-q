@@ -1,0 +1,17 @@
+<div class="control-group">
+    <label class="control-label"><em class="required">*</em>导航名称：</label>
+    <div class="controls">
+        <input type="text" name="title" ng-model="item.title">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label"><em class="required">*</em>链接到：</label>
+    <div class="controls">
+        <ui-setup-link link_id="item.link_id"  link_url="item.link_url" link_title="item.link_title" link_type="item.link_type"></ui-setup-link>
+        <input type="hidden" ng-model="item.link_url">
+    </div>
+</div>
+<div class="actions">
+    <span class="action add close-modal" title="添加" ng-click="addItem()">+</span>
+    <span class="action delete close-modal" title="删除" ng-click="delItem(item)">×</span>
+</div>

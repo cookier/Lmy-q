@@ -1,0 +1,83 @@
+<div class="app-init-container" ng-controller="ActivityParticipationRecommendController">
+    <div class="app__content js-app-main">
+        <div class="widget-list">
+            <!-- <div class="js-list-filter-region clearfix">
+                <div class="widget-list-filter">
+                    <form class="form-horizontal ui-box list-filter-form" onsubmit="return false;">
+                        <div class="clearfix">
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">用户昵称：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="nickname" style="height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-groups">
+                                <div class="control-group">
+                                    <label class="control-label">用户手机号：</label>
+                                    <div class="controls">
+                                        <input type="text" ng-model="mobile" style="height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="ui-btn-group">
+                                    <a href="javascript:;" class="ui-btn ui-btn-primary js-filter"
+                                        data-loading-text="正在筛选..." ng-click="load()">筛选</a> <a
+                                        href="javascript:;" class="ui-btn js-export">批量导出</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div> -->
+            <div class="ui-box">
+                <table class="ui-table-order" style="padding: 0px;">
+                    <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                    <tr class="widget-list-header">
+                        <th>昵称</th>
+                        <th>手机号</th>
+                        <th>店铺</th>
+                        <th>销售额</th>
+                        <th>分红名额</th>
+                        <th>累计分红金额</th>
+                        <th>参与时间</th>
+                        <th>排名</th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-list-body-region">
+                    <tr class="widget-list-item" ng-repeat="data in pageData track by $index">
+                        <td>{{data.nickname}}</td>
+                        <td>{{data.mobile}}</td>
+                        <td>{{data.shop_name}}</td>
+                        <td>{{data.sales}}</td>
+                        <td>{{data.remainderBonusNumber}}</td>
+                        <td>{{data.bonusTotalMoney}}</td>
+                        <td>{{data.create_time!=null?data.create_time:"未参与活动"}}</td>
+                        <td>{{(data.role==0&&data.create_time!=null)?data.ranking:'不参与排名'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="js-list-empty-region"></div>
+            </div>
+            <div class="js-list-footer-region ui-box">
+                <div style="text-align: center;" ng-show="pageData.length>0">
+                    <!-- <custom-pagination boundary-links="true" ng-change="pageChanged()"
+                        total-items="pageData.totalRow" ng-model="pageData.pageNumber"
+                        page-size="pageData.pageSize" class="pagination-sm m-t-none m-b"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                        last-text="&raquo;"></custom-pagination> -->
+                    共有{{pageData.length}}条记录!
+                </div>
+                <div ng-show="(pageData.length==0)"
+                     style="text-align: center;">没有找到相关记录!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

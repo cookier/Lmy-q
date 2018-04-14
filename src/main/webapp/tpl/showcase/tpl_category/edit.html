@@ -1,0 +1,26 @@
+<div class="form-horizontal" novalidate ng-controller="UICategoryConfigController">
+	<div class="js-meta-region" style="margin-bottom: 20px;" ng-include="'tpl/showcase/tpl_category/edit_meta.html'"></div>
+	<div class="control-group">
+		<hr>
+		<div class="separate-line">
+			<p class="text-center">微页面分类简介</p>
+			<p class="text-center">v</p>
+		</div>
+	</div>
+	<div class="control-group">
+		<div name="content">
+			<script class="js-editor" type="text/plain"></script>
+		</div>
+	</div>
+</div>
+<div class="js-collection-region">
+	<ul class="feature-list">
+		<li ng-repeat="item in data.sub_entry">
+			{{item.title}}
+			<div class="remove-item js-remove icon-remove icon-white">×</div>
+		</li>
+	</ul>
+</div>
+<div ng-show="data.is_default == 0">
+	<a href="javascript:;" class="ui-btn ui-btn-primary js-add-feature">添加微页面</a>
+</div>
